@@ -363,7 +363,7 @@ def rotsprite(im, angle, pivot):
         a = scale2x(a)
     big = Image.fromarray(a, "RGBA").rotate(angle, resample=Image.NEAREST, center=(pivot[0] * 8, pivot[1] * 8))
     small = np.array(big)[4::8, 4::8]
-    return Image.fromarray(np.ascontiguousarray(small), "RGBA")
+    return Image.fromarray(np.ascontiguousarray(small), "RGBA").copy()
 
 
 def regions(frame, d):

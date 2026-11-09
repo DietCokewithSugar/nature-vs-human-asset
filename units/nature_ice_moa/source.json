@@ -3,8 +3,39 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 6.0,
-  "animations": {},
+  "generations_spent": 16.0,
+  "animations": {
+    "idle": {
+      "directions": {
+        "south": "done",
+        "south-east": "done",
+        "east": "done",
+        "north": "done",
+        "north-east": "done"
+      },
+      "request": {
+        "action": "standing in place, gentle breathing, slight body bob, seamless loop",
+        "action_by_dir": null,
+        "frames": 4
+      },
+      "animation_group_id": "d1e0aa53-c950-4d4b-b558-c2651ecf891e"
+    },
+    "walk": {
+      "directions": {
+        "south": "done",
+        "south-east": "done",
+        "north-east": "done",
+        "east": "done",
+        "north": "done"
+      },
+      "request": {
+        "action": "striding forward on its long legs, neck bobbing, seamless loop",
+        "action_by_dir": null,
+        "frames": 6
+      },
+      "animation_group_id": "8845a03d-c5ee-49d8-bdc3-3fb723ead3a0"
+    }
+  },
   "candidates": [
     {
       "seed": 6301,
@@ -37,5 +68,33 @@
     }
   },
   "updated": "2026-11-09",
-  "character_id": "bdabb46c-cbd0-4c7d-90b3-3bda1f30b275"
+  "character_id": "bdabb46c-cbd0-4c7d-90b3-3bda1f30b275",
+  "variants": {
+    "attackhand": {
+      "method": "AI hand-edited: select-and-move / squash-stretch / smear edits on the PixelLab base pose, text-grid method from aseprite-ai-artist (MIT), timing from its rules/44",
+      "kind": "lunge",
+      "heavy": false,
+      "mag": 1.0,
+      "directions": [
+        "south",
+        "south-east",
+        "east",
+        "north-east",
+        "north"
+      ],
+      "hand_tuned": [],
+      "generations": 0
+    },
+    "death": {
+      "method": "AI hand-edited collapse (squash + RotSprite-style tilt)",
+      "directions": [
+        "south",
+        "south-east",
+        "east",
+        "north-east",
+        "north"
+      ],
+      "generations": 0
+    }
+  }
 }

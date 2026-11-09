@@ -3,8 +3,39 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 6.0,
-  "animations": {},
+  "generations_spent": 16.0,
+  "animations": {
+    "idle": {
+      "directions": {
+        "south": "done",
+        "east": "done",
+        "north-east": "done",
+        "south-east": "done",
+        "north": "done"
+      },
+      "request": {
+        "action": "standing in place, gentle breathing, slight body bob, seamless loop",
+        "action_by_dir": null,
+        "frames": 4
+      },
+      "animation_group_id": "75df79ab-f4af-480d-95a0-66ba10db268e"
+    },
+    "walk": {
+      "directions": {
+        "south": "done",
+        "north": "done",
+        "south-east": "done",
+        "north-east": "done",
+        "east": "done"
+      },
+      "request": {
+        "action": "waddling forward, quills swaying, seamless loop",
+        "action_by_dir": null,
+        "frames": 6
+      },
+      "animation_group_id": "94b9d804-c666-469a-b495-a4facc25545a"
+    }
+  },
   "candidates": [
     {
       "seed": 6601,
@@ -37,5 +68,33 @@
     }
   },
   "updated": "2026-11-09",
-  "character_id": "599e613f-d6fa-4a96-9601-6af0740e7e2d"
+  "character_id": "599e613f-d6fa-4a96-9601-6af0740e7e2d",
+  "variants": {
+    "attackhand": {
+      "method": "AI hand-edited: select-and-move / squash-stretch / smear edits on the PixelLab base pose, text-grid method from aseprite-ai-artist (MIT), timing from its rules/44",
+      "kind": "lunge",
+      "heavy": false,
+      "mag": 1.2,
+      "directions": [
+        "south",
+        "south-east",
+        "east",
+        "north-east",
+        "north"
+      ],
+      "hand_tuned": [],
+      "generations": 0
+    },
+    "death": {
+      "method": "AI hand-edited collapse (squash + RotSprite-style tilt)",
+      "directions": [
+        "south",
+        "south-east",
+        "east",
+        "north-east",
+        "north"
+      ],
+      "generations": 0
+    }
+  }
 }

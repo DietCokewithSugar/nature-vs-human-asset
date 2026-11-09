@@ -3,8 +3,39 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 12.0,
-  "animations": {},
+  "generations_spent": 22.0,
+  "animations": {
+    "idle": {
+      "directions": {
+        "south": "done",
+        "south-east": "done",
+        "east": "done",
+        "north-east": "done",
+        "north": "done"
+      },
+      "request": {
+        "action": "standing in place, gentle breathing, slight body bob, seamless loop",
+        "action_by_dir": null,
+        "frames": 4
+      },
+      "animation_group_id": "39477506-8075-4b33-b49b-ede3b31b1c74"
+    },
+    "walk": {
+      "directions": {
+        "south": "done",
+        "south-east": "done",
+        "north-east": "done",
+        "north": "done",
+        "east": "done"
+      },
+      "request": {
+        "action": "heavy plodding walk, head low, seamless loop",
+        "action_by_dir": null,
+        "frames": 6
+      },
+      "animation_group_id": "29cf3869-fc70-4c95-ba06-cc45aab837a8"
+    }
+  },
   "create_request": {
     "description": "woolly rhinoceros completely covered in long shaggy woolly reddish-brown fur hanging down over its legs like a mammoth's coat, big shoulder hump, two horns with a very long flattened front horn sweeping forward, small eyes, short thick legs",
     "view": "low top-down",
@@ -51,5 +82,33 @@
       "picked": false
     }
   ],
-  "character_id": "b3f4a6a4-72d0-4b1c-8ab3-04fabb35fb82"
+  "character_id": "b3f4a6a4-72d0-4b1c-8ab3-04fabb35fb82",
+  "variants": {
+    "attackhand": {
+      "method": "AI hand-edited: select-and-move / squash-stretch / smear edits on the PixelLab base pose, text-grid method from aseprite-ai-artist (MIT), timing from its rules/44",
+      "kind": "lunge",
+      "heavy": true,
+      "mag": 1.6,
+      "directions": [
+        "south",
+        "south-east",
+        "east",
+        "north-east",
+        "north"
+      ],
+      "hand_tuned": [],
+      "generations": 0
+    },
+    "death": {
+      "method": "AI hand-edited collapse (squash + RotSprite-style tilt)",
+      "directions": [
+        "south",
+        "south-east",
+        "east",
+        "north-east",
+        "north"
+      ],
+      "generations": 0
+    }
+  }
 }

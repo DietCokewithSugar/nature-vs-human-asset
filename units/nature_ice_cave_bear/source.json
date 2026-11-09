@@ -3,11 +3,15 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 7.0,
+  "generations_spent": 16.0,
   "animations": {
     "idle": {
       "directions": {
-        "south": "done"
+        "south": "done",
+        "south-east": "done",
+        "east": "done",
+        "north-east": "done",
+        "north": "done"
       },
       "request": {
         "action": "standing in place, gentle breathing, slight body bob, seamless loop",
@@ -17,7 +21,13 @@
       "animation_group_id": "e20f7904-a5bf-4edc-af42-3f1b7c7d2b55"
     },
     "walk": {
-      "directions": {},
+      "directions": {
+        "south": "done",
+        "east": "done",
+        "north-east": "done",
+        "south-east": "done",
+        "north": "done"
+      },
       "request": {
         "action": "heavy rolling walk on all fours, seamless loop",
         "action_by_dir": null,
@@ -58,5 +68,33 @@
     }
   },
   "updated": "2026-11-09",
-  "character_id": "a6982178-f884-471c-8d25-d0384c14afe8"
+  "character_id": "a6982178-f884-471c-8d25-d0384c14afe8",
+  "variants": {
+    "attackhand": {
+      "method": "AI hand-edited: select-and-move / squash-stretch / smear edits on the PixelLab base pose, text-grid method from aseprite-ai-artist (MIT), timing from its rules/44",
+      "kind": "lunge",
+      "heavy": true,
+      "mag": 1.6,
+      "directions": [
+        "south",
+        "south-east",
+        "east",
+        "north-east",
+        "north"
+      ],
+      "hand_tuned": [],
+      "generations": 0
+    },
+    "death": {
+      "method": "AI hand-edited collapse (squash + RotSprite-style tilt)",
+      "directions": [
+        "south",
+        "south-east",
+        "east",
+        "north-east",
+        "north"
+      ],
+      "generations": 0
+    }
+  }
 }

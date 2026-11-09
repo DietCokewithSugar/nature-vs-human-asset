@@ -3,16 +3,42 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 12.0,
-  "animations": {},
+  "generations_spent": 23.0,
+  "animations": {
+    "idle": {
+      "directions": {
+        "south": "done",
+        "south-east": "done",
+        "east": "done",
+        "north-east": "done"
+      },
+      "request": {
+        "action": "standing in place, gentle breathing, slight body bob, seamless loop",
+        "action_by_dir": null,
+        "frames": 4
+      },
+      "animation_group_id": "e545eb3a-5e67-431b-985f-affe649ccd36"
+    },
+    "walk": {
+      "directions": {
+        "south": "done"
+      },
+      "request": {
+        "action": "prowling forward in a seamless looping walk cycle, shoulders rolling, legs alternating",
+        "action_by_dir": null,
+        "frames": 6
+      },
+      "animation_group_id": "e255d895-a38b-49ac-9ce3-cf7c20bbdb3a"
+    }
+  },
   "create_request": {
-    "description": "Smilodon sabre-toothed cat with a completely plain uniform tawny coat like a lion, absolutely no stripes and no spots anywhere, paler belly, very long curved white upper sabre fangs, heavy muscular bear-like build, short bobbed tail like a lynx",
+    "description": "sabre-toothed cat with a completely plain uniform tawny coat, no mane, no stripes, no spots, short smooth fur, paler belly, very long curved white upper sabre fangs, heavy muscular bear-like build, short bobbed tail like a lynx",
     "view": "low top-down",
-    "template_id": "lion",
+    "template_id": "cat",
     "outline": "single color black outline",
     "detail": "medium detail",
     "no_background": true,
-    "seed": 4321,
+    "seed": 4331,
     "name": "nature_ice_smilodon",
     "image_size": {
       "width": 48,
@@ -45,5 +71,23 @@
       "seed": 4321,
       "character_id": "4cf0c543-d259-4037-b865-d03956ef7eb4"
     }
-  ]
+  ],
+  "candidates": [
+    {
+      "seed": 4332,
+      "character_id": "b0f9c052-e74e-48f5-8717-fe37244a998d",
+      "picked": false
+    },
+    {
+      "seed": 4333,
+      "character_id": "6798b464-16c5-4b63-8b46-7248d002a725",
+      "picked": false
+    },
+    {
+      "seed": 4331,
+      "character_id": "3f46fb96-6506-4141-bb55-a694243d5b1d",
+      "picked": true
+    }
+  ],
+  "character_id": "3f46fb96-6506-4141-bb55-a694243d5b1d"
 }
