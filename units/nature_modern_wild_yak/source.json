@@ -3,7 +3,7 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 10.0,
+  "generations_spent": 20.0,
   "animations": {},
   "candidates": [
     {
@@ -11,6 +11,12 @@
       "pipeline": "pro",
       "reference": null,
       "character_id": "5f17313b-5d17-4596-b346-ad49f82eddaf"
+    },
+    {
+      "seed": 9102,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "88dbe611-83b1-4c42-ae8a-6744505c689f"
     }
   ],
   "create_request": {
