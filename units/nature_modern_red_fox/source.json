@@ -1,0 +1,30 @@
+{
+  "id": "nature_modern_red_fox",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 10.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 9131,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "f71d877f-575a-4510-abe7-03d915a2ba3a"
+    }
+  ],
+  "create_request": {
+    "description": "red fox Vulpes vulpes, slender fox with bright red-orange fur, white throat and chest, black legs, pointed black-backed ears, big bushy tail with a white tip",
+    "view": "low top-down",
+    "template_id": "dog",
+    "no_background": true,
+    "seed": 9131,
+    "image_size": {
+      "width": 64,
+      "height": 64
+    },
+    "method": "create_with_style",
+    "style_character_id": "bd11b67a-1165-495e-96cf-b40403d116cb"
+  },
+  "updated": "2026-11-09"
+}
