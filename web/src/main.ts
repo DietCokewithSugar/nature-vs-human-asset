@@ -17,7 +17,7 @@ async function route() {
     a.classList.toggle("active", a.dataset.route === (page === "lab" ? "lab" : "gallery"));
   });
   const m = await loadManifest();
-  if (page === "lab") cleanup = await renderLab(app, m);
+  if (page === "lab") cleanup = await renderLab(app, m, arg === "classic");
   else if (page === "unit" && arg) cleanup = renderUnit(app, m, decodeURIComponent(arg));
   else cleanup = renderGallery(app, m);
   window.scrollTo(0, 0);

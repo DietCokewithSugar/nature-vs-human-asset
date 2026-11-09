@@ -1,0 +1,21 @@
+# HD map tiles (64px, Pro) for the high-detail standard: units 64px / 128px.
+common:
+  mode: pro
+  tile_size: {width: 64, height: 64}
+  view: low top-down
+  transition_size: 0
+  raggedness: 0.35
+  boundary_amplitude: 0.15
+tilesets:
+  - id: hd_snow_tundra
+    lower_description: frozen tundra ground with tufts of dry yellow-green grass, small pebbles and patches of frost, finely detailed
+    upper_description: soft white packed snow with subtle blue shadows, wind ripples and tiny ice sparkles, finely detailed
+    seed: 5201
+  - id: hd_snow_water
+    lower_description: deep cold icy blue water with small ripples and floating ice shards, finely detailed
+    upper_description: soft white packed snow with subtle blue shadows, wind ripples and tiny ice sparkles, finely detailed
+    seed: 5202
+  - id: hd_snow_mud
+    lower_description: trampled brown mud with footprints and scattered straw, human camp ground, finely detailed
+    upper_description: soft white packed snow with subtle blue shadows, wind ripples and tiny ice sparkles, finely detailed
+    seed: 5203

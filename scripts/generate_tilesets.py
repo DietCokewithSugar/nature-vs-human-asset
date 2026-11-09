@@ -1,6 +1,6 @@
 """Generate the Wang tilesets listed in prompts/tilesets.yaml.
 
-Usage: PIXELLAB_API_KEY=... python scripts/generate_tilesets.py
+Usage: PIXELLAB_API_KEY=... python scripts/generate_tilesets.py [prompts/tilesets.yaml]
 
 Writes tilesets/<id>.png (4x4 atlas of 32px tiles) and tilesets/<id>.json
 (per tile: atlas cell and its NW/NE/SW/SE corners as "lower"/"upper").
@@ -21,7 +21,8 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 
 def main():
-    cfg = yaml.safe_load((ROOT / "prompts/tilesets.yaml").read_text())
+    import sys
+    cfg = yaml.safe_load((ROOT / (sys.argv[1] if len(sys.argv) > 1 else "prompts/tilesets.yaml")).read_text())
     out = ROOT / "tilesets"
     out.mkdir(exist_ok=True)
     c = PixelLab()
@@ -44,7 +45,7 @@ def main():
         tiles = (t.get("tileset") or t)["tiles"]
         size = body["tile_size"]["width"]
         n = len(tiles)
-        cols = 4
+        cols = 4  # 4x4 atlas
         atlas = Image.new("RGBA", (cols * size, ((n + cols - 1) // cols) * size))
         meta = {"id": tid, "tileset_id": r["tileset_id"], "tile_size": size, "request": body, "tiles": []}
         for i, tile in enumerate(tiles):

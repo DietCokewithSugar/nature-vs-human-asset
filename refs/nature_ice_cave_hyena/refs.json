@@ -1,0 +1,87 @@
+{
+ "species": "冰河斑鬣狗 - Cave hyena",
+ "wiki": "https://en.wikipedia.org/wiki/Cave_hyena",
+ "description_zh": "欧亚大陆冰期强悍掠食者，颌骨与咬合力极度发达，能轻松碎骨，常成群活动。",
+ "images": [
+  {
+   "file": "00_Crocuta_crocuta_cave_art_Chauvet_cave.png",
+   "commons": "https://commons.wikimedia.org/wiki/File:Crocuta_crocuta_cave_art_-_Chauvet_cave.png",
+   "license": "Public domain",
+   "author": "Upper Paleolithic artist, derivative trace by Nikolai Spassov &amp; Todor Stoytchev",
+   "size": [
+    452,
+    286
+   ]
+  },
+  {
+   "file": "01_Crocuta_crocuta_cave_art_Lascaux_cave.png",
+   "commons": "https://commons.wikimedia.org/wiki/File:Crocuta_crocuta_cave_art_-_Lascaux_cave.png",
+   "license": "Public domain",
+   "author": "Upper Paleolithic artist, derivative trace by Nikolai Spassov &amp; Todor Stoytchev",
+   "size": [
+    491,
+    336
+   ]
+  },
+  {
+   "file": "02_Crocuta_crocuta_cave_art_Le_Portel_cave.png",
+   "commons": "https://commons.wikimedia.org/wiki/File:Crocuta_crocuta_cave_art_-_Le_Portel_cave.png",
+   "license": "Public domain",
+   "author": "Upper Paleolithic artist, derivative trace by Nikolai Spassov &amp; Todor Stoytchev",
+   "size": [
+    326,
+    410
+   ]
+  },
+  {
+   "file": "03_Crocuta_crocuta_cave_art_Le_Gabillou_cave.png",
+   "commons": "https://commons.wikimedia.org/wiki/File:Crocuta_crocuta_cave_art_-_Le_Gabillou_cave.png",
+   "license": "Public domain",
+   "author": "Upper Paleolithic artist, derivative trace by Nikolai Spassov &amp; Todor Stoytchev",
+   "size": [
+    290,
+    384
+   ]
+  },
+  {
+   "file": "04_MHNT_Crocuta_crocuta_spelaea_2011_10_29.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:MHNT_-_Crocuta_crocuta_spelaea_-_2011-10-29.jpg",
+   "license": "CC BY-SA 3.0",
+   "author": "PierreSelim",
+   "size": [
+    1728,
+    2592
+   ]
+  },
+  {
+   "file": "05_Stamps_of_Moldova_2016_Crocuta_crocuta_spelaea_mod.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Stamps_of_Moldova_2016_Crocuta_crocuta_spelaea_(mod).jpg",
+   "license": "Public domain",
+   "author": "Post of Moldova",
+   "size": [
+    710,
+    415
+   ]
+  },
+  {
+   "file": "06_Palaeopopulations_of_Late_Pleistocene_Top_Predator.png",
+   "commons": "https://commons.wikimedia.org/wiki/File:Palaeopopulations_of_Late_Pleistocene_Top_Predators_in_Europe_(2014)_figure_8C.png",
+   "license": "CC BY 4.0",
+   "author": "Cajus G. Diedrich et al.",
+   "size": [
+    1424,
+    942
+   ]
+  },
+  {
+   "file": "07_Buckland_hyena.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Buckland_hyena.jpg",
+   "license": "Public domain",
+   "author": "William Conybeare",
+   "size": [
+    515,
+    389
+   ]
+  }
+ ]
+}

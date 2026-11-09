@@ -108,6 +108,30 @@ class Unit:
         body.update(seed=seed, name=u["id"], image_size={"width": u["canvas"], "height": u["canvas"]})
         return body
 
+    def pro_body(self, seed):
+        """High-detail standard: PixelLab Pro character mode. With `reference`
+        (an image under refs/<id>/, e.g. a Wikipedia life restoration) the image
+        seeds the design (create_from_concept); `style_character_id` keeps a
+        batch consistent with an approved character."""
+        import base64
+        u = self.cfg
+        body = {"description": u["description"], "view": u["view"], "template_id": u["template_id"],
+                "no_background": True, "seed": seed, "image_size": {"width": u["canvas"], "height": u["canvas"]},
+                "method": "create_with_style"}
+        if u.get("style_description"):
+            body["style_description"] = u["style_description"]
+        ref = u.get("reference")
+        if ref:
+            im = Image.open(ROOT / ref).convert("RGB")
+            im.thumbnail((1024, 1024))
+            buf = io.BytesIO()
+            im.save(buf, "PNG")
+            body["method"] = "create_from_concept"
+            body["concept_image"] = {"type": "base64", "base64": base64.b64encode(buf.getvalue()).decode(), "format": "png"}
+        if u.get("style_character_id"):
+            body["style_character_id"] = u["style_character_id"]
+        return body
+
     def candidates(self, n):
         cands = self.src.setdefault("candidates", [])
         have = {c["seed"] for c in cands}
@@ -116,11 +140,12 @@ class Unit:
             seed = self.cfg["seed"] + i
             if seed in have:
                 continue
-            body = self.create_body(seed)
-            rec = {"seed": seed}
+            pro = self.cfg.get("pipeline") == "pro"
+            body = self.pro_body(seed) if pro else self.create_body(seed)
+            rec = {"seed": seed, "pipeline": "pro" if pro else "v3", "reference": self.cfg.get("reference")}
 
-            def submit(body=body, rec=rec):
-                r = self.api.post("/create-character-v3", body)
+            def submit(body=body, rec=rec, pro=pro):
+                r = self.api.post("/create-character-pro" if pro else "/create-character-v3", body)
                 rec["character_id"] = r["character_id"]
                 return [r["background_job_id"]]
 
@@ -128,7 +153,9 @@ class Unit:
                 cands.append(rec)
 
             tasks.append((f"candidate seed={seed}", submit, done))
-        self.src["create_request"] = self.create_body(self.cfg["seed"])
+        req = self.pro_body(self.cfg["seed"]) if self.cfg.get("pipeline") == "pro" else self.create_body(self.cfg["seed"])
+        req.pop("concept_image", None)   # keep the record small; `reference` names the file
+        self.src["create_request"] = req
         self.run_jobs(tasks)
         self.save()
         self.contact_sheet()
@@ -166,7 +193,7 @@ class Unit:
         self.src["character_id"] = cid
         for c in self.src.get("candidates", []):
             c["picked"] = c["character_id"] == cid
-            if c["picked"]:
+            if c["picked"] and c.get("pipeline") != "pro":
                 self.src["create_request"] = self.create_body(c["seed"])
         self.save()
 

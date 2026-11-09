@@ -1,0 +1,181 @@
+{
+ "id": "hd_snow_water",
+ "tileset_id": "1dde5a79-25b0-454d-9f99-218a89dfe952",
+ "tile_size": 64,
+ "request": {
+  "mode": "pro",
+  "tile_size": {
+   "width": 64,
+   "height": 64
+  },
+  "view": "low top-down",
+  "transition_size": 0,
+  "raggedness": 0.35,
+  "boundary_amplitude": 0.15,
+  "lower_description": "deep cold icy blue water with small ripples and floating ice shards, finely detailed",
+  "upper_description": "soft white packed snow with subtle blue shadows, wind ripples and tiny ice sparkles, finely detailed",
+  "seed": 5202
+ },
+ "tiles": [
+  {
+   "x": 0,
+   "y": 0,
+   "corners": {
+    "NW": "upper",
+    "NE": "upper",
+    "SW": "lower",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 64,
+   "y": 0,
+   "corners": {
+    "NW": "upper",
+    "NE": "lower",
+    "SW": "upper",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 128,
+   "y": 0,
+   "corners": {
+    "NW": "lower",
+    "NE": "upper",
+    "SW": "lower",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 192,
+   "y": 0,
+   "corners": {
+    "NW": "upper",
+    "NE": "upper",
+    "SW": "lower",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 0,
+   "y": 64,
+   "corners": {
+    "NW": "lower",
+    "NE": "upper",
+    "SW": "upper",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 64,
+   "y": 64,
+   "corners": {
+    "NW": "upper",
+    "NE": "lower",
+    "SW": "lower",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 128,
+   "y": 64,
+   "corners": {
+    "NW": "lower",
+    "NE": "lower",
+    "SW": "lower",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 192,
+   "y": 64,
+   "corners": {
+    "NW": "lower",
+    "NE": "lower",
+    "SW": "lower",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 0,
+   "y": 128,
+   "corners": {
+    "NW": "upper",
+    "NE": "lower",
+    "SW": "upper",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 64,
+   "y": 128,
+   "corners": {
+    "NW": "lower",
+    "NE": "lower",
+    "SW": "upper",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 128,
+   "y": 128,
+   "corners": {
+    "NW": "lower",
+    "NE": "lower",
+    "SW": "upper",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 192,
+   "y": 128,
+   "corners": {
+    "NW": "lower",
+    "NE": "upper",
+    "SW": "lower",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 0,
+   "y": 192,
+   "corners": {
+    "NW": "upper",
+    "NE": "upper",
+    "SW": "upper",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 64,
+   "y": 192,
+   "corners": {
+    "NW": "upper",
+    "NE": "upper",
+    "SW": "upper",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 128,
+   "y": 192,
+   "corners": {
+    "NW": "upper",
+    "NE": "lower",
+    "SW": "lower",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 192,
+   "y": 192,
+   "corners": {
+    "NW": "lower",
+    "NE": "upper",
+    "SW": "upper",
+    "SE": "upper"
+   }
+  }
+ ]
+}

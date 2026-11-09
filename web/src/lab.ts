@@ -11,13 +11,18 @@ import { WeatherLayer } from "./weather";
 
 TextureSource.defaultOptions.scaleMode = "nearest";
 
-const TILE = 32;
-const MAP_W = 44;
-const MAP_H = 28;
+// Map scale: the high-detail standard uses 64px tiles (units 64px / 128px);
+// "#/lab/classic" keeps the original 32px map for comparison.
+let TILE = 64;
+let MAP_W = 30;
+let MAP_H = 18;
+let SET_PREFIX = "hd_snow_";
+/** world units per original 32px tile: speeds, reach and lights scale with it */
+let K = 2;
 type Terrain = "snow" | "tundra" | "water" | "mud";
-const TERRAIN_SET: Record<Exclude<Terrain, "snow">, string> = {
-  tundra: "ice_snow_tundra", water: "ice_snow_water", mud: "ice_snow_mud",
-};
+const TERRAIN_SET = (): Record<Exclude<Terrain, "snow">, string> => ({
+  tundra: SET_PREFIX + "tundra", water: SET_PREFIX + "water", mud: SET_PREFIX + "mud",
+});
 const FALLBACK_COLOR: Record<Terrain, number> = { snow: 0xdfe8f2, tundra: 0x7d7a4f, water: 0x1d5fa8, mud: 0x6b4423 };
 type State = "idle" | "walk" | "attack" | "rest" | "death";
 type Mode = "auto" | Exclude<State, "death">;
@@ -100,7 +105,7 @@ function drawTerrain(layer: Container, nlayer: Container, v: Terrain[], sets: Re
     for (let x = 0; x < MAP_W; x++) {
       const c = [v[y * W + x], v[y * W + x + 1], v[(y + 1) * W + x], v[(y + 1) * W + x + 1]];
       const other = c.find((t) => t !== "snow") as Exclude<Terrain, "snow"> | undefined;
-      const set = other ? sets[TERRAIN_SET[other]] : anySet;
+      const set = other ? sets[TERRAIN_SET()[other]] : anySet;
       const key = c.map((t) => (other && t === other ? "L" : "U")).join("");
       const tex = set?.color.get(key);
       if (tex) {
@@ -200,7 +205,9 @@ interface Ent {
   push: { x: number; y: number; t: number } | null;
 }
 
-export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => void> {
+export async function renderLab(root: HTMLElement, m: Manifest, classic = false): Promise<() => void> {
+  const hd = !classic && m.tilesets.some((t) => t.id.startsWith("hd_snow_"));
+  TILE = hd ? 64 : 32; MAP_W = hd ? 30 : 44; MAP_H = hd ? 18 : 28; SET_PREFIX = hd ? "hd_snow_" : "ice_snow_"; K = TILE / 32;
   const host = el("div", { class: "lab-canvas" });
   const side = el("aside", { class: "lab-side" });
   const hud = el("div", { class: "lab-hud" });
@@ -271,7 +278,7 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
 
   function spawn(ut: UnitTex, x: number, y: number): Ent | null {
     const u = ut.unit;
-    for (let i = 0; i < 30 && !walkable(u, x, y); i++) { x += (Math.random() - 0.5) * 60; y += (Math.random() - 0.5) * 60; }
+    for (let i = 0; i < 30 && !walkable(u, x, y); i++) { x += (Math.random() - 0.5) * 60 * K; y += (Math.random() - 0.5) * 60 * K; }
     if (!walkable(u, x, y)) return null;
     const st = SIZE_STATS[u.sizeClass] ?? SIZE_STATS.medium;
     const air = u.habitat === "air";
@@ -353,6 +360,8 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
     if (p === "day") return !isNight() && ui.hour > 11 && ui.hour < 15;
     return Math.floor(ui.hour / 3) % 4 === Math.floor(e.restRoll * 4);
   }
+  /** half the drawn body width: reach works for any canvas size */
+  const bodyR = (e: Ent) => Math.max(4, e.ut.bodyW * 0.45);
   function enemyNear(e: Ent, radius: number): Ent | null {
     let best: Ent | null = null, bd = radius;
     for (const o of ents) {
@@ -364,7 +373,7 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
   }
   function pickWander(e: Ent) {
     for (let i = 0; i < 12; i++) {
-      const a = Math.random() * Math.PI * 2, d = 40 + Math.random() * 140;
+      const a = Math.random() * Math.PI * 2, d = (40 + Math.random() * 140) * K;
       const x = e.x + Math.cos(a) * d, y = e.y + Math.sin(a) * d;
       if (walkable(e.ut.unit, x, y)) { e.tx = x; e.ty = y; return; }
     }
@@ -450,24 +459,24 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
     if (mode === "idle" || mode === "rest") { e.state = mode; return; }
     if (mode === "walk") {
       e.state = "walk";
-      if (moveToward(e, e.tx, e.ty, dt, st.speed)) pickWander(e);
+      if (moveToward(e, e.tx, e.ty, dt, st.speed * K)) pickWander(e);
       return;
     }
     if (mode === "attack") {
-      const t = enemyNear(e, st.radius + 18);
+      const t = enemyNear(e, bodyR(e) + 18 * K);
       e.target = t;
       attack(e, t, dt);
       return;
     }
     // ---- auto
     if (wantsRest(e) && !(e.target && !e.target.dead)) { e.state = "rest"; return; }
-    if (!e.target || e.target.dead || Math.hypot(e.target.x - e.x, e.target.y - e.y) > 220) e.target = enemyNear(e, 150);
+    if (!e.target || e.target.dead || Math.hypot(e.target.x - e.x, e.target.y - e.y) > 220 * K) e.target = enemyNear(e, 150 * K);
     if (e.target) {
-      const t = e.target, tst = SIZE_STATS[t.ut.unit.sizeClass] ?? SIZE_STATS.medium;
-      const reach = st.radius + tst.radius + 4;
+      const t = e.target;
+      const reach = bodyR(e) + bodyR(t) + 4;
       if (Math.hypot(t.x - e.x, t.y - e.y) > reach) {
         e.state = "walk";
-        moveToward(e, t.x, t.y, dt, st.speed * 1.25);
+        moveToward(e, t.x, t.y, dt, st.speed * 1.25 * K);
       } else {
         attack(e, t, dt);
       }
@@ -476,7 +485,7 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
     if (e.wait > 0) { e.state = "idle"; e.wait -= dt; return; }
     e.state = "walk";
     if (e.tx === e.x && e.ty === e.y) pickWander(e);
-    if (moveToward(e, e.tx, e.ty, dt, st.speed)) { e.wait = 1 + Math.random() * 3; e.tx = e.x; e.ty = e.y; }
+    if (moveToward(e, e.tx, e.ty, dt, st.speed * K)) { e.wait = 1 + Math.random() * 3; e.tx = e.x; e.ty = e.y; }
   }
 
   /** Killed: play the death animation (if the unit has one), then fade out. */
@@ -680,6 +689,8 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
         el("h3", {}, "全体状态"),
         seg((["auto", "idle", "walk", "attack", "rest"] as Mode[]).map((s) => [s, STATE_LABEL[s]]), ui.mode, (v) => { ui.mode = v as Mode; ents.forEach((e) => (e.atk = null)); }),
         el("p", { class: "muted small" }, "自动：闲逛、追击并攻击敌对阵营、按物种表的休眠时段休息。其他选项强制所有单位播放该动作。"),
+        el("p", { class: "small" }, hd ? "地图：64px 高清地块 · " : "地图：32px 旧地块 · ",
+          el("a", { href: hd ? "#/lab/classic" : "#/lab" }, hd ? "切换到 32px 旧地图" : "切换到 64px 高清地图")),
       ),
       el("div", { class: "panel" },
         el("h3", {}, "攻击"),
@@ -760,11 +771,11 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
       const nightK = S.night ? 1 : ui.hour > 17.5 || ui.hour < 7 ? 0.5 : 0;
       if (nightK > 0) {
         for (const [cx, cy] of camps)
-          lighting.lights.push({ x: view.x + cx * ui.zoom, y: view.y + cy * ui.zoom, radius: 120 * ui.zoom, height: 26 * ui.zoom, color: [1, 0.58, 0.26], intensity: 0.85 * nightK * flick() });
+          lighting.lights.push({ x: view.x + cx * ui.zoom, y: view.y + cy * ui.zoom, radius: 120 * K * ui.zoom, height: 26 * K * ui.zoom, color: [1, 0.58, 0.26], intensity: 0.85 * nightK * flick() });
         for (const e of ents) {
           if (lighting.lights.length >= 16) break;
           if (e.ut.unit.faction !== "human" || e.dead) continue;
-          lighting.lights.push({ x: view.x + e.x * ui.zoom, y: view.y + (e.y - 12) * ui.zoom, radius: 56 * ui.zoom, height: 20 * ui.zoom, color: [1, 0.66, 0.32], intensity: 0.5 * nightK * flick() });
+          lighting.lights.push({ x: view.x + e.x * ui.zoom, y: view.y + (e.y - 12) * ui.zoom, radius: 56 * K * ui.zoom, height: 20 * K * ui.zoom, color: [1, 0.66, 0.32], intensity: 0.5 * nightK * flick() });
         }
       }
     }
