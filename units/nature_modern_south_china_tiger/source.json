@@ -1,0 +1,36 @@
+{
+  "id": "nature_modern_south_china_tiger",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 20.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 9191,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "c865e5c1-e351-46aa-a69c-52670d3ace54"
+    },
+    {
+      "seed": 9192,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "eaa7ca23-d2d2-40c0-9b8e-35a5449f5821"
+    }
+  ],
+  "create_request": {
+    "description": "South China tiger Panthera tigris amoyensis, compact tiger with bright orange coat and few broad widely spaced black stripes, white belly, cheeks and eye patches, long striped tail",
+    "view": "low top-down",
+    "template_id": "cat",
+    "no_background": true,
+    "seed": 9191,
+    "image_size": {
+      "width": 64,
+      "height": 64
+    },
+    "method": "create_with_style",
+    "style_character_id": "bd11b67a-1165-495e-96cf-b40403d116cb"
+  },
+  "updated": "2026-11-09"
+}

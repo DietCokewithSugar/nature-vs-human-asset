@@ -3,8 +3,29 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 20.0,
-  "animations": {},
+  "generations_spent": 21.0,
+  "animations": {
+    "idle": {
+      "directions": {
+        "south": "done"
+      },
+      "request": {
+        "action": "standing in place, gentle breathing, slight body bob, seamless loop",
+        "action_by_dir": null,
+        "frames": 4
+      },
+      "animation_group_id": "65fcbd1f-fd3e-476b-9e62-e2a158ec9ff6"
+    },
+    "walk": {
+      "directions": {},
+      "request": {
+        "action": "walking slowly forward on six legs, swaying side to side, seamless loop",
+        "action_by_dir": null,
+        "frames": 6
+      },
+      "animation_group_id": "79dea3ff-fb14-434e-aa2f-245987a81336"
+    }
+  },
   "candidates": [
     {
       "seed": 9051,
