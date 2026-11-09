@@ -3,7 +3,7 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 27.0,
+  "generations_spent": 28.0,
   "animations": {
     "idle": {
       "directions": {
@@ -24,7 +24,8 @@
       "directions": {
         "south": "done",
         "east": "done",
-        "north-east": "done"
+        "north-east": "done",
+        "south-east": "done"
       },
       "request": {
         "action": "heavy plodding walk, head low, seamless loop",
