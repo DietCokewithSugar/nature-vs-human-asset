@@ -3988,7 +3988,7 @@
     "w": 128,
     "h": 128
    },
-   "duration": 220
+   "duration": 280
   },
   "attackcombo_north-east_3": {
    "frame": {
@@ -4030,7 +4030,7 @@
     "w": 128,
     "h": 128
    },
-   "duration": 150
+   "duration": 170
   },
   "attackcombo_north-east_5": {
    "frame": {
@@ -4072,7 +4072,7 @@
     "w": 128,
     "h": 128
    },
-   "duration": 100
+   "duration": 110
   },
   "attackcombo_north-east_7": {
    "frame": {
@@ -4366,7 +4366,7 @@
     "w": 128,
     "h": 128
    },
-   "duration": 220
+   "duration": 280
   },
   "attackcombo_north-west_3": {
    "frame": {
@@ -4408,7 +4408,7 @@
     "w": 128,
     "h": 128
    },
-   "duration": 150
+   "duration": 170
   },
   "attackcombo_north-west_5": {
    "frame": {
@@ -4450,7 +4450,7 @@
     "w": 128,
     "h": 128
    },
-   "duration": 100
+   "duration": 110
   },
   "attackcombo_north-west_7": {
    "frame": {
