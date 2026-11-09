@@ -1,0 +1,30 @@
+{
+  "id": "nature_modern_golden_poison_frog",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 10.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 9222,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "d4d9aeb1-9dfc-45e1-a949-d9ec219285be"
+    }
+  ],
+  "create_request": {
+    "description": "golden poison frog Phyllobates terribilis, small smooth shiny bright golden-yellow frog, black eyes, slender legs with small toe pads",
+    "view": "low top-down",
+    "template_id": "custom",
+    "no_background": true,
+    "seed": 9221,
+    "image_size": {
+      "width": 64,
+      "height": 64
+    },
+    "method": "create_with_style",
+    "style_character_id": "bd11b67a-1165-495e-96cf-b40403d116cb"
+  },
+  "updated": "2026-11-09"
+}
