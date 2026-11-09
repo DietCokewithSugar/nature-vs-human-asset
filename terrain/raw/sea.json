@@ -1,0 +1,200 @@
+{
+ "id": "sea",
+ "tileset_id": "498200da-f0ec-41b5-84c3-abebd99ff22b",
+ "tool": "PixelLab v2 /create-tileset",
+ "date": "2026-11-09",
+ "request": {
+  "mode": "pro",
+  "tile_size": {
+   "width": 32,
+   "height": 32
+  },
+  "view": "low top-down",
+  "transition_size": 0,
+  "raggedness": 0.35,
+  "boundary_amplitude": 0.15,
+  "seed": 6106,
+  "lower_description": "deep dark blue cold ocean water with faint wave crests",
+  "upper_description": "shallow turquoise sea water over pale sand, gentle small waves"
+ },
+ "lower": "x_deep",
+ "upper": "x_shallow",
+ "tiles": [
+  {
+   "x": 0,
+   "y": 0,
+   "id": "13",
+   "corners": {
+    "NW": "upper",
+    "NE": "upper",
+    "SW": "lower",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 32,
+   "y": 0,
+   "id": "10",
+   "corners": {
+    "NW": "upper",
+    "NE": "lower",
+    "SW": "upper",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 64,
+   "y": 0,
+   "id": "4",
+   "corners": {
+    "NW": "lower",
+    "NE": "upper",
+    "SW": "lower",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 96,
+   "y": 0,
+   "id": "12",
+   "corners": {
+    "NW": "upper",
+    "NE": "upper",
+    "SW": "lower",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 0,
+   "y": 32,
+   "id": "6",
+   "corners": {
+    "NW": "lower",
+    "NE": "upper",
+    "SW": "upper",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 32,
+   "y": 32,
+   "id": "8",
+   "corners": {
+    "NW": "upper",
+    "NE": "lower",
+    "SW": "lower",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 64,
+   "y": 32,
+   "id": "5f94e3d3-0f48-4628-b626-12f0820af01a",
+   "corners": {
+    "NW": "lower",
+    "NE": "lower",
+    "SW": "lower",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 96,
+   "y": 32,
+   "id": "1",
+   "corners": {
+    "NW": "lower",
+    "NE": "lower",
+    "SW": "lower",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 0,
+   "y": 64,
+   "id": "11",
+   "corners": {
+    "NW": "upper",
+    "NE": "lower",
+    "SW": "upper",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 32,
+   "y": 64,
+   "id": "3",
+   "corners": {
+    "NW": "lower",
+    "NE": "lower",
+    "SW": "upper",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 64,
+   "y": 64,
+   "id": "2",
+   "corners": {
+    "NW": "lower",
+    "NE": "lower",
+    "SW": "upper",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 96,
+   "y": 64,
+   "id": "5",
+   "corners": {
+    "NW": "lower",
+    "NE": "upper",
+    "SW": "lower",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 0,
+   "y": 96,
+   "id": "6546170e-3e00-44cc-8d76-3e025e549866",
+   "corners": {
+    "NW": "upper",
+    "NE": "upper",
+    "SW": "upper",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 32,
+   "y": 96,
+   "id": "14",
+   "corners": {
+    "NW": "upper",
+    "NE": "upper",
+    "SW": "upper",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 64,
+   "y": 96,
+   "id": "9",
+   "corners": {
+    "NW": "upper",
+    "NE": "lower",
+    "SW": "lower",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 96,
+   "y": 96,
+   "id": "7",
+   "corners": {
+    "NW": "lower",
+    "NE": "upper",
+    "SW": "upper",
+    "SE": "upper"
+   }
+  }
+ ]
+}

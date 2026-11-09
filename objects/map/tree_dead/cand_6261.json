@@ -1,0 +1,17 @@
+{
+ "object_id": "2417d9c3-f042-4a71-ab0a-65a589a4f533",
+ "request": {
+  "description": "single dead bare grey conifer tree with broken branches, frost on the bark",
+  "image_size": {
+   "width": 32,
+   "height": 48
+  },
+  "view": "low top-down",
+  "outline": "single color outline",
+  "shading": "medium shading",
+  "detail": "medium detail",
+  "seed": 6261
+ },
+ "tool": "PixelLab v2 /map-objects",
+ "date": "2026-11-09"
+}

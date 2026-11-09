@@ -1,0 +1,551 @@
+{
+ "id": "ice_age",
+ "tile": 32,
+ "columns": 19,
+ "rows": 15,
+ "png": "ice_age.png",
+ "normal": "ice_age_n.png",
+ "wang_bits": {
+  "NW": 8,
+  "NE": 4,
+  "SW": 2,
+  "SE": 1
+ },
+ "frame": "row = terrain index; col 0-15 = overlay for corner mask; full tile = col 15 or a variant col 16-18",
+ "layering": "dual grid offset (-16,-16); per display tile draw the lowest corner terrain full, then each higher terrain with mask = corners whose priority >= its own (scripts/terrainlib.py)",
+ "terrains": [
+  {
+   "index": 0,
+   "id": "x_deep",
+   "name": "深海",
+   "owner": "neutral",
+   "contestable": false,
+   "kind": "water",
+   "durability": null,
+   "converts_to": null,
+   "priority": 0,
+   "row": 0,
+   "full": [
+    15,
+    16,
+    17,
+    18
+   ],
+   "edge": {
+    "amp": 0.14,
+    "rim": "none",
+    "shadow": 0
+   },
+   "source": {
+    "set": "sea",
+    "tileset_id": "498200da-f0ec-41b5-84c3-abebd99ff22b",
+    "tile_id": "5f94e3d3-0f48-4628-b626-12f0820af01a",
+    "seed": 6106,
+    "description": "deep dark blue cold ocean water with faint wave crests"
+   }
+  },
+  {
+   "index": 1,
+   "id": "x_shallow",
+   "name": "浅海",
+   "owner": "neutral",
+   "contestable": true,
+   "kind": "water",
+   "durability": null,
+   "converts_to": null,
+   "priority": 1,
+   "row": 1,
+   "full": [
+    15,
+    16,
+    17,
+    18
+   ],
+   "edge": {
+    "amp": 0.18,
+    "rim": "none",
+    "shadow": 0
+   },
+   "source": {
+    "set": "sea",
+    "tileset_id": "498200da-f0ec-41b5-84c3-abebd99ff22b",
+    "tile_id": "6546170e-3e00-44cc-8d76-3e025e549866",
+    "seed": 6106,
+    "description": "shallow turquoise sea water over pale sand, gentle small waves"
+   }
+  },
+  {
+   "index": 2,
+   "id": "n_stream",
+   "name": "杂乱有植物与淤泥的溪流",
+   "owner": "nature",
+   "contestable": true,
+   "kind": "water",
+   "durability": 100,
+   "converts_to": "h_weir",
+   "priority": 2,
+   "row": 2,
+   "full": [
+    15,
+    16,
+    17,
+    18
+   ],
+   "edge": {
+    "amp": 0.2,
+    "rim": "soft",
+    "shadow": 0
+   },
+   "source": {
+    "set": "streams",
+    "tileset_id": "02c6d1e3-c479-48ea-8f5d-677f4d345481",
+    "tile_id": "8e33f211-8d6c-410c-89ae-8442f4135a4f",
+    "seed": 6123,
+    "description": "dark teal blue water of a wild stream with bright ripples and reflections, small floating green algae patches and reed tufts, brown silt showing through the shallow water"
+   }
+  },
+  {
+   "index": 3,
+   "id": "h_shore",
+   "name": "碎石河滩",
+   "owner": "human",
+   "contestable": true,
+   "kind": "land",
+   "durability": 60,
+   "converts_to": "n_beach",
+   "priority": 3,
+   "row": 3,
+   "full": [
+    15,
+    16,
+    17,
+    18
+   ],
+   "edge": {
+    "amp": 0.04,
+    "rim": "soft",
+    "shadow": 1
+   },
+   "source": {
+    "set": "shore_beach",
+    "tileset_id": "5efd807a-0056-412c-95a8-d296ec42eba5",
+    "tile_id": "d19de61a-24ca-4008-bacb-927aba3bcb1f",
+    "seed": 6105,
+    "description": "gravel river bank of small uniform grey pebbles, flat and tidy"
+   }
+  },
+  {
+   "index": 4,
+   "id": "n_beach",
+   "name": "各色石子与海藻的海滩",
+   "owner": "nature",
+   "contestable": true,
+   "kind": "land",
+   "durability": 80,
+   "converts_to": "h_shore",
+   "priority": 4,
+   "row": 4,
+   "full": [
+    15,
+    16,
+    17,
+    18
+   ],
+   "edge": {
+    "amp": 0.22,
+    "rim": "soft",
+    "shadow": 1
+   },
+   "source": {
+    "set": "shore_beach",
+    "tileset_id": "5efd807a-0056-412c-95a8-d296ec42eba5",
+    "tile_id": "b8d79470-105a-4d46-9906-68b1a8bad0cd",
+    "seed": 6105,
+    "description": "wild beach of multicoloured pebbles, shells and tangled brown-green seaweed on wet dark sand"
+   }
+  },
+  {
+   "index": 5,
+   "id": "h_mud",
+   "name": "踩平的泥地",
+   "owner": "human",
+   "contestable": true,
+   "kind": "land",
+   "durability": 60,
+   "converts_to": "n_steppe",
+   "priority": 5,
+   "row": 5,
+   "full": [
+    15,
+    16,
+    17,
+    18
+   ],
+   "edge": {
+    "amp": 0.04,
+    "rim": "soft",
+    "shadow": 0
+   },
+   "source": {
+    "set": "mud_steppe",
+    "tileset_id": "693de6c4-4f0d-479e-a701-edf4d261a89d",
+    "tile_id": "53e20eb8-1675-48da-8e0b-e7aec83f9807",
+    "seed": 6101,
+    "description": "trampled flat brown mud with human footprints, ice age camp ground"
+   }
+  },
+  {
+   "index": 6,
+   "id": "h_camp",
+   "name": "夷土营地",
+   "owner": "human",
+   "contestable": true,
+   "kind": "land",
+   "durability": 100,
+   "converts_to": "n_rocks",
+   "priority": 6,
+   "row": 6,
+   "full": [
+    15,
+    16,
+    17,
+    18
+   ],
+   "edge": {
+    "amp": 0.03,
+    "rim": "soft",
+    "shadow": 0
+   },
+   "source": {
+    "set": "camp_rocks",
+    "tileset_id": "a6638fbb-2ad0-413e-8115-23040034f881",
+    "tile_id": "39e91d7e-37c9-471f-a382-bb7921bda27d",
+    "seed": 6102,
+    "description": "levelled bare earth of a stone age camp: packed grey-brown dirt, tidy and flat, scattered ash, charcoal bits and small bone fragments"
+   }
+  },
+  {
+   "index": 7,
+   "id": "h_snow",
+   "name": "清扫过的雪地",
+   "owner": "human",
+   "contestable": true,
+   "kind": "land",
+   "durability": 40,
+   "converts_to": "n_tundra",
+   "priority": 7,
+   "row": 7,
+   "full": [
+    15,
+    16,
+    17,
+    18
+   ],
+   "edge": {
+    "amp": 0.04,
+    "rim": "soft",
+    "shadow": 1
+   },
+   "source": {
+    "set": "tundra_snow",
+    "tileset_id": "d1e98e3c-99af-4306-8cf0-82c6a272727e",
+    "tile_id": "bf7a7616-b046-45f7-8164-442bef02df87",
+    "seed": 6104,
+    "description": "flat packed snow swept clean by people, white with subtle blue shadows and faint parallel brush strokes"
+   }
+  },
+  {
+   "index": 8,
+   "id": "n_tundra",
+   "name": "冻原苔原",
+   "owner": "nature",
+   "contestable": true,
+   "kind": "land",
+   "durability": 80,
+   "converts_to": "h_mud",
+   "priority": 8,
+   "row": 8,
+   "full": [
+    15,
+    16,
+    17,
+    18
+   ],
+   "edge": {
+    "amp": 0.22,
+    "rim": "soft",
+    "shadow": 0
+   },
+   "source": {
+    "set": "tundra_snow",
+    "tileset_id": "d1e98e3c-99af-4306-8cf0-82c6a272727e",
+    "tile_id": "10037abf-dbe6-4171-bcc4-d4e91c8f04d2",
+    "seed": 6104,
+    "description": "frozen tundra: low green-brown moss, grey-green lichen and small pebbles, patches of frost"
+   }
+  },
+  {
+   "index": 9,
+   "id": "n_steppe",
+   "name": "猛犸草原",
+   "owner": "nature",
+   "contestable": true,
+   "kind": "land",
+   "durability": 60,
+   "converts_to": "h_mud",
+   "priority": 9,
+   "row": 9,
+   "full": [
+    15,
+    16,
+    17,
+    18
+   ],
+   "edge": {
+    "amp": 0.24,
+    "rim": "soft",
+    "shadow": 1
+   },
+   "source": {
+    "set": "mud_steppe",
+    "tileset_id": "693de6c4-4f0d-479e-a701-edf4d261a89d",
+    "tile_id": "6f6968e3-9db4-449a-9937-5073f127789a",
+    "seed": 6101,
+    "description": "mammoth steppe: tall dry yellow-green grass with tiny white and purple wildflowers"
+   }
+  },
+  {
+   "index": 10,
+   "id": "x_basalt",
+   "name": "火山岩地",
+   "owner": "volcano",
+   "contestable": false,
+   "kind": "land",
+   "durability": null,
+   "converts_to": null,
+   "priority": 10,
+   "row": 10,
+   "full": [
+    15,
+    16,
+    17,
+    18
+   ],
+   "edge": {
+    "amp": 0.2,
+    "rim": "soft",
+    "shadow": 1
+   },
+   "source": {
+    "set": "basalt_forest",
+    "tileset_id": "c3b19cb4-7e2f-4d40-b1ec-bb1015a212b6",
+    "tile_id": "35448c4f-e72e-4bd4-970a-05bdf81481c1",
+    "seed": 6107,
+    "description": "dark grey volcanic basalt rock ground with cracks and black ash"
+   }
+  },
+  {
+   "index": 11,
+   "id": "n_rocks",
+   "name": "不规则的石子坡",
+   "owner": "nature",
+   "contestable": true,
+   "kind": "land",
+   "durability": 120,
+   "converts_to": "h_camp",
+   "priority": 11,
+   "row": 11,
+   "full": [
+    15,
+    16,
+    17,
+    18
+   ],
+   "edge": {
+    "amp": 0.24,
+    "rim": "raised",
+    "shadow": 2
+   },
+   "source": {
+    "set": "camp_rocks",
+    "tileset_id": "a6638fbb-2ad0-413e-8115-23040034f881",
+    "tile_id": "c99a44d6-ee07-4b77-a4a7-195f8e84ffa3",
+    "seed": 6102,
+    "description": "irregular rocky scree slope: jumble of grey and ochre stones of many sizes with tufts of moss between them"
+   }
+  },
+  {
+   "index": 12,
+   "id": "h_weir",
+   "name": "石块围堰的规整溪流",
+   "owner": "human",
+   "contestable": true,
+   "kind": "water",
+   "durability": 120,
+   "converts_to": "n_stream",
+   "priority": 12,
+   "row": 12,
+   "full": [
+    15,
+    16,
+    17,
+    18
+   ],
+   "edge": {
+    "amp": 0.02,
+    "rim": "stone",
+    "shadow": 1
+   },
+   "source": {
+    "set": "streams",
+    "tileset_id": "02c6d1e3-c479-48ea-8f5d-677f4d345481",
+    "tile_id": "2b6d3383-58e7-4708-b86b-3942845df565",
+    "seed": 6123,
+    "description": "clear cold grey-blue stream water flowing evenly, regular parallel ripples, clean"
+   }
+  },
+  {
+   "index": 13,
+   "id": "n_glacier",
+   "name": "冰川",
+   "owner": "nature",
+   "contestable": true,
+   "kind": "land",
+   "durability": 200,
+   "converts_to": "h_snow",
+   "priority": 13,
+   "row": 13,
+   "full": [
+    15,
+    16,
+    17,
+    18
+   ],
+   "edge": {
+    "amp": 0.2,
+    "rim": "raised",
+    "shadow": 2
+   },
+   "source": {
+    "set": "glacier",
+    "tileset_id": "441e591f-fbf2-48cf-8ce7-4cb42eea1ebc",
+    "tile_id": "403876bb-6e11-4254-98dc-fa4fb217ef35",
+    "seed": 6108,
+    "description": "glacier: thick pale cyan-blue ice with deep blue crevasses and a crust of white snow"
+   }
+  },
+  {
+   "index": 14,
+   "id": "x_forest",
+   "name": "极度茂密的森林",
+   "owner": "neutral",
+   "contestable": true,
+   "kind": "land",
+   "durability": "2x",
+   "converts_to": {
+    "nature": "n_tundra",
+    "human": "h_mud"
+   },
+   "priority": 14,
+   "row": 14,
+   "full": [
+    15,
+    16,
+    17,
+    18
+   ],
+   "edge": {
+    "amp": 0.26,
+    "rim": "raised",
+    "shadow": 3
+   },
+   "source": {
+    "set": "basalt_forest",
+    "tileset_id": "c3b19cb4-7e2f-4d40-b1ec-bb1015a212b6",
+    "tile_id": "92d960b3-1bb1-4e28-bb7c-45acdb20d137",
+    "seed": 6107,
+    "description": "extremely dense ancient conifer forest seen from above: tightly packed dark green spruce and pine crowns dusted with snow, no ground visible"
+   }
+  }
+ ],
+ "decals": {
+  "png": "ice_age_decals.png",
+  "columns": {
+   "33": [
+    0,
+    1
+   ],
+   "66": [
+    2,
+    3
+   ]
+  },
+  "rows": [
+   {
+    "row": 0,
+    "from": "n_stream",
+    "to": "h_weir"
+   },
+   {
+    "row": 1,
+    "from": "h_shore",
+    "to": "n_beach"
+   },
+   {
+    "row": 2,
+    "from": "n_beach",
+    "to": "h_shore"
+   },
+   {
+    "row": 3,
+    "from": "h_mud",
+    "to": "n_steppe"
+   },
+   {
+    "row": 4,
+    "from": "h_camp",
+    "to": "n_rocks"
+   },
+   {
+    "row": 5,
+    "from": "h_snow",
+    "to": "n_tundra"
+   },
+   {
+    "row": 6,
+    "from": "n_tundra",
+    "to": "h_mud"
+   },
+   {
+    "row": 7,
+    "from": "n_steppe",
+    "to": "h_mud"
+   },
+   {
+    "row": 8,
+    "from": "n_rocks",
+    "to": "h_camp"
+   },
+   {
+    "row": 9,
+    "from": "h_weir",
+    "to": "n_stream"
+   },
+   {
+    "row": 10,
+    "from": "n_glacier",
+    "to": "h_snow"
+   },
+   {
+    "row": 11,
+    "from": "x_forest",
+    "to": "n_tundra"
+   },
+   {
+    "row": 12,
+    "from": "x_forest",
+    "to": "h_mud"
+   }
+  ]
+ }
+}

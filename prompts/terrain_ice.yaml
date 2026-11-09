@@ -1,0 +1,87 @@
+# Ice-age terrain for the 96x64 level (PRD section 5.1), generated with
+# PixelLab Wang tilesets. Each set pairs two terrains; we keep only the two
+# full tiles (all-lower, all-upper), which tile seamlessly with themselves.
+# Transitions between ANY two terrains are built by scripts/build_terrain_atlas.py
+# (dual grid + layered edge masks), so the pairing below only decides which
+# two terrains share one generation.
+common:
+  mode: pro
+  tile_size: {width: 32, height: 32}
+  view: low top-down
+  transition_size: 0
+  raggedness: 0.35
+  boundary_amplitude: 0.15
+
+sets:
+  - id: mud_steppe
+    seed: 6101
+    lower: {terrain: h_mud, description: "trampled flat brown mud with human footprints, ice age camp ground"}
+    upper: {terrain: n_steppe, description: "mammoth steppe: tall dry yellow-green grass with tiny white and purple wildflowers"}
+  - id: camp_rocks
+    seed: 6102
+    lower: {terrain: h_camp, description: "levelled bare earth of a stone age camp: packed grey-brown dirt, tidy and flat, scattered ash, charcoal bits and small bone fragments"}
+    upper: {terrain: n_rocks, description: "irregular rocky scree slope: jumble of grey and ochre stones of many sizes with tufts of moss between them"}
+  - id: streams
+    # take 3 (seed 6103 drew the wild stream as a meadow, 6113 as dark moss)
+    seed: 6123
+    lower: {terrain: n_stream, description: "dark teal blue water of a wild stream with bright ripples and reflections, small floating green algae patches and reed tufts, brown silt showing through the shallow water"}
+    upper: {terrain: h_weir, description: "clear cold grey-blue stream water flowing evenly, regular parallel ripples, clean"}
+  - id: tundra_snow
+    seed: 6104
+    lower: {terrain: n_tundra, description: "frozen tundra: low green-brown moss, grey-green lichen and small pebbles, patches of frost"}
+    upper: {terrain: h_snow, description: "flat packed snow swept clean by people, white with subtle blue shadows and faint parallel brush strokes"}
+  - id: shore_beach
+    seed: 6105
+    lower: {terrain: h_shore, description: "gravel river bank of small uniform grey pebbles, flat and tidy"}
+    upper: {terrain: n_beach, description: "wild beach of multicoloured pebbles, shells and tangled brown-green seaweed on wet dark sand"}
+  - id: sea
+    seed: 6106
+    lower: {terrain: x_deep, description: "deep dark blue cold ocean water with faint wave crests"}
+    upper: {terrain: x_shallow, description: "shallow turquoise sea water over pale sand, gentle small waves"}
+  - id: basalt_forest
+    seed: 6107
+    lower: {terrain: x_basalt, description: "dark grey volcanic basalt rock ground with cracks and black ash"}
+    upper: {terrain: x_forest, description: "extremely dense ancient conifer forest seen from above: tightly packed dark green spruce and pine crowns dusted with snow, no ground visible"}
+  - id: glacier
+    seed: 6108
+    lower: {terrain: h_snow2, description: "flat packed snow swept clean by people, white with subtle blue shadows"}
+    upper: {terrain: n_glacier, description: "glacier: thick pale cyan-blue ice with deep blue crevasses and a crust of white snow"}
+
+# Terrain registry, in draw order (priority low -> high). In the dual-grid
+# renderer a higher-priority terrain's ragged edge is drawn over its lower
+# neighbours, so nature (ragged) mostly overlaps human (tidy) ground.
+#   owner: human | nature | neutral | volcano (volcano and x_deep are not contestable)
+#   durability: PRD 5.1 "转化耐久"; converts_to: terrain it becomes when flipped
+#   edge: amp = boundary wobble (0 tidy .. 0.3 wild), rim = inner edge style,
+#         shadow = px of 3/4 drop shadow cast to the south-east
+terrains:
+  - {id: x_deep,    name: 深海, owner: neutral, contestable: false, kind: water, source: sea.lower,
+     edge: {amp: 0.14, rim: none, shadow: 0}}
+  - {id: x_shallow, name: 浅海, owner: neutral, contestable: true, kind: water, source: sea.upper,
+     edge: {amp: 0.18, rim: none, shadow: 0}}
+  - {id: n_stream,  name: 杂乱有植物与淤泥的溪流, owner: nature, durability: 100, converts_to: h_weir, kind: water, source: streams.lower,
+     edge: {amp: 0.2, rim: soft, shadow: 0}}
+  - {id: h_shore,   name: 碎石河滩, owner: human, durability: 60, converts_to: n_beach, kind: land, source: shore_beach.lower,
+     edge: {amp: 0.04, rim: soft, shadow: 1}}
+  - {id: n_beach,   name: 各色石子与海藻的海滩, owner: nature, durability: 80, converts_to: h_shore, kind: land, source: shore_beach.upper,
+     edge: {amp: 0.22, rim: soft, shadow: 1}}
+  - {id: h_mud,     name: 踩平的泥地, owner: human, durability: 60, converts_to: n_steppe, kind: land, source: mud_steppe.lower,
+     edge: {amp: 0.04, rim: soft, shadow: 0}}
+  - {id: h_camp,    name: 夷土营地, owner: human, durability: 100, converts_to: n_rocks, kind: land, source: camp_rocks.lower,
+     edge: {amp: 0.03, rim: soft, shadow: 0}}
+  - {id: h_snow,    name: 清扫过的雪地, owner: human, durability: 40, converts_to: n_tundra, kind: land, source: tundra_snow.upper,
+     edge: {amp: 0.04, rim: soft, shadow: 1}}
+  - {id: n_tundra,  name: 冻原苔原, owner: nature, durability: 80, converts_to: h_mud, kind: land, source: tundra_snow.lower,
+     edge: {amp: 0.22, rim: soft, shadow: 0}}
+  - {id: n_steppe,  name: 猛犸草原, owner: nature, durability: 60, converts_to: h_mud, kind: land, source: mud_steppe.upper,
+     edge: {amp: 0.24, rim: soft, shadow: 1}}
+  - {id: x_basalt,  name: 火山岩地, owner: volcano, contestable: false, kind: land, source: basalt_forest.lower,
+     edge: {amp: 0.2, rim: soft, shadow: 1}}
+  - {id: n_rocks,   name: 不规则的石子坡, owner: nature, durability: 120, converts_to: h_camp, kind: land, source: camp_rocks.upper,
+     edge: {amp: 0.24, rim: raised, shadow: 2}}
+  - {id: h_weir,    name: 石块围堰的规整溪流, owner: human, durability: 120, converts_to: n_stream, kind: water, source: streams.upper,
+     edge: {amp: 0.02, rim: stone, shadow: 1}}
+  - {id: n_glacier, name: 冰川, owner: nature, durability: 200, converts_to: h_snow, kind: land, source: glacier.upper,
+     edge: {amp: 0.2, rim: raised, shadow: 2}}
+  - {id: x_forest,  name: 极度茂密的森林, owner: neutral, contestable: true, durability: 2x, converts_to: {nature: n_tundra, human: h_mud}, kind: land, source: basalt_forest.upper,
+     edge: {amp: 0.26, rim: raised, shadow: 3}}

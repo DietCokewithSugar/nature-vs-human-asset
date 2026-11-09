@@ -1,0 +1,17 @@
+{
+ "object_id": "78758c2d-426e-4fad-810d-7effeb74b0d3",
+ "request": {
+  "description": "resource point: a small grove of three snow-dusted spruce trees with red berry bushes and a mossy stump at their feet",
+  "image_size": {
+   "width": 48,
+   "height": 64
+  },
+  "view": "low top-down",
+  "outline": "single color outline",
+  "shading": "medium shading",
+  "detail": "medium detail",
+  "seed": 6212
+ },
+ "tool": "PixelLab v2 /map-objects",
+ "date": "2026-11-09"
+}
