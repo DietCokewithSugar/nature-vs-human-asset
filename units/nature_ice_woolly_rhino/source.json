@@ -1,0 +1,39 @@
+{
+  "id": "nature_ice_woolly_rhino",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 20.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 6811,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "73100960-b380-4279-97a6-b76c56b92fa4",
+      "picked": true
+    },
+    {
+      "seed": 6812,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "8c790c6e-ef30-47e4-b366-048dd95c0c8f",
+      "picked": false
+    }
+  ],
+  "create_request": {
+    "description": "woolly rhinoceros completely covered in long shaggy woolly reddish-brown fur hanging down over its legs, big shoulder hump, two horns with a very long flattened front horn sweeping forward, small eyes, short thick legs",
+    "view": "low top-down",
+    "template_id": "horse",
+    "no_background": true,
+    "seed": 6811,
+    "image_size": {
+      "width": 64,
+      "height": 64
+    },
+    "method": "create_with_style",
+    "style_character_id": "bd11b67a-1165-495e-96cf-b40403d116cb"
+  },
+  "updated": "2026-11-09",
+  "character_id": "73100960-b380-4279-97a6-b76c56b92fa4"
+}

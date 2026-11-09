@@ -1,0 +1,30 @@
+{
+  "id": "nature_ice_sardinian_pika",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 10.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 4201,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "ea8e7cb6-f3ba-4494-bcfa-622db583bb96"
+    }
+  ],
+  "create_request": {
+    "description": "Sardinian pika Prolagus sardus, plump round rabbit-like burrowing lagomorph, short rounded ears, no visible tail, dense brown-grey fur with a lighter belly, small black eyes, short legs",
+    "view": "low top-down",
+    "template_id": "cat",
+    "no_background": true,
+    "seed": 4201,
+    "image_size": {
+      "width": 64,
+      "height": 64
+    },
+    "method": "create_with_style",
+    "style_character_id": "bd11b67a-1165-495e-96cf-b40403d116cb"
+  },
+  "updated": "2026-11-09"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "nature_ice_mastodon",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 10.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 6721,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "80d4f890-7162-4103-80a4-a10683b6ba46"
+    }
+  ],
+  "create_request": {
+    "description": "ancient woodland elephant with a long low barrel body, a flat low head with no dome, short dark chestnut-brown hair, two long gently curved ivory tusks pointing forward, thick pillar legs, long trunk; it looks like a hairy African elephant, not a woolly beast",
+    "view": "low top-down",
+    "template_id": "horse",
+    "no_background": true,
+    "seed": 6721,
+    "image_size": {
+      "width": 64,
+      "height": 64
+    },
+    "method": "create_with_style",
+    "style_character_id": "bd11b67a-1165-495e-96cf-b40403d116cb"
+  },
+  "updated": "2026-11-09"
+}
