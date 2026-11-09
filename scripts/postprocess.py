@@ -97,7 +97,11 @@ def load_unit_frames(uid, style):
     mirror = style["mirror_map"]
 
     src = {"rotation": {d: [(raw / fr["rotations"][d], None)] for d in DIRS}}
+    ucfg = yaml.safe_load((ROOT / "prompts/units" / f"{uid}.yaml").read_text()) or {}
+    drop = set(ucfg.get("drop_animations", []))   # e.g. PixelLab attack replaced by the hand-edited one
     for name, per_dir in fr.get("animations", {}).items():
+        if name in drop:
+            continue
         src[name] = {d: [(raw / p, None) for p in paths] for d, paths in per_dir.items()}
     hits = {}
     for v in VARIANTS:
@@ -159,8 +163,9 @@ def foot_offset(frames, cell):
     return (bbox[3] - cell / 2) if bbox else cell / 2
 
 
-def pack(strips, max_w=2048):
-    """Shelf-pack strips [(key, w, h)] -> {key: (x, y)}, sheet size."""
+def pack(strips, max_w=4096):
+    """Shelf-pack strips [(key, w, h)] -> {key: (x, y)}, sheet size.
+    4096 is the texture size every WebGL device (incl. phones) can load."""
     pos, x, y, shelf_h, W = {}, 0, 0, 0, 0
     for key, w, h in strips:
         if x and x + w > max_w:

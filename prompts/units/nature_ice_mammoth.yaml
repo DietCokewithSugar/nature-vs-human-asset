@@ -16,9 +16,6 @@ animations:
   - name: walk
     action: slow heavy walk, trunk swaying
     frames: 6
-  - name: attack
-    action: steps forward and thrusts its head down and forward to gore with its tusks, then lifts its head back up; the tusks keep exactly the same curved shape and size in every frame
-    frames: 6
 attack_keys:
   anticipation: rearing back with its head raised high, trunk curled up and long curved tusks lifted, weight on the hind legs, facing {facing}
   strike: driving its head down and forward {facing}, long curved tusks stabbing forward, front legs braced wide; the tusks keep the same curved shape
@@ -29,4 +26,5 @@ handedit: {kind: lunge, heavy: true}
 pipeline: pro
 reference: refs/nature_ice_mammoth/00_Woolly_mammoth_model_Royal_BC_Museum_in_Victoria.jpg
 reference_license: CC BY 2.0, Thomas Quine - https://commons.wikimedia.org/wiki/File:Woolly_mammoth_model_Royal_BC_Museum_in_Victoria.jpg
-
+# hand-edited attack replaces the PixelLab one (keeps the 128px sheet within 4096px)
+drop_animations: [attack]

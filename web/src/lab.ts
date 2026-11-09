@@ -65,11 +65,13 @@ function buildTerrain(seed: number): Terrain[] {
         if (ok) v[y * W + x] = t;
       }
   };
-  paint(W * 0.5, H * 0.72, 5.5, "water");
-  paint(W * 0.56, H * 0.62, 3.5, "water");
-  paint(W * 0.5, H * 0.2, 2.5, "water");
-  for (let i = 0; i < 6; i++) paint(3 + r() * W * 0.35, 2 + r() * (H - 4), 2.5 + r() * 3.5, "tundra");
-  for (let i = 0; i < 4; i++) paint(W * 0.66 + r() * W * 0.28, 3 + r() * (H - 6), 2 + r() * 3, "mud");
+  // patch sizes were tuned on the 44-wide classic map: scale them to this map
+  const k = Math.max(0.55, W / 45);
+  paint(W * 0.5, H * 0.72, 5.5 * k, "water");
+  paint(W * 0.56, H * 0.62, 3.5 * k, "water");
+  paint(W * 0.5, H * 0.2, 2.5 * k, "water");
+  for (let i = 0; i < 6; i++) paint(3 + r() * W * 0.35, 2 + r() * (H - 4), (2.5 + r() * 3.5) * k, "tundra");
+  for (let i = 0; i < 4; i++) paint(W * 0.66 + r() * W * 0.28, 3 + r() * (H - 6), (2 + r() * 3) * k, "mud");
   return v;
 }
 
@@ -771,7 +773,7 @@ export async function renderLab(root: HTMLElement, m: Manifest, classic = false)
 
   renderSide();
   battle(60);
-  ui.zoom = app.screen.width < 700 ? 1 : 2;
+  ui.zoom = hd || app.screen.width < 700 ? 1 : 2;   // HD tiles are already 64px
   centerOn(MAP_W * TILE / 2, MAP_H * TILE / 2);
 
   let fpsAvg = 60, hudT = 0;

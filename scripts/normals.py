@@ -40,13 +40,18 @@ def unit(uid):
         r = f["frame"]
         groups.setdefault(r["w"], []).append(r)
     with tempfile.TemporaryDirectory() as tmp:
+        # the CLI caps one input at ~4.19M px (incl. padding): process big cells in chunks
+        chunks = []
         for cell, rects in groups.items():
+            per = max(1, 2_500_000 // (cell * cell))
+            chunks += [(cell, rects[i:i + per]) for i in range(0, len(rects), per)]
+        for k, (cell, rects) in enumerate(chunks):
             cols = max(1, min(len(rects), 2048 // cell))
             rows_ = (len(rects) + cols - 1) // cols
             tile = Image.new("RGBA", (cols * cell, rows_ * cell))
             for i, r in enumerate(rects):
                 tile.paste(sheet.crop((r["x"], r["y"], r["x"] + cell, r["y"] + cell)), ((i % cols) * cell, (i // cols) * cell))
-            src, dst = pathlib.Path(tmp) / f"s{cell}.png", pathlib.Path(tmp) / f"s{cell}_n.png"
+            src, dst = pathlib.Path(tmp) / f"s{cell}_{k}.png", pathlib.Path(tmp) / f"s{cell}_{k}_n.png"
             tile.save(src)
             run(src, dst, "--frame-size", f"{cell}x{cell}")
             nm = Image.open(dst).convert("RGBA")

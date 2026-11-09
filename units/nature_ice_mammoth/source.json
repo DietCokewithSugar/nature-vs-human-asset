@@ -3,11 +3,15 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 81.0,
+  "generations_spent": 113.0,
   "animations": {
     "idle": {
       "directions": {
-        "south": "done"
+        "south": "done",
+        "east": "done",
+        "north-east": "done",
+        "south-east": "done",
+        "north": "done"
       },
       "request": {
         "action": "standing in place, gentle breathing, slight body bob, seamless loop",
@@ -18,7 +22,11 @@
     },
     "walk": {
       "directions": {
-        "south": "done"
+        "south": "done",
+        "north": "done",
+        "north-east": "done",
+        "east": "done",
+        "south-east": "done"
       },
       "request": {
         "action": "slow heavy walk, trunk swaying",
@@ -29,7 +37,11 @@
     },
     "attack": {
       "directions": {
-        "south": "done"
+        "south": "done",
+        "east": "done",
+        "south-east": "done",
+        "north-east": "done",
+        "north": "done"
       },
       "request": {
         "action": "steps forward and thrusts its head down and forward to gore with its tusks, then lifts its head back up; the tusks keep exactly the same curved shape and size in every frame",
@@ -75,5 +87,33 @@
     "method": "create_from_concept"
   },
   "updated": "2026-11-09",
-  "character_id": "2908d092-f1d8-4d84-ba73-c83e43d66925"
+  "character_id": "2908d092-f1d8-4d84-ba73-c83e43d66925",
+  "variants": {
+    "attackhand": {
+      "method": "AI hand-edited: select-and-move / squash-stretch / smear edits on the PixelLab base pose, text-grid method from aseprite-ai-artist (MIT), timing from its rules/44",
+      "kind": "lunge",
+      "heavy": true,
+      "mag": 2.6,
+      "directions": [
+        "south",
+        "south-east",
+        "east",
+        "north-east",
+        "north"
+      ],
+      "hand_tuned": [],
+      "generations": 0
+    },
+    "death": {
+      "method": "AI hand-edited collapse (squash + RotSprite-style tilt)",
+      "directions": [
+        "south",
+        "south-east",
+        "east",
+        "north-east",
+        "north"
+      ],
+      "generations": 0
+    }
+  }
 }
