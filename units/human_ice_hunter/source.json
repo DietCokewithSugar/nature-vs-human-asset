@@ -3,14 +3,27 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab ToS (commercial use per plan)",
   "created": "2026-11-09",
-  "generations_spent": 4.0,
+  "generations_spent": 12.0,
   "animations": {
     "walk": {
       "directions": {
         "south": "done",
-        "south-east": "done"
+        "south-east": "done",
+        "east": "done",
+        "north-east": "done",
+        "north": "done"
       },
       "animation_group_id": "16b09928-aa2f-4f2f-b7bd-43c7c7ed362a"
+    },
+    "attack": {
+      "directions": {
+        "south": "done",
+        "south-east": "done",
+        "east": "done",
+        "north-east": "done",
+        "north": "done"
+      },
+      "animation_group_id": "bcfb598f-9137-4e93-9b49-2a4d518db866"
     }
   },
   "character_id": "be25476a-68c5-4081-800e-ff564d6e8cd8",

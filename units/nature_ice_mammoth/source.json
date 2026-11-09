@@ -1,0 +1,23 @@
+{
+  "id": "nature_ice_mammoth",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab ToS (commercial use per plan)",
+  "created": "2026-11-09",
+  "generations_spent": 0,
+  "animations": {},
+  "character_id": "cf9d4ebe-179a-44c2-af17-e5ead08b1bf4",
+  "create_request": {
+    "description": "woolly mammoth, shaggy reddish-brown long fur, long curved ivory tusks, small ears, trunk hanging down, huge heavy body, thick column legs",
+    "view": "low top-down",
+    "template_id": "horse",
+    "outline": "single color black outline",
+    "detail": "medium detail",
+    "no_background": true,
+    "seed": 2001,
+    "image_size": {
+      "width": 64,
+      "height": 64
+    },
+    "name": "nature_ice_mammoth"
+  }
+}
