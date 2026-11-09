@@ -7,9 +7,12 @@ size_class: large
 canvas: 64
 template_id: horse
 habitat: land
-seed: 6701
+seed: 6711
 description: >-
-  American mastodon, long low heavy body with shorter shaggy reddish-brown hair, flat low head without a dome, long nearly straight forward-pointing ivory tusks, thick legs, trunk hanging down
+  American mastodon, an elephant-like animal that is clearly NOT a mammoth: long
+  low barrel-shaped body, flat sloping forehead with no dome and no shoulder
+  hump, short dark chestnut-brown hair, two long nearly straight ivory tusks
+  pointing forward and slightly upward, thick pillar legs, long trunk
 animations:
   - name: walk
     action: slow heavy walk, trunk swaying

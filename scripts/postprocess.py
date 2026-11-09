@@ -81,6 +81,7 @@ def centred(im, cell):
 VARIANTS = {  # extra attack versions: folder under units/<id>/variants/ -> label
     "attackkf": "PixelLab key poses + interpolation",
     "attackhand": "AI hand-edited (text-grid method)",
+    "death": "AI hand-edited collapse",
 }
 BASE_ANIMS = ("rotation", "idle", "walk", "attack")
 DIRV = {"south": (0, 1), "south-east": (0.7071, 0.7071), "east": (1, 0), "north-east": (0.7071, -0.7071),
@@ -174,7 +175,7 @@ def pack(strips, max_w=2048):
 def process(uid, style, pal):
     unit_cfg = yaml.safe_load((ROOT / "prompts/units" / f"{uid}.yaml").read_text())
     frames, ms, hits, cells, cell = load_unit_frames(uid, style)
-    fps = {"rotation": 1, "idle": 6, "walk": 10, "attack": 10, "attackkf": 10, "attackhand": 10}
+    fps = {"rotation": 1, "idle": 6, "walk": 10, "attack": 10, "attackkf": 10, "attackhand": 10, "death": 10}
 
     rows = [(n, d) for n in frames for d in DIRS if d in frames[n]]
     strips = [((n, d), len(frames[n][d]) * cells[n], cells[n]) for n, d in rows]

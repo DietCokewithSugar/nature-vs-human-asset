@@ -8,15 +8,18 @@
   "candidates": [
     {
       "seed": 7402,
-      "character_id": "84259a53-2ec0-41c3-b9b8-4f8392b8fb3b"
+      "character_id": "84259a53-2ec0-41c3-b9b8-4f8392b8fb3b",
+      "picked": false
     },
     {
       "seed": 7401,
-      "character_id": "a6982178-f884-471c-8d25-d0384c14afe8"
+      "character_id": "a6982178-f884-471c-8d25-d0384c14afe8",
+      "picked": true
     },
     {
       "seed": 7403,
-      "character_id": "c4f60508-7ab9-4ef2-b203-b78406118e93"
+      "character_id": "c4f60508-7ab9-4ef2-b203-b78406118e93",
+      "picked": false
     }
   ],
   "create_request": {
@@ -33,5 +36,6 @@
       "height": 64
     }
   },
-  "updated": "2026-11-09"
+  "updated": "2026-11-09",
+  "character_id": "a6982178-f884-471c-8d25-d0384c14afe8"
 }

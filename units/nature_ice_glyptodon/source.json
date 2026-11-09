@@ -1,0 +1,41 @@
+{
+  "id": "nature_ice_glyptodon",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 6.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 6903,
+      "character_id": "ea0c393f-693d-431c-91db-ebdb1693edd7",
+      "picked": false
+    },
+    {
+      "seed": 6902,
+      "character_id": "12e1ee0b-ae03-4c27-8e74-3c6e3f3d3e4f",
+      "picked": false
+    },
+    {
+      "seed": 6901,
+      "character_id": "41016704-693c-4f77-8145-6ee49d16ea5f",
+      "picked": true
+    }
+  ],
+  "create_request": {
+    "description": "Glyptodon, giant armadillo-like animal with a huge domed bony shell made of hexagonal plates, small armoured head cap, ringed armoured tail, short stubby legs, tan and brown colours",
+    "view": "low top-down",
+    "template_id": "custom",
+    "outline": "single color black outline",
+    "detail": "medium detail",
+    "no_background": true,
+    "seed": 6901,
+    "name": "nature_ice_glyptodon",
+    "image_size": {
+      "width": 64,
+      "height": 64
+    }
+  },
+  "updated": "2026-11-09",
+  "character_id": "41016704-693c-4f77-8145-6ee49d16ea5f"
+}

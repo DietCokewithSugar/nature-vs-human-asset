@@ -1,0 +1,37 @@
+{
+  "id": "nature_ice_mastodon",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 6.0,
+  "animations": {},
+  "create_request": {
+    "description": "American mastodon, long low heavy body with shorter shaggy reddish-brown hair, flat low head without a dome, long nearly straight forward-pointing ivory tusks, thick legs, trunk hanging down",
+    "view": "low top-down",
+    "template_id": "horse",
+    "outline": "single color black outline",
+    "detail": "medium detail",
+    "no_background": true,
+    "seed": 6701,
+    "name": "nature_ice_mastodon",
+    "image_size": {
+      "width": 64,
+      "height": 64
+    }
+  },
+  "updated": "2026-11-09",
+  "rejected_candidates": [
+    {
+      "seed": 6702,
+      "character_id": "e1381475-ed10-4091-b3eb-ea72468c42fc"
+    },
+    {
+      "seed": 6703,
+      "character_id": "322f2419-c22f-4f5b-8f9c-f0b8d690bcfc"
+    },
+    {
+      "seed": 6701,
+      "character_id": "b9886b01-b170-42b0-9520-a65e97d0e96b"
+    }
+  ]
+}

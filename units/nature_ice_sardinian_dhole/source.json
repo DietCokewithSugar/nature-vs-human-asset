@@ -1,0 +1,41 @@
+{
+  "id": "nature_ice_sardinian_dhole",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 6.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 7001,
+      "character_id": "cc34aa95-e773-4b48-ae1f-ed6a47ed16fd",
+      "picked": true
+    },
+    {
+      "seed": 7003,
+      "character_id": "91236715-9959-4692-a995-be3432338757",
+      "picked": false
+    },
+    {
+      "seed": 7002,
+      "character_id": "570f5f17-bb97-4d46-b965-6436d610809f",
+      "picked": false
+    }
+  ],
+  "create_request": {
+    "description": "Sardinian dhole Cynotherium, small slender wild dog with a reddish-brown coat, paler throat, large rounded ears, bushy dark-tipped tail",
+    "view": "low top-down",
+    "template_id": "dog",
+    "outline": "single color black outline",
+    "detail": "medium detail",
+    "no_background": true,
+    "seed": 7001,
+    "name": "nature_ice_sardinian_dhole",
+    "image_size": {
+      "width": 32,
+      "height": 32
+    }
+  },
+  "updated": "2026-11-09",
+  "character_id": "cc34aa95-e773-4b48-ae1f-ed6a47ed16fd"
+}

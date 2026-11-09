@@ -1,0 +1,41 @@
+{
+  "id": "nature_ice_miracinonyx",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 6.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 7201,
+      "character_id": "d8010057-0d38-4579-b248-78206da124bb",
+      "picked": true
+    },
+    {
+      "seed": 7202,
+      "character_id": "7d737c71-29ed-478c-ae41-7a0ea5ded47e",
+      "picked": false
+    },
+    {
+      "seed": 7203,
+      "character_id": "6466c1ee-00d7-428d-b6c4-60e9a3ff06f4",
+      "picked": false
+    }
+  ],
+  "create_request": {
+    "description": "Miracinonyx American cheetah, slender long-legged cat with a small rounded head, plain tawny coat without spots or stripes, deep chest, long tail",
+    "view": "low top-down",
+    "template_id": "cat",
+    "outline": "single color black outline",
+    "detail": "medium detail",
+    "no_background": true,
+    "seed": 7201,
+    "name": "nature_ice_miracinonyx",
+    "image_size": {
+      "width": 32,
+      "height": 32
+    }
+  },
+  "updated": "2026-11-09",
+  "character_id": "d8010057-0d38-4579-b248-78206da124bb"
+}

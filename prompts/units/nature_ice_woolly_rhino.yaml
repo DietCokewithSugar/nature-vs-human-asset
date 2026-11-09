@@ -7,9 +7,9 @@ size_class: large
 canvas: 64
 template_id: horse
 habitat: land
-seed: 6801
+seed: 6811
 description: >-
-  woolly rhinoceros, stocky heavy body with a shoulder hump and thick shaggy reddish-brown fur, two horns on the snout with a very long flattened front horn, small eyes, short thick legs
+  woolly rhinoceros completely covered in long shaggy woolly reddish-brown fur hanging down over its legs like a mammoth's coat, big shoulder hump, two horns with a very long flattened front horn sweeping forward, small eyes, short thick legs
 animations:
   - name: walk
     action: heavy plodding walk, head low, seamless loop

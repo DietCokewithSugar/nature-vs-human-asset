@@ -1,0 +1,37 @@
+{
+  "id": "nature_ice_woolly_rhino",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 6.0,
+  "animations": {},
+  "create_request": {
+    "description": "woolly rhinoceros, stocky heavy body with a shoulder hump and thick shaggy reddish-brown fur, two horns on the snout with a very long flattened front horn, small eyes, short thick legs",
+    "view": "low top-down",
+    "template_id": "horse",
+    "outline": "single color black outline",
+    "detail": "medium detail",
+    "no_background": true,
+    "seed": 6801,
+    "name": "nature_ice_woolly_rhino",
+    "image_size": {
+      "width": 64,
+      "height": 64
+    }
+  },
+  "updated": "2026-11-09",
+  "rejected_candidates": [
+    {
+      "seed": 6801,
+      "character_id": "bd97473b-b7f4-443f-9666-c5dc43966093"
+    },
+    {
+      "seed": 6803,
+      "character_id": "52decbb5-a156-43e9-9969-adba2d32381e"
+    },
+    {
+      "seed": 6802,
+      "character_id": "c86f1b07-c9a5-47fe-9670-598cf7adff9e"
+    }
+  ]
+}

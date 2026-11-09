@@ -1,0 +1,41 @@
+{
+  "id": "nature_ice_moa",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 6.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 6301,
+      "character_id": "88a6cf06-c69f-45cc-847e-da22b5448863",
+      "picked": false
+    },
+    {
+      "seed": 6302,
+      "character_id": "bdabb46c-cbd0-4c7d-90b3-3bda1f30b275",
+      "picked": true
+    },
+    {
+      "seed": 6303,
+      "character_id": "da237be3-f3c6-4888-99a0-209881cf1136",
+      "picked": false
+    }
+  ],
+  "create_request": {
+    "description": "giant moa bird, very tall flightless bird with a long neck, small head with a short pointed beak, shaggy brown-grey hair-like feathers covering a round body, thick strong legs, no wings visible",
+    "view": "low top-down",
+    "template_id": "custom",
+    "outline": "single color black outline",
+    "detail": "medium detail",
+    "no_background": true,
+    "seed": 6302,
+    "name": "nature_ice_moa",
+    "image_size": {
+      "width": 32,
+      "height": 32
+    }
+  },
+  "updated": "2026-11-09",
+  "character_id": "bdabb46c-cbd0-4c7d-90b3-3bda1f30b275"
+}

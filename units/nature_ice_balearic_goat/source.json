@@ -3,12 +3,23 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 2.0,
+  "generations_spent": 6.0,
   "animations": {},
   "candidates": [
     {
       "seed": 6401,
-      "character_id": "88447aaa-9f18-42a5-a4fb-575ba390908a"
+      "character_id": "88447aaa-9f18-42a5-a4fb-575ba390908a",
+      "picked": false
+    },
+    {
+      "seed": 6402,
+      "character_id": "56d6bb6a-c0a8-4676-b58c-5835a8a229af",
+      "picked": true
+    },
+    {
+      "seed": 6403,
+      "character_id": "b6718ecb-2ea0-48cd-adc6-6bcc07ab80f9",
+      "picked": false
     }
   ],
   "create_request": {
@@ -18,12 +29,13 @@
     "outline": "single color black outline",
     "detail": "medium detail",
     "no_background": true,
-    "seed": 6401,
+    "seed": 6402,
     "name": "nature_ice_balearic_goat",
     "image_size": {
       "width": 32,
       "height": 32
     }
   },
-  "updated": "2026-11-09"
+  "updated": "2026-11-09",
+  "character_id": "56d6bb6a-c0a8-4676-b58c-5835a8a229af"
 }

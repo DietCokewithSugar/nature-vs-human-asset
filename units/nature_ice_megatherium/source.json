@@ -1,0 +1,41 @@
+{
+  "id": "nature_ice_megatherium",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 6.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 6201,
+      "character_id": "5dc13d3a-da6e-4232-8c9b-7e0d68a0c762",
+      "picked": true
+    },
+    {
+      "seed": 6202,
+      "character_id": "b85f8084-7bc5-4576-9759-73d053f2ecf8",
+      "picked": false
+    },
+    {
+      "seed": 6203,
+      "character_id": "74b457a6-2c35-4cbe-8712-651dc6da1f3b",
+      "picked": false
+    }
+  ],
+  "create_request": {
+    "description": "giant ground sloth Megatherium, massive shaggy brown body, small head with a short snout, long curved claws on the front feet, thick heavy tail, walking on all fours on the sides of its feet",
+    "view": "low top-down",
+    "template_id": "bear",
+    "outline": "single color black outline",
+    "detail": "medium detail",
+    "no_background": true,
+    "seed": 6201,
+    "name": "nature_ice_megatherium",
+    "image_size": {
+      "width": 64,
+      "height": 64
+    }
+  },
+  "updated": "2026-11-09",
+  "character_id": "5dc13d3a-da6e-4232-8c9b-7e0d68a0c762"
+}
