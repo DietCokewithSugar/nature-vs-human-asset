@@ -3,14 +3,22 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 10.0,
+  "generations_spent": 20.0,
   "animations": {},
   "candidates": [
     {
       "seed": 9131,
       "pipeline": "pro",
       "reference": null,
-      "character_id": "f71d877f-575a-4510-abe7-03d915a2ba3a"
+      "character_id": "f71d877f-575a-4510-abe7-03d915a2ba3a",
+      "picked": true
+    },
+    {
+      "seed": 9132,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "1cf5bd20-3ebd-4372-ac81-f70c737520d5",
+      "picked": false
     }
   ],
   "create_request": {
@@ -26,5 +34,6 @@
     "method": "create_with_style",
     "style_character_id": "bd11b67a-1165-495e-96cf-b40403d116cb"
   },
-  "updated": "2026-11-09"
+  "updated": "2026-11-09",
+  "character_id": "f71d877f-575a-4510-abe7-03d915a2ba3a"
 }
