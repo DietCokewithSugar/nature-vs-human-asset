@@ -1,0 +1,30 @@
+{
+  "id": "nature_ice_smilodon",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 10.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 4331,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "e1a276d0-beae-461b-a6aa-a47d8a4269bd"
+    }
+  ],
+  "create_request": {
+    "description": "Smilodon sabre-toothed cat with a completely plain uniform tawny coat, no mane, no stripes, no spots, short smooth fur, paler belly, very long flattened dagger-like curved white upper sabre fangs, powerful thick forelimbs, heavy muscular bear-like build, short bobbed tail like a lynx",
+    "view": "low top-down",
+    "template_id": "cat",
+    "no_background": true,
+    "seed": 4331,
+    "image_size": {
+      "width": 64,
+      "height": 64
+    },
+    "method": "create_with_style",
+    "style_character_id": "bd11b67a-1165-495e-96cf-b40403d116cb"
+  },
+  "updated": "2026-11-09"
+}

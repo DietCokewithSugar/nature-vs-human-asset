@@ -3,7 +3,7 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 21.0,
+  "generations_spent": 22.0,
   "animations": {
     "idle": {
       "directions": {
@@ -17,7 +17,9 @@
       "animation_group_id": "385a85f3-599d-4126-beb5-9815c70b2d2d"
     },
     "walk": {
-      "directions": {},
+      "directions": {
+        "south": "done"
+      },
       "request": {
         "action": "hopping forward in small hops, seamless loop",
         "action_by_dir": null,
