@@ -3,7 +3,7 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 28.0,
+  "generations_spent": 36.0,
   "animations": {
     "idle": {
       "directions": {
@@ -24,7 +24,9 @@
       "directions": {
         "south": "done",
         "south-east": "done",
-        "north-east": "done"
+        "north-east": "done",
+        "east": "done",
+        "north": "done"
       },
       "request": {
         "action": "trotting forward, tail level, seamless loop",
@@ -64,5 +66,55 @@
     "style_character_id": "bd11b67a-1165-495e-96cf-b40403d116cb"
   },
   "updated": "2026-11-09",
-  "character_id": "9a9bb123-a734-4c37-9cc8-b52530ce08f7"
+  "character_id": "9a9bb123-a734-4c37-9cc8-b52530ce08f7",
+  "variants": {
+    "attackhand": {
+      "method": "AI hand-edited: select-and-move / squash-stretch / smear edits on the PixelLab base pose, text-grid method from aseprite-ai-artist (MIT), timing from its rules/44",
+      "kind": "lunge",
+      "heavy": false,
+      "mag": 1.6,
+      "directions": [
+        "south",
+        "south-east",
+        "east",
+        "north-east",
+        "north"
+      ],
+      "hand_tuned": [],
+      "generations": 0
+    },
+    "death": {
+      "method": "AI hand-edited collapse (squash + RotSprite-style tilt)",
+      "directions": [
+        "south",
+        "south-east",
+        "east",
+        "north-east",
+        "north"
+      ],
+      "generations": 0
+    },
+    "attackcombo": {
+      "generations": 6,
+      "directions": [
+        "east",
+        "north",
+        "north-east",
+        "south",
+        "south-east"
+      ],
+      "method": "AI key poses (Pixen edit) + AI hand-edit cleanup/tweens/timing",
+      "keys": {
+        "anticipation": "crouching low with the head lowered and ears pinned back, weight on the hind legs, facing {facing}",
+        "strike": "lunging forward {facing} with the neck stretched out, front legs reaching off the ground, jaws wide open biting"
+      },
+      "key_sources": {
+        "south": "pixen",
+        "east": "pixen",
+        "south-east": "v3",
+        "north-east": "v3",
+        "north": "hand warp (fallback: AI key poses turn the back view sideways)"
+      }
+    }
+  }
 }
