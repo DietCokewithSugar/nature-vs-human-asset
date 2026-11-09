@@ -94,5 +94,33 @@
       "picked": false
     }
   ],
-  "character_id": "09bbaca3-1231-4fcb-8371-76382953b0c6"
+  "character_id": "09bbaca3-1231-4fcb-8371-76382953b0c6",
+  "variants": {
+    "attackhand": {
+      "method": "AI hand-edited: select-and-move / squash-stretch / smear edits on the PixelLab base pose, text-grid method from aseprite-ai-artist (MIT), timing from its rules/44",
+      "kind": "lunge",
+      "heavy": true,
+      "mag": 1.6,
+      "directions": [
+        "south",
+        "south-east",
+        "east",
+        "north-east",
+        "north"
+      ],
+      "hand_tuned": [],
+      "generations": 0
+    },
+    "death": {
+      "method": "AI hand-edited collapse (squash + RotSprite-style tilt)",
+      "directions": [
+        "south",
+        "south-east",
+        "east",
+        "north-east",
+        "north"
+      ],
+      "generations": 0
+    }
+  }
 }

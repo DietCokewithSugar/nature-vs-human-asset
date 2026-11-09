@@ -3,14 +3,15 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 24.0,
+  "generations_spent": 28.0,
   "animations": {
     "idle": {
       "directions": {
         "south": "done",
         "south-east": "done",
         "east": "done",
-        "north-east": "done"
+        "north-east": "done",
+        "north": "done"
       },
       "request": {
         "action": "standing in place, gentle breathing, slight body bob, seamless loop",
@@ -22,7 +23,10 @@
     "walk": {
       "directions": {
         "south": "done",
-        "south-east": "done"
+        "south-east": "done",
+        "north": "done",
+        "east": "done",
+        "north-east": "done"
       },
       "request": {
         "action": "prowling forward in a seamless looping walk cycle, shoulders rolling, legs alternating",
@@ -90,5 +94,33 @@
       "picked": true
     }
   ],
-  "character_id": "3f46fb96-6506-4141-bb55-a694243d5b1d"
+  "character_id": "3f46fb96-6506-4141-bb55-a694243d5b1d",
+  "variants": {
+    "attackhand": {
+      "method": "AI hand-edited: select-and-move / squash-stretch / smear edits on the PixelLab base pose, text-grid method from aseprite-ai-artist (MIT), timing from its rules/44",
+      "kind": "lunge",
+      "heavy": false,
+      "mag": 1.3,
+      "directions": [
+        "south",
+        "south-east",
+        "east",
+        "north-east",
+        "north"
+      ],
+      "hand_tuned": [],
+      "generations": 0
+    },
+    "death": {
+      "method": "AI hand-edited collapse (squash + RotSprite-style tilt)",
+      "directions": [
+        "south",
+        "south-east",
+        "east",
+        "north-east",
+        "north"
+      ],
+      "generations": 0
+    }
+  }
 }
