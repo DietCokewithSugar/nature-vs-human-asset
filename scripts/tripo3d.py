@@ -54,7 +54,9 @@ def wait(task_id, every=8):
 
 
 def concept_image(uid):
-    """The approved PixelLab sprite (three-quarter view), cropped and scaled up 8x on white."""
+    """The approved PixelLab sprite (three-quarter view), cropped and scaled up 8x on white.
+    Note: fed to image_to_model directly this gives blocky, voxel-like meshes (the model
+    reads the pixel steps as geometry); restyle it first (see --image / concept.png)."""
     src = ROOT / "units" / uid / "raw" / "Idle" / "rotations" / "south-east.png"
     im = Image.open(src).convert("RGBA")
     im = im.crop(im.getbbox())
@@ -75,6 +77,7 @@ def main():
     ap.add_argument("--image")
     ap.add_argument("--rig-type", default="quadruped")
     ap.add_argument("--animations", default="preset:quadruped:walk")
+    ap.add_argument("--model", default="P2-20260801")
     ap.add_argument("--rig-model", default="v2.5-20260210")   # the v2 endpoint rejects v3.0
     a = ap.parse_args()
     d = ROOT / "units" / a.unit / "tripo"
@@ -104,7 +107,7 @@ def main():
         with open(img, "rb") as f:
             st["image_token"] = call("POST", "/upload", files={"file": (img.name, f, "image/png")})["image_token"]
         save()
-    m = step("model", {"type": "image_to_model", "model_version": "v2.5-20250123",
+    m = step("model", {"type": "image_to_model", "model_version": a.model,
                        "file": {"type": "png", "file_token": st["image_token"]},
                        "texture": True, "pbr": True, "face_limit": 20000}, out_file="model.glb")
     chk = step("rigcheck", {"type": "animate_prerigcheck", "original_model_task_id": m["task_id"]})

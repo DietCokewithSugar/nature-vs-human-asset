@@ -46,6 +46,11 @@
       "animation": "preset:quadruped:walk",
       "bake_animation": true,
       "animate_in_place": true
-    }
+    },
+    "status": "success",
+    "output": {
+      "model": "https://tripo-data.rg1.data.tripo3d.com/tcli_244d132c8e7c4fbba482cca84a28742c/20261109/176bd360-533e-4177-85b3-6ea090280af3/tripo_retarget_176bd360-533e-4177-85b3-6ea090280af3.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMjQ0ZDEzMmM4ZTdjNGZiYmE0ODJjY2E4NGEyODc0MmMvMjAyNjExMDkvMTc2YmQzNjAtNTMzZS00MTc3LTg1YjMtNmVhMDkwMjgwYWYzL3RyaXBvX3JldGFyZ2V0XzE3NmJkMzYwLTUzM2UtNDE3Ny04NWIzLTZlYTA5MDI4MGFmMy5nbGIiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTQyNjg4MDB9fX1dfQ__&Signature=VRLR-rHt5JQjqypcnHn8QwZ4ce06mYkKTRLapPFzEcl9fFiwuPuH2C~9F8NafVA1szBxuwGYV9VXZi9BMXm-Rq5E1s8a3U6exyOmDAi2mZHe5jCD8NNdkOYCVZNp6n6TO3xBjAkQqPNc5x3X0-UKIVoajyB6lfsFEJP6Jiwai4AAzIU-IuQuYSnZ8zYUQ4CFEEfBdKlAXh5tP7~mw9rawOYMnag5B7G93W9SSfsdBPHTISInLRqVAOy25epSFxel0OisOuMV-IWceDoJMgTRlkDv007H13OH~6b5Ii4pYRpXGk1bLaQzU1eg6fZY1V~fZS1Gxz0eWrPI9rIhNXITsw__"
+    },
+    "consumed": 10
   }
 }

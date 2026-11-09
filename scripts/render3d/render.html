@@ -14,6 +14,10 @@ function roles(root) {
   root.traverse((o) => {
     if (!o.isBone) return;
     const n = o.name.toLowerCase();
+    if (/^tripo0_.*limb_0$/.test(n)) { r.frontUpper.push(o); return; }
+    if (/^tripo0_.*limb_[1-9]$/.test(n)) { r.frontLower.push(o); return; }
+    if (/^tripo1_.*limb_0$/.test(n)) { r.hindUpper.push(o); return; }
+    if (/^tripo1_/.test(n)) return;
     if (/jaw/.test(n)) r.jaw = o;
     else if (/head/.test(n) && !/end|top/.test(n)) r.head.push(o);
     else if (/neck/.test(n)) r.neck.push(o);
@@ -76,7 +80,7 @@ function procPose(kind, t, R, holder, size) {
 
 let renderer, scene, camera;
 window.renderJob = async (cfg) => {
-  const { url, size = 256, elevation = 38, clips, frameScale = 1.35, toon = true } = cfg;
+  const { url, size = 256, elevation = 38, clips, frameScale = 1.15, toon = true } = cfg;
   renderer = renderer || new THREE.WebGLRenderer({ antialias: false, alpha: true, preserveDrawingBuffer: true });
   renderer.setSize(size, size); renderer.setPixelRatio(1); renderer.setClearColor(0x000000, 0);
   scene = new THREE.Scene();
@@ -89,24 +93,39 @@ window.renderJob = async (cfg) => {
     if (o.isMesh) {
       const m = o.material;
       if (toon) o.material = new THREE.MeshToonMaterial({ map: m.map || null, color: m.map ? 0xffffff : (m.color || 0xffffff), gradientMap: grad, });
-      if (o.material.map) { o.material.map.minFilter = THREE.LinearFilter; }
+      if (o.material.map) { o.material.map.minFilter = THREE.LinearFilter; o.material.map.colorSpace = THREE.SRGBColorSpace; }
       o.frustumCulled = false;
     }
   });
+  // orient: Tripo builds the model in the reference image's view, so turn it until
+  // the hind-to-head axis points at +z (south = facing the camera)
+  const orient = new THREE.Group(); orient.add(model);
+  const R0 = roles(model); model.updateMatrixWorld(true);
+  const wp = (b) => b.getWorldPosition(new THREE.Vector3());
+  const head = R0.head[0] || R0.neck[0];
+  const back = R0.hindUpper.length ? R0.hindUpper.map(wp).reduce((a, v) => a.add(v), new THREE.Vector3()).multiplyScalar(1 / R0.hindUpper.length)
+             : R0.tail[0] ? wp(R0.tail[0]) : null;
+  if (head && back && cfg.autoOrient !== false) {
+    const f = wp(head).sub(back);
+    orient.rotation.y = -Math.atan2(f.x, f.z) + (cfg.yawOffset || 0) * Math.PI / 180;
+  }
+  orient.updateMatrixWorld(true);
   // normalise: centre on x/z, feet on y=0, body length along +z
-  const box0 = new THREE.Box3().setFromObject(model);
+  const box0 = new THREE.Box3().setFromObject(orient);
   const size0 = box0.getSize(new THREE.Vector3());
   const yaw = new THREE.Group(), holder = new THREE.Group();
-  holder.add(model); yaw.add(holder); scene.add(yaw);
-  model.position.set(-(box0.min.x + box0.max.x) / 2, -box0.min.y, -(box0.min.z + box0.max.z) / 2);
-  const span = Math.max(size0.x, size0.y, size0.z) * frameScale;
+  holder.add(orient); yaw.add(holder); scene.add(yaw);
+  orient.position.set(-(box0.min.x + box0.max.x) / 2, -box0.min.y, -(box0.min.z + box0.max.z) / 2);
+  // frame on the body length (the lunge/death motion needs some head room on top)
+  const span = Math.max(size0.z * 1.0, size0.y * 1.25, size0.x) * frameScale;
   camera = new THREE.OrthographicCamera(-span / 2, span / 2, span / 2, -span / 2, -span * 10, span * 10);
   const e = elevation * Math.PI / 180;
   const target = new THREE.Vector3(0, size0.y * 0.45, 0);
   camera.position.copy(target).add(new THREE.Vector3(0, Math.sin(e), Math.cos(e)).multiplyScalar(span * 4));
   camera.lookAt(target);
-  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
-  const sun = new THREE.DirectionalLight(0xffffff, 1.6); sun.position.set(-1, 2, 1.2); scene.add(sun);   // top-left-front, like the sprites
+  scene.add(new THREE.AmbientLight(0xffffff, cfg.ambient ?? 1.1));
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x8a7a6a, cfg.hemi ?? 0.6));
+  const sun = new THREE.DirectionalLight(0xffffff, cfg.sun ?? 2.2); sun.position.set(-1, 2, 1.2); scene.add(sun);   // top-left-front, like the sprites   // top-left-front, like the sprites
 
   const mixer = new THREE.AnimationMixer(model);
   const R = roles(model);

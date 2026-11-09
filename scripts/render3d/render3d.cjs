@@ -8,7 +8,7 @@ const fs = require('fs'); const path = require('path'); const http = require('ht
 const ROOT = path.resolve(__dirname, '../..');
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.glb': 'model/gltf-binary', '.png': 'image/png', '.json': 'application/json' };
 (async () => {
-  const [model, outdir, clipsJson, size = '256', elev = '38'] = process.argv.slice(2);
+  const [model, outdir, clipsJson, size = '256', elev = '38', extraJson = '{}'] = process.argv.slice(2);
   const server = http.createServer((req, res) => {
     const f = path.join(ROOT, decodeURIComponent(req.url.split('?')[0]));
     if (!f.startsWith(ROOT) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) { res.writeHead(404); return res.end(); }
@@ -20,7 +20,7 @@ const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/ja
   p.on('pageerror', (e) => console.log('pageerror', e.message));
   await p.goto(`http://localhost:${port}/scripts/render3d/render.html`); await p.waitForFunction(() => window.ready);
   const url = '/' + path.relative(ROOT, path.resolve(model)).split(path.sep).join('/');
-  const res = await p.evaluate((cfg) => window.renderJob(cfg), { url, size: +size, elevation: +elev, clips: JSON.parse(clipsJson) });
+  const res = await p.evaluate((cfg) => window.renderJob(cfg), { url, size: +size, elevation: +elev, clips: JSON.parse(clipsJson), ...JSON.parse(extraJson) });
   console.log('bone roles', JSON.stringify(res.roles));
   for (const [clip, dirs] of Object.entries(res.frames)) for (const [d, list] of Object.entries(dirs)) {
     const dir = path.join(outdir, clip, d); fs.mkdirSync(dir, { recursive: true });
