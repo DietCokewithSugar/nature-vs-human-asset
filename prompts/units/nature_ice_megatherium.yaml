@@ -21,6 +21,8 @@ pipeline: pro
 style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
 reference: null   # open-licence images on Wikipedia are 19th-century bear-like restorations; text only
 reference_license: null
+attack_hand_dirs: [north-east]
+attack_hand_why: the AI strike key flattened the body on this diagonal
 attack_keys:
-  anticipation: rearing up on its hind legs with the thick tail braced and both clawed forelimbs raised high, facing {facing}
+  anticipation: rearing up on its hind legs with the thick straight tail braced on the ground and both clawed forelimbs raised high, heavy ground-sloth body, facing {facing}
   strike: slamming both huge curved claws down and forward {facing}, body leaning in, raking
