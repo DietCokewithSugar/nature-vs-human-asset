@@ -1,0 +1,200 @@
+{
+ "id": "camp_rocks",
+ "tileset_id": "a6638fbb-2ad0-413e-8115-23040034f881",
+ "tool": "PixelLab v2 /create-tileset",
+ "date": "2026-11-09",
+ "request": {
+  "mode": "pro",
+  "tile_size": {
+   "width": 32,
+   "height": 32
+  },
+  "view": "low top-down",
+  "transition_size": 0,
+  "raggedness": 0.35,
+  "boundary_amplitude": 0.15,
+  "seed": 6102,
+  "lower_description": "levelled bare earth of a stone age camp: packed grey-brown dirt, tidy and flat, scattered ash, charcoal bits and small bone fragments",
+  "upper_description": "irregular rocky scree slope: jumble of grey and ochre stones of many sizes with tufts of moss between them"
+ },
+ "lower": "h_camp",
+ "upper": "n_rocks",
+ "tiles": [
+  {
+   "x": 0,
+   "y": 0,
+   "id": "13",
+   "corners": {
+    "NW": "upper",
+    "NE": "upper",
+    "SW": "lower",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 32,
+   "y": 0,
+   "id": "10",
+   "corners": {
+    "NW": "upper",
+    "NE": "lower",
+    "SW": "upper",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 64,
+   "y": 0,
+   "id": "4",
+   "corners": {
+    "NW": "lower",
+    "NE": "upper",
+    "SW": "lower",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 96,
+   "y": 0,
+   "id": "12",
+   "corners": {
+    "NW": "upper",
+    "NE": "upper",
+    "SW": "lower",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 0,
+   "y": 32,
+   "id": "6",
+   "corners": {
+    "NW": "lower",
+    "NE": "upper",
+    "SW": "upper",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 32,
+   "y": 32,
+   "id": "8",
+   "corners": {
+    "NW": "upper",
+    "NE": "lower",
+    "SW": "lower",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 64,
+   "y": 32,
+   "id": "39e91d7e-37c9-471f-a382-bb7921bda27d",
+   "corners": {
+    "NW": "lower",
+    "NE": "lower",
+    "SW": "lower",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 96,
+   "y": 32,
+   "id": "1",
+   "corners": {
+    "NW": "lower",
+    "NE": "lower",
+    "SW": "lower",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 0,
+   "y": 64,
+   "id": "11",
+   "corners": {
+    "NW": "upper",
+    "NE": "lower",
+    "SW": "upper",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 32,
+   "y": 64,
+   "id": "3",
+   "corners": {
+    "NW": "lower",
+    "NE": "lower",
+    "SW": "upper",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 64,
+   "y": 64,
+   "id": "2",
+   "corners": {
+    "NW": "lower",
+    "NE": "lower",
+    "SW": "upper",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 96,
+   "y": 64,
+   "id": "5",
+   "corners": {
+    "NW": "lower",
+    "NE": "upper",
+    "SW": "lower",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 0,
+   "y": 96,
+   "id": "c99a44d6-ee07-4b77-a4a7-195f8e84ffa3",
+   "corners": {
+    "NW": "upper",
+    "NE": "upper",
+    "SW": "upper",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 32,
+   "y": 96,
+   "id": "14",
+   "corners": {
+    "NW": "upper",
+    "NE": "upper",
+    "SW": "upper",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 64,
+   "y": 96,
+   "id": "9",
+   "corners": {
+    "NW": "upper",
+    "NE": "lower",
+    "SW": "lower",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 96,
+   "y": 96,
+   "id": "7",
+   "corners": {
+    "NW": "lower",
+    "NE": "upper",
+    "SW": "upper",
+    "SE": "upper"
+   }
+  }
+ ]
+}

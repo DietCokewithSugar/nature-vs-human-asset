@@ -1,0 +1,17 @@
+{
+ "object_id": "2f24c3b4-2fb6-4d03-82cd-a9eb57628317",
+ "request": {
+  "description": "ice age volcano cone of dark basalt rock, wide base, glowing orange lava crater on top, thin plume of grey smoke rising, snow patches and frozen ash on its lower slopes, cracks with faint orange glow",
+  "image_size": {
+   "width": 96,
+   "height": 128
+  },
+  "view": "low top-down",
+  "outline": "single color outline",
+  "shading": "medium shading",
+  "detail": "medium detail",
+  "seed": 6203
+ },
+ "tool": "PixelLab v2 /map-objects",
+ "date": "2026-11-09"
+}

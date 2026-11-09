@@ -8,17 +8,19 @@ import {
 import { bodyWidth, drawFrame } from "./sprites";
 import { Lighting, WEATHER_LABEL, sky, type LightMode, type Weather } from "./lighting";
 import { WeatherLayer } from "./weather";
+import { drawLevel, loadLevel, territoryLayer } from "./level";
 
 TextureSource.defaultOptions.scaleMode = "nearest";
 
 const TILE = 32;
-const MAP_W = 44;
-const MAP_H = 28;
-type Terrain = "snow" | "tundra" | "water" | "mud";
-const TERRAIN_SET: Record<Exclude<Terrain, "snow">, string> = {
+// demo map size; replaced by the level size when the fixed level is shown
+let MAP_W = 44;
+let MAP_H = 28;
+type Terrain = "snow" | "tundra" | "water" | "mud" | "block";
+const TERRAIN_SET: Record<Exclude<Terrain, "snow" | "block">, string> = {
   tundra: "ice_snow_tundra", water: "ice_snow_water", mud: "ice_snow_mud",
 };
-const FALLBACK_COLOR: Record<Terrain, number> = { snow: 0xdfe8f2, tundra: 0x7d7a4f, water: 0x1d5fa8, mud: 0x6b4423 };
+const FALLBACK_COLOR: Record<Terrain, number> = { snow: 0xdfe8f2, tundra: 0x7d7a4f, water: 0x1d5fa8, mud: 0x6b4423, block: 0x222222 };
 type State = "idle" | "walk" | "attack" | "rest" | "death";
 type Mode = "auto" | Exclude<State, "death">;
 const STATE_LABEL: Record<Mode, string> = { auto: "自动", idle: "待机", walk: "行走", attack: "攻击", rest: "休息" };
@@ -99,7 +101,7 @@ function drawTerrain(layer: Container, nlayer: Container, v: Terrain[], sets: Re
   for (let y = 0; y < MAP_H; y++)
     for (let x = 0; x < MAP_W; x++) {
       const c = [v[y * W + x], v[y * W + x + 1], v[(y + 1) * W + x], v[(y + 1) * W + x + 1]];
-      const other = c.find((t) => t !== "snow") as Exclude<Terrain, "snow"> | undefined;
+      const other = c.find((t) => t !== "snow") as Exclude<Terrain, "snow" | "block"> | undefined;
       const set = other ? sets[TERRAIN_SET[other]] : anySet;
       const key = c.map((t) => (other && t === other ? "L" : "U")).join("");
       const tex = set?.color.get(key);
@@ -238,10 +240,19 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
   weatherLayer.resize(app.screen.width, app.screen.height);
   app.stage.addChild(lighting.quad, fxWorld, weatherLayer.view);
 
-  const terrain = buildTerrain(7);
-  const [sets, uts] = await Promise.all([loadTilesets(m), Promise.all(m.units.map(loadUnitTex))]);
-  drawTerrain(ground, nground, terrain, sets);
-  const camps = campSpots(terrain);
+  const level = prefs.labMap === "ice_age" ? await loadLevel(m) : null;
+  MAP_W = level ? level.w : 44;
+  MAP_H = level ? level.h : 28;
+  const terrain = level ? [] : buildTerrain(7);
+  const [sets, uts] = await Promise.all([level ? Promise.resolve({}) : loadTilesets(m), Promise.all(m.units.map(loadUnitTex))]);
+  const territory = new Container();
+  if (level) {
+    await drawLevel(app.renderer, level, ground, nground, actors, fxUnder);
+    territory.addChild(territoryLayer(level));
+    territory.visible = false;
+    fxUnder.addChildAt(territory, 0);
+  } else drawTerrain(ground, nground, terrain, sets);
+  const camps = level ? level.camps : campSpots(terrain);
   const flames = new Graphics();
   fxUnder.addChild(flames);
 
@@ -249,6 +260,11 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
   const zTex = app.renderer.generateTexture(zText);
 
   const terrainAt = (px: number, py: number): Terrain => {
+    if (level) {
+      const t = level.cellAt(px, py);
+      if (!t) return "block";
+      return t.owner === "volcano" ? "block" : t.kind === "water" ? "water" : t.id === "h_camp" ? "mud" : "snow";
+    }
     const x = Math.round(px / TILE), y = Math.round(py / TILE);
     if (x < 0 || y < 0 || x > MAP_W || y > MAP_H) return "snow";
     return terrain[y * (MAP_W + 1) + x];
@@ -257,6 +273,7 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
     if (px < 8 || py < 12 || px > MAP_W * TILE - 8 || py > MAP_H * TILE - 4) return false;
     if (u.habitat === "air") return true;
     const t = terrainAt(px, py);
+    if (t === "block") return false;
     return u.habitat === "water" ? t === "water" : t !== "water";
   };
 
@@ -677,6 +694,17 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
       el("label", { class: "check" }, el("input", { type: "checkbox", checked: get, onchange: (ev: Event) => set((ev.target as HTMLInputElement).checked) }), label);
     side.replaceChildren(
       el("div", { class: "panel" },
+        el("h3", {}, "地图"),
+        seg([["ice_age", "冰河关卡 96×64"], ["demo", "演示小图"]], level ? "ice_age" : "demo", (v) => {
+          prefs.labMap = v as "ice_age" | "demo"; savePrefs();
+          window.dispatchEvent(new HashChangeEvent("hashchange"));
+        }, "seg"),
+        ...(level ? [
+          check("领地与区块（PRD 4.3）", territory.visible, (v) => (territory.visible = v)),
+          el("p", { class: "muted small" }, "冰河时代固定地图：分层地块（dual grid）、火山、资源点、森林边缘的树。橙框是人类开局建筑的占地（还没有美术）。区块边框：橙=人类，绿=自然，白=争夺中。"),
+        ] : []),
+      ),
+      el("div", { class: "panel" },
         el("h3", {}, "全体状态"),
         seg((["auto", "idle", "walk", "attack", "rest"] as Mode[]).map((s) => [s, STATE_LABEL[s]]), ui.mode, (v) => { ui.mode = v as Mode; ents.forEach((e) => (e.atk = null)); }),
         el("p", { class: "muted small" }, "自动：闲逛、追击并攻击敌对阵营、按物种表的休眠时段休息。其他选项强制所有单位播放该动作。"),
@@ -734,8 +762,10 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
 
   renderSide();
   battle(60);
-  ui.zoom = app.screen.width < 700 ? 1 : 2;
-  centerOn(MAP_W * TILE / 2, MAP_H * TILE / 2);
+  ui.zoom = app.screen.width < 700 || level ? 1 : 2;
+  // level: open on the west side (outposts, volcano, two nature start zones)
+  if (level) centerOn(22 * TILE, 34 * TILE);
+  else centerOn(MAP_W * TILE / 2, MAP_H * TILE / 2);
 
   let fpsAvg = 60, hudT = 0;
   const ticker = (tk: { deltaMS: number }) => {

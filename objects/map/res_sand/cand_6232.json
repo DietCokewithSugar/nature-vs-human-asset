@@ -1,0 +1,17 @@
+{
+ "object_id": "51045491-b5f6-4380-b2e7-2a88de2244be",
+ "request": {
+  "description": "resource point: low mound of pale yellow sand and fine gravel with a few pebbles, flat on the ground",
+  "image_size": {
+   "width": 32,
+   "height": 32
+  },
+  "view": "low top-down",
+  "outline": "single color outline",
+  "shading": "medium shading",
+  "detail": "medium detail",
+  "seed": 6232
+ },
+ "tool": "PixelLab v2 /map-objects",
+ "date": "2026-11-09"
+}

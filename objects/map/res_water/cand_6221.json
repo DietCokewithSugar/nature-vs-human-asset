@@ -1,0 +1,17 @@
+{
+ "object_id": "7e0d3fcd-f186-4b86-9636-2943bee4bd17",
+ "request": {
+  "description": "resource point: small round freshwater spring pool of clear blue water ringed with mossy stones, seen from above, flat on the ground",
+  "image_size": {
+   "width": 32,
+   "height": 32
+  },
+  "view": "low top-down",
+  "outline": "single color outline",
+  "shading": "medium shading",
+  "detail": "medium detail",
+  "seed": 6221
+ },
+ "tool": "PixelLab v2 /map-objects",
+ "date": "2026-11-09"
+}

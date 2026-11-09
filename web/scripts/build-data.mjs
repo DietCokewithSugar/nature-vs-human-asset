@@ -2,6 +2,7 @@
 //   manifest.json            units (prompt config + sheet row + provenance), sheet species, tilesets
 //   units/<id>.png|.json     processed spritesheets and atlases
 //   tilesets/<id>.png|.json  Wang tilesets
+//   maps/, terrain/, objects/ the fixed level (layout + layered terrain atlas + map objects)
 // Runs before `vite` / `vite build`, so Vercel always deploys what is in the repo.
 import fs from "node:fs";
 import path from "node:path";
@@ -136,6 +137,38 @@ if (exists(tsDir)) {
   }
 }
 
+// fixed levels: maps/<id>_layout.json + terrain/<id>.* + objects/map/*.png
+const maps = [];
+const mapsDir = path.join(ROOT, "maps");
+if (exists(mapsDir)) {
+  for (const sub of ["maps", "terrain", "objects"]) fs.mkdirSync(path.join(OUT, sub), { recursive: true });
+  const objDir = path.join(ROOT, "objects/map");
+  if (exists(path.join(objDir, "objects.json"))) {
+    fs.copyFileSync(path.join(objDir, "objects.json"), path.join(OUT, "objects", "objects.json"));
+    for (const f of fs.readdirSync(objDir)) if (f.endsWith(".png")) fs.copyFileSync(path.join(objDir, f), path.join(OUT, "objects", f));
+  }
+  for (const f of fs.readdirSync(mapsDir).sort()) {
+    if (!f.endsWith("_layout.json")) continue;
+    const id = f.replace(/_layout\.json$/, "");
+    const tdir = path.join(ROOT, "terrain");
+    for (const t of [`${id}.png`, `${id}_n.png`, `${id}_decals.png`, `${id}.json`])
+      if (exists(path.join(tdir, t))) fs.copyFileSync(path.join(tdir, t), path.join(OUT, "terrain", t));
+    fs.copyFileSync(path.join(mapsDir, f), path.join(OUT, "maps", f));
+    const ov = `${id}_overview.png`;
+    if (exists(path.join(mapsDir, ov))) fs.copyFileSync(path.join(mapsDir, ov), path.join(OUT, "maps", ov));
+    maps.push({
+      id,
+      layout: `data/maps/${f}`,
+      terrain: `data/terrain/${id}.json`,
+      terrainPng: `data/terrain/${id}.png`,
+      terrainNormal: exists(path.join(tdir, `${id}_n.png`)) ? `data/terrain/${id}_n.png` : undefined,
+      objects: "data/objects/objects.json",
+      objectBase: "data/objects/",
+      overview: exists(path.join(mapsDir, ov)) ? `data/maps/${ov}` : undefined,
+    });
+  }
+}
+
 const unitBySheetName = new Map(units.filter((u) => u.sheet).map((u) => [u.sheet.name, u.id]));
 const species = creatureRows
   .filter((r) => r[speciesKey])
@@ -154,6 +187,7 @@ const manifest = {
   units,
   species,
   tilesets,
+  maps,
 };
 fs.writeFileSync(path.join(OUT, "manifest.json"), JSON.stringify(manifest, null, 1));
-console.log(`manifest: ${units.length} units, ${species.length} sheet species, ${tilesets.length} tilesets`);
+console.log(`manifest: ${units.length} units, ${species.length} sheet species, ${tilesets.length} tilesets, ${maps.length} maps`);
