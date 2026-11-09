@@ -1,0 +1,26 @@
+id: nature_modern_alligator_snapping_turtle
+display_name: 苏湾尼鳄龟
+sheet: {tab: 生物, name: 苏湾尼鳄龟 - Macrochelys suwanniensis}
+faction: nature
+era: modern
+size_class: medium
+canvas: 64
+template_id: custom
+habitat: land
+seed: 9231
+description: >-
+  Suwannee alligator snapping turtle Macrochelys suwanniensis, huge dark grey-brown turtle with a rough shell with three rows of tall ridges, big head with a sharp hooked beak, thick scaly legs with claws, long thick tail
+animations:
+  - name: walk
+    action: crawling forward slowly, heavy shell rocking, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: true}
+# HD standard: Pro character mode at 64px, styled after the approved HD cave hyena.
+# Text only: Wikimedia rate-limits this build container; these are well-documented living species.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: pulling its big head back into the shell with jaws open, facing {facing}
+  strike: snapping its head far forward {facing} with the hooked beak wide open

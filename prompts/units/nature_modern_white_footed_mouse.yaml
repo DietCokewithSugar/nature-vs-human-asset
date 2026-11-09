@@ -1,0 +1,26 @@
+id: nature_modern_white_footed_mouse
+display_name: 北美白足鼠
+sheet: {tab: 生物, name: 北美白足鼠 - Peromyscus leucopus}
+faction: nature
+era: modern
+size_class: micro
+canvas: 64
+template_id: cat
+habitat: land
+seed: 9081
+description: >-
+  white-footed mouse Peromyscus leucopus, small agile mouse with reddish-brown back, bright white belly and white feet, big round ears, big black eyes, long tail
+animations:
+  - name: walk
+    action: scampering forward quickly, tail trailing, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: false}
+# HD standard: Pro character mode at 64px, styled after the approved HD cave hyena.
+# Text only: Wikimedia rate-limits this build container; these are well-documented living species.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: crouching low and bunched up ready to leap, facing {facing}
+  strike: leaping forward {facing} with front paws out, mouth open biting

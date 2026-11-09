@@ -1,0 +1,29 @@
+id: nature_modern_pacific_flying_fox
+display_name: 海岛狐蝠
+sheet: {tab: 生物, name: 海岛狐蝠 - Pteropus tonganus}
+faction: nature
+era: modern
+size_class: small
+canvas: 64
+template_id: custom
+habitat: air
+seed: 9021
+description: >-
+  Pacific flying fox fruit bat Pteropus tonganus in flight, large dark brown-black leathery wings spread wide, golden-brown furry mantle around the neck, fox-like face with big dark eyes and pointed ears
+animations:
+  - name: idle
+    action: hovering in place with slow wide wingbeats
+    frames: 4
+  - name: walk
+    action: flying forward with slow wide wingbeats, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: false}
+# HD standard: Pro character mode at 64px, styled after the approved HD cave hyena.
+# Text only: Wikimedia rate-limits this build container; these are well-documented living species.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: pulling back in the air with wings raised high and mouth open, facing {facing}
+  strike: swooping forward {facing} with wings swept back, mouth open biting with small sharp teeth

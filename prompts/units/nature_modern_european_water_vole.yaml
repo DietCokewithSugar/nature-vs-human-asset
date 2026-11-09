@@ -1,0 +1,26 @@
+id: nature_modern_european_water_vole
+display_name: 欧洲水䶄
+sheet: {tab: 生物, name: 欧洲水䶄 - Arvicola amphibius}
+faction: nature
+era: modern
+size_class: small
+canvas: 64
+template_id: cat
+habitat: land
+seed: 9091
+description: >-
+  European water vole Arvicola amphibius, plump rodent with thick glossy dark brown fur, round blunt head, small ears hidden in fur, small dark eyes, fairly long furry tail
+animations:
+  - name: walk
+    action: scurrying forward, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: false}
+# HD standard: Pro character mode at 64px, styled after the approved HD cave hyena.
+# Text only: Wikimedia rate-limits this build container; these are well-documented living species.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: crouching low and bunched up with ears flat, facing {facing}
+  strike: lunging forward {facing} with mouth open showing its orange front teeth, biting

@@ -1,0 +1,26 @@
+id: nature_modern_siberian_weasel
+display_name: 黄鼬
+sheet: {tab: 生物, name: 黄鼬 - Mustela sibirica}
+faction: nature
+era: modern
+size_class: micro
+canvas: 64
+template_id: cat
+habitat: land
+seed: 9141
+description: >-
+  Siberian weasel Mustela sibirica, very long slender weasel with short legs, golden-orange-brown fur, dark mask around the eyes, white chin, long bushy tail
+animations:
+  - name: walk
+    action: bounding forward with an arched back, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: false}
+# HD standard: Pro character mode at 64px, styled after the approved HD cave hyena.
+# Text only: Wikimedia rate-limits this build container; these are well-documented living species.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: coiling its long body back into an S-shape, head low, facing {facing}
+  strike: darting forward {facing} with its long body stretched out, jaws open biting

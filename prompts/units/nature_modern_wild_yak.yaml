@@ -1,0 +1,26 @@
+id: nature_modern_wild_yak
+display_name: 野牦牛
+sheet: {tab: 生物, name: 野牦牛 - Bos mutus}
+faction: nature
+era: modern
+size_class: large
+canvas: 64
+template_id: horse
+habitat: land
+seed: 9101
+description: >-
+  wild yak Bos mutus, huge heavy wild ox with a massive shoulder hump, long shaggy blackish-brown hair hanging down like a skirt over the legs and belly, long upward-curving pale grey horns, broad hooves
+animations:
+  - name: walk
+    action: plodding forward heavily, long hair swaying, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: true}
+# HD standard: Pro character mode at 64px, styled after the approved HD cave hyena.
+# Text only: Wikimedia rate-limits this build container; these are well-documented living species.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: lowering its head with the horns aimed forward, front hooves braced, facing {facing}
+  strike: charging forward {facing} and tossing its head upward, goring with its curved horns

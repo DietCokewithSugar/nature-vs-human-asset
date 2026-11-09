@@ -1,0 +1,26 @@
+id: nature_modern_carpenter_ant
+display_name: 黑色木工蚁
+sheet: {tab: 生物, name: 黑色木工蚁 - Camponotus pennsylvanicus}
+faction: nature
+era: modern
+size_class: micro
+canvas: 64
+template_id: custom
+habitat: land
+seed: 9041
+description: >-
+  a small group of three black carpenter ants Camponotus pennsylvanicus, large glossy black ants with strong mandibles, faint golden hairs on the abdomen, long legs and elbowed antennae
+animations:
+  - name: idle
+    action: standing in place, antennae twitching, slight shuffle
+    frames: 4
+  - name: walk
+    action: scurrying forward together, legs moving quickly, seamless loop
+    frames: 6
+handedit: {kind: swarm, heavy: false}
+# HD standard: Pro character mode at 64px, styled after the approved HD cave hyena.
+# Text only: Wikimedia rate-limits this build container; these are well-documented living species.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null

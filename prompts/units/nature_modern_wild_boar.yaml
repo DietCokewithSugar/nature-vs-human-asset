@@ -1,0 +1,26 @@
+id: nature_modern_wild_boar
+display_name: 野猪
+sheet: {tab: 生物, name: 野猪 - Sus scrofa}
+faction: nature
+era: modern
+size_class: medium
+canvas: 64
+template_id: horse
+habitat: land
+seed: 9111
+description: >-
+  wild boar Sus scrofa, stocky boar with coarse bristly dark grey-brown fur, a bristly mane along the back, long snout with protruding curved white tusks, small eyes, short legs
+animations:
+  - name: walk
+    action: trotting forward, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: false}
+# HD standard: Pro character mode at 64px, styled after the approved HD cave hyena.
+# Text only: Wikimedia rate-limits this build container; these are well-documented living species.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: lowering its head with the tusks aimed forward, back legs bunched, facing {facing}
+  strike: charging forward {facing} and slashing upward with its curved tusks

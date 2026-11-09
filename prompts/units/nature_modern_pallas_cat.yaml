@@ -1,0 +1,26 @@
+id: nature_modern_pallas_cat
+display_name: 兔狲
+sheet: {tab: 生物, name: 兔狲 - Otocolobus manul}
+faction: nature
+era: modern
+size_class: small
+canvas: 64
+template_id: cat
+habitat: land
+seed: 9151
+description: >-
+  Pallas's cat Otocolobus manul, small stocky wild cat with very dense long grey fur, flat broad face with low-set ears on the sides of the head, round yellow eyes, dark bars on the forehead, thick ringed black-tipped tail
+animations:
+  - name: walk
+    action: prowling forward slowly, low to the ground, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: false}
+# HD standard: Pro character mode at 64px, styled after the approved HD cave hyena.
+# Text only: Wikimedia rate-limits this build container; these are well-documented living species.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: crouching low and flat with ears back, ready to pounce, facing {facing}
+  strike: pouncing forward {facing} with front paws out and claws extended, mouth open

@@ -1,0 +1,26 @@
+id: nature_modern_lesser_blind_mole_rat
+display_name: 小盲鼹鼠
+sheet: {tab: 生物, name: 小盲鼹鼠 - Nannospalax leucodon}
+faction: nature
+era: modern
+size_class: small
+canvas: 64
+template_id: cat
+habitat: land
+seed: 9071
+description: >-
+  lesser blind mole-rat Nannospalax leucodon, cylindrical burrowing rodent with soft grey-brown fur, no visible eyes and no visible ears, flat broad head, huge protruding orange-yellow front incisors, short legs
+animations:
+  - name: walk
+    action: scurrying forward close to the ground, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: false}
+# HD standard: Pro character mode at 64px, styled after the approved HD cave hyena.
+# Text only: Wikimedia rate-limits this build container; these are well-documented living species.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: raising its flat head with the huge front teeth bared, facing {facing}
+  strike: lunging forward {facing} and biting with its huge orange front teeth

@@ -1,0 +1,26 @@
+id: nature_modern_red_fox
+display_name: 赤狐
+sheet: {tab: 生物, name: 赤狐 - Vulpes vulpes}
+faction: nature
+era: modern
+size_class: small
+canvas: 64
+template_id: dog
+habitat: land
+seed: 9131
+description: >-
+  red fox Vulpes vulpes, slender fox with bright red-orange fur, white throat and chest, black legs, pointed black-backed ears, big bushy tail with a white tip
+animations:
+  - name: walk
+    action: trotting forward, bushy tail level, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: false}
+# HD standard: Pro character mode at 64px, styled after the approved HD cave hyena.
+# Text only: Wikimedia rate-limits this build container; these are well-documented living species.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: crouching low with the head down and ears forward, weight on the hind legs, facing {facing}
+  strike: pouncing forward {facing} with front legs reaching, jaws open biting

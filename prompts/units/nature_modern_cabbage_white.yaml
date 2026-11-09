@@ -1,0 +1,26 @@
+id: nature_modern_cabbage_white
+display_name: 菜粉蝶
+sheet: {tab: 生物, name: 菜粉蝶 - Pieris rapae}
+faction: nature
+era: modern
+size_class: micro
+canvas: 64
+template_id: custom
+habitat: air
+seed: 9001
+description: >-
+  two cabbage white butterflies Pieris rapae fluttering together, white wings with small black wing-tip patches and one or two black spots, slender black-grey bodies, thin antennae
+animations:
+  - name: idle
+    action: hovering in place, wings flapping slowly, gentle bobbing
+    frames: 4
+  - name: walk
+    action: fluttering forward together, wings flapping, gentle up and down drift, seamless loop
+    frames: 4
+handedit: {kind: swarm, heavy: false}
+# HD standard: Pro character mode at 64px, styled after the approved HD cave hyena.
+# Text only: Wikimedia rate-limits this build container; these are well-documented living species.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null

@@ -1,0 +1,26 @@
+id: nature_modern_cheetah
+display_name: 猎豹
+sheet: {tab: 生物, name: 猎豹 - Acinonyx jubatus}
+faction: nature
+era: modern
+size_class: medium
+canvas: 64
+template_id: cat
+habitat: land
+seed: 9161
+description: >-
+  cheetah Acinonyx jubatus, slender long-legged cat with golden-tan coat covered in solid round black spots, black tear marks running from the eyes to the mouth, small round head, deep chest, long spotted tail with black rings
+animations:
+  - name: walk
+    action: walking forward on long slender legs, head low, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: false}
+# HD standard: Pro character mode at 64px, styled after the approved HD cave hyena.
+# Text only: Wikimedia rate-limits this build container; these are well-documented living species.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: crouching low with shoulders up and tail out, ready to sprint, facing {facing}
+  strike: pouncing forward {facing} with long front legs outstretched and claws out, jaws open

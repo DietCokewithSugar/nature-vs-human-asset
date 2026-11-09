@@ -1,0 +1,26 @@
+id: nature_modern_south_china_tiger
+display_name: 华南虎
+sheet: {tab: 生物, name: 华南虎 - Panthera tigris amoyensis}
+faction: nature
+era: modern
+size_class: medium
+canvas: 64
+template_id: cat
+habitat: land
+seed: 9191
+description: >-
+  South China tiger Panthera tigris amoyensis, compact tiger with bright orange coat and few broad widely spaced black stripes, white belly, cheeks and eye patches, long striped tail
+animations:
+  - name: walk
+    action: prowling forward, shoulders rolling, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: false}
+# HD standard: Pro character mode at 64px, styled after the approved HD cave hyena.
+# Text only: Wikimedia rate-limits this build container; these are well-documented living species.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: crouching low with shoulders hunched and tail lashing, ready to pounce, facing {facing}
+  strike: pouncing forward {facing} with front paws outstretched and claws out, jaws wide open

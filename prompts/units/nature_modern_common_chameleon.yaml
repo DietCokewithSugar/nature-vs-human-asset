@@ -1,0 +1,26 @@
+id: nature_modern_common_chameleon
+display_name: 变色龙
+sheet: {tab: 生物, name: 变色龙 - Chamaeleo chamaeleon}
+faction: nature
+era: modern
+size_class: small
+canvas: 64
+template_id: custom
+habitat: land
+seed: 9211
+description: >-
+  common chameleon Chamaeleo chamaeleon, green chameleon with yellow and brown bands, laterally flattened body, casque-shaped head, turret eyes, zygodactyl gripping feet, curled prehensile tail
+animations:
+  - name: walk
+    action: creeping forward slowly with a swaying gait, tail curled, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: false}
+# HD standard: Pro character mode at 64px, styled after the approved HD cave hyena.
+# Text only: Wikimedia rate-limits this build container; these are well-documented living species.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: rocking back with its mouth opening, eyes locked forward, facing {facing}
+  strike: shooting its long sticky tongue far forward {facing}, mouth wide open

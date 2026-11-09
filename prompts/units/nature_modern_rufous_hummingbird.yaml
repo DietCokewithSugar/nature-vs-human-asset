@@ -1,0 +1,29 @@
+id: nature_modern_rufous_hummingbird
+display_name: 棕煌蜂鸟
+sheet: {tab: 生物, name: 棕煌蜂鸟 - Selasphorus rufus}
+faction: nature
+era: modern
+size_class: micro
+canvas: 64
+template_id: custom
+habitat: air
+seed: 9011
+description: >-
+  rufous hummingbird Selasphorus rufus hovering, tiny bird with bright orange-rufous body, iridescent red-orange throat, white chest band, long thin straight black beak, wings a fast blur
+animations:
+  - name: idle
+    action: hovering in place, wings beating rapidly, tail flicking
+    frames: 4
+  - name: walk
+    action: darting forward while hovering, wings a rapid blur, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: false}
+# HD standard: Pro character mode at 64px, styled after the approved HD cave hyena.
+# Text only: Wikimedia rate-limits this build container; these are well-documented living species.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: pulling its head back with the long beak raised and wings spread, facing {facing}
+  strike: darting forward {facing} and stabbing with its long thin beak, body stretched, wings back

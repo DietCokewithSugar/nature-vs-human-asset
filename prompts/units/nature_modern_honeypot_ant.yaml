@@ -1,0 +1,26 @@
+id: nature_modern_honeypot_ant
+display_name: 蜜罐蚁
+sheet: {tab: 生物, name: 蜜罐蚁 - Camponotus inflatus}
+faction: nature
+era: modern
+size_class: micro
+canvas: 64
+template_id: custom
+habitat: land
+seed: 9031
+description: >-
+  a small group of three honeypot ants Camponotus inflatus, black-brown worker ants, one with a huge swollen translucent golden-amber honey-filled abdomen, thin legs and antennae
+animations:
+  - name: idle
+    action: standing in place, antennae twitching, slight shuffle
+    frames: 4
+  - name: walk
+    action: scurrying forward together, legs moving quickly, seamless loop
+    frames: 6
+handedit: {kind: swarm, heavy: false}
+# HD standard: Pro character mode at 64px, styled after the approved HD cave hyena.
+# Text only: Wikimedia rate-limits this build container; these are well-documented living species.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null

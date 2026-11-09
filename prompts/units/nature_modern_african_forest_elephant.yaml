@@ -1,0 +1,26 @@
+id: nature_modern_african_forest_elephant
+display_name: 非洲森林象
+sheet: {tab: 生物, name: 非洲森林象 - Loxodonta cyclotis}
+faction: nature
+era: modern
+size_class: large
+canvas: 64
+template_id: horse
+habitat: land
+seed: 9121
+description: >-
+  African forest elephant Loxodonta cyclotis, compact elephant with grey wrinkled skin, rounded oval ears, straight slender tusks pointing downward, long trunk, thick pillar legs
+animations:
+  - name: walk
+    action: walking forward slowly, trunk swaying, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: true}
+# HD standard: Pro character mode at 64px, styled after the approved HD cave hyena.
+# Text only: Wikimedia rate-limits this build container; these are well-documented living species.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: raising its head with the trunk curled up and ears spread wide, facing {facing}
+  strike: charging forward {facing} with the head lowered, thrusting its straight tusks
