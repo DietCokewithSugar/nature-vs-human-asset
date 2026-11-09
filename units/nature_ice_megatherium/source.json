@@ -24,7 +24,8 @@
       "directions": {
         "south": "done",
         "east": "done",
-        "north-east": "done"
+        "north-east": "done",
+        "south-east": "done"
       },
       "request": {
         "action": "slow heavy lumbering walk on all fours, claws curled, body swaying",

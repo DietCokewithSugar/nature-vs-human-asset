@@ -229,7 +229,14 @@ class Unit:
                 def submit(body=body, rec=rec):
                     if rec.get("animation_group_id"):
                         body["animation_group_id"] = rec["animation_group_id"]
-                    r = self.api.post("/characters/animations", body)
+                    try:
+                        r = self.api.post("/characters/animations", body)
+                    except RuntimeError as e:
+                        # resumed after an interruption: the direction was already paid for and saved
+                        if "409" in str(e) and "already has" in str(e):
+                            print("  already on PixelLab:", body["animation_name"], body["directions"][0], flush=True)
+                            return []
+                        raise
                     rec["animation_group_id"] = r.get("animation_group_id") or rec.get("animation_group_id")
                     return r.get("background_job_ids") or [r["background_job_id"]]
 

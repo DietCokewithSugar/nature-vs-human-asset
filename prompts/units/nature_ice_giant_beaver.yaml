@@ -19,7 +19,7 @@ handedit: {kind: lunge, heavy: false}
 # HD cave hyena, design seeded by an open-licence image from the species' Wikipedia page.
 pipeline: pro
 style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
-reference: null
+reference: null   # Wikimedia rate-limited this container (429s); text + hyena style. Drop an open-licence image in refs/ to redo with a concept
 reference_license: null
 attack_keys:
   anticipation: rearing back with its head raised and mouth open showing the big orange front teeth, facing {facing}
