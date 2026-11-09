@@ -1,0 +1,30 @@
+{
+  "id": "nature_modern_lord_howe_stick_insect",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 10.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 9051,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "50ac0765-2e25-4705-972d-4ad4e9f9fca0"
+    }
+  ],
+  "create_request": {
+    "description": "Lord Howe Island stick insect Dryococelus australis, large wingless glossy dark brown-black stick insect with a thick heavily armoured body like a beetle, six sturdy legs with thick spiny hind legs",
+    "view": "low top-down",
+    "template_id": "custom",
+    "no_background": true,
+    "seed": 9051,
+    "image_size": {
+      "width": 64,
+      "height": 64
+    },
+    "method": "create_with_style",
+    "style_character_id": "bd11b67a-1165-495e-96cf-b40403d116cb"
+  },
+  "updated": "2026-11-09"
+}
