@@ -134,6 +134,36 @@ class Frame:
                 px[x, y] = c
         return self
 
+    def warp(self, dx, dy, region, lo=0.3, hi=1.0):
+        """Puppet-warp style move with no seams: pixels in `region` of the
+        silhouette (front along x for side views, the top for front/back views)
+        shift by up to (dx, dy), easing to zero towards the rest of the body,
+        so the neck/body stretches instead of tearing. Nearest sampling keeps
+        the pixel grid."""
+        import numpy as np
+        a = np.array(self.im)
+        bb = self.im.getbbox()
+        if not bb or (dx == 0 and dy == 0):
+            return self
+        h, w = a.shape[:2]
+        ys, xs = np.mgrid[0:h, 0:w]
+        x0, y0, x1, y1 = bb
+        if region == "x+":
+            u = (xs - x0) / max(1, x1 - x0)
+        elif region == "x-":
+            u = (x1 - xs) / max(1, x1 - x0)
+        else:  # "top"
+            u = (y1 - ys) / max(1, y1 - y0)
+        t = np.clip((u - lo) / (hi - lo), 0, 1)
+        t = t * t * (3 - 2 * t)
+        sx = np.rint(xs - dx * t).astype(int)
+        sy = np.rint(ys - dy * t).astype(int)
+        ok = (sx >= 0) & (sx < w) & (sy >= 0) & (sy < h)
+        out = np.zeros_like(a)
+        out[ok] = a[sy[ok], sx[ok]]
+        self.im = Image.fromarray(out, "RGBA").copy()
+        return self
+
     def fill_holes(self):
         """After moves: fill 1px gaps that have opaque neighbours on 3+ sides."""
         px = self.im.load()
@@ -403,7 +433,7 @@ def bright_colors(frame, rect, n=2):
     return out
 
 
-def auto_lunge(frame, d, mag, heavy):
+def auto_lunge(frame, d, mag, heavy, warp=False):
     """Lunge attack for any direction (aseprite-ai-artist rules/44 phases).
     Side views lunge along x; the front view rears back then fills toward the
     camera (grows + drops), the back view dips then stretches away (up)."""
@@ -415,12 +445,18 @@ def auto_lunge(frame, d, mag, heavy):
     cols = bright_colors(frame, head)
     hx0, hy0, hx1, hy1 = head
 
+    region = "x+" if fx > 0.1 else "top"
+
     def pose(head_d=(0, 0), front_d=(0, 0), sx=1.0, sy=1.0, lean=0, off=(0, 0), smear=False, center=False):
         def op(f):
-            if head_d != (0, 0):
-                f.move(head, round(head_d[0]), round(head_d[1]))
-            if front and front_d != (0, 0):
-                f.move(front, round(front_d[0]), round(front_d[1]))
+            if warp:   # HD: seamless warp of the front/top of the body instead of cut-and-move
+                if head_d != (0, 0):
+                    f.warp(head_d[0] * 1.3, head_d[1] * 1.3, region)
+            else:
+                if head_d != (0, 0):
+                    f.move(head, round(head_d[0]), round(head_d[1]))
+                if front and front_d != (0, 0):
+                    f.move(front, round(front_d[0]), round(front_d[1]))
             f.fill_holes()
             f.cleanup()
             if lean:
@@ -527,7 +563,8 @@ def unit_cfg(uid):
 
 
 def mag_for(cfg):
-    base = {32: 1.0, 48: 1.3, 64: 1.6}.get(cfg.get("canvas", 32), cfg.get("canvas", 32) / 32)
+    c = cfg.get("canvas", 32)
+    base = {32: 1.0, 48: 1.3, 64: 1.6, 128: 2.6}.get(c, c / 40)
     return base * (1.2 if cfg.get("size_class") in ("small", "micro") else 1.0)
 
 
@@ -566,7 +603,7 @@ def build(uid, dirs=None):
         elif kind == "swarm":
             frames, hit = swarm_attack(*FACE[d], pad=(base.w - base.w // 2) // 2)
         else:
-            frames, hit = auto_lunge(base, d, mag, heavy)
+            frames, hit = auto_lunge(base, d, mag, heavy, warp=he.get("style", "warp" if cfg.get("canvas", 32) >= 64 else "cut") == "warp")
         write_seq(root / "attackhand" / d, base, frames, hit, "AI hand-edited attack (text-grid method)")
         write_seq(root / "death" / d, base, auto_death(base, d, mag, kind), 0, "AI hand-edited death")
         done.append(d)

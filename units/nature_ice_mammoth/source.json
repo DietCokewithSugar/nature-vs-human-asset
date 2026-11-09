@@ -1,0 +1,79 @@
+{
+  "id": "nature_ice_mammoth",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 81.0,
+  "animations": {
+    "idle": {
+      "directions": {
+        "south": "done"
+      },
+      "request": {
+        "action": "standing in place, gentle breathing, slight body bob, seamless loop",
+        "action_by_dir": null,
+        "frames": 4
+      },
+      "animation_group_id": "69946a16-d172-4fb2-a1d4-9223b6b92e43"
+    },
+    "walk": {
+      "directions": {
+        "south": "done"
+      },
+      "request": {
+        "action": "slow heavy walk, trunk swaying",
+        "action_by_dir": null,
+        "frames": 6
+      },
+      "animation_group_id": "63fe7840-b539-4a7f-bb66-cf040ccc9a29"
+    },
+    "attack": {
+      "directions": {
+        "south": "done"
+      },
+      "request": {
+        "action": "steps forward and thrusts its head down and forward to gore with its tusks, then lifts its head back up; the tusks keep exactly the same curved shape and size in every frame",
+        "action_by_dir": null,
+        "frames": 6
+      },
+      "animation_group_id": "2a25281e-9c45-4edb-8694-a8e35813e0e0"
+    }
+  },
+  "candidates": [
+    {
+      "seed": 2052,
+      "pipeline": "pro",
+      "reference": "refs/nature_ice_mammoth/00_Woolly_mammoth_model_Royal_BC_Museum_in_Victoria.jpg",
+      "character_id": "2908d092-f1d8-4d84-ba73-c83e43d66925",
+      "picked": true
+    },
+    {
+      "seed": 2051,
+      "pipeline": "pro",
+      "reference": "refs/nature_ice_mammoth/00_Woolly_mammoth_model_Royal_BC_Museum_in_Victoria.jpg",
+      "character_id": "8c3579ff-731e-4d20-a25b-d8d8b973164e",
+      "picked": false
+    },
+    {
+      "seed": 2053,
+      "pipeline": "pro",
+      "reference": "refs/nature_ice_mammoth/00_Woolly_mammoth_model_Royal_BC_Museum_in_Victoria.jpg",
+      "character_id": "67b0551a-00c1-4fc3-80c5-5a334e514cca",
+      "picked": false
+    }
+  ],
+  "create_request": {
+    "description": "woolly mammoth Mammuthus primigenius, huge Ice Age elephant with a high domed head and sloping back, very thick shaggy reddish-brown long fur over a dark undercoat, small furry ears, short tail, long strongly curved spiralling ivory tusks, long trunk, thick column legs",
+    "view": "low top-down",
+    "template_id": "horse",
+    "no_background": true,
+    "seed": 2051,
+    "image_size": {
+      "width": 128,
+      "height": 128
+    },
+    "method": "create_from_concept"
+  },
+  "updated": "2026-11-09",
+  "character_id": "2908d092-f1d8-4d84-ba73-c83e43d66925"
+}
