@@ -20,7 +20,16 @@ class PixelLab:
         self.s.headers["Authorization"] = f"Bearer {token}"
 
     def _req(self, method, path, **kw):
-        r = self.s.request(method, BASE + path, timeout=120, **kw)
+        # ride out short network/proxy outages (e.g. the container's proxy restarting)
+        for i in range(30):
+            try:
+                r = self.s.request(method, BASE + path, timeout=120, **kw)
+                break
+            except (requests.exceptions.ConnectionError, requests.exceptions.Timeout) as e:
+                if i == 29:
+                    raise
+                print(f"  network error ({type(e).__name__}), retrying in 20s", flush=True)
+                time.sleep(20)
         if r.status_code >= 400:
             raise RuntimeError(f"{method} {path} -> {r.status_code}: {r.text[:800]}")
         return r

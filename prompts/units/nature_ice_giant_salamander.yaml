@@ -21,6 +21,7 @@ pipeline: pro
 style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
 reference: null   # living species: text + hyena style is enough
 reference_license: null
+attack_new_colors: false   # the AI keys added red/pink; a giant salamander's mouth stays in its own browns
 attack_keys:
   anticipation: pulling its flat head back with the body tensed, wide mouth closed, facing {facing}
-  strike: lunging forward {facing} with its wide flat mouth gaping open, snapping
+  strike: lunging forward {facing} with its wide flat toothless mouth gaping open, snapping; it keeps its tiny dark eyes, flat head and mottled brown-grey skin

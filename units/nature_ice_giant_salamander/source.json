@@ -3,7 +3,7 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 34.0,
+  "generations_spent": 36.0,
   "animations": {
     "idle": {
       "directions": {
@@ -95,15 +95,25 @@
       "generations": 0
     },
     "attackcombo": {
-      "generations": 4,
+      "generations": 6,
       "directions": [
         "east",
-        "south"
+        "north",
+        "north-east",
+        "south",
+        "south-east"
       ],
       "method": "AI key poses (Pixen edit) + AI hand-edit cleanup/tweens/timing",
       "keys": {
         "anticipation": "pulling its flat head back with the body tensed, wide mouth closed, facing {facing}",
-        "strike": "lunging forward {facing} with its wide flat mouth gaping open, snapping"
+        "strike": "lunging forward {facing} with its wide flat toothless mouth gaping open, snapping; it keeps its tiny dark eyes, flat head and mottled brown-grey skin"
+      },
+      "key_sources": {
+        "south": "pixen",
+        "east": "pixen",
+        "south-east": "v3",
+        "north-east": "v3",
+        "north": "hand warp (fallback)"
       }
     }
   }

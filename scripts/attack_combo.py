@@ -39,10 +39,33 @@ from postprocess import srgb_to_lab  # noqa: E402
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 
-def palette_lock(im, base, keep_far=28.0):
+def _patches(mask):
+    """8-connected patches of True pixels (sprites are small: plain flood fill)."""
+    seen = np.zeros(mask.shape, bool)
+    h, w = mask.shape
+    for y0, x0 in zip(*np.nonzero(mask)):
+        if seen[y0, x0]:
+            continue
+        stack, patch = [(y0, x0)], []
+        seen[y0, x0] = True
+        while stack:
+            y, x = stack.pop()
+            patch.append((y, x))
+            for dy in (-1, 0, 1):
+                for dx in (-1, 0, 1):
+                    ny, nx = y + dy, x + dx
+                    if 0 <= ny < h and 0 <= nx < w and mask[ny, nx] and not seen[ny, nx]:
+                        seen[ny, nx] = True
+                        stack.append((ny, nx))
+        yield patch
+
+
+def palette_lock(im, base, keep_far=28.0, max_patch=0.03, face=None):
     """Snap every opaque pixel of `im` to the nearest (CIELAB) colour of `base`.
     Colours far from every base colour (e.g. the inside of an open mouth, which
-    the closed-mouth base pose does not have) are kept: they are new, not drift."""
+    the closed-mouth base pose does not have) are kept, but only as small patches
+    (each connected patch under `max_patch` of the sprite): a far colour spread
+    over a big area (a red outline along the whole body) is drift, so it snaps."""
     a, b = np.array(im.convert("RGBA")), np.array(base.convert("RGBA"))
     pal = np.unique(b[b[..., 3] > 127][:, :3], axis=0).astype(float)
     if not len(pal):
@@ -52,11 +75,35 @@ def palette_lock(im, base, keep_far=28.0):
     px = a[..., :3][m].astype(float)
     uniq, inv = np.unique(px, axis=0, return_inverse=True)
     d = ((srgb_to_lab(uniq)[:, None] - lab_p[None]) ** 2).sum(-1)
-    snapped = pal[d.argmin(1)]
+    nearest = pal[d.argmin(1)]
     far = np.sqrt(d.min(1)) > keep_far
-    snapped[far] = uniq[far]
+    # per-pixel: far colour?  then keep it only inside small connected patches
+    far_px = np.zeros(m.shape, bool)
+    far_px[m] = far[inv.ravel()]
+    if face is not None:
+        # new colours belong to the head end (open mouth, teeth, eyes): only keep
+        # them in the front 40% of the body along the facing direction
+        ys, xs = np.nonzero(m)
+        proj = xs * face[0] + ys * face[1]
+        cut = np.quantile(proj, 0.6)
+        yy, xx = np.mgrid[:m.shape[0], :m.shape[1]]
+        far_px &= (xx * face[0] + yy * face[1]) >= cut
+    limit = max(4, max_patch * m.sum())
+    keep = np.zeros(m.shape, bool)
+    # a real new feature (mouth interior, teeth) sits inside the outline; colour
+    # drift shows up on the silhouette edge, touching transparency
+    edge = np.zeros(m.shape, bool)
+    pad_m = np.pad(m, 1)
+    edge[:] = ~(pad_m[:-2, 1:-1] & pad_m[2:, 1:-1] & pad_m[1:-1, :-2] & pad_m[1:-1, 2:])
+    for patch in _patches(far_px):
+        if len(patch) <= limit and not any(edge[y, x] for y, x in patch):
+            for y, x in patch:
+                keep[y, x] = True
+    rgb = np.zeros(m.shape + (3,), np.uint8)
+    rgb[m] = nearest[inv.ravel()].astype(np.uint8)
+    rgb[keep] = a[..., :3][keep]
     out = np.zeros_like(a)
-    out[..., :3][m] = snapped[inv.ravel()].astype(np.uint8)
+    out[..., :3] = rgb
     out[..., 3] = np.where(m, 255, 0)
     return Image.fromarray(out, "RGBA")
 
@@ -80,6 +127,13 @@ def align(im, base, d):
 
 def run_dir(api, uid, cfg, d, out, rebuild=False, reseed=0, key_source="pixen"):
     keys = cfg["attack_keys"]
+    # attack_new_colors: false -> every pixel snaps to the base palette (no new mouth colours)
+    keep_far = 28.0 if cfg.get("attack_new_colors", True) else float("inf")
+    if not rebuild and not reseed and (out / "sequence.json").exists():
+        print(uid, d, "already done, skipping", flush=True)
+        return 0
+    if not reseed and (out / "key_anticipation.png").exists() and (out / "key_strike.png").exists():
+        rebuild = True   # resume: AI keys were already paid for
     face = FACING[d]
     back = " Seen from behind: the face and mouth are not visible." if d == "north" else ""
     base = base_frame(uid, d)
@@ -132,8 +186,8 @@ def run_dir(api, uid, cfg, d, out, rebuild=False, reseed=0, key_source="pixen"):
         out.mkdir(parents=True, exist_ok=True)
         raw_a.save(out / "key_anticipation.png")
         raw_s.save(out / "key_strike.png")
-    antic = Frame(align(palette_lock(raw_a, base.im), base.im, d)).cleanup()
-    strike = Frame(align(palette_lock(raw_s, base.im), base.im, d)).cleanup()
+    antic = Frame(align(palette_lock(raw_a, base.im, face=FACE[d], keep_far=keep_far), base.im, d)).cleanup()
+    strike = Frame(align(palette_lock(raw_s, base.im, face=FACE[d], keep_far=keep_far), base.im, d)).cleanup()
 
     fx, fy = FACE[d]
     mag = mag_for(cfg)

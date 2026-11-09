@@ -3,12 +3,15 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 23.0,
+  "generations_spent": 29.0,
   "animations": {
     "idle": {
       "directions": {
         "south": "done",
-        "south-east": "done"
+        "south-east": "done",
+        "east": "done",
+        "north-east": "done",
+        "north": "done"
       },
       "request": {
         "action": "standing in place, gentle breathing, slight body bob, seamless loop",
@@ -19,7 +22,10 @@
     },
     "walk": {
       "directions": {
-        "south": "done"
+        "south": "done",
+        "south-east": "done",
+        "east": "done",
+        "north-east": "done"
       },
       "request": {
         "action": "hopping forward, the whole body clearly lifts off the ground and lands again, hind legs push off, ears bounce, seamless loop",
