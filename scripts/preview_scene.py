@@ -72,7 +72,7 @@ def main():
     for uid in ids:
         atlas, frames = units[uid]
         span = 2 if atlas["meta"]["unit"]["size_class"] == "large" else 1
-        draw_unit(img, atlas, frames, "idle_south-east", 0, x + TILE * span / 2, TILE * 2.3)
+        draw_unit(img, atlas, frames, "rotation_south-east", 0, x + TILE * span / 2, TILE * 2.3)
         x += TILE * 3
     img.resize((img.width * 3, img.height * 3), Image.NEAREST).save(prev / "lineup.png")
 
@@ -98,7 +98,7 @@ def main():
         img = base.copy()
         for uid, ax, ay, d, off in actors:
             atlas, frames = units[uid]
-            anim = f"walk_{d}" if f"walk_{d}" in atlas["animations"] else f"idle_{d}"
+            anim = f"walk_{d}" if f"walk_{d}" in atlas["animations"] else f"rotation_{d}"
             draw_unit(img, atlas, frames, anim, f + off, ax, ay)
         gif.append(img.resize((W * 2, H * 2), Image.NEAREST).convert("RGB"))
     gif[0].save(prev / "scene.gif", save_all=True, append_images=gif[1:], duration=100, loop=0)

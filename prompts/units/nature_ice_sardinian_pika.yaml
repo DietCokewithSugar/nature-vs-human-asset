@@ -17,4 +17,9 @@ animations:
     frames: 6
   - name: attack
     action: rears back, then lunges forward with mouth wide open showing front teeth to bite, then returns to the starting pose
+    action_by_dir:
+      north: >-
+        seen from behind, facing away from the viewer: the body rears back, then
+        lunges forward away from the viewer with the head dipping down out of
+        sight, then returns; only the back, ears and fur are visible, no face or mouth
     frames: 6

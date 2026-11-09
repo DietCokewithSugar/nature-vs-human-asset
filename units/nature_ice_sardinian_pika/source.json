@@ -3,7 +3,7 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 21.0,
+  "generations_spent": 33.0,
   "animations": {
     "idle": {
       "directions": {
@@ -20,18 +20,35 @@
       "animation_group_id": "a0be6b6a-a550-4e99-89d3-0b549a8cd01e"
     },
     "walk": {
-      "directions": {},
+      "directions": {
+        "south": "done",
+        "south-east": "done",
+        "north": "done",
+        "east": "done",
+        "north-east": "done"
+      },
       "request": {
-        "action": "hopping forward in short bouncy hops, seamless loop",
+        "action": "hopping forward, the whole body clearly lifts off the ground and lands again, hind legs push off, ears bounce, seamless loop",
         "frames": 6
-      }
+      },
+      "animation_group_id": "dd257ce0-bf64-4cb3-957d-4b6760d6f3a2"
     },
     "attack": {
-      "directions": {},
+      "directions": {
+        "south": "done",
+        "north-east": "done",
+        "south-east": "done",
+        "east": "done",
+        "north": "done"
+      },
       "request": {
-        "action": "lunging forward to bite, then hopping back",
+        "action": "rears back, then lunges forward with mouth wide open showing front teeth to bite, then returns to the starting pose",
+        "action_by_dir": {
+          "north": "seen from behind, facing away from the viewer: the body rears back, then lunges forward away from the viewer with the head dipping down out of sight, then returns; only the back, ears and fur are visible, no face or mouth"
+        },
         "frames": 6
-      }
+      },
+      "animation_group_id": "e31b105e-76b2-48ba-98bb-0dafe4974b7f"
     }
   },
   "candidates": [

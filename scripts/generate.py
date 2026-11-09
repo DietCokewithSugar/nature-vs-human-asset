@@ -178,12 +178,14 @@ class Unit:
             if anims and a["name"] not in anims:
                 continue
             rec = self.src["animations"].setdefault(a["name"], {"directions": {}})
-            rec["request"] = {"action": a["action"], "frames": a["frames"]}
+            rec["request"] = {"action": a["action"], "action_by_dir": a.get("action_by_dir"), "frames": a["frames"]}
             for d in dirs:
                 if rec["directions"].get(d) == "done":
                     continue
+                # optional per-direction wording, e.g. back views where the face is hidden
+                action = (a.get("action_by_dir") or {}).get(d, a["action"])
                 body = {"character_id": cid, "mode": "v3", "animation_name": a["name"],
-                        "action_description": a["action"], "frame_count": a["frames"],
+                        "action_description": action, "frame_count": a["frames"],
                         "keep_first_frame": False, "directions": [d]}
 
                 def submit(body=body, rec=rec):
