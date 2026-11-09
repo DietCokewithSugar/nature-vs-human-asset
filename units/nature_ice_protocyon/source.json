@@ -1,0 +1,36 @@
+{
+  "id": "nature_ice_protocyon",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 20.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 7101,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "9a9bb123-a734-4c37-9cc8-b52530ce08f7"
+    },
+    {
+      "seed": 7102,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "42818b74-ec80-4d3e-9466-a5ad92cf14bc"
+    }
+  ],
+  "create_request": {
+    "description": "Protocyon, large long-legged fox-like South American wild canid with a grey-brown coat, long pointed muzzle, large pointed ears, bushy tail",
+    "view": "low top-down",
+    "template_id": "dog",
+    "no_background": true,
+    "seed": 7101,
+    "image_size": {
+      "width": 64,
+      "height": 64
+    },
+    "method": "create_with_style",
+    "style_character_id": "bd11b67a-1165-495e-96cf-b40403d116cb"
+  },
+  "updated": "2026-11-09"
+}
