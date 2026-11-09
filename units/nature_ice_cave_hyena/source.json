@@ -1,0 +1,45 @@
+{
+  "id": "nature_ice_cave_hyena",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 30.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 7351,
+      "pipeline": "pro",
+      "reference": "refs/nature_ice_cave_hyena/05_Stamps_of_Moldova_2016_Crocuta_crocuta_spelaea_mod.jpg",
+      "character_id": "bd11b67a-1165-495e-96cf-b40403d116cb",
+      "picked": true
+    },
+    {
+      "seed": 7352,
+      "pipeline": "pro",
+      "reference": "refs/nature_ice_cave_hyena/05_Stamps_of_Moldova_2016_Crocuta_crocuta_spelaea_mod.jpg",
+      "character_id": "98e78ea8-e84f-464d-af00-c40437a8e7f6",
+      "picked": false
+    },
+    {
+      "seed": 7353,
+      "pipeline": "pro",
+      "reference": "refs/nature_ice_cave_hyena/05_Stamps_of_Moldova_2016_Crocuta_crocuta_spelaea_mod.jpg",
+      "character_id": "14bc24df-481c-48da-a993-4906acdf29a5",
+      "picked": false
+    }
+  ],
+  "create_request": {
+    "description": "cave hyena Crocuta spelaea, a powerful Ice Age spotted hyena: sloping back with high muscular shoulders, sandy-ochre coat densely covered in dark round spots, thick neck, massive bone-crushing jaws, rounded ears, short dark-tipped tail",
+    "view": "low top-down",
+    "template_id": "dog",
+    "no_background": true,
+    "seed": 7351,
+    "image_size": {
+      "width": 64,
+      "height": 64
+    },
+    "method": "create_from_concept"
+  },
+  "updated": "2026-11-09",
+  "character_id": "bd11b67a-1165-495e-96cf-b40403d116cb"
+}

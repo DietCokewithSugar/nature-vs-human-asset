@@ -249,6 +249,32 @@ export async function renderLab(root: HTMLElement, m: Manifest, classic = false)
   const [sets, uts] = await Promise.all([loadTilesets(m), Promise.all(m.units.map(loadUnitTex))]);
   drawTerrain(ground, nground, terrain, sets);
   const camps = campSpots(terrain);
+  // HD map: dress each human camp with props (tent, campfire, drying rack, bone hut)
+  if (hd && m.props?.length) {
+    const tex = new Map<string, { c: Texture; n: Texture | null }>();
+    await Promise.all(m.props.map(async (p) => tex.set(p.id, {
+      c: await Assets.load<Texture>(p.png), n: p.normal ? await Assets.load<Texture>(p.normal) : null })));
+    const layout: [string, number, number][] = [["campfire", 0, 0.35], ["hide_tent", -1.4, -0.5], ["drying_rack", 1.3, -0.3], ["bone_hut", 0.2, 1.4]];
+    for (const [cx, cy] of camps)
+      for (const [id, dx, dy] of layout) {
+        const t = tex.get(id);
+        const x = cx + dx * TILE, y = cy + dy * TILE;
+        const vx = Math.round(x / TILE), vy = Math.round(y / TILE);
+        if (!t || vx < 1 || vy < 1 || vx >= MAP_W || vy >= MAP_H || terrain[vy * (MAP_W + 1) + vx] === "water") continue;
+        const sp = new Sprite(t.c);
+        sp.anchor.set(0.5, 1);
+        sp.position.set(Math.round(x), Math.round(y));
+        sp.zIndex = y;
+        actors.addChild(sp);
+        if (t.n) {
+          const ns = new Sprite(t.n);
+          ns.anchor.set(0.5, 1);
+          ns.position.copyFrom(sp.position);
+          ns.zIndex = y;
+          nactors.addChild(ns);
+        }
+      }
+  }
   const flames = new Graphics();
   fxUnder.addChild(flames);
 

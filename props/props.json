@@ -1,0 +1,68 @@
+{
+ "props": [
+  {
+   "id": "hide_tent",
+   "name_zh": "兽皮帐篷",
+   "file": "hide_tent.png",
+   "size": 88,
+   "anchor": {
+    "x": 0.5,
+    "y": 1.0
+   },
+   "emissive": false,
+   "source": {
+    "tool": "PixelLab generate-image-v2 (Pro)",
+    "experiment": "experiments/detail-test/props_test.py",
+    "original": "pro_hide_tent_0.png"
+   }
+  },
+  {
+   "id": "campfire",
+   "name_zh": "石圈篝火",
+   "file": "campfire.png",
+   "size": 80,
+   "anchor": {
+    "x": 0.5,
+    "y": 1.0
+   },
+   "emissive": true,
+   "source": {
+    "tool": "PixelLab generate-image-v2 (Pro)",
+    "experiment": "experiments/detail-test/props_test.py",
+    "original": "pro_campfire_0.png"
+   }
+  },
+  {
+   "id": "drying_rack",
+   "name_zh": "晾肉架",
+   "file": "drying_rack.png",
+   "size": 84,
+   "anchor": {
+    "x": 0.5,
+    "y": 1.0
+   },
+   "emissive": false,
+   "source": {
+    "tool": "PixelLab generate-image-v2 (Pro)",
+    "experiment": "experiments/detail-test/props_test.py",
+    "original": "pro_drying_rack_1.png"
+   }
+  },
+  {
+   "id": "bone_hut",
+   "name_zh": "猛犸骨屋",
+   "file": "bone_hut.png",
+   "size": 84,
+   "anchor": {
+    "x": 0.5,
+    "y": 1.0
+   },
+   "emissive": false,
+   "source": {
+    "tool": "PixelLab generate-image-v2 (Pro)",
+    "experiment": "experiments/detail-test/props_test.py",
+    "original": "pro_mammoth_bone_hut_0.png"
+   }
+  }
+ ]
+}

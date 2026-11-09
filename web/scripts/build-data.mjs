@@ -136,6 +136,20 @@ if (exists(tsDir)) {
   }
 }
 
+// static props (camp buildings etc.)
+const props = [];
+const propDir = path.join(ROOT, "props");
+if (exists(path.join(propDir, "props.json"))) {
+  fs.mkdirSync(path.join(OUT, "props"), { recursive: true });
+  for (const pr of readJson(path.join(propDir, "props.json")).props) {
+    fs.copyFileSync(path.join(propDir, pr.file), path.join(OUT, "props", pr.file));
+    const n = pr.file.replace(/\.png$/, "_n.png");
+    const hasN = exists(path.join(propDir, n));
+    if (hasN) fs.copyFileSync(path.join(propDir, n), path.join(OUT, "props", n));
+    props.push({ ...pr, png: `data/props/${pr.file}`, normal: hasN ? `data/props/${n}` : undefined });
+  }
+}
+
 const unitBySheetName = new Map(units.filter((u) => u.sheet).map((u) => [u.sheet.name, u.id]));
 const species = creatureRows
   .filter((r) => r[speciesKey])
@@ -154,6 +168,7 @@ const manifest = {
   units,
   species,
   tilesets,
+  props,
 };
 fs.writeFileSync(path.join(OUT, "manifest.json"), JSON.stringify(manifest, null, 1));
 console.log(`manifest: ${units.length} units, ${species.length} sheet species, ${tilesets.length} tilesets`);

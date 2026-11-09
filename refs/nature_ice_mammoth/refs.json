@@ -1,0 +1,43 @@
+{
+ "species": "猛犸象 - Woolly Mammoth",
+ "wiki": "https://en.wikipedia.org/wiki/Woolly_mammoth",
+ "description_zh": "冰河时代标志性巨型象类，身披厚重长毛与厚脂肪层，长卷曲象牙用于铲雪觅食。",
+ "images": [
+  {
+   "file": "00_Woolly_mammoth_model_Royal_BC_Museum_in_Victoria.jpg",
+   "license": "CC BY 2.0",
+   "author": "Thomas Quine",
+   "commons": "https://commons.wikimedia.org/wiki/File:Woolly_mammoth_model_Royal_BC_Museum_in_Victoria.jpg"
+  },
+  {
+   "file": "01_Ice_age_fauna_of_northern_Spain_Mauricio_Ant_n.jpg",
+   "license": "CC BY 2.5",
+   "author": "Mauricio Antón",
+   "commons": "https://commons.wikimedia.org/wiki/File:Ice_age_fauna_of_northern_Spain_-_Mauricio_Ant%C3%B3n.jpg"
+  },
+  {
+   "file": "02_Mammuthus_primigenius_Museum_of_Ancient_Life_1.jpg",
+   "license": "CC BY-SA 4.0",
+   "author": "Etemenanki3",
+   "commons": "https://commons.wikimedia.org/wiki/File:Mammuthus_primigenius_Museum_of_Ancient_Life_1.jpg"
+  },
+  {
+   "file": "03_Dima_baby_mammoth_model.jpg",
+   "license": "CC BY-SA 3.0",
+   "author": "Apotea",
+   "commons": "https://commons.wikimedia.org/wiki/File:Dima_baby_mammoth_model.jpg"
+  },
+  {
+   "file": "04_Siegsdorfer_Mammut.jpg",
+   "license": "unknown (not checked)",
+   "author": "",
+   "commons": ""
+  },
+  {
+   "file": "05_Boltunov_mammoth.jpg",
+   "license": "unknown (not checked)",
+   "author": "",
+   "commons": ""
+  }
+ ]
+}

@@ -51,6 +51,7 @@ export interface Manifest {
   units: Unit[];
   species: Species[];
   tilesets: Tileset[];
+  props?: { id: string; name_zh: string; png: string; normal?: string; size: number; emissive?: boolean }[];
 }
 export interface Atlas {
   frames: Record<string, { frame: { x: number; y: number; w: number; h: number }; duration?: number }>;
