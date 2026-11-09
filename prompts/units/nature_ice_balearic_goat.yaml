@@ -1,0 +1,17 @@
+id: nature_ice_balearic_goat
+display_name: 巴利阿里山羊
+sheet: {tab: 生物, name: 巴利阿里山羊 - Balearic Island Cave Goat}
+faction: nature
+era: ice_age
+size_class: small
+canvas: 32
+template_id: horse
+habitat: land
+seed: 6401
+description: >-
+  Balearic cave goat Myotragus, small stocky goat with short legs, short backward-curving horns, forward-facing eyes, coarse brown coat with a paler belly
+animations:
+  - name: walk
+    action: trotting forward on short legs, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: false}

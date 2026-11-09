@@ -19,8 +19,8 @@ const TERRAIN_SET: Record<Exclude<Terrain, "snow">, string> = {
   tundra: "ice_snow_tundra", water: "ice_snow_water", mud: "ice_snow_mud",
 };
 const FALLBACK_COLOR: Record<Terrain, number> = { snow: 0xdfe8f2, tundra: 0x7d7a4f, water: 0x1d5fa8, mud: 0x6b4423 };
-type State = "idle" | "walk" | "attack" | "rest";
-type Mode = "auto" | State;
+type State = "idle" | "walk" | "attack" | "rest" | "death";
+type Mode = "auto" | Exclude<State, "death">;
 const STATE_LABEL: Record<Mode, string> = { auto: "自动", idle: "待机", walk: "行走", attack: "攻击", rest: "休息" };
 const LIGHT_LABEL: Record<LightMode, string> = { lit: "法线光照", tint: "色调滤镜（旧）", off: "关闭" };
 
@@ -28,6 +28,7 @@ const SIZE_STATS: Record<string, { hp: number; dmg: number; speed: number; radiu
   micro: { hp: 30, dmg: 3, speed: 38, radius: 6 },
   small: { hp: 60, dmg: 6, speed: 30, radius: 8 },
   medium: { hp: 120, dmg: 16, speed: 32, radius: 10 },
+  medium_large: { hp: 200, dmg: 24, speed: 30, radius: 14 },
   large: { hp: 320, dmg: 34, speed: 20, radius: 22 },
 };
 
@@ -423,8 +424,12 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
     const u = e.ut.unit;
     const st = SIZE_STATS[u.sizeClass] ?? SIZE_STATS.medium;
     if (e.dead) {
-      e.dead += dt;
-      e.root.alpha = e.fx.alpha = e.nsprite.alpha = Math.max(0, 1 - e.dead);
+      e.state = "death";
+      const total = anim(e).key === "death" ? anim(e).total : 0;
+      const fade = Math.max(0, e.animT - total) / 800;   // body fades after the last frame
+      e.root.alpha = e.nsprite.alpha = Math.max(0, 1 - fade);
+      e.fx.alpha = 0;
+      e.dead = fade >= 1 ? 2 : 0.5;
       return;
     }
     e.cooldown -= dt;
@@ -432,9 +437,9 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
     if (e.push) {
       e.push.t -= dt;
       const k = Math.max(0, e.push.t) / 0.12;
-      if (walkable(u, e.x + e.push.x * dt * 25 * k, e.y + e.push.y * dt * 25 * k)) {
-        e.x += e.push.x * dt * 25 * k;
-        e.y += e.push.y * dt * 25 * k;
+      if (walkable(u, e.x + e.push.x * dt * 50 * k, e.y + e.push.y * dt * 50 * k)) {
+        e.x += e.push.x * dt * 50 * k;
+        e.y += e.push.y * dt * 50 * k;
       }
       if (e.push.t <= 0) e.push = null;
     }
@@ -474,6 +479,18 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
     if (moveToward(e, e.tx, e.ty, dt, st.speed)) { e.wait = 1 + Math.random() * 3; e.tx = e.x; e.ty = e.y; }
   }
 
+  /** Killed: play the death animation (if the unit has one), then fade out. */
+  function kill(e: Ent) {
+    if (e.dead) return;
+    e.hpNow = 0;
+    e.dead = 0.001;
+    e.state = "death";
+    e.animT = 0;
+    e.atk = null;
+    e.freeze = 0;
+    if (ui.selected === e) select(null);
+  }
+
   const sparkList: { x: number; y: number; t: number; big: boolean }[] = [];
   function hit(a: Ent, b: Ent, dmg: number, heavy = false) {
     b.flash = prefs.feel ? 0.1 : 0.18;
@@ -485,14 +502,14 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
     }
     if (ui.immortal) return;
     b.hpNow -= dmg * (0.75 + Math.random() * 0.5);
-    if (b.hpNow <= 0) { b.hpNow = 0; b.dead = 0.001; if (ui.selected === b) select(null); }
+    if (b.hpNow <= 0) kill(b);
     if (!b.target) b.target = a;
   }
 
   function draw(e: Ent) {
     const u = e.ut.unit;
     const a = anim(e);
-    const loop = !(e.state === "attack" && prefs.feel);
+    const loop = !((e.state === "attack" && prefs.feel) || e.state === "death");
     if (a.frames.length) {
       const name = a.frames[frameAt(a.durs, e.animT, loop)];
       const tex = e.ut.frames.get(name);
@@ -644,7 +661,7 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
         el("button", { type: "button", class: e.force === s ? "on" : "", onclick: () => { e.force = s; e.atk = null; renderSelected(); } }, STATE_LABEL[s]))),
       el("div", { class: "row" },
         el("a", { href: `#/unit/${u.id}`, class: "small" }, "查看素材与配置 →"),
-        el("button", { type: "button", class: "ghost small", onclick: () => { e.dead = 0.001; select(null); } }, "移除")),
+        el("button", { type: "button", class: "ghost small", onclick: () => kill(e) }, "击杀（播放死亡）")),
     );
   }
   const clock = el("span", { class: "clock" });
@@ -727,12 +744,12 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
     if (ui.autoTime) ui.hour = (ui.hour + dt * 0.2) % 24;
     shake = Math.max(0, shake - rdt);
     for (const e of ents) {
-      if (e.freeze > 0) { e.freeze -= dt; draw(e); continue; }   // hitstop: hold the pose
+      if (e.freeze > 0 && !e.dead) { e.freeze -= dt; draw(e); continue; }   // hitstop: hold the pose
       e.animT += dt * 1000;
       step(e, dt);
       draw(e);
     }
-    for (let i = ents.length - 1; i >= 0; i--) if (ents[i].dead > 1) { removeEnt(ents[i]); ents.splice(i, 1); }
+    for (let i = ents.length - 1; i >= 0; i--) if (ents[i].dead >= 2) { removeEnt(ents[i]); ents.splice(i, 1); }
     drawSparks(dt);
 
     // lighting: sun / moon / ambient from time + weather; torches & campfires at night

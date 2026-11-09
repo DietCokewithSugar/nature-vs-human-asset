@@ -199,3 +199,5 @@ main:has(.lab) { max-width: none; padding: 0; }
 .toolbar-row { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; }
 .check.inline { margin-top: 0; }
 .attack-note { flex-basis: 100%; margin: 0; }
+.cands summary { cursor: pointer; font-size: 13px; color: var(--muted); margin-top: 10px; }
+.cand-img { display: block; max-width: 100%; image-rendering: pixelated; margin-top: 8px; border-radius: 6px; }

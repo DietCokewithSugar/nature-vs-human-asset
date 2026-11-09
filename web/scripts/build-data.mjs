@@ -53,6 +53,9 @@ for (const file of fs.readdirSync(path.join(ROOT, "prompts/units")).sort()) {
   const normalPath = path.join(dir, `${cfg.id}_n.png`);
   const hasNormal = exists(normalPath);
   if (hasNormal) fs.copyFileSync(normalPath, path.join(OUT, "units", `${cfg.id}_n.png`));
+  const candPath = path.join(dir, "candidates.png");
+  const hasCand = exists(candPath);
+  if (hasCand) fs.copyFileSync(candPath, path.join(OUT, "units", `${cfg.id}_candidates.png`));
   const atlas = readJson(atlasPath);
   const source = exists(path.join(dir, "source.json")) ? readJson(path.join(dir, "source.json")) : {};
   const row = sheetRowFor(cfg);
@@ -105,6 +108,7 @@ for (const file of fs.readdirSync(path.join(ROOT, "prompts/units")).sort()) {
       png: `data/units/${cfg.id}.png`,
       atlas: `data/units/${cfg.id}.json`,
       normal: hasNormal ? `data/units/${cfg.id}_n.png` : undefined,
+      candidates: hasCand ? `data/units/${cfg.id}_candidates.png` : undefined,
     },
     variants: atlas.meta.unit.variants ?? {},
   });

@@ -1,0 +1,17 @@
+id: nature_ice_glyptodon
+display_name: 雕齿兽
+sheet: {tab: 生物, name: 雕齿兽 - Glyptodon}
+faction: nature
+era: ice_age
+size_class: large
+canvas: 64
+template_id: custom
+habitat: land
+seed: 6901
+description: >-
+  Glyptodon, giant armadillo-like animal with a huge domed bony shell made of hexagonal plates, small armoured head cap, ringed armoured tail, short stubby legs, tan and brown colours
+animations:
+  - name: walk
+    action: slow waddling walk on stubby legs, shell rocking slightly, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: true}

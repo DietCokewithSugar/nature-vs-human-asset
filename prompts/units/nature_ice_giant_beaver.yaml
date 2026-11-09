@@ -1,0 +1,17 @@
+id: nature_ice_giant_beaver
+display_name: 巨河狸
+sheet: {tab: 生物, name: 巨河狸 - Giant Beaver}
+faction: nature
+era: ice_age
+size_class: small
+canvas: 32
+template_id: bear
+habitat: land
+seed: 6501
+description: >-
+  giant beaver Castoroides, large rounded rodent with dense dark brown fur, big orange front teeth, small ears, long narrow scaly tail
+animations:
+  - name: walk
+    action: waddling forward on short legs, tail dragging, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: false}

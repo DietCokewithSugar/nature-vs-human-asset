@@ -1,0 +1,17 @@
+id: nature_ice_moa
+display_name: 恐鸟
+sheet: {tab: 生物, name: 恐鸟 - Moa}
+faction: nature
+era: ice_age
+size_class: medium
+canvas: 32
+template_id: custom
+habitat: land
+seed: 6301
+description: >-
+  giant moa bird, very tall flightless bird with a long neck, small head with a short pointed beak, shaggy brown-grey hair-like feathers covering a round body, thick strong legs, no wings visible
+animations:
+  - name: walk
+    action: striding forward on its long legs, neck bobbing, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: false}

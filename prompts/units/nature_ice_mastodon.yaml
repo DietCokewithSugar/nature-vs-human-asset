@@ -1,0 +1,17 @@
+id: nature_ice_mastodon
+display_name: 美洲乳齿象
+sheet: {tab: 生物, name: 美洲乳齿象 - American Mastodon}
+faction: nature
+era: ice_age
+size_class: large
+canvas: 64
+template_id: horse
+habitat: land
+seed: 6701
+description: >-
+  American mastodon, long low heavy body with shorter shaggy reddish-brown hair, flat low head without a dome, long nearly straight forward-pointing ivory tusks, thick legs, trunk hanging down
+animations:
+  - name: walk
+    action: slow heavy walk, trunk swaying
+    frames: 6
+handedit: {kind: lunge, heavy: true}

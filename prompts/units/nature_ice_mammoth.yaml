@@ -21,3 +21,4 @@ attack_keys:
   anticipation: rearing back with its head raised high, trunk curled up and long curved tusks lifted, weight on the hind legs, facing {facing}
   strike: driving its head down and forward {facing}, long curved tusks stabbing forward, front legs braced wide; the tusks keep the same curved shape
   motion: heavy goring thrust with the tusks
+handedit: {kind: lunge, heavy: true}

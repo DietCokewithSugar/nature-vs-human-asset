@@ -1,0 +1,17 @@
+id: nature_ice_porcupine
+display_name: 北美巨豪猪
+sheet: {tab: 生物, name: 北美巨豪猪 - Pleistocene North American Porcupine}
+faction: nature
+era: ice_age
+size_class: small
+canvas: 32
+template_id: dog
+habitat: land
+seed: 6601
+description: >-
+  large North American porcupine, round body covered in long pale-tipped dark quills, small dark face with a blunt nose, short legs
+animations:
+  - name: walk
+    action: waddling forward, quills swaying, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: false}

@@ -1,0 +1,17 @@
+id: nature_ice_bumblebee
+display_name: 原生熊蜂
+sheet: {tab: 生物, name: 原生熊峰 - Bumblebees}
+faction: nature
+era: ice_age
+size_class: micro
+canvas: 32
+template_id: custom
+habitat: air
+seed: 6101
+description: >-
+  two large fuzzy ice age bumblebees flying side by side, very round fluffy black and golden-yellow bodies with a white tail tip, short translucent wings
+animations:
+  - name: walk
+    action: flying forward together, wings buzzing rapidly, bobbing slightly
+    frames: 6
+handedit: {kind: swarm, heavy: false}

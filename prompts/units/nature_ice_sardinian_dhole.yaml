@@ -1,0 +1,17 @@
+id: nature_ice_sardinian_dhole
+display_name: 萨丁岛豺
+sheet: {tab: 生物, name: 萨丁岛豺 - Sardinian dhole}
+faction: nature
+era: ice_age
+size_class: medium
+canvas: 32
+template_id: dog
+habitat: land
+seed: 7001
+description: >-
+  Sardinian dhole Cynotherium, small slender wild dog with a reddish-brown coat, paler throat, large rounded ears, bushy dark-tipped tail
+animations:
+  - name: walk
+    action: trotting forward, tail level, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: false}

@@ -1,0 +1,17 @@
+id: nature_ice_woolly_rhino
+display_name: 披毛犀
+sheet: {tab: 生物, name: 披毛犀 - Woolly Rhinoceros}
+faction: nature
+era: ice_age
+size_class: large
+canvas: 64
+template_id: horse
+habitat: land
+seed: 6801
+description: >-
+  woolly rhinoceros, stocky heavy body with a shoulder hump and thick shaggy reddish-brown fur, two horns on the snout with a very long flattened front horn, small eyes, short thick legs
+animations:
+  - name: walk
+    action: heavy plodding walk, head low, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: true}

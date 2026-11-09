@@ -18,16 +18,14 @@ mirror_map:
 # then set e.g. `palette: palettes/endesga-32.hex` and re-run postprocess.py.
 palette: null
 
-# Animations every unit gets unless its YAML overrides (same name) or sets
-# `skip: true`. "rest" is not generated: the game plays idle slowly with a Zzz
-# icon (art direction doc). Hit flash is code, too.
+# Animations generated with PixelLab for every unit unless its YAML overrides
+# (same name) or sets `skip: true`. Attack and death are AI hand-edited from
+# the base poses (scripts/handedit.py), so they are not generated here.
+# "rest" is not generated either: the game plays idle slowly with a Zzz icon.
 default_animations:
   - name: idle
     action: standing in place, gentle breathing, slight body bob, seamless loop
     frames: 4
   - name: walk
     action: walking forward in a seamless looping walk cycle, legs alternating clearly, body facing the same direction throughout
-    frames: 6
-  - name: attack
-    action: lunging forward to attack, then returning to the starting pose
     frames: 6

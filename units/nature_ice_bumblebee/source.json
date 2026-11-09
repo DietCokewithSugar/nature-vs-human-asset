@@ -1,0 +1,33 @@
+{
+  "id": "nature_ice_bumblebee",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 4.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 6101,
+      "character_id": "39d5112d-9155-4c0e-904c-1e1b06558660"
+    },
+    {
+      "seed": 6102,
+      "character_id": "0676b8b6-4b84-4046-922d-2c9a2ee3752c"
+    }
+  ],
+  "create_request": {
+    "description": "two large fuzzy ice age bumblebees flying side by side, very round fluffy black and golden-yellow bodies with a white tail tip, short translucent wings",
+    "view": "low top-down",
+    "template_id": "custom",
+    "outline": "single color black outline",
+    "detail": "medium detail",
+    "no_background": true,
+    "seed": 6101,
+    "name": "nature_ice_bumblebee",
+    "image_size": {
+      "width": 32,
+      "height": 32
+    }
+  },
+  "updated": "2026-11-09"
+}

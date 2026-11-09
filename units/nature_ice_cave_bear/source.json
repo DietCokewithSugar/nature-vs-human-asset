@@ -1,0 +1,37 @@
+{
+  "id": "nature_ice_cave_bear",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 6.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 7402,
+      "character_id": "84259a53-2ec0-41c3-b9b8-4f8392b8fb3b"
+    },
+    {
+      "seed": 7401,
+      "character_id": "a6982178-f884-471c-8d25-d0384c14afe8"
+    },
+    {
+      "seed": 7403,
+      "character_id": "c4f60508-7ab9-4ef2-b203-b78406118e93"
+    }
+  ],
+  "create_request": {
+    "description": "cave bear Ursus spelaeus, huge heavy dark brown bear with thick fur, steep domed forehead, massive shoulders, short tail",
+    "view": "low top-down",
+    "template_id": "bear",
+    "outline": "single color black outline",
+    "detail": "medium detail",
+    "no_background": true,
+    "seed": 7401,
+    "name": "nature_ice_cave_bear",
+    "image_size": {
+      "width": 64,
+      "height": 64
+    }
+  },
+  "updated": "2026-11-09"
+}

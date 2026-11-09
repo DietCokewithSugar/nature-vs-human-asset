@@ -10,11 +10,11 @@ export const DIR_ARROW: Record<Dir, string> = {
   south: "↓", "south-east": "↘", east: "→", "north-east": "↗",
   north: "↑", "north-west": "↖", west: "←", "south-west": "↙",
 };
-export type AnimName = "idle" | "walk" | "attack" | "rest" | "rotation";
+export type AnimName = "idle" | "walk" | "attack" | "rest" | "death" | "rotation";
 export const ANIM_LABEL: Record<AnimName, string> = {
-  idle: "待机", walk: "行走", attack: "攻击", rest: "休息", rotation: "静态",
+  idle: "待机", walk: "行走", attack: "攻击", rest: "休息", death: "死亡", rotation: "静态",
 };
-export const SIZE_LABEL: Record<string, string> = { micro: "微型", small: "小型", medium: "中型", large: "大型" };
+export const SIZE_LABEL: Record<string, string> = { micro: "微型", small: "小型", medium: "中型", medium_large: "中大型", large: "大型" };
 export const FACTION_LABEL: Record<string, string> = { nature: "自然", human: "人类" };
 export const ERA_LABEL: Record<string, string> = { ice_age: "冰河时代", modern: "现代" };
 
@@ -39,7 +39,7 @@ export interface Unit {
   mirrored: Record<string, string>;
   provenance: Record<string, string | number | null>;
   yaml: string;
-  files: { png: string; atlas: string; normal?: string };
+  files: { png: string; atlas: string; normal?: string; candidates?: string };
   variants: Record<string, string>;
 }
 export interface Species { row: number; name: string; era: string; type: string; unitId: string | null }
@@ -103,13 +103,14 @@ export const ATTACK_LABEL: Record<AttackVersion, string> = {
 export const ATTACK_NOTE: Record<AttackVersion, string> = {
   attack: "PixelLab v3 按文字一次生成，匀速播放",
   attackkf: "先用 Pixen 编辑出「蓄力」和「出击」两个关键姿势，再由 v3 补中间帧，按蓄力-出击-停顿-收招重排节奏",
-  attackhand: "在 PixelLab 原图上逐像素改出关键姿势（aseprite-ai-artist 的文本网格方法 + 攻击规则），只改了右、右下两个方向",
+  attackhand: "在 PixelLab 原图上逐像素改出关键姿势（aseprite-ai-artist 的文本网格方法 + 攻击规则），5 个方向，不消耗生成次数（当前默认）",
 };
 
 export interface Resolved { key: string; frames: string[]; fallback: boolean }
 export function resolve(atlas: Atlas, anim: AnimName, dir: Dir, attack: AttackVersion = "attack"): Resolved {
   const order: string[] = anim === "rest" ? ["idle", "rotation"]
-    : anim === "attack" ? [attack, "attack", "idle", "rotation"] : [anim, "idle", "rotation"];
+    : anim === "death" ? ["death", "rotation"]
+    : anim === "attack" ? [attack, "attackhand", "attackkf", "attack", "idle", "rotation"] : [anim, "idle", "rotation"];
   for (const a of order) {
     const f = atlas.animations[`${a}_${dir}`];
     if (f?.length) return { key: a, frames: f, fallback: a !== order[0] };
@@ -121,9 +122,15 @@ export function resolve(atlas: Atlas, anim: AnimName, dir: Dir, attack: AttackVe
  *  behaviour). With it on, authored variant timings are used, and the original
  *  attack is re-timed around its hit frame: held wind-up, fast strike, held hit. */
 export function durations(atlas: Atlas, key: string, dir: Dir, frames: string[], fps: number, feel: boolean): number[] {
+  return timed(atlas, key, dir, frames, fps, feel);
+}
+
+const AUTHORED = new Set(["attackkf", "attackhand", "death"]);
+function timed(atlas: Atlas, key: string, dir: Dir, frames: string[], fps: number, feel: boolean): number[] {
   const even = frames.map(() => 1000 / fps);
+  if (key === "death") return frames.map((f) => atlas.frames[f]?.duration ?? 1000 / fps);   // always authored
   if (!feel) return even;
-  if (key === "attackkf" || key === "attackhand") return frames.map((f) => atlas.frames[f]?.duration ?? 1000 / fps);
+  if (AUTHORED.has(key)) return frames.map((f) => atlas.frames[f]?.duration ?? 1000 / fps);
   if (key === "attack") {
     const h = hitIndex(atlas, key, dir, frames.length);
     return frames.map((_, i) => (i === 0 ? 120 : i < h - 1 ? 110 : i === h - 1 ? 50 : i === h ? 160 : i === frames.length - 1 ? 120 : 90));
@@ -149,15 +156,16 @@ export function frameAt(durs: number[], t: number, loop = true): number {
 
 /** Viewer preferences shared by the gallery, unit page and lab. */
 export const prefs = (() => {
-  const def = { attack: "attack" as AttackVersion, feel: true };
+  const def = { attack: "attackhand" as AttackVersion, feel: true };
   try {
-    return { ...def, ...JSON.parse(localStorage.getItem("nvh-prefs") || "{}") } as typeof def;
+    // key bumped: the default attack version changed to the hand-edited one
+    return { ...def, ...JSON.parse(localStorage.getItem("nvh-prefs-v2") || "{}") } as typeof def;
   } catch {
     return def;
   }
 })();
 export function savePrefs() {
-  try { localStorage.setItem("nvh-prefs", JSON.stringify(prefs)); } catch { /* private mode */ }
+  try { localStorage.setItem("nvh-prefs-v2", JSON.stringify(prefs)); } catch { /* private mode */ }
 }
 
 export function fpsFor(u: Unit, anim: AnimName): number {
@@ -168,6 +176,7 @@ export function fpsFor(u: Unit, anim: AnimName): number {
 /** "已生成" means a real animation exists, not only the fallback. */
 export function hasAnim(u: Unit, anim: AnimName): boolean {
   if (anim === "rest") return u.generatedAnimations.includes("idle");
+  if (anim === "attack") return ["attack", "attackhand", "attackkf"].some((a) => u.generatedAnimations.includes(a));
   return u.generatedAnimations.includes(anim);
 }
 

@@ -1,0 +1,33 @@
+{
+  "id": "nature_ice_cave_hyena",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 4.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 7302,
+      "character_id": "ebf8ac2b-acd6-4a19-aa30-aa26bbe753fe"
+    },
+    {
+      "seed": 7301,
+      "character_id": "9facb4b2-1382-48eb-bf77-85b4c7a7d37d"
+    }
+  ],
+  "create_request": {
+    "description": "cave hyena Crocuta spelaea, sloping back with high shoulders, sandy coat with dark spots, thick powerful neck and jaws, rounded ears, short tail",
+    "view": "low top-down",
+    "template_id": "dog",
+    "outline": "single color black outline",
+    "detail": "medium detail",
+    "no_background": true,
+    "seed": 7301,
+    "name": "nature_ice_cave_hyena",
+    "image_size": {
+      "width": 32,
+      "height": 32
+    }
+  },
+  "updated": "2026-11-09"
+}

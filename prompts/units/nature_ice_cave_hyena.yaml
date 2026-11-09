@@ -1,0 +1,17 @@
+id: nature_ice_cave_hyena
+display_name: 冰河斑鬣狗
+sheet: {tab: 生物, name: 冰河斑鬣狗 - Cave hyena}
+faction: nature
+era: ice_age
+size_class: medium
+canvas: 32
+template_id: dog
+habitat: land
+seed: 7301
+description: >-
+  cave hyena Crocuta spelaea, sloping back with high shoulders, sandy coat with dark spots, thick powerful neck and jaws, rounded ears, short tail
+animations:
+  - name: walk
+    action: loping walk with a sloping back, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: false}

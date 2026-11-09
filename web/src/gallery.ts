@@ -133,7 +133,7 @@ export function renderGallery(root: HTMLElement, m: Manifest): () => void {
       c.note.textContent = note;
     });
   }
-  seg(animTabs, (["idle", "walk", "attack", "rest"] as AnimName[]).map((a) => [a, ANIM_LABEL[a]]),
+  seg(animTabs, (["idle", "walk", "attack", "rest", "death"] as AnimName[]).map((a) => [a, ANIM_LABEL[a]]),
     () => state.anim, (v) => (state.anim = v as AnimName));
   seg(dirPad, DIRS.map((d) => [d, DIR_ARROW[d]]), () => state.dir, (v) => (state.dir = v as Dir));
   dirPad.querySelectorAll("button").forEach((b, i) => b.setAttribute("title", DIR_LABEL[DIRS[i]]));
@@ -141,7 +141,7 @@ export function renderGallery(root: HTMLElement, m: Manifest): () => void {
   seg(filterSeg, [["all", "全部"], ["done", "已生成"], ["todo", "待生成"]], () => state.filter,
     (v) => (state.filter = v as typeof state.filter));
   seg(attackSeg, (Object.keys(ATTACK_LABEL) as AttackVersion[]).map((a) => [a, ATTACK_LABEL[a]]),
-    () => prefs.attack, (v) => { prefs.attack = v as AttackVersion; savePrefs(); if (state.anim !== "attack") state.anim = "attack"; seg(animTabs, (["idle", "walk", "attack", "rest"] as AnimName[]).map((a) => [a, ANIM_LABEL[a]]), () => state.anim, (x) => (state.anim = x as AnimName)); });
+    () => prefs.attack, (v) => { prefs.attack = v as AttackVersion; savePrefs(); if (state.anim !== "attack") state.anim = "attack"; seg(animTabs, (["idle", "walk", "attack", "rest", "death"] as AnimName[]).map((a) => [a, ANIM_LABEL[a]]), () => state.anim, (x) => (state.anim = x as AnimName)); });
   feelBox.checked = prefs.feel;
   feelBox.addEventListener("change", () => { prefs.feel = feelBox.checked; savePrefs(); });
   renderTodo();

@@ -1,0 +1,17 @@
+id: nature_ice_giant_salamander
+display_name: 大鲵
+sheet: {tab: 生物, name: 大鲵 - Andrias}
+faction: nature
+era: ice_age
+size_class: medium
+canvas: 32
+template_id: custom
+habitat: land
+seed: 7601
+description: >-
+  giant salamander Andrias, flat broad head with tiny eyes, wrinkly mottled brown-grey skin, short stubby legs, long flat paddle tail
+animations:
+  - name: walk
+    action: slow crawling walk, body and tail undulating, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: false}

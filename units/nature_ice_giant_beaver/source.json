@@ -1,0 +1,33 @@
+{
+  "id": "nature_ice_giant_beaver",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 4.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 6502,
+      "character_id": "38780d99-f536-40ad-a79c-0b9e2de3ed56"
+    },
+    {
+      "seed": 6501,
+      "character_id": "b8d0e4bc-8022-4b3e-bbdb-11e37cfd8c1a"
+    }
+  ],
+  "create_request": {
+    "description": "giant beaver Castoroides, large rounded rodent with dense dark brown fur, big orange front teeth, small ears, long narrow scaly tail",
+    "view": "low top-down",
+    "template_id": "bear",
+    "outline": "single color black outline",
+    "detail": "medium detail",
+    "no_background": true,
+    "seed": 6501,
+    "name": "nature_ice_giant_beaver",
+    "image_size": {
+      "width": 32,
+      "height": 32
+    }
+  },
+  "updated": "2026-11-09"
+}

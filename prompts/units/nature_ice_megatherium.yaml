@@ -1,0 +1,17 @@
+id: nature_ice_megatherium
+display_name: 草原大地懒
+sheet: {tab: 生物, name: 草原大地懒 - Megatherium}
+faction: nature
+era: ice_age
+size_class: large
+canvas: 64
+template_id: bear
+habitat: land
+seed: 6201
+description: >-
+  giant ground sloth Megatherium, massive shaggy brown body, small head with a short snout, long curved claws on the front feet, thick heavy tail, walking on all fours on the sides of its feet
+animations:
+  - name: walk
+    action: slow heavy lumbering walk on all fours, claws curled, body swaying
+    frames: 6
+handedit: {kind: lunge, heavy: true}

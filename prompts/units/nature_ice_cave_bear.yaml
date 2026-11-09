@@ -1,0 +1,17 @@
+id: nature_ice_cave_bear
+display_name: 洞熊
+sheet: {tab: 生物, name: 洞熊 - Ursus spelaeus}
+faction: nature
+era: ice_age
+size_class: large
+canvas: 64
+template_id: bear
+habitat: land
+seed: 7401
+description: >-
+  cave bear Ursus spelaeus, huge heavy dark brown bear with thick fur, steep domed forehead, massive shoulders, short tail
+animations:
+  - name: walk
+    action: heavy rolling walk on all fours, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: true}

@@ -5,11 +5,12 @@ as a palette-indexed character grid, edited as text / with select-and-move
 style operations, and written back. No Aseprite needed - the canvas is a PNG.
 
   python scripts/handedit.py dump <png> [out.png]      grid text + zoomed coordinate view
-  python scripts/handedit.py build <unit_id>            run prompts/handedit/<unit_id>.py
+  python scripts/handedit.py build <unit_id> [...]      attack + death for the 5 drawn directions
 
-A recipe (prompts/handedit/<unit>.py) defines  DIRS = {dir: [frame_spec, ...]}
-where each frame_spec is (ms, [ops...]) applied to a fresh copy of the base
-pose, plus  HIT = {dir: index}.  Ops (see Frame) are listed below.
+Selections (head, front legs) are found automatically from the silhouette; the
+unit YAML's `handedit: {kind: lunge|swarm, heavy, mag}` sets the style. An
+optional prompts/handedit/<unit>.py (DIRS = {dir: [(ms, [ops])]}, HIT = {dir: i})
+overrides individual directions with hand-tuned selections.
 """
 import importlib.util
 import json
@@ -231,43 +232,6 @@ def base_frame(uid, d, factor=2):
     return Frame(c)
 
 
-def build(uid):
-    spec = importlib.util.spec_from_file_location("recipe", ROOT / "prompts" / "handedit" / f"{uid}.py")
-    rec = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(rec)
-    for d, frames in rec.DIRS.items():
-        out = ROOT / "units" / uid / "variants" / "attackhand" / d
-        out.mkdir(parents=True, exist_ok=True)
-        for old in out.glob("*.png"):
-            old.unlink()
-        base = base_frame(uid, d)
-        seq = []
-        for i, (ms, ops) in enumerate(frames):
-            f = base.copy()
-            for op in ops:
-                op(f)
-            f.im.save(out / f"frame_{i:02d}.png")
-            seq.append({"file": f"frame_{i:02d}.png", "ms": ms})
-        (out / "sequence.json").write_text(json.dumps(
-            {"frames": seq, "hit": rec.HIT[d], "method": "AI hand-edited (text-grid method)"}, indent=1) + "\n")
-        print(uid, d, len(seq), "frames")
-    src = ROOT / "units" / uid / "source.json"
-    rec_ = json.loads(src.read_text())
-    rec_.setdefault("variants", {})["attackhand"] = {
-        "method": "AI hand-edited: select-and-move / squash-stretch / smear edits on the PixelLab base pose, "
-                  "text-grid method from aseprite-ai-artist (MIT), timing from its rules/44",
-        "recipe": f"prompts/handedit/{uid}.py", "directions": list(rec.DIRS), "generations": 0}
-    src.write_text(json.dumps(rec_, indent=2, ensure_ascii=False) + "\n")
-
-
-if __name__ == "__main__":
-    cmd = sys.argv[1]
-    if cmd == "dump":
-        dump(sys.argv[2], sys.argv[3] if len(sys.argv) > 3 else None)
-    elif cmd == "build":
-        build(sys.argv[2])
-
-
 # ---------------------------------------------------------------- recipes
 def _r(rect, pad):
     return tuple(v + pad for v in rect)
@@ -364,3 +328,265 @@ def swarm_attack(fx, fy, pad=16, wing=(223, 239, 255, 255)):
         (120, []),
     ]
     return frames, 4
+
+# ---------------------------------------------------------------- v2: automatic recipes
+import numpy as np
+import yaml
+
+DRAWN = ["south", "south-east", "east", "north-east", "north"]
+FACE = {"south": (0, 1), "south-east": (0.7071, 0.7071), "east": (1, 0), "north-east": (0.7071, -0.7071), "north": (0, -1)}
+
+
+def scale2x(a):
+    """EPX/Scale2x on an RGBA array: doubles size while keeping edges crisp."""
+    h, w, _ = a.shape
+    p = np.pad(a, ((1, 1), (1, 1), (0, 0)), mode="edge")
+    A, B, C, D, E = p[:-2, 1:-1], p[1:-1, :-2], p[1:-1, 2:], p[2:, 1:-1], p[1:-1, 1:-1]
+    eq = lambda x, y: np.all(x == y, axis=2)
+    out = np.zeros((h * 2, w * 2, 4), a.dtype)
+    c_bd, c_ac = ~eq(B, C) & ~eq(A, D), None
+    e0 = np.where((eq(A, B) & c_bd)[..., None], A, E)
+    e1 = np.where((eq(A, C) & c_bd)[..., None], C, E)
+    e2 = np.where((eq(D, B) & c_bd)[..., None], B, E)
+    e3 = np.where((eq(D, C) & c_bd)[..., None], D, E)
+    out[0::2, 0::2], out[0::2, 1::2], out[1::2, 0::2], out[1::2, 1::2] = e0, e1, e2, e3
+    return out
+
+
+def rotsprite(im, angle, pivot):
+    """Rotate pixel art without mush (RotSprite-lite): Scale2x x3, rotate with
+    nearest sampling, sample back down at block centres."""
+    if abs(angle) < 0.5:
+        return im
+    a = np.array(im.convert("RGBA"))
+    for _ in range(3):
+        a = scale2x(a)
+    big = Image.fromarray(a, "RGBA").rotate(angle, resample=Image.NEAREST, center=(pivot[0] * 8, pivot[1] * 8))
+    small = np.array(big)[4::8, 4::8]
+    return Image.fromarray(np.ascontiguousarray(small), "RGBA")
+
+
+def regions(frame, d):
+    """Automatic selections for a direction: the head (front/upper part of the
+    silhouette, moved like an Aseprite selection) and the front legs."""
+    bb = frame.im.getbbox()
+    x0, y0, x1, y1 = bb
+    W, H = x1 - x0, y1 - y0
+    fx, fy = FACE[d]
+    if abs(fx) > 0.1:   # side / diagonal views: the head leads along x
+        xc = int(x0 + W * 0.5)
+        head = (xc, y0, x1, int(y0 + H * 0.7))
+        front = (int(xc - W * 0.08), int(y0 + H * 0.7), x1, y1)
+    elif fy > 0:        # facing the viewer: head is the upper middle, over the body
+        head = (int(x0 + W * 0.12), y0, int(x1 - W * 0.12), int(y0 + H * 0.58))
+        front = (x0, int(y0 + H * 0.72), x1, y1)
+    else:               # facing away: head is the top of the silhouette
+        head = (int(x0 + W * 0.15), y0, int(x1 - W * 0.15), int(y0 + H * 0.45))
+        front = None
+    return head, front
+
+
+def bright_colors(frame, rect, n=2):
+    a = np.array(frame.im.crop(rect))
+    px = a[a[..., 3] > 127][:, :3]
+    if not len(px):
+        return [(246, 245, 236, 255)]
+    lum = px @ np.array([0.3, 0.59, 0.11])
+    order = np.argsort(-lum)
+    out = []
+    for i in order:
+        c = tuple(int(v) for v in px[i]) + (255,)
+        if c not in out:
+            out.append(c)
+        if len(out) == n:
+            break
+    return out
+
+
+def auto_lunge(frame, d, mag, heavy):
+    """Lunge attack for any direction (aseprite-ai-artist rules/44 phases).
+    Side views lunge along x; the front view rears back then fills toward the
+    camera (grows + drops), the back view dips then stretches away (up)."""
+    fx, fy = FACE[d]
+    head, front = regions(frame, d)
+    m = mag
+    hold = 280 if heavy else 200
+    hit_ms = 170 if heavy else 140
+    cols = bright_colors(frame, head)
+    hx0, hy0, hx1, hy1 = head
+
+    def pose(head_d=(0, 0), front_d=(0, 0), sx=1.0, sy=1.0, lean=0, off=(0, 0), smear=False, center=False):
+        def op(f):
+            if head_d != (0, 0):
+                f.move(head, round(head_d[0]), round(head_d[1]))
+            if front and front_d != (0, 0):
+                f.move(front, round(front_d[0]), round(front_d[1]))
+            f.fill_holes()
+            f.cleanup()
+            if lean:
+                bb = f.im.getbbox()
+                if bb:
+                    f.shear(bb[1], bb[1] + (bb[3] - bb[1]) * 2 // 3, round(lean), 0)
+            if (sx, sy) != (1.0, 1.0):
+                f.scale(sx, sy, anchor="center" if center else "bottom")
+            if off != (0, 0):
+                f.offset(round(off[0]), round(off[1]))
+            if smear:
+                if abs(fx) > 0.1:   # vertical arc just ahead of the head
+                    xa = hx1 + 2 * m + off[0]
+                    pts = [(xa, hy0 + (hy1 - hy0) * 0.25 + off[1]), (xa + 2 * m, (hy0 + hy1) / 2 + off[1]),
+                           (xa, hy1 + off[1] + fy * 2 * m)]
+                else:               # horizontal arc in front of / behind the head
+                    ya = (hy1 + 2 * m if fy > 0 else hy0 - 2 * m) + off[1]
+                    pts = [(hx0 + (hx1 - hx0) * 0.2, ya), ((hx0 + hx1) / 2, ya + fy * 2 * m), (hx1 - (hx1 - hx0) * 0.2, ya)]
+                f.smear(pts, cols, width=1)
+        return [op]
+
+    if abs(fx) > 0.1:
+        st = 0.14 * abs(fx)
+        frames = [
+            (100, []),
+            (110, pose((-fx * m, -m), (0, 0), 1.03, 0.95, -fx * m, (-fx * m, -fy * m))),
+            (hold, pose((-fx * 2 * m, -2 * m), (0, 0), 1.05, 0.9, -fx * 2 * m, (-fx * 2 * m, -fy * 2 * m))),
+            (50, pose((fx * 3 * m, fy * 2 * m + 1), (fx * 2 * m, fy * m), 1 + st, 0.98 + 0.06 * abs(fy), 0, (fx * 3 * m, fy * 3 * m), True)),
+            (hit_ms, pose((fx * 4 * m, fy * 2 * m + 2), (fx * 3 * m, fy * 2 * m), 1 + st * 0.7, 1.0, fx * m, (fx * 4 * m, fy * 4 * m))),
+            (80, pose((fx * 3 * m, fy * m + 1), (fx * 2 * m, fy * m), 1.04, 1.0, 0, (fx * 3 * m, fy * 3 * m))),
+            (110 if heavy else 90, pose((fx * m, 0), (0, 0), 1.0, 1.0, 0, (fx * m, fy * m))),
+            (50, pose((0, 0), (0, 0), 1.0, 1.0, 0, (-fx, -fy))),
+            (120, []),
+        ]
+    elif fy > 0:   # facing the viewer
+        frames = [
+            (100, []),
+            (110, pose((0, -m), (0, 0), 0.98, 0.95, 0, (0, -m))),
+            (hold, pose((0, -2 * m), (0, 0), 0.96, 0.9, 0, (0, -2 * m))),
+            (50, pose((0, 3 * m), (0, m), 1.1, 1.08, 0, (0, 2 * m), False, True)),   # no smear: it would cross the face
+            (hit_ms, pose((0, 3 * m), (0, 2 * m), 1.08, 1.06, 0, (0, 3 * m), False, True)),
+            (80, pose((0, 2 * m), (0, m), 1.04, 1.03, 0, (0, 2 * m), False, True)),
+            (110 if heavy else 90, pose((0, m), (0, 0), 1.0, 1.0, 0, (0, m))),
+            (50, pose((0, 0), (0, 0), 1.0, 1.0, 0, (0, -1))),
+            (120, []),
+        ]
+    else:          # facing away
+        frames = [
+            (100, []),
+            (110, pose((0, m), (0, 0), 1.02, 0.95, 0, (0, m))),
+            (hold, pose((0, 2 * m), (0, 0), 1.04, 0.9, 0, (0, 2 * m))),
+            (50, pose((0, -3 * m), (0, 0), 0.96, 1.1, 0, (0, -2 * m), True)),
+            (hit_ms, pose((0, -3 * m), (0, 0), 0.97, 1.06, 0, (0, -3 * m))),
+            (80, pose((0, -2 * m), (0, 0), 0.99, 1.03, 0, (0, -2 * m))),
+            (110 if heavy else 90, pose((0, -m), (0, 0), 1.0, 1.0, 0, (0, -m))),
+            (50, pose((0, 0), (0, 0), 1.0, 1.0, 0, (0, 1))),
+            (120, []),
+        ]
+    return frames, 4
+
+
+def auto_death(frame, d, mag, kind):
+    """Collapse: recoil, legs buckle (squash), tip over (clean rotation), bounce,
+    rest. The game fades the body out after the last frame."""
+    fx, fy = FACE[d]
+    m = mag
+    tilt = 1 if fx > 0.1 else -1   # tip backwards on side views, to the right otherwise
+
+    def pose(sx, sy, ang, off=(0, 0)):
+        def op(f):
+            if (sx, sy) != (1.0, 1.0):
+                f.scale(sx, sy)
+            bb = f.im.getbbox()
+            if bb and ang:
+                f.im = rotsprite(f.im, ang * tilt, ((bb[0] + bb[2]) / 2, bb[3] - 1))
+            if off != (0, 0):
+                f.offset(round(off[0]), round(off[1]))
+            f.cleanup()
+        return [op]
+
+    if kind == "swarm":   # bees drop out of the air and lie still
+        return [
+            (90, pose(1.0, 1.0, 0, (-fx * 2, -fy * 2 - 1))),
+            (100, pose(0.95, 0.95, 10, (0, 2))),
+            (90, pose(0.9, 0.85, 25, (0, 5))),
+            (80, pose(0.85, 0.7, 40, (0, 8))),
+            (70, pose(0.85, 0.62, 45, (0, 9))),
+            (500, pose(0.85, 0.6, 45, (0, 9))),
+        ]
+    back = (-fx * 2 * m, -fy * m)
+    return [
+        (90, pose(1.0, 1.0, 0, back)),                    # recoil from the killing blow
+        (110, pose(1.0, 0.95, 6, back)),                  # stagger
+        (100, pose(1.04, 0.85, 12, back)),                # legs buckle
+        (80, pose(1.1, 0.72, 18, back)),                  # collapse
+        (70, pose(1.16, 0.6, 22, (back[0], back[1] + 1))),  # hit the ground
+        (70, pose(1.12, 0.65, 20, back)),                 # one bounce
+        (500, pose(1.15, 0.62, 22, (back[0], back[1] + 1))),  # rest; the game fades it out
+    ]
+
+
+def unit_cfg(uid):
+    return yaml.safe_load((ROOT / "prompts" / "units" / f"{uid}.yaml").read_text())
+
+
+def mag_for(cfg):
+    base = {32: 1.0, 48: 1.3, 64: 1.6}.get(cfg.get("canvas", 32), cfg.get("canvas", 32) / 32)
+    return base * (1.2 if cfg.get("size_class") in ("small", "micro") else 1.0)
+
+
+def write_seq(out, base, frames, hit, method):
+    out.mkdir(parents=True, exist_ok=True)
+    for old in out.glob("*.png"):
+        old.unlink()
+    seq = []
+    for i, (ms, ops) in enumerate(frames):
+        f = base.copy()
+        for op in ops:
+            op(f)
+        f.im.save(out / f"frame_{i:02d}.png")
+        seq.append({"file": f"frame_{i:02d}.png", "ms": ms})
+    (out / "sequence.json").write_text(json.dumps({"frames": seq, "hit": hit, "method": method}, indent=1) + "\n")
+
+
+def build(uid, dirs=None):
+    cfg = unit_cfg(uid)
+    he = cfg.get("handedit") or {}
+    kind, heavy = he.get("kind", "lunge"), bool(he.get("heavy", False))
+    mag = he.get("mag", mag_for(cfg))
+    over = {}
+    rp = ROOT / "prompts" / "handedit" / f"{uid}.py"
+    if rp.exists():   # hand-tuned selections for some directions
+        spec = importlib.util.spec_from_file_location("recipe", rp)
+        rec = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(rec)
+        over = {d: (rec.DIRS[d], rec.HIT[d]) for d in rec.DIRS}
+    done = []
+    for d in dirs or DRAWN:
+        base = base_frame(uid, d)
+        root = ROOT / "units" / uid / "variants"
+        if d in over:
+            frames, hit = over[d]
+        elif kind == "swarm":
+            frames, hit = swarm_attack(*FACE[d], pad=(base.w - base.w // 2) // 2)
+        else:
+            frames, hit = auto_lunge(base, d, mag, heavy)
+        write_seq(root / "attackhand" / d, base, frames, hit, "AI hand-edited attack (text-grid method)")
+        write_seq(root / "death" / d, base, auto_death(base, d, mag, kind), 0, "AI hand-edited death")
+        done.append(d)
+    src = ROOT / "units" / uid / "source.json"
+    rec_ = json.loads(src.read_text())
+    v = rec_.setdefault("variants", {})
+    v["attackhand"] = {
+        "method": "AI hand-edited: select-and-move / squash-stretch / smear edits on the PixelLab base pose, "
+                  "text-grid method from aseprite-ai-artist (MIT), timing from its rules/44",
+        "kind": kind, "heavy": heavy, "mag": mag, "directions": done,
+        "hand_tuned": sorted(over), "generations": 0}
+    v["death"] = {"method": "AI hand-edited collapse (squash + RotSprite-style tilt)", "directions": done, "generations": 0}
+    src.write_text(json.dumps(rec_, indent=2, ensure_ascii=False) + "\n")
+    print(uid, "attack+death:", ", ".join(done))
+
+
+if __name__ == "__main__":
+    cmd = sys.argv[1]
+    if cmd == "dump":
+        dump(sys.argv[2], sys.argv[3] if len(sys.argv) > 3 else None)
+    elif cmd == "build":
+        for u in sys.argv[2:]:
+            build(u)

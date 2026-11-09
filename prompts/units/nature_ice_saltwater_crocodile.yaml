@@ -1,0 +1,17 @@
+id: nature_ice_saltwater_crocodile
+display_name: 湾鳄
+sheet: {tab: 生物, name: 湾鳄 - Crocodylus porosus}
+faction: nature
+era: ice_age
+size_class: large
+canvas: 64
+template_id: custom
+habitat: land
+seed: 7501
+description: >-
+  saltwater crocodile, long low armoured body with olive-grey scaly hide and rows of bony scutes, long powerful tail, long broad snout with visible teeth, short sprawling legs
+animations:
+  - name: walk
+    action: low crawling walk, legs sprawling, tail swaying side to side, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: true}

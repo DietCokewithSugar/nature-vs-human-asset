@@ -1,0 +1,29 @@
+{
+  "id": "nature_ice_giant_salamander",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 2.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 7601,
+      "character_id": "e964c9fa-fb47-481a-aa8e-8dee68c4dec5"
+    }
+  ],
+  "create_request": {
+    "description": "giant salamander Andrias, flat broad head with tiny eyes, wrinkly mottled brown-grey skin, short stubby legs, long flat paddle tail",
+    "view": "low top-down",
+    "template_id": "custom",
+    "outline": "single color black outline",
+    "detail": "medium detail",
+    "no_background": true,
+    "seed": 7601,
+    "name": "nature_ice_giant_salamander",
+    "image_size": {
+      "width": 32,
+      "height": 32
+    }
+  },
+  "updated": "2026-11-09"
+}

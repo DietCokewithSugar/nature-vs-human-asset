@@ -1,0 +1,29 @@
+{
+  "id": "nature_ice_balearic_goat",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 2.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 6401,
+      "character_id": "88447aaa-9f18-42a5-a4fb-575ba390908a"
+    }
+  ],
+  "create_request": {
+    "description": "Balearic cave goat Myotragus, small stocky goat with short legs, short backward-curving horns, forward-facing eyes, coarse brown coat with a paler belly",
+    "view": "low top-down",
+    "template_id": "horse",
+    "outline": "single color black outline",
+    "detail": "medium detail",
+    "no_background": true,
+    "seed": 6401,
+    "name": "nature_ice_balearic_goat",
+    "image_size": {
+      "width": 32,
+      "height": 32
+    }
+  },
+  "updated": "2026-11-09"
+}

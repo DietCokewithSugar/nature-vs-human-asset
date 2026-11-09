@@ -1,0 +1,17 @@
+id: nature_ice_protocyon
+display_name: 穴居古狐
+sheet: {tab: 生物, name: 穴居古狐 - Protocyon}
+faction: nature
+era: ice_age
+size_class: medium
+canvas: 32
+template_id: dog
+habitat: land
+seed: 7101
+description: >-
+  Protocyon, large fox-like wild canid with a grey-brown coat, long legs, long pointed muzzle, large pointed ears, bushy tail
+animations:
+  - name: walk
+    action: trotting forward, tail level, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: false}

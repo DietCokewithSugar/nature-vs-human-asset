@@ -1,0 +1,17 @@
+id: nature_ice_marsh_frog
+display_name: 湖侧褶蛙
+sheet: {tab: 生物, name: 湖侧褶蛙 - Pelophylax}
+faction: nature
+era: ice_age
+size_class: small
+canvas: 32
+template_id: custom
+habitat: land
+seed: 7701
+description: >-
+  marsh frog Pelophylax, olive-green frog with dark spots, pale green stripe down the back, golden eyes, long folded hind legs
+animations:
+  - name: walk
+    action: hopping forward in small hops, seamless loop
+    frames: 6
+handedit: {kind: lunge, heavy: false}

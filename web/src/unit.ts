@@ -73,7 +73,7 @@ export function renderUnit(root: HTMLElement, m: Manifest, id: string): () => vo
     }, l)));
   }
   function drawAnims() {
-    animSeg.replaceChildren(...(["idle", "walk", "attack", "rest"] as AnimName[]).map((a) =>
+    animSeg.replaceChildren(...(["idle", "walk", "attack", "rest", "death"] as AnimName[]).map((a) =>
       el("button", {
         type: "button", class: `${st.anim === a ? "on" : ""} ${hasAnim(u!, a) ? "" : "missing"}`,
         title: hasAnim(u!, a) ? "" : "尚未生成，显示替代帧",
@@ -171,8 +171,11 @@ export function renderUnit(root: HTMLElement, m: Manifest, id: string): () => vo
         cfgTable([
           ["工具", u.provenance.tool], ["授权", u.provenance.license], ["创建", u.provenance.created],
           ["更新", u.provenance.updated], ["PixelLab 角色 ID", u.provenance.characterId],
-          ["候选数", u.provenance.candidates || "—"], ["消耗生成次数", u.provenance.generationsSpent],
+          ["候选数", u.provenance.candidates || "—"], ["选中种子", u.prompt.seed], ["消耗生成次数", u.provenance.generationsSpent],
         ]),
+        u.files.candidates ? el("details", { class: "cands" },
+          el("summary", {}, "候选对比（每行一个候选的 8 个方向，选中的种子见上表；不满意可以告诉我换一个）"),
+          el("img", { src: u.files.candidates, class: "cand-img", alt: "candidates" })) : null,
         el("div", { class: "downloads" },
           el("a", { class: "button", href: u.files.png, download: `${u.id}.png` }, "精灵图集 PNG"),
           el("a", { class: "button", href: u.files.atlas, download: `${u.id}.json` }, "图集 JSON"),
