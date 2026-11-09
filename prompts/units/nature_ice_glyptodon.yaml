@@ -19,7 +19,7 @@ handedit: {kind: lunge, heavy: true}
 # HD cave hyena, design seeded by an open-licence image from the species' Wikipedia page.
 pipeline: pro
 style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
-reference: null
+reference: null   # well-known species; Wikimedia rate-limited this run, so text + hyena style
 reference_license: null
 attack_keys:
   anticipation: pulling its armoured head back under the shell rim with its legs braced, facing {facing}
