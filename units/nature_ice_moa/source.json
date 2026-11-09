@@ -3,7 +3,7 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 32.0,
+  "generations_spent": 34.0,
   "animations": {
     "idle": {
       "directions": {
@@ -95,15 +95,25 @@
       "generations": 0
     },
     "attackcombo": {
-      "generations": 2,
+      "generations": 4,
       "directions": [
         "east",
-        "south"
+        "north",
+        "north-east",
+        "south",
+        "south-east"
       ],
       "method": "AI key poses (Pixen edit) + AI hand-edit cleanup/tweens/timing",
       "keys": {
         "anticipation": "pulling its long neck back into an S-curve with the head raised high, facing {facing}",
         "strike": "jabbing its head and beak sharply forward {facing} with the neck fully extended, pecking hard"
+      },
+      "key_sources": {
+        "south": "hand warp (fallback: AI key poses broke the bird body (arms, fangs, back view))",
+        "east": "pixen",
+        "south-east": "hand warp (fallback: AI key poses broke the bird body (arms, fangs, back view))",
+        "north-east": "hand warp (fallback: AI key poses broke the bird body (arms, fangs, back view))",
+        "north": "hand warp (fallback: AI key poses turn the back view sideways)"
       }
     }
   }

@@ -263,27 +263,29 @@ def run_dir(api, uid, cfg, d, out, rebuild=False, reseed=0, key_source="pixen"):
     return spent
 
 
-def north_fallback(uid):
-    """Back view: copy the hand warp attack (AI key poses come out sideways)."""
+def north_fallback(uid, d="north", why="AI key poses turn the back view sideways"):
+    """Copy the hand warp attack into the combo set for one direction (default: the
+    back view, where AI key poses come out sideways)."""
     u = ROOT / "units" / uid
-    src_dir, dst = u / "variants" / "attackhand" / "north", u / "variants" / "attackcombo" / "north"
+    src_dir, dst = u / "variants" / "attackhand" / d, u / "variants" / "attackcombo" / d
     if not src_dir.exists():
-        print(uid, "north: no hand attack to copy (run handedit.py build first)")
+        print(uid, d, ": no hand attack to copy (run handedit.py build first)")
         return
     shutil.rmtree(dst, ignore_errors=True)
     shutil.copytree(src_dir, dst)
     seq = dst / "sequence.json"
     meta = json.loads(seq.read_text()) if seq.exists() else {}
-    meta["method"] = "hand warp attack (fallback: AI key poses turn the back view sideways)"
+    meta["method"] = f"hand warp attack (fallback: {why})"
     seq.write_text(json.dumps(meta, indent=1) + "\n")
     srcp = u / "source.json"
     s = json.loads(srcp.read_text())
     v = s.setdefault("variants", {}).setdefault("attackcombo", {"generations": 0, "directions": []})
-    v["directions"] = sorted(set(v.get("directions", [])) | {"north"})
-    v["key_sources"] = {"south": "pixen", "east": "pixen", "south-east": "v3", "north-east": "v3",
-                        "north": "hand warp (fallback)", **{k: x for k, x in (v.get("key_sources") or {}).items() if k != "north"}}
+    v["directions"] = sorted(set(v.get("directions", [])) | {d})
+    ks = {"south": "pixen", "east": "pixen", "south-east": "v3", "north-east": "v3", **(v.get("key_sources") or {})}
+    ks[d] = f"hand warp (fallback: {why})"
+    v["key_sources"] = ks
     srcp.write_text(json.dumps(s, indent=2, ensure_ascii=False) + "\n")
-    print(uid, "north: hand warp fallback")
+    print(uid, d, ": hand warp fallback")
 
 
 def main():
@@ -299,10 +301,17 @@ def main():
     a = ap.parse_args()
     if a.dirs == "auto":
         plan = {"pixen": ["south", "east"], "v3": ["south-east", "north-east"]}
+        unit_cfg = yaml.safe_load((ROOT / "prompts/units" / f"{a.unit}.yaml").read_text())
+        hand = unit_cfg.get("attack_hand_dirs") or []   # directions where AI keys failed for this body
+        plan = {k: [d for d in v if d not in hand] for k, v in plan.items()}
         for keys, dirs in plan.items():
+            if not dirs:
+                continue
             sub = [x for x in sys.argv[1:] if not x.startswith("--dirs") and not x.startswith("--keys")]
             subprocess.run([sys.executable, __file__, *sub, "--dirs", ",".join(dirs), "--keys", keys], check=True)
         north_fallback(a.unit)
+        for d in hand:
+            north_fallback(a.unit, d, unit_cfg.get("attack_hand_why", "AI key poses failed for this body"))
         return
     style = yaml.safe_load((ROOT / "prompts/style.yaml").read_text())
     cfg = {**style, **yaml.safe_load((ROOT / "prompts/units" / f"{a.unit}.yaml").read_text())}

@@ -10,7 +10,7 @@
   },
   {
    "file": "frame_02.png",
-   "ms": 220
+   "ms": 200
   },
   {
    "file": "frame_03.png",
@@ -18,7 +18,7 @@
   },
   {
    "file": "frame_04.png",
-   "ms": 150
+   "ms": 140
   },
   {
    "file": "frame_05.png",
@@ -26,7 +26,7 @@
   },
   {
    "file": "frame_06.png",
-   "ms": 100
+   "ms": 90
   },
   {
    "file": "frame_07.png",
@@ -38,5 +38,5 @@
   }
  ],
  "hit": 4,
- "method": "combo: AI key poses (Pixen edit) + hand palette lock, alignment, smear, warp tweens, timing"
+ "method": "hand warp attack (fallback: AI key poses broke the bird body (arms, fangs, back view))"
 }

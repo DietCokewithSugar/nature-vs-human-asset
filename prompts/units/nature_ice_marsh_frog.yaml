@@ -21,6 +21,8 @@ pipeline: pro
 style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
 reference: null   # living species: text + hyena style is enough
 reference_license: null
+attack_hand_dirs: [south-east, north-east]
+attack_hand_why: AI key poses drew an impact burst / washed-out colours on the diagonals
 attack_keys:
   anticipation: crouching low with its hind legs bunched under the body, facing {facing}
   strike: leaping forward {facing} with hind legs fully extended and front legs reaching out, mouth open

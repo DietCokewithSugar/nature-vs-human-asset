@@ -45,6 +45,14 @@
               "Idle/animations/walk/north/frame_004.png",
               "Idle/animations/walk/north/frame_005.png"
             ],
+            "east": [
+              "Idle/animations/walk/east/frame_000.png",
+              "Idle/animations/walk/east/frame_001.png",
+              "Idle/animations/walk/east/frame_002.png",
+              "Idle/animations/walk/east/frame_003.png",
+              "Idle/animations/walk/east/frame_004.png",
+              "Idle/animations/walk/east/frame_005.png"
+            ],
             "north-east": [
               "Idle/animations/walk/north-east/frame_000.png",
               "Idle/animations/walk/north-east/frame_001.png",
@@ -99,5 +107,5 @@
     }
   ],
   "export_version": "3.1",
-  "export_date": "2026-11-09T15:10:41.355040"
+  "export_date": "2026-11-09T15:12:59.573283"
 }
