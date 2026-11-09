@@ -3,8 +3,28 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 20.0,
-  "animations": {},
+  "generations_spent": 21.0,
+  "animations": {
+    "idle": {
+      "directions": {
+        "south": "done"
+      },
+      "request": {
+        "action": "hovering in place, wings beating rapidly, tail flicking",
+        "action_by_dir": null,
+        "frames": 4
+      },
+      "animation_group_id": "c9246ef1-8e9a-41c5-8b9e-f8d172ee0d98"
+    },
+    "walk": {
+      "directions": {},
+      "request": {
+        "action": "darting forward while hovering, wings a rapid blur, seamless loop",
+        "action_by_dir": null,
+        "frames": 6
+      }
+    }
+  },
   "candidates": [
     {
       "seed": 9011,
