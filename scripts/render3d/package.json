@@ -1,0 +1,6 @@
+{
+  "name": "render3d",
+  "private": true,
+  "description": "Headless three.js renderer: rigged GLB -> 8-direction frames for pixelize.py",
+  "dependencies": { "three": "0.169.0" }
+}
