@@ -1,0 +1,39 @@
+{
+  "id": "nature_modern_african_forest_elephant",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 20.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 9121,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "6f3f1927-b537-404c-8279-868fbb806dcb",
+      "picked": true
+    },
+    {
+      "seed": 9122,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "79bc12cd-ee67-4389-b4ab-014f7bcf120c",
+      "picked": false
+    }
+  ],
+  "create_request": {
+    "description": "African forest elephant Loxodonta cyclotis, compact elephant with grey wrinkled skin, rounded oval ears, straight slender tusks pointing downward, long trunk, thick pillar legs",
+    "view": "low top-down",
+    "template_id": "horse",
+    "no_background": true,
+    "seed": 9121,
+    "image_size": {
+      "width": 64,
+      "height": 64
+    },
+    "method": "create_with_style",
+    "style_character_id": "bd11b67a-1165-495e-96cf-b40403d116cb"
+  },
+  "updated": "2026-11-09",
+  "character_id": "6f3f1927-b537-404c-8279-868fbb806dcb"
+}

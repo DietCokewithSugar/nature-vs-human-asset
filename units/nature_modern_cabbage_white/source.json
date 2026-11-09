@@ -1,0 +1,39 @@
+{
+  "id": "nature_modern_cabbage_white",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 20.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 9002,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "5329fcfa-d982-4510-ad90-5b3465b5baad",
+      "picked": false
+    },
+    {
+      "seed": 9001,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "5e75881e-e82b-4999-92aa-86c60ac57d3f",
+      "picked": true
+    }
+  ],
+  "create_request": {
+    "description": "two cabbage white butterflies Pieris rapae fluttering together, white wings with small black wing-tip patches and one or two black spots, slender black-grey bodies, thin antennae",
+    "view": "low top-down",
+    "template_id": "custom",
+    "no_background": true,
+    "seed": 9001,
+    "image_size": {
+      "width": 64,
+      "height": 64
+    },
+    "method": "create_with_style",
+    "style_character_id": "bd11b67a-1165-495e-96cf-b40403d116cb"
+  },
+  "updated": "2026-11-09",
+  "character_id": "5e75881e-e82b-4999-92aa-86c60ac57d3f"
+}

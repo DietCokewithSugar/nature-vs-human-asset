@@ -1,0 +1,39 @@
+{
+  "id": "nature_modern_cheetah",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 20.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 9161,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "569e7ea3-f5ef-4f9d-a700-c2dd588bc064",
+      "picked": true
+    },
+    {
+      "seed": 9162,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "a115c3f3-9c1e-4e2a-9b50-db379e5c84d8",
+      "picked": false
+    }
+  ],
+  "create_request": {
+    "description": "cheetah Acinonyx jubatus, slender long-legged cat with golden-tan coat covered in solid round black spots, black tear marks running from the eyes to the mouth, small round head, deep chest, long spotted tail with black rings",
+    "view": "low top-down",
+    "template_id": "cat",
+    "no_background": true,
+    "seed": 9161,
+    "image_size": {
+      "width": 64,
+      "height": 64
+    },
+    "method": "create_with_style",
+    "style_character_id": "bd11b67a-1165-495e-96cf-b40403d116cb"
+  },
+  "updated": "2026-11-09",
+  "character_id": "569e7ea3-f5ef-4f9d-a700-c2dd588bc064"
+}
