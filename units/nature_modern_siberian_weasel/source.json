@@ -1,0 +1,30 @@
+{
+  "id": "nature_modern_siberian_weasel",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 10.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 9141,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "3b6f7df3-d1fb-4f26-9e73-534be5ffcc51"
+    }
+  ],
+  "create_request": {
+    "description": "Siberian weasel Mustela sibirica, very long slender weasel with short legs, golden-orange-brown fur, dark mask around the eyes, white chin, long bushy tail",
+    "view": "low top-down",
+    "template_id": "cat",
+    "no_background": true,
+    "seed": 9141,
+    "image_size": {
+      "width": 64,
+      "height": 64
+    },
+    "method": "create_with_style",
+    "style_character_id": "bd11b67a-1165-495e-96cf-b40403d116cb"
+  },
+  "updated": "2026-11-09"
+}

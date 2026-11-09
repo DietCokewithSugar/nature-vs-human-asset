@@ -3,7 +3,7 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 21.0,
+  "generations_spent": 22.0,
   "animations": {
     "idle": {
       "directions": {
@@ -17,12 +17,15 @@
       "animation_group_id": "fda6c8f3-f68a-4278-b10b-979713578dc7"
     },
     "walk": {
-      "directions": {},
+      "directions": {
+        "south": "done"
+      },
       "request": {
         "action": "trotting forward on short legs, spines bobbing, seamless loop",
         "action_by_dir": null,
         "frames": 6
-      }
+      },
+      "animation_group_id": "95939777-cb25-46a8-9f52-62af19824e0e"
     }
   },
   "candidates": [
