@@ -3,13 +3,15 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 24.0,
+  "generations_spent": 26.0,
   "animations": {
     "idle": {
       "directions": {
         "south": "done",
         "south-east": "done",
-        "east": "done"
+        "east": "done",
+        "north-east": "done",
+        "north": "done"
       },
       "request": {
         "action": "standing in place, gentle breathing, slight body bob, seamless loop",
