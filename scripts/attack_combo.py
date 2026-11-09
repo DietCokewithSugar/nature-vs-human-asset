@@ -95,6 +95,14 @@ def palette_lock(im, base, keep_far=28.0, max_patch=0.03, face=None):
     edge = np.zeros(m.shape, bool)
     pad_m = np.pad(m, 1)
     edge[:] = ~(pad_m[:-2, 1:-1] & pad_m[2:, 1:-1] & pad_m[1:-1, :-2] & pad_m[1:-1, 2:])
+    # only mouth-like new colours survive: red/pink flesh or near-white teeth
+    lab_all = np.zeros(m.shape + (3,))
+    lab_all[m] = srgb_to_lab(a[..., :3][m].astype(float))
+    L, A, Bb = lab_all[..., 0], lab_all[..., 1], lab_all[..., 2]
+    hue = np.degrees(np.arctan2(Bb, A)) % 360
+    chroma = np.hypot(A, Bb)
+    mouthlike = ((chroma > 20) & ((hue < 40) | (hue > 330))) | ((L > 80) & (chroma < 15))
+    far_px &= mouthlike
     for patch in _patches(far_px):
         if len(patch) <= limit and not any(edge[y, x] for y, x in patch):
             for y, x in patch:
@@ -102,6 +110,28 @@ def palette_lock(im, base, keep_far=28.0, max_patch=0.03, face=None):
     rgb = np.zeros(m.shape + (3,), np.uint8)
     rgb[m] = nearest[inv.ravel()].astype(np.uint8)
     rgb[keep] = a[..., :3][keep]
+    # the style is a single dark outline: silhouette pixels take the base's outline colour
+    lum = pal @ np.array([0.299, 0.587, 0.114])
+    dark = pal[lum.argmin()].astype(np.uint8)
+    rgb_lum = rgb.astype(float) @ np.array([0.299, 0.587, 0.114])
+    rgb[edge & m & (rgb_lum > lum.min() + 60)] = dark
+    # AI keys sometimes add a light rim just inside the outline: a light pixel in the
+    # second ring whose deeper neighbours are clearly darker takes their colour
+    # (tusks/teeth survive: their deeper neighbours are light too)
+    inner = m & ~edge
+    p2 = np.pad(inner, 1)
+    ring2 = inner & ~(p2[:-2, 1:-1] & p2[2:, 1:-1] & p2[1:-1, :-2] & p2[1:-1, 2:])
+    deep = inner & ~ring2
+    rgb_lum = rgb.astype(float) @ np.array([0.299, 0.587, 0.114])
+    h, w = m.shape
+    for y, x in zip(*np.nonzero(ring2)):
+        nb = [(y + dy, x + dx) for dy in (-2, -1, 0, 1, 2) for dx in (-2, -1, 0, 1, 2)
+              if 0 <= y + dy < h and 0 <= x + dx < w and deep[y + dy, x + dx]]
+        if len(nb) < 3:
+            continue
+        nl = np.array([rgb_lum[q] for q in nb])
+        if rgb_lum[y, x] > np.median(nl) + 60:
+            rgb[y, x] = rgb[nb[int(np.argsort(nl)[len(nl) // 2])]]
     out = np.zeros_like(a)
     out[..., :3] = rgb
     out[..., 3] = np.where(m, 255, 0)

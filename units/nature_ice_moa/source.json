@@ -3,7 +3,7 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 30.0,
+  "generations_spent": 32.0,
   "animations": {
     "idle": {
       "directions": {
@@ -93,6 +93,18 @@
         "north"
       ],
       "generations": 0
+    },
+    "attackcombo": {
+      "generations": 2,
+      "directions": [
+        "east",
+        "south"
+      ],
+      "method": "AI key poses (Pixen edit) + AI hand-edit cleanup/tweens/timing",
+      "keys": {
+        "anticipation": "pulling its long neck back into an S-curve with the head raised high, facing {facing}",
+        "strike": "jabbing its head and beak sharply forward {facing} with the neck fully extended, pecking hard"
+      }
     }
   }
 }

@@ -3,7 +3,7 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 36.0,
+  "generations_spent": 38.0,
   "animations": {
     "idle": {
       "directions": {
@@ -95,7 +95,7 @@
       "generations": 0
     },
     "attackcombo": {
-      "generations": 6,
+      "generations": 8,
       "directions": [
         "east",
         "north",

@@ -3,12 +3,11 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 34.0,
+  "generations_spent": 36.0,
   "animations": {
     "idle": {
       "directions": {
         "south": "done",
-        "east": "done",
         "south-east": "done",
         "north-east": "done",
         "north": "done"
@@ -24,7 +23,6 @@
       "directions": {
         "south": "done",
         "south-east": "done",
-        "east": "done",
         "north-east": "done",
         "north": "done"
       },
@@ -95,15 +93,25 @@
       "generations": 0
     },
     "attackcombo": {
-      "generations": 4,
+      "generations": 6,
       "directions": [
         "east",
-        "south"
+        "north",
+        "north-east",
+        "south",
+        "south-east"
       ],
       "method": "AI key poses (Pixen edit) + AI hand-edit cleanup/tweens/timing",
       "keys": {
         "anticipation": "lying low with its head drawn back and long jaws slightly open, facing {facing}",
         "strike": "lunging forward {facing} with its long jaws snapping wide open, body twisting"
+      },
+      "key_sources": {
+        "south": "pixen",
+        "east": "pixen",
+        "south-east": "v3",
+        "north-east": "v3",
+        "north": "hand warp (fallback)"
       }
     }
   }
