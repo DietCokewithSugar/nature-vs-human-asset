@@ -9,7 +9,8 @@
       "directions": {
         "south": "done",
         "south-east": "done",
-        "east": "done"
+        "east": "done",
+        "north-east": "done"
       },
       "request": {
         "action": "standing in place, gentle breathing, slight body bob, seamless loop",
