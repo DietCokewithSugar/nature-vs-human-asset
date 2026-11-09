@@ -1,0 +1,42 @@
+[
+ {
+  "tag": "hyena_64_v3_a",
+  "uid": "nature_ice_cave_hyena",
+  "size": 64,
+  "mode": "v3",
+  "character_id": "a2c72540-4c03-4192-a800-4d405312ecf5",
+  "generations": 3.0
+ },
+ {
+  "tag": "hyena_64_v3_b",
+  "uid": "nature_ice_cave_hyena",
+  "size": 64,
+  "mode": "v3",
+  "character_id": "6c453312-e2a6-41a7-83fe-fdc31c64f23e",
+  "generations": 3.0
+ },
+ {
+  "tag": "hyena_64_pro",
+  "uid": "nature_ice_cave_hyena",
+  "size": 64,
+  "mode": "pro",
+  "character_id": "c25877d3-6fe1-44a1-bd44-e8e36d24f571",
+  "generations": 11.0
+ },
+ {
+  "tag": "mammoth_128_v3_a",
+  "uid": "nature_ice_mammoth",
+  "size": 128,
+  "mode": "v3",
+  "character_id": "9c21e59f-e26d-4fd1-b7ab-e1a4705d4e74",
+  "generations": 6.0
+ },
+ {
+  "tag": "mammoth_128_v3_b",
+  "uid": "nature_ice_mammoth",
+  "size": 128,
+  "mode": "v3",
+  "character_id": "3265eb09-ed2a-4961-8922-b3d96daeb8d4",
+  "generations": 6.0
+ }
+]

@@ -1,0 +1,47 @@
+{
+  "group_id": "ce77c930-e12b-40c8-8c75-069dfd1e97e8",
+  "states": [
+    {
+      "character": {
+        "id": "3265eb09-ed2a-4961-8922-b3d96daeb8d4",
+        "name": "Idle",
+        "prompt": "woolly mammoth, shaggy reddish-brown long fur, long curved ivory tusks, small ears, trunk hanging down, huge heavy body, thick column legs",
+        "size": {
+          "width": 128,
+          "height": 128
+        },
+        "template_id": "horse",
+        "directions": 8,
+        "view": "low top-down",
+        "created_at": "2026-11-09T10:51:35.471908+00:00"
+      },
+      "folder": "Idle",
+      "frames": {
+        "rotations": {
+          "south": "Idle/rotations/south.png",
+          "south-east": "Idle/rotations/south-east.png",
+          "east": "Idle/rotations/east.png",
+          "north-east": "Idle/rotations/north-east.png",
+          "north": "Idle/rotations/north.png",
+          "north-west": "Idle/rotations/north-west.png",
+          "west": "Idle/rotations/west.png",
+          "south-west": "Idle/rotations/south-west.png"
+        },
+        "animations": {
+          "walk": {
+            "east": [
+              "Idle/animations/walk/east/frame_000.png",
+              "Idle/animations/walk/east/frame_001.png",
+              "Idle/animations/walk/east/frame_002.png",
+              "Idle/animations/walk/east/frame_003.png",
+              "Idle/animations/walk/east/frame_004.png",
+              "Idle/animations/walk/east/frame_005.png"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "export_version": "3.1",
+  "export_date": "2026-11-09T10:56:47.837655"
+}
