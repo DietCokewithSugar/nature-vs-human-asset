@@ -1,0 +1,39 @@
+{
+  "id": "nature_ice_saltwater_crocodile",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 20.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 7501,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "a447808d-10c0-4a10-90a3-912ffd904863",
+      "picked": true
+    },
+    {
+      "seed": 7502,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "dc166708-cd75-4193-a198-86445992d800",
+      "picked": false
+    }
+  ],
+  "create_request": {
+    "description": "saltwater crocodile, long low armoured body with olive-grey scaly hide and rows of bony scutes, long powerful tail, long broad snout with visible teeth, short sprawling legs",
+    "view": "low top-down",
+    "template_id": "custom",
+    "no_background": true,
+    "seed": 7501,
+    "image_size": {
+      "width": 64,
+      "height": 64
+    },
+    "method": "create_with_style",
+    "style_character_id": "bd11b67a-1165-495e-96cf-b40403d116cb"
+  },
+  "updated": "2026-11-09",
+  "character_id": "a447808d-10c0-4a10-90a3-912ffd904863"
+}

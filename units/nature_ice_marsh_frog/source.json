@@ -1,0 +1,39 @@
+{
+  "id": "nature_ice_marsh_frog",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 20.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 7701,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "f7ea2056-a77b-4ed8-8e6f-11cd837462f4",
+      "picked": false
+    },
+    {
+      "seed": 7702,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "cec77c50-5ad3-42f1-8316-2180850d18ad",
+      "picked": true
+    }
+  ],
+  "create_request": {
+    "description": "marsh frog Pelophylax ridibundus, olive-green frog with dark spots, pale green stripe down the back, golden eyes, long folded muscular hind legs",
+    "view": "low top-down",
+    "template_id": "custom",
+    "no_background": true,
+    "seed": 7701,
+    "image_size": {
+      "width": 64,
+      "height": 64
+    },
+    "method": "create_with_style",
+    "style_character_id": "bd11b67a-1165-495e-96cf-b40403d116cb"
+  },
+  "updated": "2026-11-09",
+  "character_id": "cec77c50-5ad3-42f1-8316-2180850d18ad"
+}

@@ -1,0 +1,63 @@
+{
+ "species": "草原大地懒 - Megatherium",
+ "wiki": "https://en.wikipedia.org/wiki/Megatherium",
+ "description_zh": "晚更新世南美洲巨型植食哺乳动物，体长可达6米，后肢粗壮具利爪，以树叶灌木为食。",
+ "images": [
+  {
+   "file": "00_Benjamin_Waterhouse_Hawkins_Pleistocene_Edentates_.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Benjamin_Waterhouse_Hawkins_-_Pleistocene_Edentates_of_Patagoni_-_PP331_-_Princeton_University_Art_Museum.jpg",
+   "license": "Public domain",
+   "author": "Benjamin Waterhouse Hawkins",
+   "size": [
+    3000,
+    1504
+   ]
+  },
+  {
+   "file": "01_La_terre_avant_le_d_luge_1863_M_gath_rium_restaur_.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:La_terre_avant_le_d%C3%A9luge,_1863_%22M%C3%A9gath%C3%A9rium_restaur%C3%A9%22._(4513818527).jpg",
+   "license": "CC BY 2.0",
+   "author": "Fondo Antiguo de la Biblioteca de la Universidad de Sevilla from Sevilla, España",
+   "size": [
+    3548,
+    3088
+   ]
+  },
+  {
+   "file": null,
+   "title": "File:Megaterio.JPG",
+   "license": "CC BY-SA 3.0",
+   "skipped": "share-alike / unclear licence"
+  },
+  {
+   "file": null,
+   "title": "File:Madrid MNCN-Megatherium americanum2.jpg",
+   "license": "CC BY-SA 3.0",
+   "skipped": "share-alike / unclear licence"
+  },
+  {
+   "file": null,
+   "title": "File:Megaterio cráneo.JPG",
+   "license": "CC BY-SA 3.0",
+   "skipped": "share-alike / unclear licence"
+  },
+  {
+   "file": null,
+   "title": "File:Megatherium cuvieri - right foot.JPG",
+   "license": "CC BY-SA 3.0",
+   "skipped": "share-alike / unclear licence"
+  },
+  {
+   "file": null,
+   "title": "File:Pleistocene SA.jpg",
+   "license": "CC BY-SA 3.0",
+   "skipped": "share-alike / unclear licence"
+  },
+  {
+   "file": null,
+   "title": "File:Pleistocene mammals of Chile.jpg",
+   "license": "CC BY-SA 4.0",
+   "skipped": "share-alike / unclear licence"
+  }
+ ]
+}

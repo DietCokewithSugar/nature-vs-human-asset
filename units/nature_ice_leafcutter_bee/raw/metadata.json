@@ -1,0 +1,101 @@
+{
+  "group_id": "873e2190-7174-4a8a-96f3-57c01275f1b6",
+  "states": [
+    {
+      "character": {
+        "id": "4b2219d5-8c09-4dda-ab4f-bc738f28db69",
+        "name": "Idle",
+        "prompt": "a small swarm of three Ice Age leafcutter bees flying close together, solitary bees with strong cutting mandibles, fuzzy black bodies with amber pollen hair under the belly, translucent wings, each bee carrying a tiny cut green leaf disc",
+        "size": {
+          "width": 64,
+          "height": 64
+        },
+        "template_id": "custom",
+        "directions": 8,
+        "view": "low top-down",
+        "created_at": "2026-11-09T13:33:45.541964+00:00"
+      },
+      "folder": "Idle",
+      "frames": {
+        "rotations": {
+          "south": "Idle/rotations/south.png",
+          "south-east": "Idle/rotations/south-east.png",
+          "east": "Idle/rotations/east.png",
+          "north-east": "Idle/rotations/north-east.png",
+          "north": "Idle/rotations/north.png",
+          "north-west": "Idle/rotations/north-west.png",
+          "west": "Idle/rotations/west.png",
+          "south-west": "Idle/rotations/south-west.png"
+        },
+        "animations": {
+          "walk": {
+            "south-east": [
+              "Idle/animations/walk/south-east/frame_000.png",
+              "Idle/animations/walk/south-east/frame_001.png",
+              "Idle/animations/walk/south-east/frame_002.png",
+              "Idle/animations/walk/south-east/frame_003.png"
+            ],
+            "north": [
+              "Idle/animations/walk/north/frame_000.png",
+              "Idle/animations/walk/north/frame_001.png",
+              "Idle/animations/walk/north/frame_002.png",
+              "Idle/animations/walk/north/frame_003.png"
+            ],
+            "north-east": [
+              "Idle/animations/walk/north-east/frame_000.png",
+              "Idle/animations/walk/north-east/frame_001.png",
+              "Idle/animations/walk/north-east/frame_002.png",
+              "Idle/animations/walk/north-east/frame_003.png"
+            ],
+            "east": [
+              "Idle/animations/walk/east/frame_000.png",
+              "Idle/animations/walk/east/frame_001.png",
+              "Idle/animations/walk/east/frame_002.png",
+              "Idle/animations/walk/east/frame_003.png"
+            ],
+            "south": [
+              "Idle/animations/walk/south/frame_000.png",
+              "Idle/animations/walk/south/frame_001.png",
+              "Idle/animations/walk/south/frame_002.png",
+              "Idle/animations/walk/south/frame_003.png"
+            ]
+          },
+          "idle": {
+            "north-east": [
+              "Idle/animations/idle/north-east/frame_000.png",
+              "Idle/animations/idle/north-east/frame_001.png",
+              "Idle/animations/idle/north-east/frame_002.png",
+              "Idle/animations/idle/north-east/frame_003.png"
+            ],
+            "south": [
+              "Idle/animations/idle/south/frame_000.png",
+              "Idle/animations/idle/south/frame_001.png",
+              "Idle/animations/idle/south/frame_002.png",
+              "Idle/animations/idle/south/frame_003.png"
+            ],
+            "south-east": [
+              "Idle/animations/idle/south-east/frame_000.png",
+              "Idle/animations/idle/south-east/frame_001.png",
+              "Idle/animations/idle/south-east/frame_002.png",
+              "Idle/animations/idle/south-east/frame_003.png"
+            ],
+            "north": [
+              "Idle/animations/idle/north/frame_000.png",
+              "Idle/animations/idle/north/frame_001.png",
+              "Idle/animations/idle/north/frame_002.png",
+              "Idle/animations/idle/north/frame_003.png"
+            ],
+            "east": [
+              "Idle/animations/idle/east/frame_000.png",
+              "Idle/animations/idle/east/frame_001.png",
+              "Idle/animations/idle/east/frame_002.png",
+              "Idle/animations/idle/east/frame_003.png"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "export_version": "3.1",
+  "export_date": "2026-11-09T13:40:56.895117"
+}
