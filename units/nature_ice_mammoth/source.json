@@ -3,7 +3,7 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab ToS (commercial use per plan)",
   "created": "2026-11-09",
-  "generations_spent": 22.0,
+  "generations_spent": 37.0,
   "animations": {
     "walk": {
       "directions": {
@@ -59,5 +59,31 @@
     },
     "name": "nature_ice_mammoth"
   },
-  "updated": "2026-11-09"
+  "updated": "2026-11-09",
+  "variants": {
+    "attackkf": {
+      "method": "PixelLab Pixen key poses + v3 interpolation",
+      "directions": [
+        "south",
+        "south-east",
+        "east",
+        "north-east",
+        "north"
+      ],
+      "keys": {
+        "anticipation": "rearing back with its head raised high, trunk curled up and long curved tusks lifted, weight on the hind legs, facing {facing}",
+        "strike": "driving its head down and forward {facing}, long curved tusks stabbing forward, front legs braced wide; the tusks keep the same curved shape",
+        "motion": "heavy goring thrust with the tusks"
+      }
+    },
+    "attackhand": {
+      "method": "AI hand-edited: select-and-move / squash-stretch / smear edits on the PixelLab base pose, text-grid method from aseprite-ai-artist (MIT), timing from its rules/44",
+      "recipe": "prompts/handedit/nature_ice_mammoth.py",
+      "directions": [
+        "east",
+        "south-east"
+      ],
+      "generations": 0
+    }
+  }
 }

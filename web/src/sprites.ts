@@ -1,5 +1,16 @@
 import type { Atlas } from "./data";
 
+/** Draw a frame centred on (cx, cy): frames of every size share their centre. */
+export function drawFrameAt(
+  ctx: CanvasRenderingContext2D, img: HTMLImageElement, atlas: Atlas, name: string,
+  cx: number, cy: number, scale: number,
+) {
+  const f = atlas.frames[name]?.frame;
+  if (!f) return;
+  ctx.imageSmoothingEnabled = false;
+  ctx.drawImage(img, f.x, f.y, f.w, f.h, Math.round(cx - (f.w * scale) / 2), Math.round(cy - (f.h * scale) / 2), f.w * scale, f.h * scale);
+}
+
 export function drawFrame(
   ctx: CanvasRenderingContext2D, img: HTMLImageElement, atlas: Atlas, name: string,
   dx: number, dy: number, scale: number,

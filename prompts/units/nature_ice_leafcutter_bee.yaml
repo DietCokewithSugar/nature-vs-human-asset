@@ -22,3 +22,7 @@ animations:
     action: the bees dart forward to sting, then pull back
     frames: 4
 habitat: air            # flies over water
+attack_keys:
+  anticipation: the three small separate bees pull back and bunch together tightly, abdomens curled forward with stingers ready, facing {facing}
+  strike: the three small separate bees dart forward {facing} in a tight line, stingers extended, wings blurred; they stay three small bees and never merge into one big bee
+  motion: fast darting sting

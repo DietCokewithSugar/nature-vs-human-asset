@@ -3,7 +3,7 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 22.0,
+  "generations_spent": 40.0,
   "animations": {
     "idle": {
       "directions": {
@@ -80,5 +80,39 @@
     }
   },
   "updated": "2026-11-09",
-  "character_id": "e9714c9a-d37c-445e-90eb-97f9748998c7"
+  "character_id": "e9714c9a-d37c-445e-90eb-97f9748998c7",
+  "variants": {
+    "attackkf": {
+      "method": "PixelLab Pixen key poses + v3 interpolation",
+      "directions": [
+        "south",
+        "south-east",
+        "east",
+        "north-east",
+        "north"
+      ],
+      "keys": {
+        "anticipation": "the three small separate bees pull back and bunch together tightly, abdomens curled forward with stingers ready, facing {facing}",
+        "strike": "the three small separate bees dart forward {facing} in a tight line, stingers extended, wings blurred; they stay three small bees and never merge into one big bee",
+        "motion": "fast darting sting"
+      },
+      "takes": [
+        {
+          "directions": [
+            "south"
+          ],
+          "reseed": 1
+        }
+      ]
+    },
+    "attackhand": {
+      "method": "AI hand-edited: select-and-move / squash-stretch / smear edits on the PixelLab base pose, text-grid method from aseprite-ai-artist (MIT), timing from its rules/44",
+      "recipe": "prompts/handedit/nature_ice_leafcutter_bee.py",
+      "directions": [
+        "east",
+        "south-east"
+      ],
+      "generations": 0
+    }
+  }
 }

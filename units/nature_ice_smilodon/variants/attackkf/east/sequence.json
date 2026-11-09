@@ -1,0 +1,51 @@
+{
+ "frames": [
+  {
+   "file": "base.png",
+   "ms": 100
+  },
+  {
+   "file": "anticipation.png",
+   "ms": 260
+  },
+  {
+   "file": "mid_0.png",
+   "ms": 50
+  },
+  {
+   "file": "mid_1.png",
+   "ms": 50
+  },
+  {
+   "file": "mid_2.png",
+   "ms": 50
+  },
+  {
+   "file": "mid_3.png",
+   "ms": 50
+  },
+  {
+   "file": "strike.png",
+   "ms": 150
+  },
+  {
+   "file": "mid_3.png",
+   "ms": 90
+  },
+  {
+   "file": "mid_1.png",
+   "ms": 90
+  },
+  {
+   "file": "base.png",
+   "ms": 140
+  }
+ ],
+ "hit": 6,
+ "generations": 3,
+ "prompts": {
+  "anticipation": "crouching low and coiled back on its hind legs, weight shifted back away from the target, head raised and jaws open wide showing the long sabre fangs, facing {facing}",
+  "strike": "pouncing forward {facing} at full extension, forelegs reaching out, head thrust forward biting down hard with the long sabre fangs",
+  "facing": "to the right"
+ }
+}

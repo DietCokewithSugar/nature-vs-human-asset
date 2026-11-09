@@ -23,3 +23,7 @@ animations:
         lunges forward away from the viewer with the head dipping down out of
         sight, then returns; only the back, ears and fur are visible, no face or mouth
     frames: 6
+attack_keys:
+  anticipation: crouching low and leaning back, ears flattened, body squashed and coiled, about to pounce, facing {facing}
+  strike: lunging forward {facing}, its round plump body leaning far forward and slightly stretched, mouth open biting with its front teeth; it has no tail and keeps its round pika shape and short ears
+  motion: quick pounce and bite

@@ -1,0 +1,51 @@
+{
+ "frames": [
+  {
+   "file": "base.png",
+   "ms": 100
+  },
+  {
+   "file": "anticipation.png",
+   "ms": 260
+  },
+  {
+   "file": "mid_0.png",
+   "ms": 50
+  },
+  {
+   "file": "mid_1.png",
+   "ms": 50
+  },
+  {
+   "file": "mid_2.png",
+   "ms": 50
+  },
+  {
+   "file": "mid_3.png",
+   "ms": 50
+  },
+  {
+   "file": "strike.png",
+   "ms": 150
+  },
+  {
+   "file": "mid_3.png",
+   "ms": 90
+  },
+  {
+   "file": "mid_1.png",
+   "ms": 90
+  },
+  {
+   "file": "base.png",
+   "ms": 140
+  }
+ ],
+ "hit": 6,
+ "generations": 3,
+ "prompts": {
+  "anticipation": "crouching low and leaning back, ears flattened, body squashed and coiled, about to pounce, facing {facing}",
+  "strike": "lunging forward {facing}, its round plump body leaning far forward and slightly stretched, mouth open biting with its front teeth; it has no tail and keeps its round pika shape and short ears",
+  "facing": "toward the viewer (downward on screen)"
+ }
+}

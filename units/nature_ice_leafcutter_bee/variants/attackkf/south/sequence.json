@@ -1,0 +1,51 @@
+{
+ "frames": [
+  {
+   "file": "base.png",
+   "ms": 100
+  },
+  {
+   "file": "anticipation.png",
+   "ms": 260
+  },
+  {
+   "file": "mid_0.png",
+   "ms": 50
+  },
+  {
+   "file": "mid_1.png",
+   "ms": 50
+  },
+  {
+   "file": "mid_2.png",
+   "ms": 50
+  },
+  {
+   "file": "mid_3.png",
+   "ms": 50
+  },
+  {
+   "file": "strike.png",
+   "ms": 150
+  },
+  {
+   "file": "mid_3.png",
+   "ms": 90
+  },
+  {
+   "file": "mid_1.png",
+   "ms": 90
+  },
+  {
+   "file": "base.png",
+   "ms": 140
+  }
+ ],
+ "hit": 6,
+ "generations": 3,
+ "prompts": {
+  "anticipation": "the three small separate bees pull back and bunch together tightly, abdomens curled forward with stingers ready, facing {facing}",
+  "strike": "the three small separate bees dart forward {facing} in a tight line, stingers extended, wings blurred; they stay three small bees and never merge into one big bee",
+  "facing": "toward the viewer (downward on screen)"
+ }
+}

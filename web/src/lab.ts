@@ -2,10 +2,12 @@ import {
   Application, Assets, Container, Graphics, Rectangle, Sprite, Text, Texture, TextureSource,
 } from "pixi.js";
 import {
-  ANIM_LABEL, DIRS, el, fpsFor, framesFor, loadSheet,
-  type AnimName, type Atlas, type Dir, type Manifest, type Unit,
+  ANIM_LABEL, ATTACK_LABEL, DIRS, durations, el, fpsFor, frameAt, hitIndex, loadSheet, prefs, resolve, savePrefs,
+  type AnimName, type Atlas, type AttackVersion, type Dir, type Manifest, type Unit,
 } from "./data";
 import { bodyWidth, drawFrame } from "./sprites";
+import { Lighting, WEATHER_LABEL, sky, type LightMode, type Weather } from "./lighting";
+import { WeatherLayer } from "./weather";
 
 TextureSource.defaultOptions.scaleMode = "nearest";
 
@@ -20,6 +22,7 @@ const FALLBACK_COLOR: Record<Terrain, number> = { snow: 0xdfe8f2, tundra: 0x7d7a
 type State = "idle" | "walk" | "attack" | "rest";
 type Mode = "auto" | State;
 const STATE_LABEL: Record<Mode, string> = { auto: "自动", idle: "待机", walk: "行走", attack: "攻击", rest: "休息" };
+const LIGHT_LABEL: Record<LightMode, string> = { lit: "法线光照", tint: "色调滤镜（旧）", off: "关闭" };
 
 const SIZE_STATS: Record<string, { hp: number; dmg: number; speed: number; radius: number }> = {
   micro: { hp: 30, dmg: 3, speed: 38, radius: 6 },
@@ -47,7 +50,7 @@ function buildTerrain(seed: number): Terrain[] {
         if (x < 1 || y < 1 || x >= W - 1 || y >= H - 1) continue;
         const d = Math.hypot((x - cx) * 0.9, y - cy) + (r() - 0.5) * 1.4;
         if (d > rad) continue;
-        // never let two different non-snow terrains touch: each cell needs one tileset
+        // two different non-snow terrains never touch: each cell needs one tileset
         let ok = true;
         for (let dy = -1; dy <= 1 && ok; dy++) for (let dx = -1; dx <= 1; dx++) {
           const n = at(x + dx, y + dy);
@@ -64,64 +67,111 @@ function buildTerrain(seed: number): Terrain[] {
   return v;
 }
 
-interface TileLookup { textures: Map<string, Texture>; ok: boolean }
+interface TileLookup { color: Map<string, Texture>; normal: Map<string, Texture> }
 async function loadTilesets(m: Manifest): Promise<Record<string, TileLookup>> {
   const out: Record<string, TileLookup> = {};
   for (const ts of m.tilesets) {
     try {
-      const [meta, tex] = await Promise.all([fetch(ts.json).then((r) => r.json()), Assets.load<Texture>(ts.png)]);
-      const map = new Map<string, Texture>();
+      const [meta, tex, ntex] = await Promise.all([
+        fetch(ts.json).then((r) => r.json()), Assets.load<Texture>(ts.png),
+        ts.normal ? Assets.load<Texture>(ts.normal) : Promise.resolve(null),
+      ]);
+      const color = new Map<string, Texture>(), normal = new Map<string, Texture>();
       for (const t of meta.tiles as { x: number; y: number; corners: Record<string, string> }[]) {
-        const c = t.corners;
-        const key = ["NW", "NE", "SW", "SE"].map((k) => (c[k] === "lower" ? "L" : "U")).join("");
-        if (!map.has(key)) map.set(key, new Texture({ source: tex.source, frame: new Rectangle(t.x, t.y, TILE, TILE) }));
+        const key = ["NW", "NE", "SW", "SE"].map((k) => (t.corners[k] === "lower" ? "L" : "U")).join("");
+        if (color.has(key)) continue;
+        const fr = new Rectangle(t.x, t.y, TILE, TILE);
+        color.set(key, new Texture({ source: tex.source, frame: fr }));
+        if (ntex) normal.set(key, new Texture({ source: ntex.source, frame: fr.clone() }));
       }
-      out[ts.id] = { textures: map, ok: true };
+      out[ts.id] = { color, normal };
     } catch {
-      out[ts.id] = { textures: new Map(), ok: false };
+      out[ts.id] = { color: new Map(), normal: new Map() };
     }
   }
   return out;
 }
 
-function drawTerrain(layer: Container, v: Terrain[], sets: Record<string, TileLookup>) {
+function drawTerrain(layer: Container, nlayer: Container, v: Terrain[], sets: Record<string, TileLookup>) {
   const W = MAP_W + 1;
-  const anySet = Object.values(sets).find((s) => s.ok);
+  const anySet = Object.values(sets).find((s) => s.color.size);
   for (let y = 0; y < MAP_H; y++)
     for (let x = 0; x < MAP_W; x++) {
       const c = [v[y * W + x], v[y * W + x + 1], v[(y + 1) * W + x], v[(y + 1) * W + x + 1]];
       const other = c.find((t) => t !== "snow") as Exclude<Terrain, "snow"> | undefined;
       const set = other ? sets[TERRAIN_SET[other]] : anySet;
       const key = c.map((t) => (other && t === other ? "L" : "U")).join("");
-      const tex = set?.textures.get(key);
+      const tex = set?.color.get(key);
       if (tex) {
         const s = new Sprite(tex);
         s.position.set(x * TILE, y * TILE);
         layer.addChild(s);
+        const nt = set?.normal.get(key);
+        if (nt) {
+          const ns = new Sprite(nt);
+          ns.position.set(x * TILE, y * TILE);
+          nlayer.addChild(ns);
+        }
       } else {
-        const g = new Graphics().rect(x * TILE, y * TILE, TILE, TILE).fill(FALLBACK_COLOR[other ?? "snow"]);
-        layer.addChild(g);
+        layer.addChild(new Graphics().rect(x * TILE, y * TILE, TILE, TILE).fill(FALLBACK_COLOR[other ?? "snow"]));
       }
     }
 }
 
+/** Centres of the mud patches = human camps; they get campfires at night. */
+function campSpots(v: Terrain[]): [number, number][] {
+  const W = MAP_W + 1;
+  const seen = new Set<number>();
+  const out: [number, number][] = [];
+  for (let i = 0; i < v.length; i++) {
+    if (v[i] !== "mud" || seen.has(i)) continue;
+    const stack = [i];
+    let sx = 0, sy = 0, n = 0;
+    seen.add(i);
+    while (stack.length) {
+      const j = stack.pop()!;
+      const x = j % W, y = Math.floor(j / W);
+      sx += x; sy += y; n++;
+      for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+        const k = (y + dy) * W + x + dx;
+        if (x + dx >= 0 && x + dx < W && v[k] === "mud" && !seen.has(k)) { seen.add(k); stack.push(k); }
+      }
+    }
+    if (n > 6) out.push([(sx / n) * TILE, (sy / n) * TILE]);
+  }
+  return out;
+}
+
 // ---------------------------------------------------------------- units
-interface UnitTex { unit: Unit; atlas: Atlas; frames: Map<string, Texture>; bodyW: number; thumb: string }
+interface UnitTex {
+  unit: Unit; atlas: Atlas; frames: Map<string, Texture>; nframes: Map<string, Texture>;
+  bodyW: number; thumb: string; foot: number;
+}
 
 async function loadUnitTex(u: Unit): Promise<UnitTex> {
-  const [sheet, base] = await Promise.all([loadSheet(u), Assets.load<Texture>(u.files.png)]);
-  const frames = new Map<string, Texture>();
+  const [sheet, base, nbase] = await Promise.all([
+    loadSheet(u), Assets.load<Texture>(u.files.png),
+    u.files.normal ? Assets.load<Texture>(u.files.normal) : Promise.resolve(null),
+  ]);
+  const frames = new Map<string, Texture>(), nframes = new Map<string, Texture>();
   for (const [name, f] of Object.entries(sheet.atlas.frames)) {
-    frames.set(name, new Texture({ source: base.source, frame: new Rectangle(f.frame.x, f.frame.y, f.frame.w, f.frame.h) }));
+    const r = new Rectangle(f.frame.x, f.frame.y, f.frame.w, f.frame.h);
+    frames.set(name, new Texture({ source: base.source, frame: r }));
+    if (nbase) nframes.set(name, new Texture({ source: nbase.source, frame: r.clone() }));
   }
   const rot = sheet.atlas.animations["rotation_south-east"]?.[0] ?? Object.keys(sheet.atlas.frames)[0];
   const c = document.createElement("canvas");
   const s = Math.max(1, Math.floor(48 / u.cell)) || 1;
   c.width = c.height = u.cell * s;
   drawFrame(c.getContext("2d")!, sheet.img, sheet.atlas, rot, 0, 0, s);
-  return { unit: u, atlas: sheet.atlas, frames, bodyW: bodyWidth(sheet.img, sheet.atlas, rot), thumb: c.toDataURL() };
+  const foot = sheet.atlas.meta.unit.foot ?? (u.anchor.y - 0.5) * u.cell;
+  return { unit: u, atlas: sheet.atlas, frames, nframes, bodyW: bodyWidth(sheet.img, sheet.atlas, rot), thumb: c.toDataURL(), foot };
 }
 
+const DIRV: Record<Dir, [number, number]> = {
+  south: [0, 1], "south-east": [0.7071, 0.7071], east: [1, 0], "north-east": [0.7071, -0.7071],
+  north: [0, -1], "north-west": [-0.7071, -0.7071], west: [-1, 0], "south-west": [-0.7071, 0.7071],
+};
 function dirFromVec(dx: number, dy: number): Dir {
   const order: Dir[] = ["east", "south-east", "south", "south-west", "west", "north-west", "north", "north-east"];
   const i = Math.round(Math.atan2(dy, dx) / (Math.PI / 4));
@@ -137,10 +187,16 @@ function sleepPeriod(u: Unit): "night" | "day" | "random" {
 }
 
 interface Ent {
-  ut: UnitTex; root: Container; sprite: Sprite; ring: Graphics; hp: Graphics; zzz: Sprite;
-  x: number; y: number; dir: Dir; state: State; force: Mode; t: number; animT: number;
+  ut: UnitTex;
+  root: Container; sprite: Sprite; flashS: Sprite;          // colour pass
+  nsprite: Sprite;                                            // normal pass
+  fx: Container; ring: Graphics; hp: Graphics; zzz: Sprite;  // unlit overlay
+  x: number; y: number; dir: Dir; state: State; force: Mode; animT: number;
   tx: number; ty: number; wait: number; target: Ent | null; hpNow: number; hpMax: number;
   cooldown: number; flash: number; dead: number; restRoll: number;
+  atk: { t: number; hitDone: boolean } | null;   // one attack in progress (timing on)
+  freeze: number;                                  // hitstop
+  push: { x: number; y: number; t: number } | null;
 }
 
 export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => void> {
@@ -151,21 +207,42 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
   host.append(el("p", { class: "muted pad" }, "加载中…"));
 
   const app = new Application();
-  await app.init({ resizeTo: host, background: "#11151c", antialias: false, roundPixels: true, autoDensity: true, resolution: window.devicePixelRatio || 1 });
+  await app.init({
+    resizeTo: host, background: "#11151c", antialias: false, roundPixels: true, autoDensity: true,
+    resolution: window.devicePixelRatio || 1, preference: "webgl",
+  });
   host.replaceChildren(app.canvas);
 
+  // colour world + normal world are rendered off-screen and combined by the lighting quad
   const world = new Container();
   const ground = new Container();
   const actors = new Container();
   actors.sortableChildren = true;
-  const night = new Graphics().rect(0, 0, MAP_W * TILE, MAP_H * TILE).fill(0xffffff);
-  night.blendMode = "multiply";
-  world.addChild(ground, actors, night);
-  app.stage.addChild(world);
+  world.addChild(ground, actors);
+  const nworld = new Container();
+  const nground = new Container();
+  const nactors = new Container();
+  nactors.sortableChildren = true;
+  nworld.addChild(nground, nactors);
+  // unlit overlay in world space: rings, HP bars, Zzz, hit sparks, campfire flames
+  const fxWorld = new Container();
+  const fxUnder = new Container();
+  const fxOver = new Container();
+  fxOver.sortableChildren = true;
+  const sparks = new Graphics();
+  fxWorld.addChild(fxUnder, fxOver, sparks);
+
+  const lighting = new Lighting(app.renderer, app.screen.width, app.screen.height);
+  const weatherLayer = new WeatherLayer();
+  weatherLayer.resize(app.screen.width, app.screen.height);
+  app.stage.addChild(lighting.quad, fxWorld, weatherLayer.view);
 
   const terrain = buildTerrain(7);
   const [sets, uts] = await Promise.all([loadTilesets(m), Promise.all(m.units.map(loadUnitTex))]);
-  drawTerrain(ground, terrain, sets);
+  drawTerrain(ground, nground, terrain, sets);
+  const camps = campSpots(terrain);
+  const flames = new Graphics();
+  fxUnder.addChild(flames);
 
   const zText = new Text({ text: "Zz", style: { fontFamily: "Silkscreen, monospace", fontSize: 24, fill: "#ffffff", stroke: { color: "#1b1f2a", width: 6 } } });
   const zTex = app.renderer.generateTexture(zText);
@@ -185,56 +262,69 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
   // ---------------- state / controls
   const ui = {
     mode: "auto" as Mode, spawnId: uts.find((x) => !x.unit.demo)?.unit.id ?? uts[0]?.unit.id,
-    hour: 10, autoTime: true, immortal: false, rings: true, bars: true, speed: 1,
-    selected: null as Ent | null, zoom: 2,
+    hour: 9.5, autoTime: true, immortal: false, rings: true, bars: true, speed: 1,
+    selected: null as Ent | null, zoom: 2, light: "lit" as LightMode, weather: "clear" as Weather, bands: false,
   };
   const ents: Ent[] = [];
+  let shake = 0;
 
   function spawn(ut: UnitTex, x: number, y: number): Ent | null {
     const u = ut.unit;
     for (let i = 0; i < 30 && !walkable(u, x, y); i++) { x += (Math.random() - 0.5) * 60; y += (Math.random() - 0.5) * 60; }
     if (!walkable(u, x, y)) return null;
     const st = SIZE_STATS[u.sizeClass] ?? SIZE_STATS.medium;
-    const rootC = new Container();
-    const rx = Math.max(5, ut.bodyW * 0.42), ry = Math.max(2, ut.bodyW * 0.16);
     const air = u.habitat === "air";
-    const shadow = new Graphics().ellipse(0, 0, air ? rx * 0.7 : rx, air ? ry * 0.7 : ry).fill({ color: 0x19192d, alpha: air ? 0.2 : 0.32 });
-    const ring = new Graphics().ellipse(0, 0, rx + 1, ry + 0.6).stroke({ color: u.faction === "nature" ? 0x63c74d : 0xf77622, width: 1 });
+    const rx = Math.max(5, ut.bodyW * 0.42), ry = Math.max(2, ut.bodyW * 0.16);
+    const rootC = new Container();
+    const shadow = new Graphics().ellipse(0, 0, air ? rx * 0.7 : rx, air ? ry * 0.7 : ry).fill({ color: 0x19192d, alpha: air ? 0.24 : 0.4 });
     const sprite = new Sprite();
-    sprite.anchor.set(u.anchor.x, u.anchor.y);
+    sprite.anchor.set(0.5);
+    const flashS = new Sprite();
+    flashS.anchor.set(0.5);
+    flashS.blendMode = "add";
+    flashS.visible = false;
+    rootC.addChild(shadow, sprite, flashS);
+    actors.addChild(rootC);
+    const nsprite = new Sprite();
+    nsprite.anchor.set(0.5);
+    nactors.addChild(nsprite);
+    const fx = new Container();
+    const ring = new Graphics().ellipse(0, 0, rx + 1, ry + 0.6).stroke({ color: u.faction === "nature" ? 0x63c74d : 0xf77622, width: 1 });
     const hp = new Graphics();
     const zzz = new Sprite(zTex);
     zzz.scale.set(0.25);
     zzz.visible = false;
-    rootC.addChild(shadow, ring, sprite, hp, zzz);
-    actors.addChild(rootC);
+    fx.addChild(ring, hp, zzz);
+    fxOver.addChild(fx);
     const e: Ent = {
-      ut, root: rootC, sprite, ring, hp, zzz, x, y, dir: DIRS[Math.floor(Math.random() * 8)], state: "idle",
-      force: "auto", t: 0, animT: Math.random() * 10, tx: x, ty: y, wait: Math.random() * 2,
-      target: null, hpNow: st.hp, hpMax: st.hp, cooldown: 0, flash: 0, dead: 0, restRoll: Math.random(),
+      ut, root: rootC, sprite, flashS, nsprite, fx, ring, hp, zzz, x, y,
+      dir: DIRS[Math.floor(Math.random() * 8)], state: "idle", force: "auto", animT: Math.random() * 3000,
+      tx: x, ty: y, wait: Math.random() * 2, target: null, hpNow: st.hp, hpMax: st.hp, cooldown: Math.random(),
+      flash: 0, dead: 0, restRoll: Math.random(), atk: null, freeze: 0, push: null,
     };
     rootC.eventMode = "static";
     rootC.cursor = "pointer";
-    rootC.on("pointertap", (ev) => { ev.stopPropagation(); select(e); });
     ents.push(e);
     return e;
   }
-
+  function removeEnt(e: Ent) {
+    e.root.destroy({ children: true });
+    e.nsprite.destroy();
+    e.fx.destroy({ children: true });
+  }
   function clearAll() {
-    for (const e of ents) e.root.destroy({ children: true });
+    for (const e of ents) removeEnt(e);
     ents.length = 0;
     select(null);
   }
-
-  function randomSpot(u: Unit, side?: "nature" | "human") {
+  function randomSpot(u: Unit, faction?: "nature" | "human") {
     for (let i = 0; i < 200; i++) {
-      const fx = side === "nature" ? 0.05 + Math.random() * 0.45 : side === "human" ? 0.5 + Math.random() * 0.45 : Math.random();
+      const fx = faction === "nature" ? 0.05 + Math.random() * 0.45 : faction === "human" ? 0.5 + Math.random() * 0.45 : Math.random();
       const x = fx * MAP_W * TILE, y = (0.06 + Math.random() * 0.9) * MAP_H * TILE;
       if (walkable(u, x, y)) return [x, y];
     }
     return [MAP_W * TILE / 2, MAP_H * TILE / 2];
   }
-
   function battle(n = 100) {
     clearAll();
     const nature = uts.filter((x) => x.unit.faction === "nature");
@@ -266,7 +356,6 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
     let best: Ent | null = null, bd = radius;
     for (const o of ents) {
       if (o === e || o.dead || o.ut.unit.faction === e.ut.unit.faction) continue;
-      if (e.ut.unit.habitat === "water" && o.ut.unit.habitat !== "water" && terrainAt(o.x, o.y) !== "water") continue;
       const d = Math.hypot(o.x - e.x, o.y - e.y);
       if (d < bd) { bd = d; best = o; }
     }
@@ -291,18 +380,68 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
     return true;
   }
 
+  /** Frames, durations and hit index for an entity's current animation. */
+  function anim(e: Ent) {
+    const r = resolve(e.ut.atlas, e.state as AnimName, e.dir, prefs.attack);
+    const fps = fpsFor(e.ut.unit, e.state as AnimName);
+    const durs = durations(e.ut.atlas, r.key, e.dir, r.frames, fps, e.state === "attack" && prefs.feel);
+    return { ...r, durs, hit: hitIndex(e.ut.atlas, r.key, e.dir, r.frames.length), total: durs.reduce((a, b) => a + b, 0) };
+  }
+
+  /** Attack against `t` (may be null when forced): with timing on, one timed
+   *  swing whose damage lands on the hit frame; with it off, the old loop. */
+  function attack(e: Ent, t: Ent | null, dt: number) {
+    const st = SIZE_STATS[e.ut.unit.sizeClass] ?? SIZE_STATS.medium;
+    e.state = "attack";
+    if (t) e.dir = dirFromVec(t.x - e.x, t.y - e.y);
+    if (!prefs.feel) {
+      if (t && e.cooldown <= 0) { hit(e, t, st.dmg); e.cooldown = 0.9; }
+      return;
+    }
+    if (!e.atk) {
+      if (e.cooldown > 0) { e.state = "idle"; return; }
+      e.atk = { t: 0, hitDone: false };
+      e.animT = 0;
+    }
+    const a = anim(e);
+    const hitAt = a.durs.slice(0, a.hit).reduce((x, y) => x + y, 0);
+    if (!e.atk.hitDone && e.animT >= hitAt) {
+      e.atk.hitDone = true;
+      const heavy = e.ut.unit.sizeClass === "large";
+      e.freeze = heavy ? 0.11 : 0.07;                  // hitstop
+      if (t && !t.dead) hit(e, t, st.dmg, heavy);
+      if (heavy) shake = 0.14;
+    }
+    if (e.animT >= a.total) {
+      e.atk = null;
+      e.cooldown = 0.45 + Math.random() * 0.3;
+      e.state = "idle";
+    }
+  }
+
   function step(e: Ent, dt: number) {
     const u = e.ut.unit;
     const st = SIZE_STATS[u.sizeClass] ?? SIZE_STATS.medium;
     if (e.dead) {
       e.dead += dt;
-      e.root.alpha = Math.max(0, 1 - e.dead);
+      e.root.alpha = e.fx.alpha = e.nsprite.alpha = Math.max(0, 1 - e.dead);
       return;
     }
     e.cooldown -= dt;
     e.flash = Math.max(0, e.flash - dt);
+    if (e.push) {
+      e.push.t -= dt;
+      const k = Math.max(0, e.push.t) / 0.12;
+      if (walkable(u, e.x + e.push.x * dt * 25 * k, e.y + e.push.y * dt * 25 * k)) {
+        e.x += e.push.x * dt * 25 * k;
+        e.y += e.push.y * dt * 25 * k;
+      }
+      if (e.push.t <= 0) e.push = null;
+    }
     const mode = e.force !== "auto" ? e.force : ui.mode;
+    if (mode !== "attack") e.atk = e.atk && e.state === "attack" ? e.atk : null;
 
+    if (e.atk) { attack(e, e.target, dt); return; }        // finish a swing once started
     if (mode === "idle" || mode === "rest") { e.state = mode; return; }
     if (mode === "walk") {
       e.state = "walk";
@@ -310,11 +449,9 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
       return;
     }
     if (mode === "attack") {
-      // show the attack animation; hit whoever happens to be in reach
-      e.state = "attack";
       const t = enemyNear(e, st.radius + 18);
-      if (t) e.dir = dirFromVec(t.x - e.x, t.y - e.y);
-      if (t && e.cooldown <= 0) { hit(e, t, st.dmg); e.cooldown = 0.9; }
+      e.target = t;
+      attack(e, t, dt);
       return;
     }
     // ---- auto
@@ -327,9 +464,7 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
         e.state = "walk";
         moveToward(e, t.x, t.y, dt, st.speed * 1.25);
       } else {
-        e.state = "attack";
-        e.dir = dirFromVec(t.x - e.x, t.y - e.y);
-        if (e.cooldown <= 0) { hit(e, t, st.dmg); e.cooldown = 0.9; }
+        attack(e, t, dt);
       }
       return;
     }
@@ -339,8 +474,15 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
     if (moveToward(e, e.tx, e.ty, dt, st.speed)) { e.wait = 1 + Math.random() * 3; e.tx = e.x; e.ty = e.y; }
   }
 
-  function hit(a: Ent, b: Ent, dmg: number) {
-    b.flash = 0.18;
+  const sparkList: { x: number; y: number; t: number; big: boolean }[] = [];
+  function hit(a: Ent, b: Ent, dmg: number, heavy = false) {
+    b.flash = prefs.feel ? 0.1 : 0.18;
+    if (prefs.feel) {
+      b.freeze = Math.max(b.freeze, heavy ? 0.11 : 0.07);
+      const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy) || 1;
+      b.push = { x: dx / d, y: dy / d, t: 0.12 };
+      sparkList.push({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 - b.ut.unit.cell * 0.25, t: 0, big: heavy });
+    }
     if (ui.immortal) return;
     b.hpNow -= dmg * (0.75 + Math.random() * 0.5);
     if (b.hpNow <= 0) { b.hpNow = 0; b.dead = 0.001; if (ui.selected === b) select(null); }
@@ -349,23 +491,43 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
 
   function draw(e: Ent) {
     const u = e.ut.unit;
-    const anim: AnimName = e.state;
-    const frames = framesFor(e.ut.atlas, anim, e.dir);
-    if (frames.length) {
-      const name = frames[Math.floor(e.animT * fpsFor(u, anim)) % frames.length];
+    const a = anim(e);
+    const loop = !(e.state === "attack" && prefs.feel);
+    if (a.frames.length) {
+      const name = a.frames[frameAt(a.durs, e.animT, loop)];
       const tex = e.ut.frames.get(name);
-      if (tex && e.sprite.texture !== tex) e.sprite.texture = tex;
+      if (tex && e.sprite.texture !== tex) {
+        e.sprite.texture = tex;
+        e.flashS.texture = tex;
+        const nt = e.ut.nframes.get(name);
+        if (nt) e.nsprite.texture = nt;
+      }
     }
-    const shake = e.flash > 0 ? (Math.random() - 0.5) * 2 : 0;
-    e.root.position.set(Math.round(e.x + shake), Math.round(e.y));
+    // the original attack has no lunge drawn in: nudge it toward the target on the hit
+    let lx = 0, ly = 0;
+    if (prefs.feel && e.state === "attack" && a.key === "attack" && e.atk) {
+      const hitAt = a.durs.slice(0, a.hit).reduce((x, y) => x + y, 0);
+      const k = Math.max(0, 1 - Math.abs(e.animT - hitAt) / 140);
+      [lx, ly] = DIRV[e.dir].map((v) => v * 4 * k) as [number, number];
+    }
+    const shakeX = e.flash > 0 ? (Math.random() - 0.5) * 2 : 0;
+    const px = Math.round(e.x + lx + shakeX), py = Math.round(e.y + ly);
+    const hover = u.habitat === "air" ? -7 + Math.round(Math.sin(e.animT / 330) * 1.5) : 0;
+    e.root.position.set(px, py);
     e.root.zIndex = e.y;
-    e.sprite.tint = e.flash > 0 ? 0xff9a9a : 0xffffff;
-    // flying units hover above their shadow
-    if (u.habitat === "air") e.sprite.y = -7 + Math.round(Math.sin(e.animT * 3) * 1.5);
+    e.sprite.position.set(0, -e.ut.foot + hover);
+    e.flashS.position.copyFrom(e.sprite.position);
+    e.flashS.visible = e.flash > 0;
+    e.flashS.alpha = Math.min(1, e.flash * 10);
+    e.sprite.tint = !prefs.feel && e.flash > 0 ? 0xff9a9a : 0xffffff;
+    e.nsprite.position.set(px, py - e.ut.foot + hover);
+    e.nsprite.zIndex = e.y;
+    e.fx.position.set(px, py);
+    e.fx.zIndex = e.y;
     e.ring.visible = ui.rings;
-    const top = -u.anchor.y * u.cell + (u.cell - u.canvas) / 2 + 2;
+    const top = -e.ut.foot - u.canvas / 2 + 2;
     e.zzz.visible = e.state === "rest";
-    if (e.zzz.visible) e.zzz.position.set(4, top - 6 + Math.sin(e.animT * 2) * 1.5);
+    if (e.zzz.visible) e.zzz.position.set(4, top - 6 + Math.sin(e.animT / 500) * 1.5);
     e.hp.clear();
     if (ui.bars && (e.hpNow < e.hpMax || ui.selected === e)) {
       const w = Math.max(12, Math.min(28, u.canvas * 0.45));
@@ -374,37 +536,55 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
     if (ui.selected === e) e.hp.ellipse(0, 0, 16, 6).stroke({ color: 0xffffff, width: 1, alpha: 0.9 });
   }
 
-  // ---------------- day / night tint (code only; no night art)
-  const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-  const mix = (c1: number, c2: number, t: number) => {
-    const r = Math.round(lerp((c1 >> 16) & 255, (c2 >> 16) & 255, t));
-    const g = Math.round(lerp((c1 >> 8) & 255, (c2 >> 8) & 255, t));
-    const b = Math.round(lerp(c1 & 255, c2 & 255, t));
-    return (r << 16) | (g << 8) | b;
-  };
-  function tintFor(h: number) {
-    const DAY = 0xffffff, DUSK = 0xffc48f, NIGHT = 0x5664a6;
-    if (h >= 7 && h < 17) return DAY;
-    if (h >= 17 && h < 19) return mix(DAY, DUSK, (h - 17) / 2);
-    if (h >= 19 && h < 20) return mix(DUSK, NIGHT, h - 19);
-    if (h >= 5 && h < 7) return mix(NIGHT, DAY, (h - 5) / 2);
-    return NIGHT;
+  function drawSparks(dt: number) {
+    sparks.clear();
+    for (let i = sparkList.length - 1; i >= 0; i--) {
+      const s = sparkList[i];
+      s.t += dt;
+      const life = s.big ? 0.22 : 0.16;
+      if (s.t > life) { sparkList.splice(i, 1); continue; }
+      const k = s.t / life, r = (s.big ? 9 : 6) * (0.4 + k);
+      const col = k < 0.35 ? 0xffffff : 0xffd36b;
+      for (let j = 0; j < 8; j++) {
+        const ang = (j / 8) * Math.PI * 2 + (j % 2) * 0.2;
+        const len = j % 2 ? r * 0.55 : r;
+        sparks.moveTo(Math.round(s.x + Math.cos(ang) * r * 0.3), Math.round(s.y + Math.sin(ang) * r * 0.3))
+          .lineTo(Math.round(s.x + Math.cos(ang) * len), Math.round(s.y + Math.sin(ang) * len));
+      }
+      sparks.stroke({ color: col, width: s.big ? 2 : 1, alpha: 1 - k * 0.6 });
+    }
   }
 
   // ---------------- camera
   const view = { x: 0, y: 0 };
   function applyCamera() {
-    world.scale.set(ui.zoom);
     const vw = app.screen.width, vh = app.screen.height;
     const mw = MAP_W * TILE * ui.zoom, mh = MAP_H * TILE * ui.zoom;
     view.x = mw < vw ? (vw - mw) / 2 : Math.min(0, Math.max(vw - mw, view.x));
     view.y = mh < vh ? (vh - mh) / 2 : Math.min(0, Math.max(vh - mh, view.y));
-    world.position.set(Math.round(view.x), Math.round(view.y));
+  }
+  function syncCamera() {
+    const sx = shake > 0 ? Math.round((Math.random() - 0.5) * 4) : 0;
+    const sy = shake > 0 ? Math.round((Math.random() - 0.5) * 4) : 0;
+    for (const c of [world, nworld, fxWorld]) {
+      c.scale.set(ui.zoom);
+      c.position.set(Math.round(view.x) + sx, Math.round(view.y) + sy);
+    }
   }
   function centerOn(wx: number, wy: number) {
     view.x = app.screen.width / 2 - wx * ui.zoom;
     view.y = app.screen.height / 2 - wy * ui.zoom;
     applyCamera();
+  }
+  const toWorld = (gx: number, gy: number) => [(gx - view.x) / ui.zoom, (gy - view.y) / ui.zoom];
+  function entAt(wx: number, wy: number): Ent | null {
+    let best: Ent | null = null, bd = 18;
+    for (const e of ents) {
+      if (e.dead) continue;
+      const d = Math.hypot(e.x - wx, e.y - e.ut.foot * 0.6 - wy);
+      if (d < bd + e.ut.unit.cell * 0.15) { bd = d; best = e; }
+    }
+    return best;
   }
   app.stage.eventMode = "static";
   app.stage.hitArea = app.screen;
@@ -416,15 +596,18 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
     if (Math.abs(dx) + Math.abs(dy) > 4) drag.moved = true;
     if (drag.moved) { view.x = drag.vx + dx; view.y = drag.vy + dy; applyCamera(); }
   });
-  const endDrag = (ev: { global: { x: number; y: number } }) => {
+  app.stage.on("pointerup", (ev) => {
     if (drag && !drag.moved) {
-      const wx = (ev.global.x - view.x) / ui.zoom, wy = (ev.global.y - view.y) / ui.zoom;
-      const ut = uts.find((x) => x.unit.id === ui.spawnId);
-      if (ut) select(spawn(ut, wx, wy));
+      const [wx, wy] = toWorld(ev.global.x, ev.global.y);
+      const hitE = entAt(wx, wy);
+      if (hitE) select(hitE);
+      else {
+        const ut = uts.find((x) => x.unit.id === ui.spawnId);
+        if (ut) select(spawn(ut, wx, wy));
+      }
     }
     drag = null;
-  };
-  app.stage.on("pointerup", endDrag);
+  });
   app.stage.on("pointerupoutside", () => (drag = null));
   const onWheel = (ev: WheelEvent) => {
     ev.preventDefault();
@@ -439,8 +622,13 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
     renderSide();
   };
   app.canvas.addEventListener("wheel", onWheel, { passive: false });
-  const onResize = () => applyCamera();
-  window.addEventListener("resize", onResize);
+  const onResize = () => {
+    lighting.resize(app.screen.width, app.screen.height);
+    weatherLayer.resize(app.screen.width, app.screen.height);
+    app.stage.hitArea = app.screen;
+    applyCamera();
+  };
+  app.renderer.on("resize", onResize);
 
   // ---------------- side panel
   function select(e: Ent | null) { ui.selected = e; renderSelected(); }
@@ -453,25 +641,50 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
       el("div", { class: "sel-head" }, el("img", { src: e.ut.thumb, class: "thumb" }),
         el("div", {}, el("strong", {}, u.displayName), el("div", { class: "muted small" }, u.englishName))),
       el("div", { class: "seg wrap" }, ...(["auto", "idle", "walk", "attack", "rest"] as Mode[]).map((s) =>
-        el("button", { type: "button", class: e.force === s ? "on" : "", onclick: () => { e.force = s; renderSelected(); } }, STATE_LABEL[s]))),
+        el("button", { type: "button", class: e.force === s ? "on" : "", onclick: () => { e.force = s; e.atk = null; renderSelected(); } }, STATE_LABEL[s]))),
       el("div", { class: "row" },
         el("a", { href: `#/unit/${u.id}`, class: "small" }, "查看素材与配置 →"),
         el("button", { type: "button", class: "ghost small", onclick: () => { e.dead = 0.001; select(null); } }, "移除")),
     );
   }
-
+  const clock = el("span", { class: "clock" });
+  const renderClock = () => {
+    const h = Math.floor(ui.hour), mm = Math.floor((ui.hour - h) * 60);
+    const phase = ui.hour < 5 ? "夜" : ui.hour < 8 ? "清晨" : ui.hour < 16.5 ? "白天" : ui.hour < 19 ? "黄昏" : "夜";
+    clock.textContent = `${String(h).padStart(2, "0")}:${String(mm).padStart(2, "0")} ${phase}`;
+  };
   function renderSide() {
     const seg = (items: [string, string][], cur: string, set: (v: string) => void, cls = "seg wrap") =>
       el("div", { class: cls }, ...items.map(([v, l]) => el("button", { type: "button", class: cur === v ? "on" : "", onclick: () => { set(v); renderSide(); } }, l)));
+    const check = (label: string, get: boolean, set: (v: boolean) => void) =>
+      el("label", { class: "check" }, el("input", { type: "checkbox", checked: get, onchange: (ev: Event) => set((ev.target as HTMLInputElement).checked) }), label);
     side.replaceChildren(
       el("div", { class: "panel" },
         el("h3", {}, "全体状态"),
-        seg((["auto", "idle", "walk", "attack", "rest"] as Mode[]).map((s) => [s, STATE_LABEL[s]]), ui.mode, (v) => (ui.mode = v as Mode)),
+        seg((["auto", "idle", "walk", "attack", "rest"] as Mode[]).map((s) => [s, STATE_LABEL[s]]), ui.mode, (v) => { ui.mode = v as Mode; ents.forEach((e) => (e.atk = null)); }),
         el("p", { class: "muted small" }, "自动：闲逛、追击并攻击敌对阵营、按物种表的休眠时段休息。其他选项强制所有单位播放该动作。"),
       ),
       el("div", { class: "panel" },
+        el("h3", {}, "攻击"),
+        seg((Object.keys(ATTACK_LABEL) as AttackVersion[]).map((a) => [a, ATTACK_LABEL[a]]), prefs.attack, (v) => { prefs.attack = v as AttackVersion; savePrefs(); }),
+        check("攻击节奏 + 打击感", prefs.feel, (v) => { prefs.feel = v; savePrefs(); ents.forEach((e) => (e.atk = null)); }),
+        el("p", { class: "muted small" }, "打击感：每次攻击单独播放（蓄力、出击、命中停顿、收招），伤害落在命中帧；命中瞬间短暂定格、火花、被击方后退闪白，大型单位震屏。关闭则为旧的匀速循环。"),
+      ),
+      el("div", { class: "panel" },
+        el("h3", {}, "光照与天气"),
+        seg((Object.keys(LIGHT_LABEL) as LightMode[]).map((l) => [l, LIGHT_LABEL[l]]), ui.light, (v) => (ui.light = v as LightMode)),
+        check("像素风分级光照", ui.bands, (v) => (ui.bands = v)),
+        seg((Object.keys(WEATHER_LABEL) as Weather[]).map((w) => [w, WEATHER_LABEL[w]]), ui.weather, (v) => { ui.weather = v as Weather; weatherLayer.setKind(ui.weather); }),
+        el("input", { type: "range", min: "0", max: "23.9", step: "0.1", value: String(ui.hour),
+          oninput: (ev: Event) => { ui.hour = +(ev.target as HTMLInputElement).value; ui.autoTime = false; renderClock(); } }),
+        el("div", { class: "row" },
+          clock,
+          seg([["6.3", "清晨"], ["12", "正午"], ["17.8", "黄昏"], ["22", "夜"]], "", (v) => { ui.hour = +v; ui.autoTime = false; renderClock(); }, "seg")),
+        check("时间自动流逝", ui.autoTime, (v) => (ui.autoTime = v)),
+      ),
+      el("div", { class: "panel" },
         el("h3", {}, "放置单位"),
-        el("p", { class: "muted small" }, "选中后点击地图放置；拖动平移，滚轮缩放。"),
+        el("p", { class: "muted small" }, "选中后点击空地放置；点击单位选中它；拖动平移，滚轮缩放。"),
         el("div", { class: "spawn-list" }, ...uts.map((ut) =>
           el("button", {
             type: "button", class: `spawn ${ui.spawnId === ut.unit.id ? "on" : ""} f-${ut.unit.faction}`,
@@ -487,61 +700,90 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
         ),
       ),
       el("div", { class: "panel" },
-        el("h3", {}, "时间"),
-        el("input", { type: "range", min: "0", max: "23.9", step: "0.1", value: String(ui.hour),
-          oninput: (ev: Event) => { ui.hour = +(ev.target as HTMLInputElement).value; ui.autoTime = false; renderClock(); } }),
-        el("div", { class: "row" }, clock,
-          el("label", { class: "check" }, el("input", { type: "checkbox", checked: ui.autoTime, onchange: (ev: Event) => { ui.autoTime = (ev.target as HTMLInputElement).checked; } }), "自动流逝")),
-      ),
-      el("div", { class: "panel" },
         el("h3", {}, "显示"),
-        el("label", { class: "check" }, el("input", { type: "checkbox", checked: ui.rings, onchange: (ev: Event) => { ui.rings = (ev.target as HTMLInputElement).checked; } }), "阵营圈"),
-        el("label", { class: "check" }, el("input", { type: "checkbox", checked: ui.bars, onchange: (ev: Event) => { ui.bars = (ev.target as HTMLInputElement).checked; } }), "血条"),
-        el("label", { class: "check" }, el("input", { type: "checkbox", checked: ui.immortal, onchange: (ev: Event) => { ui.immortal = (ev.target as HTMLInputElement).checked; } }), "单位不会死亡"),
+        check("阵营圈", ui.rings, (v) => (ui.rings = v)),
+        check("血条", ui.bars, (v) => (ui.bars = v)),
+        check("单位不会死亡", ui.immortal, (v) => (ui.immortal = v)),
         el("div", { class: "row" }, el("span", { class: "small muted" }, "缩放"),
           seg([["1", "1×"], ["2", "2×"], ["3", "3×"], ["4", "4×"]], String(ui.zoom), (v) => { ui.zoom = +v; centerOn(MAP_W * TILE / 2, MAP_H * TILE / 2); }, "seg")),
         el("div", { class: "row" }, el("span", { class: "small muted" }, "速度"),
-          seg([["0.5", "0.5×"], ["1", "1×"], ["2", "2×"]], String(ui.speed), (v) => (ui.speed = +v), "seg")),
+          seg([["0.25", "0.25×"], ["0.5", "0.5×"], ["1", "1×"], ["2", "2×"]], String(ui.speed), (v) => (ui.speed = +v), "seg")),
       ),
       selBox,
     );
     renderSelected();
+    renderClock();
   }
-  const clock = el("span", { class: "clock" });
-  const renderClock = () => {
-    const h = Math.floor(ui.hour), mm = Math.floor((ui.hour - h) * 60);
-    clock.textContent = `${String(h).padStart(2, "0")}:${String(mm).padStart(2, "0")} ${isNight() ? "夜" : "昼"}`;
-  };
 
   renderSide();
-  renderClock();
   battle(60);
   ui.zoom = app.screen.width < 700 ? 1 : 2;
   centerOn(MAP_W * TILE / 2, MAP_H * TILE / 2);
 
   let fpsAvg = 60, hudT = 0;
   const ticker = (tk: { deltaMS: number }) => {
-    const dt = Math.min(0.05, tk.deltaMS / 1000) * ui.speed;
-    if (ui.autoTime) { ui.hour = (ui.hour + dt * 0.25) % 24; }
-    night.tint = tintFor(ui.hour);
-    for (const e of ents) { e.animT += dt; step(e, dt); draw(e); }
-    for (let i = ents.length - 1; i >= 0; i--) if (ents[i].dead > 1) { ents[i].root.destroy({ children: true }); ents.splice(i, 1); }
+    const rdt = Math.min(0.05, tk.deltaMS / 1000);
+    const dt = rdt * ui.speed;
+    if (ui.autoTime) ui.hour = (ui.hour + dt * 0.2) % 24;
+    shake = Math.max(0, shake - rdt);
+    for (const e of ents) {
+      if (e.freeze > 0) { e.freeze -= dt; draw(e); continue; }   // hitstop: hold the pose
+      e.animT += dt * 1000;
+      step(e, dt);
+      draw(e);
+    }
+    for (let i = ents.length - 1; i >= 0; i--) if (ents[i].dead > 1) { removeEnt(ents[i]); ents.splice(i, 1); }
+    drawSparks(dt);
+
+    // lighting: sun / moon / ambient from time + weather; torches & campfires at night
+    const S = sky(ui.hour, ui.weather);
+    lighting.lights = [];
+    if (ui.light === "lit") {
+      const flick = () => 0.85 + Math.random() * 0.15;
+      const nightK = S.night ? 1 : ui.hour > 17.5 || ui.hour < 7 ? 0.5 : 0;
+      if (nightK > 0) {
+        for (const [cx, cy] of camps)
+          lighting.lights.push({ x: view.x + cx * ui.zoom, y: view.y + cy * ui.zoom, radius: 120 * ui.zoom, height: 26 * ui.zoom, color: [1, 0.58, 0.26], intensity: 0.85 * nightK * flick() });
+        for (const e of ents) {
+          if (lighting.lights.length >= 16) break;
+          if (e.ut.unit.faction !== "human" || e.dead) continue;
+          lighting.lights.push({ x: view.x + e.x * ui.zoom, y: view.y + (e.y - 12) * ui.zoom, radius: 56 * ui.zoom, height: 20 * ui.zoom, color: [1, 0.66, 0.32], intensity: 0.5 * nightK * flick() });
+        }
+      }
+    }
+    lighting.set({ mode: ui.light, tint: S.tint, ambient: S.ambient, sunDir: S.sunDir, sunColor: S.sunColor, bands: ui.bands ? 4 : 0 });
+    // campfire flames (unlit pixels) where the camp lights are
+    flames.clear();
+    if (ui.light === "lit" && (S.night || ui.hour > 17.5 || ui.hour < 7)) {
+      for (const [cx, cy] of camps) {
+        for (let k = 0; k < 5; k++) {
+          const fx = Math.round(cx + (Math.random() - 0.5) * 6), fy = Math.round(cy - Math.random() * 7);
+          flames.rect(fx, fy, 2, 2).fill(k % 2 ? 0xffd36b : 0xf77622);
+        }
+      }
+    }
+    syncCamera();
+    lighting.render(world, nworld);
+    const amb = ui.light === "lit" ? S.ambient.map((v, i) => Math.min(1, v + S.sunColor[i] * 0.6)) : ui.light === "tint" ? S.tint : [1, 1, 1];
+    const tintHex = (Math.round(amb[0] * 255) << 16) | (Math.round(amb[1] * 255) << 8) | Math.round(amb[2] * 255);
+    weatherLayer.update(rdt, tintHex, ui.zoom);
+
     fpsAvg = fpsAvg * 0.95 + (1000 / Math.max(1, tk.deltaMS)) * 0.05;
     hudT += tk.deltaMS;
     if (hudT > 300) {
       hudT = 0;
       renderClock();
-      const nat = ents.filter((e) => e.ut.unit.faction === "nature" && !e.dead).length;
-      const hum = ents.filter((e) => e.ut.unit.faction === "human" && !e.dead).length;
-      const counts = (["idle", "walk", "attack", "rest"] as State[]).map((s) => `${ANIM_LABEL[s]} ${ents.filter((e) => e.state === s && !e.dead).length}`).join(" · ");
-      hud.textContent = `自然 ${nat} · 人类 ${hum} · ${counts} · ${Math.round(fpsAvg)} FPS`;
+      const live = ents.filter((e) => !e.dead);
+      const nat = live.filter((e) => e.ut.unit.faction === "nature").length;
+      const counts = (["idle", "walk", "attack", "rest"] as State[]).map((s) => `${ANIM_LABEL[s]} ${live.filter((e) => e.state === s).length}`).join(" · ");
+      hud.textContent = `自然 ${nat} · 人类 ${live.length - nat} · ${counts} · ${Math.round(fpsAvg)} FPS`;
     }
   };
   app.ticker.add(ticker);
 
   return () => {
-    window.removeEventListener("resize", onResize);
     app.canvas.removeEventListener("wheel", onWheel);
+    lighting.destroy();
     app.destroy(true, { children: true });
   };
 }

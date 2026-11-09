@@ -1,9 +1,10 @@
 import {
-  ANIM_LABEL, DIRS, DIR_ARROW, DIR_LABEL, ERA_LABEL, FACTION_LABEL, SIZE_LABEL,
-  el, fpsFor, framesFor, hasAnim, loadSheet,
-  type AnimName, type Dir, type Manifest, type Sheet,
+  ANIM_LABEL, ATTACK_LABEL, ATTACK_NOTE, DIRS, DIR_ARROW, DIR_LABEL, ERA_LABEL, FACTION_LABEL, SIZE_LABEL,
+  durations, el, fpsFor, frameAt, hasAnim, hitIndex, loadSheet, prefs, resolve, savePrefs,
+  type AnimName, type AttackVersion, type Dir, type Manifest, type Sheet,
 } from "./data";
-import { bodyWidth, drawFrame, drawGroundMarks, drawZzz } from "./sprites";
+import { bodyWidth, drawFrame, drawFrameAt, drawGroundMarks, drawZzz } from "./sprites";
+import { LitFrames, loadImage, type ViewMode } from "./light2d";
 
 const HABITAT: Record<string, string> = { land: "陆地", water: "水域", air: "空中" };
 
@@ -13,12 +14,32 @@ export function renderUnit(root: HTMLElement, m: Manifest, id: string): () => vo
     root.append(el("p", {}, "找不到这个素材。"), el("a", { href: "#/" }, "← 返回图鉴"));
     return () => {};
   }
-  const st = { anim: (hasAnim(u, "walk") ? "walk" : "idle") as AnimName, dir: "south-east" as Dir, speed: 1, marks: true };
-  const SCALE = Math.max(4, Math.min(8, Math.floor(320 / u.cell)));
+  const st = {
+    anim: (hasAnim(u, "attack") ? "attack" : "idle") as AnimName, dir: "east" as Dir, speed: 1, marks: true,
+    view: "color" as ViewMode, lightZ: 18, mouse: null as null | { x: number; y: number },
+  };
+  const maxCell = u.cell;
+  let box = u.cell;
+  const SCALE = Math.max(3, Math.min(8, Math.floor(360 / u.cell)));
 
   const big = el("canvas", { class: "sprite big" });
+  const sizeBig = () => {
+    const cells = sheet?.atlas.meta.unit.cells ?? {};
+    box = Math.max(u.cell, cells.attackkf ?? 0, cells.attackhand ?? 0, maxCell);
+    big.width = big.height = box * SCALE;
+    big.style.width = `${box * SCALE}px`;
+  };
   big.width = big.height = u.cell * SCALE;
-  big.style.width = big.style.height = `${u.cell * SCALE}px`;
+  big.style.width = `${u.cell * SCALE}px`;
+  big.addEventListener("pointermove", (e) => {
+    const r = big.getBoundingClientRect();
+    const k = big.width / r.width;
+    st.mouse = { x: ((e.clientX - r.left) * k - big.width / 2) / SCALE, y: ((e.clientY - r.top) * k - big.height / 2) / SCALE };
+  });
+  big.addEventListener("pointerleave", () => (st.mouse = null));
+  const attackSeg = el("div", { class: "seg wrap" });
+  const attackNote = el("p", { class: "muted small" });
+  const viewSeg = el("div", { class: "seg wrap" });
 
   const animSeg = el("div", { class: "seg" });
   const dirGrid = el("div", { class: "dirgrid" });
@@ -36,6 +57,21 @@ export function renderUnit(root: HTMLElement, m: Manifest, id: string): () => vo
         }, DIR_ARROW[d])
       : el("span", { class: "center" }, DIR_LABEL[st.dir])));
   }
+  function drawAttack() {
+    attackSeg.replaceChildren(...(Object.keys(ATTACK_LABEL) as AttackVersion[]).map((a) =>
+      el("button", {
+        type: "button", class: `${prefs.attack === a ? "on" : ""} ${a === "attack" || u!.variants?.[a] ? "" : "missing"}`,
+        onclick: () => { prefs.attack = a; savePrefs(); st.anim = "attack"; drawAttack(); drawAnims(); drawStrip(); },
+      }, ATTACK_LABEL[a])));
+    attackNote.textContent = ATTACK_NOTE[prefs.attack];
+  }
+  function drawView() {
+    const items: [ViewMode, string][] = [["color", "原图"], ["lit", "法线光照"], ["normal", "法线贴图"]];
+    viewSeg.replaceChildren(...items.map(([v, l]) => el("button", {
+      type: "button", class: `${st.view === v ? "on" : ""} ${u!.files.normal ? "" : "missing"}`,
+      onclick: () => { st.view = v; drawView(); },
+    }, l)));
+  }
   function drawAnims() {
     animSeg.replaceChildren(...(["idle", "walk", "attack", "rest"] as AnimName[]).map((a) =>
       el("button", {
@@ -48,15 +84,18 @@ export function renderUnit(root: HTMLElement, m: Manifest, id: string): () => vo
   let sheet: Sheet | null = null;
   function frameCanvas(name: string, scale: number, label?: string) {
     const c = el("canvas", { class: "sprite" });
-    c.width = c.height = u!.cell * scale;
-    c.style.width = c.style.height = `${u!.cell * scale}px`;
+    const fw = sheet?.atlas.frames[name]?.frame.w ?? u!.cell;
+    c.width = c.height = fw * scale;
+    c.style.width = c.style.height = `${fw * scale}px`;
     if (sheet) drawFrame(c.getContext("2d")!, sheet.img, sheet.atlas, name, 0, 0, scale);
     return el("figure", {}, c, label ? el("figcaption", {}, label) : null);
   }
   function drawStrip() {
     if (!sheet) return;
-    const frames = framesFor(sheet.atlas, st.anim, st.dir);
-    strip.replaceChildren(...frames.map((f, i) => frameCanvas(f, 2, `#${i + 1}`)));
+    const r = resolve(sheet.atlas, st.anim, st.dir, prefs.attack);
+    const durs = durations(sheet.atlas, r.key, st.dir, r.frames, fpsFor(u!, st.anim), true);
+    const hit = st.anim === "attack" ? hitIndex(sheet.atlas, r.key, st.dir, r.frames.length) : -1;
+    strip.replaceChildren(...r.frames.map((f, i) => frameCanvas(f, 2, `#${i + 1} · ${Math.round(durs[i])}ms${i === hit ? " · 命中" : ""}`)));
   }
 
   const sheetRow = u.sheet?.data;
@@ -83,6 +122,14 @@ export function renderUnit(root: HTMLElement, m: Manifest, id: string): () => vo
       el("div", { class: "stage big-stage" }, big),
       el("div", { class: "controls" },
         el("h3", {}, "动作"), animSeg,
+        el("h3", {}, "攻击版本"), attackSeg, attackNote,
+        el("label", { class: "check", title: "关闭：匀速循环（旧效果）" },
+          el("input", { type: "checkbox", checked: prefs.feel, onchange: (e: Event) => { prefs.feel = (e.target as HTMLInputElement).checked; savePrefs(); } }),
+          "攻击节奏优化"),
+        el("h3", {}, "光照预览"), viewSeg,
+        el("p", { class: "muted small" }, "法线光照：把鼠标移到左侧画面上移动光源。"),
+        el("input", { type: "range", min: "4", max: "60", step: "1", value: "18", title: "光源高度",
+          oninput: (e: Event) => { st.lightZ = +(e.target as HTMLInputElement).value; } }),
         el("h3", {}, "方向"), dirGrid,
         el("p", { class: "muted small" }, `实际绘制 ${u.drawnDirections.length} 个方向；左、左上、左下由右侧镜像。`),
         el("h3", {}, "速度"),
@@ -136,9 +183,14 @@ export function renderUnit(root: HTMLElement, m: Manifest, id: string): () => vo
   );
   drawAnims();
   drawDirs();
+  drawAttack();
+  drawView();
+  let lit: LitFrames | null = null;
 
   loadSheet(u).then((s) => {
     sheet = s;
+    sizeBig();
+    if (u.files.normal) loadImage(u.files.normal).then((n) => (lit = new LitFrames(s.img, n, s.atlas)));
     drawStrip();
     rotations.replaceChildren(...DIRS.map((d) => {
       const f = s.atlas.animations[`rotation_${d}`]?.[0];
@@ -148,17 +200,33 @@ export function renderUnit(root: HTMLElement, m: Manifest, id: string): () => vo
 
   let raf = 0, t = 0, last = performance.now();
   const tick = (now: number) => {
-    t += ((now - last) / 1000) * st.speed;
+    t += (now - last) * st.speed;
     last = now;
     if (sheet) {
       const ctx = big.getContext("2d")!;
-      const frames = framesFor(sheet.atlas, st.anim, st.dir);
+      const r = resolve(sheet.atlas, st.anim, st.dir, prefs.attack);
       ctx.clearRect(0, 0, big.width, big.height);
-      if (frames.length) {
-        const fx = u.anchor.x * u.cell * SCALE, fy = u.anchor.y * u.cell * SCALE;
-        if (st.marks) drawGroundMarks(ctx, fx, fy, bodyWidth(sheet.img, sheet.atlas, frames[0]), SCALE, u.faction);
-        drawFrame(ctx, sheet.img, sheet.atlas, frames[Math.floor(t * fpsFor(u, st.anim)) % frames.length], 0, 0, SCALE);
-        if (st.anim === "rest") drawZzz(ctx, u.cell * SCALE * 0.62, u.cell * SCALE * 0.28, t, SCALE / 1.5);
+      if (r.frames.length) {
+        const durs = durations(sheet.atlas, r.key, st.dir, r.frames, fpsFor(u, st.anim), prefs.feel);
+        const name = r.frames[frameAt(durs, t)];
+        const cx = big.width / 2, cy = big.height / 2;
+        const foot = (sheet.atlas.meta.unit.foot ?? 0) * SCALE;
+        const rot = sheet.atlas.animations[`rotation_${st.dir}`]?.[0] ?? r.frames[0];
+        if (st.marks && st.view !== "normal") drawGroundMarks(ctx, cx, cy + foot, bodyWidth(sheet.img, sheet.atlas, rot), SCALE, u.faction);
+        if (st.view !== "color" && lit) {
+          const a = t / 1400;
+          const L = st.mouse ?? { x: Math.cos(a) * u.cell * 0.6, y: Math.sin(a) * u.cell * 0.45 };
+          lit.draw(ctx, name, cx, cy, SCALE, st.view, { x: L.x, y: L.y, z: st.lightZ, color: [1.15, 1.05, 0.9], ambient: [0.32, 0.34, 0.42], bands: 0 });
+          if (st.view === "lit") {
+            ctx.fillStyle = "#ffd36b";
+            ctx.beginPath();
+            ctx.arc(cx + L.x * SCALE, cy + L.y * SCALE, 5, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        } else {
+          drawFrameAt(ctx, sheet.img, sheet.atlas, name, cx, cy, SCALE);
+        }
+        if (st.anim === "rest") drawZzz(ctx, cx + u.cell * SCALE * 0.12, cy - u.cell * SCALE * 0.22, t / 1000, SCALE / 1.5);
       }
     }
     raf = requestAnimationFrame(tick);

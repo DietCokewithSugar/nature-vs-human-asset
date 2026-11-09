@@ -195,3 +195,7 @@ main:has(.lab) { max-width: none; padding: 0; }
   .topbar { padding: 10px 16px; }
 }
 .grid-table th, .grid-table td:first-child, .grid-table td:nth-child(3), .grid-table td:nth-child(4) { white-space: nowrap; }
+.stage canvas.sprite { max-width: 100%; height: auto; }
+.toolbar-row { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; }
+.check.inline { margin-top: 0; }
+.attack-note { flex-basis: 100%; margin: 0; }

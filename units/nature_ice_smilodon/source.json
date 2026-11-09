@@ -3,7 +3,7 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 21.0,
+  "generations_spent": 42.0,
   "animations": {
     "idle": {
       "directions": {
@@ -80,5 +80,39 @@
     }
   },
   "updated": "2026-11-09",
-  "character_id": "af94f098-43dd-4776-b5c8-43b111b7cb88"
+  "character_id": "af94f098-43dd-4776-b5c8-43b111b7cb88",
+  "variants": {
+    "attackkf": {
+      "method": "PixelLab Pixen key poses + v3 interpolation",
+      "directions": [
+        "south",
+        "south-east",
+        "east",
+        "north-east",
+        "north"
+      ],
+      "keys": {
+        "anticipation": "crouching low and coiled back on its hind legs, weight shifted back away from the target, head raised and jaws open wide showing the long sabre fangs, facing {facing}",
+        "strike": "pouncing forward {facing} at full extension, forelegs reaching out, head thrust forward biting down hard with the long sabre fangs",
+        "motion": "explosive pounce and bite"
+      },
+      "takes": [
+        {
+          "directions": [
+            "north-east"
+          ],
+          "reseed": 1
+        }
+      ]
+    },
+    "attackhand": {
+      "method": "AI hand-edited: select-and-move / squash-stretch / smear edits on the PixelLab base pose, text-grid method from aseprite-ai-artist (MIT), timing from its rules/44",
+      "recipe": "prompts/handedit/nature_ice_smilodon.py",
+      "directions": [
+        "east",
+        "south-east"
+      ],
+      "generations": 0
+    }
+  }
 }

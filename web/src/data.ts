@@ -39,10 +39,11 @@ export interface Unit {
   mirrored: Record<string, string>;
   provenance: Record<string, string | number | null>;
   yaml: string;
-  files: { png: string; atlas: string };
+  files: { png: string; atlas: string; normal?: string };
+  variants: Record<string, string>;
 }
 export interface Species { row: number; name: string; era: string; type: string; unitId: string | null }
-export interface Tileset { id: string; png: string; json: string; lower: string; upper: string }
+export interface Tileset { id: string; png: string; json: string; normal?: string; lower: string; upper: string }
 export interface Manifest {
   builtAt: string;
   sheetUrl: string;
@@ -52,8 +53,14 @@ export interface Manifest {
   tilesets: Tileset[];
 }
 export interface Atlas {
-  frames: Record<string, { frame: { x: number; y: number; w: number; h: number } }>;
+  frames: Record<string, { frame: { x: number; y: number; w: number; h: number }; duration?: number }>;
   animations: Record<string, string[]>;
+  meta: {
+    unit: {
+      cell: number; cells?: Record<string, number>; foot?: number; anchor: { x: number; y: number };
+      hit?: Record<string, number>; variants?: Record<string, string>; fps?: Record<string, number>;
+    };
+  };
 }
 export interface Sheet { img: HTMLImageElement; atlas: Atlas }
 
@@ -83,14 +90,74 @@ export function loadSheet(u: Unit): Promise<Sheet> {
 }
 
 /** Frame names for an animation+direction, with the fallbacks the game uses:
- *  rest = idle played slowly; anything missing falls back to idle, then the static pose. */
-export function framesFor(atlas: Atlas, anim: AnimName, dir: Dir): string[] {
-  const order: string[] = anim === "rest" ? ["idle", "rotation"] : [anim, "idle", "rotation"];
+ *  rest = idle played slowly; attack uses the selected attack version when that
+ *  direction exists; anything missing falls back to idle, then the static pose. */
+export function framesFor(atlas: Atlas, anim: AnimName, dir: Dir, attack: AttackVersion = "attack"): string[] {
+  return resolve(atlas, anim, dir, attack).frames;
+}
+
+export type AttackVersion = "attack" | "attackkf" | "attackhand";
+export const ATTACK_LABEL: Record<AttackVersion, string> = {
+  attack: "PixelLab 原版", attackkf: "PixelLab 关键帧", attackhand: "AI 手改",
+};
+export const ATTACK_NOTE: Record<AttackVersion, string> = {
+  attack: "PixelLab v3 按文字一次生成，匀速播放",
+  attackkf: "先用 Pixen 编辑出「蓄力」和「出击」两个关键姿势，再由 v3 补中间帧，按蓄力-出击-停顿-收招重排节奏",
+  attackhand: "在 PixelLab 原图上逐像素改出关键姿势（aseprite-ai-artist 的文本网格方法 + 攻击规则），只改了右、右下两个方向",
+};
+
+export interface Resolved { key: string; frames: string[]; fallback: boolean }
+export function resolve(atlas: Atlas, anim: AnimName, dir: Dir, attack: AttackVersion = "attack"): Resolved {
+  const order: string[] = anim === "rest" ? ["idle", "rotation"]
+    : anim === "attack" ? [attack, "attack", "idle", "rotation"] : [anim, "idle", "rotation"];
   for (const a of order) {
     const f = atlas.animations[`${a}_${dir}`];
-    if (f?.length) return f;
+    if (f?.length) return { key: a, frames: f, fallback: a !== order[0] };
   }
-  return [];
+  return { key: "rotation", frames: [], fallback: true };
+}
+
+/** Per-frame durations (ms). With `feel` off everything plays evenly (the old
+ *  behaviour). With it on, authored variant timings are used, and the original
+ *  attack is re-timed around its hit frame: held wind-up, fast strike, held hit. */
+export function durations(atlas: Atlas, key: string, dir: Dir, frames: string[], fps: number, feel: boolean): number[] {
+  const even = frames.map(() => 1000 / fps);
+  if (!feel) return even;
+  if (key === "attackkf" || key === "attackhand") return frames.map((f) => atlas.frames[f]?.duration ?? 1000 / fps);
+  if (key === "attack") {
+    const h = hitIndex(atlas, key, dir, frames.length);
+    return frames.map((_, i) => (i === 0 ? 120 : i < h - 1 ? 110 : i === h - 1 ? 50 : i === h ? 160 : i === frames.length - 1 ? 120 : 90));
+  }
+  return even;
+}
+
+export function hitIndex(atlas: Atlas, key: string, dir: Dir, n: number): number {
+  const h = atlas.meta?.unit?.hit?.[`${key}_${dir}`];
+  return h !== undefined && h < n ? h : Math.floor(n / 2);
+}
+
+/** Frame index at time t (ms) for given durations; loop or clamp to last. */
+export function frameAt(durs: number[], t: number, loop = true): number {
+  const total = durs.reduce((a, b) => a + b, 0) || 1;
+  let x = loop ? ((t % total) + total) % total : Math.min(t, total - 1);
+  for (let i = 0; i < durs.length; i++) {
+    if (x < durs[i]) return i;
+    x -= durs[i];
+  }
+  return durs.length - 1;
+}
+
+/** Viewer preferences shared by the gallery, unit page and lab. */
+export const prefs = (() => {
+  const def = { attack: "attack" as AttackVersion, feel: true };
+  try {
+    return { ...def, ...JSON.parse(localStorage.getItem("nvh-prefs") || "{}") } as typeof def;
+  } catch {
+    return def;
+  }
+})();
+export function savePrefs() {
+  try { localStorage.setItem("nvh-prefs", JSON.stringify(prefs)); } catch { /* private mode */ }
 }
 
 export function fpsFor(u: Unit, anim: AnimName): number {

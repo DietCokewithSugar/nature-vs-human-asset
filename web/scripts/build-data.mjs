@@ -50,6 +50,9 @@ for (const file of fs.readdirSync(path.join(ROOT, "prompts/units")).sort()) {
   if (!exists(atlasPath)) continue; // configured but not generated yet
   fs.copyFileSync(path.join(dir, `${cfg.id}.png`), path.join(OUT, "units", `${cfg.id}.png`));
   fs.copyFileSync(atlasPath, path.join(OUT, "units", `${cfg.id}.json`));
+  const normalPath = path.join(dir, `${cfg.id}_n.png`);
+  const hasNormal = exists(normalPath);
+  if (hasNormal) fs.copyFileSync(normalPath, path.join(OUT, "units", `${cfg.id}_n.png`));
   const atlas = readJson(atlasPath);
   const source = exists(path.join(dir, "source.json")) ? readJson(path.join(dir, "source.json")) : {};
   const row = sheetRowFor(cfg);
@@ -98,7 +101,12 @@ for (const file of fs.readdirSync(path.join(ROOT, "prompts/units")).sort()) {
       candidates: (source.candidates ?? []).length,
     },
     yaml: yamlText,
-    files: { png: `data/units/${cfg.id}.png`, atlas: `data/units/${cfg.id}.json` },
+    files: {
+      png: `data/units/${cfg.id}.png`,
+      atlas: `data/units/${cfg.id}.json`,
+      normal: hasNormal ? `data/units/${cfg.id}_n.png` : undefined,
+    },
+    variants: atlas.meta.unit.variants ?? {},
   });
 }
 
@@ -110,10 +118,13 @@ if (exists(tsDir)) {
     const id = f.replace(/\.json$/, "");
     fs.copyFileSync(path.join(tsDir, f), path.join(OUT, "tilesets", f));
     fs.copyFileSync(path.join(tsDir, `${id}.png`), path.join(OUT, "tilesets", `${id}.png`));
+    const tn = path.join(tsDir, `${id}_n.png`);
+    if (exists(tn)) fs.copyFileSync(tn, path.join(OUT, "tilesets", `${id}_n.png`));
     const meta = readJson(path.join(tsDir, f));
     tilesets.push({
       id,
       png: `data/tilesets/${id}.png`,
+      normal: exists(path.join(tsDir, `${id}_n.png`)) ? `data/tilesets/${id}_n.png` : undefined,
       json: `data/tilesets/${id}.json`,
       lower: meta.request?.lower_description,
       upper: meta.request?.upper_description,

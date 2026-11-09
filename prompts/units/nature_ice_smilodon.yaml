@@ -18,3 +18,7 @@ animations:
   - name: attack
     action: pouncing forward and biting down with its long sabre fangs, then recovering
     frames: 6
+attack_keys:
+  anticipation: crouching low and coiled back on its hind legs, weight shifted back away from the target, head raised and jaws open wide showing the long sabre fangs, facing {facing}
+  strike: pouncing forward {facing} at full extension, forelegs reaching out, head thrust forward biting down hard with the long sabre fangs
+  motion: explosive pounce and bite

@@ -3,7 +3,7 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 33.0,
+  "generations_spent": 63.0,
   "animations": {
     "idle": {
       "directions": {
@@ -83,5 +83,43 @@
     }
   },
   "updated": "2026-11-09",
-  "character_id": "7e33ed1b-2063-48f0-8567-b122bb19f315"
+  "character_id": "7e33ed1b-2063-48f0-8567-b122bb19f315",
+  "variants": {
+    "attackkf": {
+      "method": "PixelLab Pixen key poses + v3 interpolation",
+      "directions": [
+        "south",
+        "south-east",
+        "east",
+        "north-east",
+        "north"
+      ],
+      "keys": {
+        "anticipation": "crouching low and leaning back, ears flattened, body squashed and coiled, about to pounce, facing {facing}",
+        "strike": "lunging forward {facing}, its round plump body leaning far forward and slightly stretched, mouth open biting with its front teeth; it has no tail and keeps its round pika shape and short ears",
+        "motion": "quick pounce and bite"
+      },
+      "takes": [
+        {
+          "directions": [
+            "south",
+            "south-east",
+            "east",
+            "north-east",
+            "north"
+          ],
+          "reseed": 1
+        }
+      ]
+    },
+    "attackhand": {
+      "method": "AI hand-edited: select-and-move / squash-stretch / smear edits on the PixelLab base pose, text-grid method from aseprite-ai-artist (MIT), timing from its rules/44",
+      "recipe": "prompts/handedit/nature_ice_sardinian_pika.py",
+      "directions": [
+        "east",
+        "south-east"
+      ],
+      "generations": 0
+    }
+  }
 }

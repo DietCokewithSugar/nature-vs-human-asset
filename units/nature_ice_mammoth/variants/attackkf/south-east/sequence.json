@@ -1,0 +1,51 @@
+{
+ "frames": [
+  {
+   "file": "base.png",
+   "ms": 100
+  },
+  {
+   "file": "anticipation.png",
+   "ms": 260
+  },
+  {
+   "file": "mid_0.png",
+   "ms": 50
+  },
+  {
+   "file": "mid_1.png",
+   "ms": 50
+  },
+  {
+   "file": "mid_2.png",
+   "ms": 50
+  },
+  {
+   "file": "mid_3.png",
+   "ms": 50
+  },
+  {
+   "file": "strike.png",
+   "ms": 150
+  },
+  {
+   "file": "mid_3.png",
+   "ms": 90
+  },
+  {
+   "file": "mid_1.png",
+   "ms": 90
+  },
+  {
+   "file": "base.png",
+   "ms": 140
+  }
+ ],
+ "hit": 6,
+ "generations": 3,
+ "prompts": {
+  "anticipation": "rearing back with its head raised high, trunk curled up and long curved tusks lifted, weight on the hind legs, facing {facing}",
+  "strike": "driving its head down and forward {facing}, long curved tusks stabbing forward, front legs braced wide; the tusks keep the same curved shape",
+  "facing": "toward the lower right"
+ }
+}
