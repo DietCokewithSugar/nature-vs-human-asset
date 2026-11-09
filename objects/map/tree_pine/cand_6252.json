@@ -1,0 +1,17 @@
+{
+ "object_id": "dfe70457-bcf6-464e-b8df-133155937b5d",
+ "request": {
+  "description": "single old scots pine tree with a bare reddish trunk and a flat dark green crown dusted with snow",
+  "image_size": {
+   "width": 32,
+   "height": 64
+  },
+  "view": "low top-down",
+  "outline": "single color outline",
+  "shading": "medium shading",
+  "detail": "medium detail",
+  "seed": 6252
+ },
+ "tool": "PixelLab v2 /map-objects",
+ "date": "2026-11-09"
+}

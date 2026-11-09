@@ -1,0 +1,162 @@
+{
+ "res_forest": {
+  "source": "res_forest",
+  "png": "res_forest.png",
+  "size": [
+   48,
+   64
+  ],
+  "footprint": [
+   1,
+   1
+  ],
+  "anchor": [
+   24,
+   63
+  ],
+  "seed": 6212,
+  "object_id": "78758c2d-426e-4fad-810d-7effeb74b0d3",
+  "description": "resource point: a small grove of three snow-dusted spruce trees with red berry bushes and a mossy stump at their feet",
+  "date": "2026-11-09"
+ },
+ "res_sand": {
+  "source": "res_sand",
+  "png": "res_sand.png",
+  "size": [
+   32,
+   32
+  ],
+  "footprint": [
+   1,
+   1
+  ],
+  "anchor": [
+   16,
+   31
+  ],
+  "seed": 6233,
+  "object_id": "31ae26c7-d84b-461c-914b-ecea03acb76e",
+  "description": "resource point: low mound of pale yellow sand and fine gravel with a few pebbles, flat on the ground",
+  "date": "2026-11-09"
+ },
+ "res_water": {
+  "source": "res_water",
+  "png": "res_water.png",
+  "size": [
+   32,
+   32
+  ],
+  "footprint": [
+   1,
+   1
+  ],
+  "anchor": [
+   16,
+   31
+  ],
+  "seed": 6223,
+  "object_id": "2b75ba9d-f5e6-4428-9d4d-86403d78d4bc",
+  "description": "resource point: small round freshwater spring pool of clear blue water ringed with mossy stones, seen from above, flat on the ground",
+  "date": "2026-11-09"
+ },
+ "tree_dead": {
+  "source": "tree_dead",
+  "png": "tree_dead.png",
+  "size": [
+   32,
+   48
+  ],
+  "footprint": [
+   1,
+   1
+  ],
+  "anchor": [
+   16,
+   47
+  ],
+  "seed": 6262,
+  "object_id": "ce65dc1c-a6d8-4e59-94eb-7e5d7892386f",
+  "description": "single dead bare grey conifer tree with broken branches, frost on the bark",
+  "date": "2026-11-09"
+ },
+ "tree_pine": {
+  "source": "tree_pine",
+  "png": "tree_pine.png",
+  "size": [
+   32,
+   64
+  ],
+  "footprint": [
+   1,
+   1
+  ],
+  "anchor": [
+   16,
+   63
+  ],
+  "seed": 6251,
+  "object_id": "f03c288a-32e9-43b1-b701-033273b3fd21",
+  "description": "single old scots pine tree with a bare reddish trunk and a flat dark green crown dusted with snow",
+  "date": "2026-11-09"
+ },
+ "tree_spruce": {
+  "source": "tree_spruce",
+  "png": "tree_spruce.png",
+  "size": [
+   32,
+   64
+  ],
+  "footprint": [
+   1,
+   1
+  ],
+  "anchor": [
+   16,
+   63
+  ],
+  "seed": 6241,
+  "object_id": "4a8a81a1-0a76-4186-af4e-b54294128afb",
+  "description": "single tall snow-dusted spruce tree, dark green, conical",
+  "date": "2026-11-09"
+ },
+ "tree_spruce_b": {
+  "source": "tree_spruce",
+  "png": "tree_spruce_b.png",
+  "size": [
+   32,
+   64
+  ],
+  "footprint": [
+   1,
+   1
+  ],
+  "anchor": [
+   16,
+   63
+  ],
+  "seed": 6242,
+  "object_id": "429b6382-c997-45f2-a760-91b1b7885e23",
+  "description": "single tall snow-dusted spruce tree, dark green, conical",
+  "date": "2026-11-09"
+ },
+ "volcano": {
+  "source": "volcano",
+  "png": "volcano.png",
+  "size": [
+   96,
+   128
+  ],
+  "footprint": [
+   3,
+   3
+  ],
+  "anchor": [
+   48,
+   127
+  ],
+  "seed": 6202,
+  "object_id": "9037267f-6aa6-4cb6-92e5-287355bba9dd",
+  "description": "ice age volcano cone of dark basalt rock, wide base, glowing orange lava crater on top, thin plume of grey smoke rising, snow patches and frozen ash on its lower slopes, cracks with faint orange glow",
+  "date": "2026-11-09"
+ }
+}

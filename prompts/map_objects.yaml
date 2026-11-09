@@ -1,0 +1,46 @@
+# Map objects for the ice-age level, generated with PixelLab /map-objects.
+# footprint: cells (32px) the object occupies; the sprite is anchored with its
+# bottom-centre on the bottom-centre of the footprint and may rise above it.
+common:
+  view: low top-down
+  outline: single color outline
+  shading: medium shading
+  detail: medium detail
+  candidates: 3
+
+objects:
+  - id: volcano
+    footprint: [3, 3]
+    size: [96, 128]
+    seeds: [6201, 6202, 6203]
+    description: "ice age volcano cone of dark basalt rock, wide base, glowing orange lava crater on top, thin plume of grey smoke rising, snow patches and frozen ash on its lower slopes, cracks with faint orange glow"
+  - id: res_forest
+    footprint: [1, 1]
+    size: [48, 64]
+    seeds: [6211, 6212, 6213]
+    description: "resource point: a small grove of three snow-dusted spruce trees with red berry bushes and a mossy stump at their feet"
+  - id: res_water
+    footprint: [1, 1]
+    size: [32, 32]
+    seeds: [6221, 6222, 6223]
+    description: "resource point: small round freshwater spring pool of clear blue water ringed with mossy stones, seen from above, flat on the ground"
+  - id: res_sand
+    footprint: [1, 1]
+    size: [32, 32]
+    seeds: [6231, 6232, 6233]
+    description: "resource point: low mound of pale yellow sand and fine gravel with a few pebbles, flat on the ground"
+  - id: tree_spruce
+    footprint: [1, 1]
+    size: [32, 64]
+    seeds: [6241, 6242]
+    description: "single tall snow-dusted spruce tree, dark green, conical"
+  - id: tree_pine
+    footprint: [1, 1]
+    size: [32, 64]
+    seeds: [6251, 6252]
+    description: "single old scots pine tree with a bare reddish trunk and a flat dark green crown dusted with snow"
+  - id: tree_dead
+    footprint: [1, 1]
+    size: [32, 48]
+    seeds: [6261, 6262]
+    description: "single dead bare grey conifer tree with broken branches, frost on the bark"

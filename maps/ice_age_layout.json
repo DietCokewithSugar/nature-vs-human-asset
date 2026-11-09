@@ -1,0 +1,1070 @@
+{
+ "id": "ice_age",
+ "width": 96,
+ "height": 64,
+ "tile": 32,
+ "seed": 2026,
+ "terrain_ids": [
+  "x_deep",
+  "x_shallow",
+  "n_stream",
+  "h_shore",
+  "n_beach",
+  "h_mud",
+  "h_camp",
+  "h_snow",
+  "n_tundra",
+  "n_steppe",
+  "x_basalt",
+  "n_rocks",
+  "h_weir",
+  "n_glacier",
+  "x_forest"
+ ],
+ "terrain": [
+  "OOOOOOOOOOOOOOOOOOOOOOOOOOOOFFFFFHHHHHHHHHHHHMMHHHHHHHHOOOOOOOOOOOOOOOOOOHHHHHHHHHHHHHHHHHHHHHHH",
+  "OOOOOOOOOOOOOOOOOOOOOOOOOOOHHFFFHHHHHHHHHHHHHHMMHHHHHHOOOOOOONNOOOOOOOOOOOHHHHHHHHHHHHHHHHHHHHHH",
+  "OOOOOOOOOOOOOOOOOOOOOOOOOOOHHHHHHHHHHHHHHHHHHHHMMHHHHOOOOOONNNNNNNOOOOOOOOOHHHHHHHHHHHHHHHHHHHHH",
+  "OOOOOOOOOOOOOOOOOOOOOOOOOOOHHHHHHHHHHHHHHHHHHHHMMHHHHOOOOOONNNNNNLLOOOOOOOOHHHHHHHHHHHHHHHHHHHHH",
+  "OOOOOOOOOOOOOOOOOOOOOOOOOOHHHHHHHHHHHHHHHHHHHHHHMMHHOOOOOONNNNNNILLLOOOOOOOHHHHHHHHHHHHHHHHHHHHH",
+  "OOOOOOOOOOOOOOOOOOOOOOOOOOHHHHHHHHHHHHHHHHHHHHHHMMHHOOOOOONNNNIIIILLLLOOOOOOHHHHHHHHHHHHHHHHHHHH",
+  "OOOOOOOOONNOOOOOOOOOOOOOOOHHHHHHHHHHHHHHHHHHHHFFMMFFOOOOOIIIIIIIIIILLLOOOOOOHHHHHHHHHHHHHHHHHHHH",
+  "OOOOONNNNNNNOOOOOOOOOOOOOOHHHHHHHHHHHHHHHHHHFFFFMMFFOOOOOIIIIIIIIIIILLOOOOOOHHHHHHHHHHHHHHHHHHHH",
+  "OOOONNNIIIINNOOOOOOOOOOOOOHHHHHHHHHHHHHHHHHFFFFFMMFFOOOOOIIICCCIIIIILLOOOOOOHHHHHHHHHHHHHHHHHHHH",
+  "OOONNNIIIIIIIIOOOOOOOOOOOOOHHHHHHHHHHHHHHHFFFFFFMMFFOOOOOOIICCCIIIILLLOOOOOOHHHHHHHHHHHHHHHHHHHH",
+  "OOONNIIIIIIIIIOOOOOOOOOOOOOHHHHHHHHHHHHHHHFFFFFMMFFFOOOOOOIICCCIIILLLOOOOOOOHHHHHHHHHHHHHHHHHHHH",
+  "OOIIIIIIIICCIIIOOOOOOOOOOOOHHHHHHHHHHHHHHHHFFFFMMFFFFOOOOOOIIIIIILLLOOOOOOOHHHHHHHHHHHHHHHHHHHHH",
+  "OOIIIIIIICCCCJIOOOOOOOOOOOOOHHHHHHHHHHHHHHHFFFMMFFFFFOOOOOOOIIIIILLOOOOOOOOHHHHHHHHHHHHHHHHHHHHH",
+  "OOIIIIIIICCCCJOOOOOOOOOOOOOOHHHHHHHHHHHHHHHHFFMMFFFFFOOOOOOOOOIIIOOOOOOOOOOHHHHHHHHHHHHHHHHHHHHH",
+  "OOIIIIIIIJCCJJOOOOOOOOOOOOOOHHHHHHHHHHHHHHHHHHMMFFFFFFOOOOOOOOOOOOOOOOOOOOHHHHHHHHHHHHHHHHHHHHHH",
+  "OOJJJJJJJJJJJJOOOOOOOOOOOOOOHHHHHHHHHHHHHHHHHHMMHHHHHHHOOOOOOOOOOOOOOOOOOHHHHHHHHHHHHHHHHHHHHHHH",
+  "OOOJJJJJJJJJJOOOOOOOOOOOOOOOHHHHHHHHHHHHHHHHHHMMHHHHHHHHOOOOOOOOOOOOOOOOHHHHHHHHHHHHHHHHHHHHHHHH",
+  "OOOOOJJJJJJJOOOOOOOOOOOOOOOOHHHHHHHHHHHHHHHHHHMMHHHHHHHHHOOOOOOOOOOOOOOHHHHHHHHHHHHHHHHHHHHHHHHH",
+  "OOOOOOOOJOOOOOOOOOOOOOKKKOOHHHHHHHHHHHHHHHHHHHMMHHHHHHHHHHOOOOOOOOOOOOHHHHHHHHHHHHHHHHHHHHHHHHHH",
+  "OOOOOOOOOOOOOOOOOOOOOOKKKOOHHHHHHHHHHHHHHHHHHHMMHHHHHHHHHHHHHOOOOOOHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+  "OOOOOOOOOOOOOOOOOOOOOOKKKOOHHHHHHHHHHHHHHHHHHHMMHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHGGGGHHHHHHHHHHHHHH",
+  "OOOOOOOOOOOOOOOOOOOOOOOOOOOHHHHHHHHHHHHHHHHHHHMMHHHHHHHHHHHHHHHHHHHHHHHHHHHHFFGGGGFFHHHHHHHHHHHH",
+  "OOOOOOOOOOOOOOOOOOOOOOOOOOOHHHHHHHHHHHHHHHHHHHMMHHHHHHHHHHHHHHHHHHHHHHHHFFFFFFGGGGFFFFFHHHHHHHHH",
+  "OOOOOOOOOOOOOOOOOOOOOOOOOOOHHHHHHHHHHHHHHHHHHHMMHHHHHHHHHHHHHHHHHHHHHHFFFFFFFFGGGGFGGGGGHHHHHHHH",
+  "OOOOOOOOOOOOOOOOFFFFOOOOOOOHHHHHHHHHHHHHHHHHHHMMHHHHHHHHHHHHHHHHHHHHHFFFGGGFFFFFFFFGGGGGHHHHHHHH",
+  "OOOOOOOOOOOOOOOFFFFFFOOOOOOHHHHHHHHHHHHHHHHHHMMHHHHHHHHHHHHHHHHHHHHHHFFFGGGFFFFFFFFGGGGGHHHHHHHH",
+  "OOOOOOOOOOOOOOFGGGGFFFOOOOOHHHHHHHHHHHHHHHHHHMMHHHHHHHHHHHHHHHHHHHHHHHFFGGGFFFFFFFFGGGGGHHHHHHHH",
+  "OOOOOOOOOOOOOOFGGGGFFHOOOOOHHHHHHHHHHHHHHHHHMMHHHHHHHHHHHHHHHHHHHHHHHHFFFFFFFFFFFFFGGGGGFHHHHHHH",
+  "OOOOOOOOOOOOOOHGGGGGGHHOOOOHHHHHHHHHHHHHHHHHMMHHHHHHHHHHHHHHHHHHHHHHHHFFFFFGGGGFFFFFFFFFFGGGHHHH",
+  "OOOOOOOOOOOOOOGGGGGGGHOOOOOOHHHHHHHHHHHHHHHMMHHHHHHHHHHHHHHHHHHHHHHHHHHFFFFGGGGFFFFFFFFFFGGGHHHH",
+  "OOOOOOOOOOOOOOGGGHGGGHOOOOOOHHHHHHHHHHHHHHMMHHHHHHHHHHHHHHHHHHHHHHHHHHHHFFFGGGGFFFFFFFFFFGGGHHHH",
+  "OOOOOOOOOOOOOOGGGHHHHOOOOOOOHHHHHHHHHHHHHHMMHHHHHHHHHHHHHHHHHHHHHHHHHHHHHFFGGGGFFFFFFFFFFFFFHHHH",
+  "OOOOOOOOOOOOOOOHHFFOOOOOOOOOHHHHHHHHHHHHHMMHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHFFFFFFFFFFFFFFFFFHHHHH",
+  "OOOOOOOOOOOOOOOOFOOOOOOOOOOOHHHHHHHHHHHHHMMHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHFFFFFFGGGFFGGGGHHHHHHH",
+  "OOOOOOOOOOOOOOOOOOOOOOOOFFFFHHHHHHHHHHHHHMMHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHFFFFFGGGFFGGGGHHHHHHH",
+  "OOOOOOOOOOOOOOOOOOOOOOOGGGGFFFFFFHHHHHHHHMMHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHFFFFFGGGFHGGGGHHHHHHH",
+  "OOOOOOOOOOOOOOOOOOOOOOFGGGGFFFFFFFHHHHHHHHMMHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHGGGHHHHHHGGGGHHHHHHH",
+  "OOOOOOOOOOOOOOOOOOOOOOFGGGGGGFFFFFHHHHHHHHMMHHHHHHHHHHHHHFFFFFFHHHHHHHHHHHHHGGGHHHHHHHHHHHHHHHHH",
+  "OOOOOOOOOOOOOOOOOOOOOFGGGGGGGFFFFFHHHHHHHHHMMHHHHHHHHHHHFFFFFFFFHHHHHHHHHHHHGGGHHHHHHHHHHHHHHHHH",
+  "OOOOOOOOOOOOOOOOOOOOOFGGGFGGGFFFFFFHHHHHHHHMMHHHHHHHHHHHFFFFFFFFHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+  "OOOOOOOJJJJJOOOOOOOOOOGGGFFFFFFFFFFHHHHHHHHHMMHHHHHHHHHHFFFFFFFFHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+  "OOOOOJJJJJJJJOOOOOOOOOOFFFFFFFFFFFHHHHHHHHHHHMMHHHHHHHHHFFFFFFFFHHHHOOOOOOHHHHHHHHHHHHHHHHHHHHHH",
+  "OOOOOJJJJJJJLLOOOOOOOOOOOOFOOFFFFFHHHHHHHHHHHHMMHHHHHHHHFFFFFFFFHOOOOOOOOOOOOHHHHHHHHHHHHHHHHHHH",
+  "OOOOOJJJJJJJLLOOOOOOOOOOOOOOOFFFFHHHHHHHHHHHHHMMHHHHHHHHFFFFFFFFOOOOOOOOOOOOOOHHHHHHHHHHHHHHHHHH",
+  "OOOOOJJJCCJJLLLOOOOOOOOOOOOOHHHHHHHHHHHHHHHHHHHMMHHHHHHHFFFFFFFOOOOOOOOOOOOOOOOHHHHHHHHHHHHHHHHH",
+  "OOOOJJJJCCJLLLLOOOOOOKKKOOOOHHHHHHHHHHHHHHHHHHHMMHHHHHHHFFFFFFOOOOOOOOOOOOOOOOOOHHHHHHHHHHHHHHHH",
+  "OOOOJJJCCJJLLLLLOOOOOKKKOOOHHHHHHHHHHHHHHHHHHHHMMHHHHHHHFFFFFOOOOOOOOOOOOOOOOOOOOHHHHHHHFFFFHHHH",
+  "OOOOJJJCCJJLLLLLOOOOOKKKOOOHHHHHHHHHHHHHHHHHHHHMMHHHHHHHFFFFOOOOOOOIIJJJJJOOOOOOOOHHHHHFFFFFFFHH",
+  "OOOOJJCCJJJLLLLLOOOOOOOOOOHHHHHHHHHHHHHHHHHHHHHMMHHHHHHHFFFFOOOOOOOIIJJJJJJOOOOOOOHHHHFFFFFFFFHH",
+  "OOOOJJCCJJJLLLLLOOOOOOOOOOHHHHHHHHHHHHHHHHHHHHMMHHHHHHHHFFFFOOOOOOIIICCJJJJJOOOOOOHHHHFFFFFFFFHH",
+  "OOOOJCCJJJJLLLLOOOOOOOOOOOHHHHHHHHHHHHHHHHHHHHMMHHHHHHHHFFFOOOOOOIIIIJCJJJJJJOOOOOOHHHFFFFFFFFHH",
+  "OOOOOCCJJJJLOOOOOOOOOOOOOOOHHHHHHHHHHHHHHHHHHHMMHHHHHHHHFFFOOOOOOIIIIJCJJJJJJJOOOOOHHHFFFFFFFFHH",
+  "OOOOOOOOJJOOOOOOOOOOOOOOOOOHHHHHHHHHHHHHHHHHHHMMHHHHHHHHHFFOOOOOOIIIIJCCJJJJJJOOOOOHHHHFFFFFFFHH",
+  "OOOOOOOOOOOOOOOOOOOOOOOOOOOHHHHHHHHHHHHHHHHHHHMMHHHHHHHHHFFOOOOOOIIIJJCCJJJJJOOOOOOHHHHHFFFFFHHH",
+  "OOOOOOOOOOOOOOOOOOOOOOOOOOOOHHHHDDDDDDDDDDDDDDMMDDDDDDDDHFFOOOOOOIIJJJJCJJJJJOOOOOOHHHHHHHHHHDDD",
+  "OOOOOOOOOOOOOOOOOOOOOOOOOOOODDDDDDDDDDDDDDDDDDMMDDDDDDDDDDDOOOOOOOJJJJJCJJJJOOOOOOOHHHHHHHDDDDDD",
+  "OOOOOOOOOOOOOOOOOOOOOOOOOOOODDDDDBBBBBBBBBBBBBBBBBBBBBDDDDDOOOOOOOOJJJJCCJJOOOOOOOHHHDDDDDDDDBBB",
+  "OOOOOOOOOOOOOOOOOOOOOOOOOOOOBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBDDOOOOOOOOEEECCEEOOOOOOODDDDDDDDBBBBBB",
+  "BBBOOOOOOOOOOOOOOOOOOOOOBBBBBBBBBBBBBBBBBBBBAAABBBBBBBBBBBBBBOOOOOOOOEECCEOOOOOOOODDDDBBBBBBBBBB",
+  "BBBBBBOOOOOOOOOOOOOOBBBBBBBBBBAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBOOOOOBBEECBBOOOOOOBBBBBBBBBBBAAAA",
+  "ABBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAA",
+  "AAAABBBBBBBBBBBBBBBBBBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBAAAAAAAAAAAA",
+  "AAAAAAAAABBBBBBBBBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+  "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+ ],
+ "objects": [
+  {
+   "class": "nature_start",
+   "name": "自然1",
+   "nest": [
+    9,
+    12
+   ],
+   "cells": 120
+  },
+  {
+   "class": "nature_start",
+   "name": "自然2",
+   "nest": [
+    9,
+    47
+   ],
+   "cells": 120
+  },
+  {
+   "class": "nature_start",
+   "name": "自然3",
+   "nest": [
+    64,
+    8
+   ],
+   "cells": 120
+  },
+  {
+   "class": "nature_start",
+   "name": "自然4",
+   "nest": [
+    71,
+    53
+   ],
+   "cells": 120
+  },
+  {
+   "class": "human_building",
+   "site": "人类主城",
+   "type": "岩洞",
+   "cell": [
+    84,
+    24
+   ],
+   "size": [
+    3,
+    3
+   ]
+  },
+  {
+   "class": "human_building",
+   "site": "人类主城",
+   "type": "篝火营地",
+   "cell": [
+    76,
+    29
+   ],
+   "size": [
+    2,
+    2
+   ]
+  },
+  {
+   "class": "human_building",
+   "site": "人类主城",
+   "type": "篝火营地",
+   "cell": [
+    86,
+    34
+   ],
+   "size": [
+    2,
+    2
+   ]
+  },
+  {
+   "class": "human_building",
+   "site": "人类主城",
+   "type": "石屋",
+   "cell": [
+    79,
+    21
+   ],
+   "size": [
+    2,
+    2
+   ]
+  },
+  {
+   "class": "human_building",
+   "site": "人类主城",
+   "type": "兽皮帐篷",
+   "cell": [
+    73,
+    25
+   ],
+   "size": [
+    1,
+    1
+   ]
+  },
+  {
+   "class": "human_building",
+   "site": "人类主城",
+   "type": "兽皮帐篷",
+   "cell": [
+    81,
+    34
+   ],
+   "size": [
+    1,
+    1
+   ]
+  },
+  {
+   "class": "human_building",
+   "site": "人类主城",
+   "type": "兽皮帐篷",
+   "cell": [
+    90,
+    29
+   ],
+   "size": [
+    1,
+    1
+   ]
+  },
+  {
+   "class": "human_building",
+   "site": "人类主城",
+   "type": "兽皮帐篷",
+   "cell": [
+    77,
+    37
+   ],
+   "size": [
+    1,
+    1
+   ]
+  },
+  {
+   "class": "human_building",
+   "site": "前哨1",
+   "type": "篝火营地",
+   "cell": [
+    16,
+    27
+   ],
+   "size": [
+    2,
+    2
+   ]
+  },
+  {
+   "class": "human_building",
+   "site": "前哨1",
+   "type": "兽皮帐篷",
+   "cell": [
+    19,
+    29
+   ],
+   "size": [
+    1,
+    1
+   ]
+  },
+  {
+   "class": "human_building",
+   "site": "前哨1",
+   "type": "兽皮帐篷",
+   "cell": [
+    15,
+    30
+   ],
+   "size": [
+    1,
+    1
+   ]
+  },
+  {
+   "class": "human_building",
+   "site": "前哨2",
+   "type": "篝火营地",
+   "cell": [
+    24,
+    36
+   ],
+   "size": [
+    2,
+    2
+   ]
+  },
+  {
+   "class": "human_building",
+   "site": "前哨2",
+   "type": "兽皮帐篷",
+   "cell": [
+    27,
+    38
+   ],
+   "size": [
+    1,
+    1
+   ]
+  },
+  {
+   "class": "human_building",
+   "site": "前哨2",
+   "type": "兽皮帐篷",
+   "cell": [
+    23,
+    39
+   ],
+   "size": [
+    1,
+    1
+   ]
+  },
+  {
+   "class": "human_start",
+   "name": "人类主城",
+   "c": [
+    80,
+    28
+   ]
+  },
+  {
+   "class": "human_start",
+   "name": "前哨1",
+   "c": [
+    17,
+    28
+   ]
+  },
+  {
+   "class": "human_start",
+   "name": "前哨2",
+   "c": [
+    25,
+    37
+   ]
+  },
+  {
+   "class": "volcano",
+   "cell": [
+    22,
+    18
+   ],
+   "size": [
+    3,
+    3
+   ],
+   "sprite": "volcano"
+  },
+  {
+   "class": "volcano",
+   "cell": [
+    21,
+    45
+   ],
+   "size": [
+    3,
+    3
+   ],
+   "sprite": "volcano"
+  },
+  {
+   "class": "resource",
+   "kind": "forest",
+   "cell": [
+    13,
+    13
+   ],
+   "sprite": "res_forest"
+  },
+  {
+   "class": "resource",
+   "kind": "water",
+   "cell": [
+    10,
+    15
+   ],
+   "sprite": "res_water"
+  },
+  {
+   "class": "resource",
+   "kind": "sand",
+   "cell": [
+    12,
+    10
+   ],
+   "sprite": "res_sand"
+  },
+  {
+   "class": "resource",
+   "kind": "forest",
+   "cell": [
+    5,
+    44
+   ],
+   "sprite": "res_forest"
+  },
+  {
+   "class": "resource",
+   "kind": "water",
+   "cell": [
+    9,
+    43
+   ],
+   "sprite": "res_water"
+  },
+  {
+   "class": "resource",
+   "kind": "sand",
+   "cell": [
+    12,
+    47
+   ],
+   "sprite": "res_sand"
+  },
+  {
+   "class": "resource",
+   "kind": "forest",
+   "cell": [
+    67,
+    11
+   ],
+   "sprite": "res_forest"
+  },
+  {
+   "class": "resource",
+   "kind": "water",
+   "cell": [
+    60,
+    7
+   ],
+   "sprite": "res_water"
+  },
+  {
+   "class": "resource",
+   "kind": "sand",
+   "cell": [
+    67,
+    6
+   ],
+   "sprite": "res_sand"
+  },
+  {
+   "class": "resource",
+   "kind": "forest",
+   "cell": [
+    67,
+    56
+   ],
+   "sprite": "res_forest"
+  },
+  {
+   "class": "resource",
+   "kind": "water",
+   "cell": [
+    70,
+    56
+   ],
+   "sprite": "res_water"
+  },
+  {
+   "class": "resource",
+   "kind": "sand",
+   "cell": [
+    71,
+    49
+   ],
+   "sprite": "res_sand"
+  },
+  {
+   "class": "resource",
+   "kind": "forest",
+   "cell": [
+    80,
+    39
+   ],
+   "sprite": "res_forest"
+  },
+  {
+   "class": "resource",
+   "kind": "water",
+   "cell": [
+    75,
+    22
+   ],
+   "sprite": "res_water"
+  },
+  {
+   "class": "resource",
+   "kind": "sand",
+   "cell": [
+    74,
+    35
+   ],
+   "sprite": "res_sand"
+  },
+  {
+   "class": "resource",
+   "kind": "forest",
+   "cell": [
+    83,
+    28
+   ],
+   "sprite": "res_forest"
+  },
+  {
+   "class": "resource",
+   "kind": "water",
+   "cell": [
+    79,
+    27
+   ],
+   "sprite": "res_water"
+  },
+  {
+   "class": "resource",
+   "kind": "sand",
+   "cell": [
+    71,
+    22
+   ],
+   "sprite": "res_sand"
+  },
+  {
+   "class": "resource",
+   "kind": "forest",
+   "cell": [
+    21,
+    26
+   ],
+   "sprite": "res_forest"
+  },
+  {
+   "class": "resource",
+   "kind": "water",
+   "cell": [
+    16,
+    24
+   ],
+   "sprite": "res_water"
+  },
+  {
+   "class": "resource",
+   "kind": "sand",
+   "cell": [
+    18,
+    32
+   ],
+   "sprite": "res_sand"
+  },
+  {
+   "class": "resource",
+   "kind": "forest",
+   "cell": [
+    30,
+    40
+   ],
+   "sprite": "res_forest"
+  },
+  {
+   "class": "resource",
+   "kind": "water",
+   "cell": [
+    29,
+    35
+   ],
+   "sprite": "res_water"
+  },
+  {
+   "class": "resource",
+   "kind": "sand",
+   "cell": [
+    26,
+    34
+   ],
+   "sprite": "res_sand"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    61,
+    0
+   ],
+   "sprite": "tree_spruce"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    62,
+    0
+   ],
+   "sprite": "tree_spruce"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    59,
+    1
+   ],
+   "sprite": "tree_spruce"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    69,
+    4
+   ],
+   "sprite": "tree_spruce_b"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    9,
+    5
+   ],
+   "sprite": "tree_dead"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    10,
+    5
+   ],
+   "sprite": "tree_spruce_b"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    57,
+    5
+   ],
+   "sprite": "tree_spruce_b"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    13,
+    8
+   ],
+   "sprite": "tree_spruce"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    2,
+    10
+   ],
+   "sprite": "tree_spruce_b"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    14,
+    10
+   ],
+   "sprite": "tree_pine"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    75,
+    10
+   ],
+   "sprite": "tree_pine"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    55,
+    15
+   ],
+   "sprite": "tree_spruce_b"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    71,
+    16
+   ],
+   "sprite": "tree_spruce_b"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    27,
+    17
+   ],
+   "sprite": "tree_spruce"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    70,
+    17
+   ],
+   "sprite": "tree_pine"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    58,
+    18
+   ],
+   "sprite": "tree_spruce_b"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    59,
+    18
+   ],
+   "sprite": "tree_spruce_b"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    62,
+    19
+   ],
+   "sprite": "tree_pine"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    66,
+    19
+   ],
+   "sprite": "tree_spruce_b"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    16,
+    23
+   ],
+   "sprite": "tree_pine"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    19,
+    23
+   ],
+   "sprite": "tree_spruce_b"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    15,
+    24
+   ],
+   "sprite": "tree_spruce"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    20,
+    24
+   ],
+   "sprite": "tree_spruce"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    14,
+    25
+   ],
+   "sprite": "tree_spruce_b"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    21,
+    25
+   ],
+   "sprite": "tree_spruce"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    22,
+    27
+   ],
+   "sprite": "tree_spruce"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    25,
+    33
+   ],
+   "sprite": "tree_pine"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    26,
+    33
+   ],
+   "sprite": "tree_spruce_b"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    21,
+    37
+   ],
+   "sprite": "tree_spruce"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    7,
+    39
+   ],
+   "sprite": "tree_spruce_b"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    9,
+    39
+   ],
+   "sprite": "tree_pine"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    10,
+    39
+   ],
+   "sprite": "tree_dead"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    5,
+    40
+   ],
+   "sprite": "tree_spruce_b"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    12,
+    40
+   ],
+   "sprite": "tree_spruce_b"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    4,
+    44
+   ],
+   "sprite": "tree_dead"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    15,
+    45
+   ],
+   "sprite": "tree_spruce"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    67,
+    46
+   ],
+   "sprite": "tree_dead"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    68,
+    46
+   ],
+   "sprite": "tree_spruce"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    71,
+    46
+   ],
+   "sprite": "tree_spruce"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    72,
+    46
+   ],
+   "sprite": "tree_spruce"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    75,
+    48
+   ],
+   "sprite": "tree_spruce_b"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    65,
+    49
+   ],
+   "sprite": "tree_spruce"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    76,
+    49
+   ],
+   "sprite": "tree_spruce"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    77,
+    50
+   ],
+   "sprite": "tree_dead"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    82,
+    55
+   ],
+   "sprite": "tree_pine"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    24,
+    57
+   ],
+   "sprite": "tree_spruce"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    25,
+    57
+   ],
+   "sprite": "tree_spruce"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    27,
+    57
+   ],
+   "sprite": "tree_pine"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    3,
+    58
+   ],
+   "sprite": "tree_pine"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    21,
+    58
+   ],
+   "sprite": "tree_spruce_b"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    23,
+    58
+   ],
+   "sprite": "tree_pine"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    61,
+    58
+   ],
+   "sprite": "tree_spruce"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    8,
+    59
+   ],
+   "sprite": "tree_spruce"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    9,
+    59
+   ],
+   "sprite": "tree_spruce"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    11,
+    59
+   ],
+   "sprite": "tree_spruce_b"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    14,
+    59
+   ],
+   "sprite": "tree_pine"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    16,
+    59
+   ],
+   "sprite": "tree_spruce"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    63,
+    59
+   ],
+   "sprite": "tree_spruce"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    65,
+    59
+   ],
+   "sprite": "tree_pine"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    76,
+    59
+   ],
+   "sprite": "tree_spruce"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    77,
+    59
+   ],
+   "sprite": "tree_pine"
+  },
+  {
+   "class": "tree",
+   "cell": [
+    78,
+    59
+   ],
+   "sprite": "tree_spruce_b"
+  }
+ ]
+}

@@ -1,0 +1,200 @@
+{
+ "id": "streams",
+ "tileset_id": "02c6d1e3-c479-48ea-8f5d-677f4d345481",
+ "tool": "PixelLab v2 /create-tileset",
+ "date": "2026-11-09",
+ "request": {
+  "mode": "pro",
+  "tile_size": {
+   "width": 32,
+   "height": 32
+  },
+  "view": "low top-down",
+  "transition_size": 0,
+  "raggedness": 0.35,
+  "boundary_amplitude": 0.15,
+  "seed": 6123,
+  "lower_description": "dark teal blue water of a wild stream with bright ripples and reflections, small floating green algae patches and reed tufts, brown silt showing through the shallow water",
+  "upper_description": "clear cold grey-blue stream water flowing evenly, regular parallel ripples, clean"
+ },
+ "lower": "n_stream",
+ "upper": "h_weir",
+ "tiles": [
+  {
+   "x": 0,
+   "y": 0,
+   "id": "13",
+   "corners": {
+    "NW": "upper",
+    "NE": "upper",
+    "SW": "lower",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 32,
+   "y": 0,
+   "id": "10",
+   "corners": {
+    "NW": "upper",
+    "NE": "lower",
+    "SW": "upper",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 64,
+   "y": 0,
+   "id": "4",
+   "corners": {
+    "NW": "lower",
+    "NE": "upper",
+    "SW": "lower",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 96,
+   "y": 0,
+   "id": "12",
+   "corners": {
+    "NW": "upper",
+    "NE": "upper",
+    "SW": "lower",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 0,
+   "y": 32,
+   "id": "6",
+   "corners": {
+    "NW": "lower",
+    "NE": "upper",
+    "SW": "upper",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 32,
+   "y": 32,
+   "id": "8",
+   "corners": {
+    "NW": "upper",
+    "NE": "lower",
+    "SW": "lower",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 64,
+   "y": 32,
+   "id": "8e33f211-8d6c-410c-89ae-8442f4135a4f",
+   "corners": {
+    "NW": "lower",
+    "NE": "lower",
+    "SW": "lower",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 96,
+   "y": 32,
+   "id": "1",
+   "corners": {
+    "NW": "lower",
+    "NE": "lower",
+    "SW": "lower",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 0,
+   "y": 64,
+   "id": "11",
+   "corners": {
+    "NW": "upper",
+    "NE": "lower",
+    "SW": "upper",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 32,
+   "y": 64,
+   "id": "3",
+   "corners": {
+    "NW": "lower",
+    "NE": "lower",
+    "SW": "upper",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 64,
+   "y": 64,
+   "id": "2",
+   "corners": {
+    "NW": "lower",
+    "NE": "lower",
+    "SW": "upper",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 96,
+   "y": 64,
+   "id": "5",
+   "corners": {
+    "NW": "lower",
+    "NE": "upper",
+    "SW": "lower",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 0,
+   "y": 96,
+   "id": "2b6d3383-58e7-4708-b86b-3942845df565",
+   "corners": {
+    "NW": "upper",
+    "NE": "upper",
+    "SW": "upper",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 32,
+   "y": 96,
+   "id": "14",
+   "corners": {
+    "NW": "upper",
+    "NE": "upper",
+    "SW": "upper",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 64,
+   "y": 96,
+   "id": "9",
+   "corners": {
+    "NW": "upper",
+    "NE": "lower",
+    "SW": "lower",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 96,
+   "y": 96,
+   "id": "7",
+   "corners": {
+    "NW": "lower",
+    "NE": "upper",
+    "SW": "upper",
+    "SE": "upper"
+   }
+  }
+ ]
+}

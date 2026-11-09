@@ -44,6 +44,10 @@ export interface Unit {
 }
 export interface Species { row: number; name: string; era: string; type: string; unitId: string | null }
 export interface Tileset { id: string; png: string; json: string; normal?: string; lower: string; upper: string }
+export interface MapInfo {
+  id: string; layout: string; terrain: string; terrainPng: string; terrainNormal?: string;
+  objects: string; objectBase: string; overview?: string;
+}
 export interface Manifest {
   builtAt: string;
   sheetUrl: string;
@@ -52,6 +56,7 @@ export interface Manifest {
   species: Species[];
   tilesets: Tileset[];
   props?: { id: string; name_zh: string; png: string; normal?: string; size: number; emissive?: boolean }[];
+  maps?: MapInfo[];
 }
 export interface Atlas {
   frames: Record<string, { frame: { x: number; y: number; w: number; h: number }; duration?: number }>;
@@ -157,7 +162,7 @@ export function frameAt(durs: number[], t: number, loop = true): number {
 
 /** Viewer preferences shared by the gallery, unit page and lab. */
 export const prefs = (() => {
-  const def = { attack: "attackhand" as AttackVersion, feel: true };
+  const def = { attack: "attackhand" as AttackVersion, feel: true, labMap: "ice_age" as "ice_age" | "hd" | "demo" };
   try {
     // key bumped: the default attack version changed to the hand-edited one
     return { ...def, ...JSON.parse(localStorage.getItem("nvh-prefs-v2") || "{}") } as typeof def;
