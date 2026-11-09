@@ -1,0 +1,23 @@
+id: nature_ice_leafcutter_bee
+display_name: 古代切叶蜂
+sheet: {tab: 生物, row: 2, name: 古代切叶蜂 - Leafcutter Bees}
+faction: nature
+era: ice_age
+size_class: micro         # swarm of 3 drawn as one unit on a 32px canvas (PixelLab minimum)
+canvas: 32
+template_id: custom       # not a biped/quadruped: no skeleton
+seed: 4101
+description: >-
+  a small swarm of three ancient leafcutter bees flying close together, fuzzy
+  black and amber striped bodies, translucent wings, each bee carrying a tiny
+  cut green leaf piece
+animations:
+  - name: idle
+    action: hovering in place, wings buzzing rapidly, bees bobbing slightly
+    frames: 4
+  - name: walk
+    action: flying forward together, wings buzzing rapidly
+    frames: 4
+  - name: attack
+    action: the bees dart forward to sting, then pull back
+    frames: 4

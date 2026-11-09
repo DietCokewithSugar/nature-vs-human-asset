@@ -3,7 +3,7 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab ToS (commercial use per plan)",
   "created": "2026-11-09",
-  "generations_spent": 7.0,
+  "generations_spent": 17.0,
   "animations": {
     "walk": {
       "directions": {
@@ -14,6 +14,34 @@
         "north": "done"
       },
       "animation_group_id": "aeefd425-10d3-4ee2-b265-186d09f036fd"
+    },
+    "idle": {
+      "directions": {
+        "south": "done",
+        "east": "done",
+        "south-east": "done",
+        "north-east": "done",
+        "north": "done"
+      },
+      "request": {
+        "action": "standing in place, gentle breathing, slight body bob, seamless loop",
+        "frames": 4
+      },
+      "animation_group_id": "b99ef587-bc2f-4b34-a15f-d806e89392f6"
+    },
+    "attack": {
+      "directions": {
+        "south": "done",
+        "north": "done",
+        "south-east": "done",
+        "north-east": "done",
+        "east": "done"
+      },
+      "request": {
+        "action": "swinging its head and long tusks sideways to strike, then returning",
+        "frames": 6
+      },
+      "animation_group_id": "644102c0-f88c-4ed8-9ddb-507e3d92fa3c"
     }
   },
   "character_id": "cf9d4ebe-179a-44c2-af17-e5ead08b1bf4",
@@ -30,5 +58,6 @@
       "height": 64
     },
     "name": "nature_ice_mammoth"
-  }
+  },
+  "updated": "2026-11-09"
 }

@@ -1,0 +1,20 @@
+id: nature_ice_sardinian_pika
+display_name: 撒丁岛巨兔
+sheet: {tab: 生物, row: 6, name: 撒丁岛巨兔 - Sardinian pika}
+faction: nature
+era: ice_age
+size_class: small
+canvas: 32
+template_id: cat
+seed: 4201
+description: >-
+  Sardinian giant pika (Prolagus sardus), plump round rabbit-like rodent, short
+  rounded ears, no visible tail, dense brown-grey fur with a lighter belly,
+  small black eyes, short legs
+animations:
+  - name: walk
+    action: hopping forward in short bouncy hops, seamless loop
+    frames: 6
+  - name: attack
+    action: lunging forward to bite, then hopping back
+    frames: 6

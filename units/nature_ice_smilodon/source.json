@@ -1,0 +1,80 @@
+{
+  "id": "nature_ice_smilodon",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 17.0,
+  "animations": {
+    "idle": {
+      "directions": {
+        "south": "done",
+        "north": "done",
+        "south-east": "done",
+        "north-east": "done",
+        "east": "done"
+      },
+      "request": {
+        "action": "standing in place, gentle breathing, slight body bob, seamless loop",
+        "frames": 4
+      },
+      "animation_group_id": "5cadd8e5-5507-4726-96ee-ab38ba4029c4"
+    },
+    "walk": {
+      "directions": {
+        "south": "done",
+        "south-east": "done",
+        "east": "done",
+        "north-east": "done",
+        "north": "done"
+      },
+      "request": {
+        "action": "prowling forward in a seamless looping walk cycle, shoulders rolling, legs alternating",
+        "frames": 6
+      },
+      "animation_group_id": "ed7eabce-ba8b-4794-89c0-afb874637c7d"
+    },
+    "attack": {
+      "directions": {
+        "south": "done"
+      },
+      "request": {
+        "action": "pouncing forward and biting down with its long sabre fangs, then recovering",
+        "frames": 6
+      },
+      "animation_group_id": "c9207d00-3ffa-4e3c-b358-e2281f27fe9c"
+    }
+  },
+  "candidates": [
+    {
+      "seed": 4301,
+      "character_id": "048cdcfc-41d1-4339-b718-acff46d77465",
+      "picked": false
+    },
+    {
+      "seed": 4302,
+      "character_id": "af94f098-43dd-4776-b5c8-43b111b7cb88",
+      "picked": true
+    },
+    {
+      "seed": 4303,
+      "character_id": "2f186372-f10f-467b-8658-2e75aeadb62f",
+      "picked": false
+    }
+  ],
+  "create_request": {
+    "description": "Smilodon sabre-toothed cat, tawny tan fur with faint darker spots, very long curved white upper sabre fangs, heavy muscular shoulders and forelimbs, short bobbed tail",
+    "view": "low top-down",
+    "template_id": "lion",
+    "outline": "single color black outline",
+    "detail": "medium detail",
+    "no_background": true,
+    "seed": 4302,
+    "name": "nature_ice_smilodon",
+    "image_size": {
+      "width": 32,
+      "height": 32
+    }
+  },
+  "updated": "2026-11-09",
+  "character_id": "af94f098-43dd-4776-b5c8-43b111b7cb88"
+}

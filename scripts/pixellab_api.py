@@ -49,3 +49,13 @@ class PixelLab:
             if time.time() - t0 > timeout:
                 raise TimeoutError(job_id)
             time.sleep(every)
+
+    def post_when_free(self, path, body, every=10):
+        """POST, waiting while the plan's concurrent-job cap is reached (HTTP 429)."""
+        while True:
+            try:
+                return self.post(path, body)
+            except RuntimeError as e:
+                if "429" not in str(e):
+                    raise
+                time.sleep(every)

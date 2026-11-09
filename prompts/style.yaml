@@ -17,3 +17,17 @@ mirror_map:
 # preview/palette_compare.png). Pick the real palette in the tone-image phase,
 # then set e.g. `palette: palettes/endesga-32.hex` and re-run postprocess.py.
 palette: null
+
+# Animations every unit gets unless its YAML overrides (same name) or sets
+# `skip: true`. "rest" is not generated: the game plays idle slowly with a Zzz
+# icon (art direction doc). Hit flash is code, too.
+default_animations:
+  - name: idle
+    action: standing in place, gentle breathing, slight body bob, seamless loop
+    frames: 4
+  - name: walk
+    action: walking forward in a seamless looping walk cycle, legs alternating clearly, body facing the same direction throughout
+    frames: 6
+  - name: attack
+    action: lunging forward to attack, then returning to the starting pose
+    frames: 6

@@ -1,0 +1,78 @@
+{
+  "id": "nature_ice_leafcutter_bee",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 15.0,
+  "animations": {
+    "idle": {
+      "directions": {
+        "south": "done",
+        "south-east": "done",
+        "north-east": "done",
+        "east": "done",
+        "north": "done"
+      },
+      "request": {
+        "action": "hovering in place, wings buzzing rapidly, bees bobbing slightly",
+        "frames": 4
+      },
+      "animation_group_id": "dfbbeed2-ed8c-4931-b9f3-59bda5de2c2b"
+    },
+    "walk": {
+      "directions": {
+        "south": "done",
+        "south-east": "done",
+        "east": "done"
+      },
+      "request": {
+        "action": "flying forward together, wings buzzing rapidly",
+        "frames": 4
+      },
+      "animation_group_id": "a0338d34-c4c7-4d4a-b109-029e2a63f916"
+    },
+    "attack": {
+      "directions": {
+        "south": "done"
+      },
+      "request": {
+        "action": "the bees dart forward to sting, then pull back",
+        "frames": 4
+      },
+      "animation_group_id": "a8cf4179-cdb7-4af1-99f3-833e729195dc"
+    }
+  },
+  "candidates": [
+    {
+      "seed": 4102,
+      "character_id": "053a5c57-623e-4b2e-b280-2aa90f816ad2",
+      "picked": false
+    },
+    {
+      "seed": 4101,
+      "character_id": "e9714c9a-d37c-445e-90eb-97f9748998c7",
+      "picked": true
+    },
+    {
+      "seed": 4103,
+      "character_id": "c6b57055-b373-47e6-a019-2420454de9c4",
+      "picked": false
+    }
+  ],
+  "create_request": {
+    "description": "a small swarm of three ancient leafcutter bees flying close together, fuzzy black and amber striped bodies, translucent wings, each bee carrying a tiny cut green leaf piece",
+    "view": "low top-down",
+    "template_id": "custom",
+    "outline": "single color black outline",
+    "detail": "medium detail",
+    "no_background": true,
+    "seed": 4101,
+    "name": "nature_ice_leafcutter_bee",
+    "image_size": {
+      "width": 32,
+      "height": 32
+    }
+  },
+  "updated": "2026-11-09",
+  "character_id": "e9714c9a-d37c-445e-90eb-97f9748998c7"
+}

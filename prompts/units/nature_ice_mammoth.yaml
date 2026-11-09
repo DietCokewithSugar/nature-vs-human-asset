@@ -1,5 +1,6 @@
 id: nature_ice_mammoth
 display_name: 猛犸象
+sheet: {tab: 生物, row: 10, name: 猛犸象 - Woolly Mammoth}
 faction: nature
 era: ice_age
 size_class: large         # 64x64, 2x2 tiles
@@ -12,4 +13,7 @@ description: >-
 animations:
   - name: walk
     action: slow heavy walk, trunk swaying
+    frames: 6
+  - name: attack
+    action: swinging its head and long tusks sideways to strike, then returning
     frames: 6

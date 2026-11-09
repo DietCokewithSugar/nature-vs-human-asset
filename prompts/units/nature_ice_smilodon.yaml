@@ -1,0 +1,20 @@
+id: nature_ice_smilodon
+display_name: 剑齿虎
+sheet: {tab: 生物, row: 17, name: 剑齿虎 - Smilodon}
+faction: nature
+era: ice_age
+size_class: medium
+canvas: 32
+template_id: lion
+seed: 4301
+description: >-
+  Smilodon sabre-toothed cat, tawny tan fur with faint darker spots, very long
+  curved white upper sabre fangs, heavy muscular shoulders and forelimbs, short
+  bobbed tail
+animations:
+  - name: walk
+    action: prowling forward in a seamless looping walk cycle, shoulders rolling, legs alternating
+    frames: 6
+  - name: attack
+    action: pouncing forward and biting down with its long sabre fangs, then recovering
+    frames: 6

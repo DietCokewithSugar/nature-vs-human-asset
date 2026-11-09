@@ -1,6 +1,6 @@
 {
  "frames": {
-  "idle_south_0": {
+  "rotation_south_0": {
    "frame": {
     "x": 0,
     "y": 0,
@@ -20,7 +20,7 @@
     "h": 44
    }
   },
-  "idle_south-east_0": {
+  "rotation_south-east_0": {
    "frame": {
     "x": 0,
     "y": 44,
@@ -40,7 +40,7 @@
     "h": 44
    }
   },
-  "idle_east_0": {
+  "rotation_east_0": {
    "frame": {
     "x": 0,
     "y": 88,
@@ -60,7 +60,7 @@
     "h": 44
    }
   },
-  "idle_north-east_0": {
+  "rotation_north-east_0": {
    "frame": {
     "x": 0,
     "y": 132,
@@ -80,7 +80,7 @@
     "h": 44
    }
   },
-  "idle_north_0": {
+  "rotation_north_0": {
    "frame": {
     "x": 0,
     "y": 176,
@@ -100,7 +100,7 @@
     "h": 44
    }
   },
-  "idle_north-west_0": {
+  "rotation_north-west_0": {
    "frame": {
     "x": 0,
     "y": 220,
@@ -120,7 +120,7 @@
     "h": 44
    }
   },
-  "idle_west_0": {
+  "rotation_west_0": {
    "frame": {
     "x": 0,
     "y": 264,
@@ -140,7 +140,7 @@
     "h": 44
    }
   },
-  "idle_south-west_0": {
+  "rotation_south-west_0": {
    "frame": {
     "x": 0,
     "y": 308,
@@ -1122,29 +1122,29 @@
   }
  },
  "animations": {
-  "idle_south": [
-   "idle_south_0"
+  "rotation_south": [
+   "rotation_south_0"
   ],
-  "idle_south-east": [
-   "idle_south-east_0"
+  "rotation_south-east": [
+   "rotation_south-east_0"
   ],
-  "idle_east": [
-   "idle_east_0"
+  "rotation_east": [
+   "rotation_east_0"
   ],
-  "idle_north-east": [
-   "idle_north-east_0"
+  "rotation_north-east": [
+   "rotation_north-east_0"
   ],
-  "idle_north": [
-   "idle_north_0"
+  "rotation_north": [
+   "rotation_north_0"
   ],
-  "idle_north-west": [
-   "idle_north-west_0"
+  "rotation_north-west": [
+   "rotation_north-west_0"
   ],
-  "idle_west": [
-   "idle_west_0"
+  "rotation_west": [
+   "rotation_west_0"
   ],
-  "idle_south-west": [
-   "idle_south-west_0"
+  "rotation_south-west": [
+   "rotation_south-west_0"
   ],
   "walk_south": [
    "walk_south_0",
@@ -1234,7 +1234,7 @@
     "y": 0.8409
    },
    "fps": {
-    "idle": 1,
+    "rotation": 1,
     "walk": 10
    },
    "directions": [

@@ -83,7 +83,7 @@ def load_unit_frames(uid, style):
     drawn = style["drawn_directions"]
     mirror = style["mirror_map"]
 
-    anims = {"idle": {d: [raw / fr["rotations"][d]] for d in DIRS}}
+    anims = {"rotation": {d: [raw / fr["rotations"][d]] for d in DIRS}}
     for name, per_dir in fr.get("animations", {}).items():
         anims[name] = {d: [raw / p for p in paths] for d, paths in per_dir.items()}
 
@@ -105,15 +105,15 @@ def load_unit_frames(uid, style):
 
 
 def foot_anchor(frames, cell):
-    """Anchor at the horizontal centre / lowest opaque row of the idle south frame."""
-    bbox = frames["idle"]["south"][0].getbbox()
+    """Anchor at the horizontal centre / lowest opaque row of the static south pose."""
+    bbox = frames["rotation"]["south"][0].getbbox()
     return {"x": 0.5, "y": round(bbox[3] / cell, 4)} if bbox else {"x": 0.5, "y": 1.0}
 
 
 def process(uid, style, pal):
     unit_cfg = yaml.safe_load((ROOT / "prompts/units" / f"{uid}.yaml").read_text())
     frames, cell = load_unit_frames(uid, style)
-    fps = {"idle": 1, "walk": 10, "attack": 10}
+    fps = {"rotation": 1, "idle": 6, "walk": 10, "attack": 10}
 
     rows = [(n, d) for n in frames for d in DIRS if d in frames[n]]
     cols = max(len(frames[n][d]) for n, d in rows)
@@ -158,7 +158,7 @@ def write_previews(uid, frames, cell, fps, scale=4):
     prev = ROOT / "preview"
     prev.mkdir(exist_ok=True)
     for n, per_dir in frames.items():
-        if n == "idle":
+        if n == "rotation":
             continue
         dirs = [d for d in DIRS if d in per_dir]
         nf = max(len(per_dir[d]) for d in dirs)

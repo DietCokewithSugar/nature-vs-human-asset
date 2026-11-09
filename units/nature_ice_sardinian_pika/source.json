@@ -1,0 +1,77 @@
+{
+  "id": "nature_ice_sardinian_pika",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 14.0,
+  "animations": {
+    "idle": {
+      "directions": {
+        "south": "done",
+        "east": "done",
+        "south-east": "done",
+        "north": "done"
+      },
+      "request": {
+        "action": "standing in place, gentle breathing, slight body bob, seamless loop",
+        "frames": 4
+      },
+      "animation_group_id": "a0be6b6a-a550-4e99-89d3-0b549a8cd01e"
+    },
+    "walk": {
+      "directions": {
+        "south": "done",
+        "east": "done",
+        "south-east": "done"
+      },
+      "request": {
+        "action": "hopping forward in short bouncy hops, seamless loop",
+        "frames": 6
+      },
+      "animation_group_id": "580e2020-c265-4bac-9787-0be42b691768"
+    },
+    "attack": {
+      "directions": {
+        "south": "done"
+      },
+      "request": {
+        "action": "lunging forward to bite, then hopping back",
+        "frames": 6
+      },
+      "animation_group_id": "f42d3336-dfa4-4bb5-95ee-af4689e1ae6a"
+    }
+  },
+  "candidates": [
+    {
+      "seed": 4203,
+      "character_id": "75bad1dd-7298-44b5-8a6c-9c2580e3bc82",
+      "picked": false
+    },
+    {
+      "seed": 4202,
+      "character_id": "7e33ed1b-2063-48f0-8567-b122bb19f315",
+      "picked": true
+    },
+    {
+      "seed": 4201,
+      "character_id": "b7f51729-cbb5-4b34-a6f6-caa27f49f381",
+      "picked": false
+    }
+  ],
+  "create_request": {
+    "description": "Sardinian giant pika (Prolagus sardus), plump round rabbit-like rodent, short rounded ears, no visible tail, dense brown-grey fur with a lighter belly, small black eyes, short legs",
+    "view": "low top-down",
+    "template_id": "cat",
+    "outline": "single color black outline",
+    "detail": "medium detail",
+    "no_background": true,
+    "seed": 4202,
+    "name": "nature_ice_sardinian_pika",
+    "image_size": {
+      "width": 32,
+      "height": 32
+    }
+  },
+  "updated": "2026-11-09",
+  "character_id": "7e33ed1b-2063-48f0-8567-b122bb19f315"
+}

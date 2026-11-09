@@ -1,0 +1,181 @@
+{
+ "id": "ice_snow_water",
+ "tileset_id": "68bd72d8-26c6-4aa5-819c-d8ca49fcfbd1",
+ "tile_size": 32,
+ "request": {
+  "mode": "pro",
+  "tile_size": {
+   "width": 32,
+   "height": 32
+  },
+  "view": "low top-down",
+  "transition_size": 0,
+  "raggedness": 0.35,
+  "boundary_amplitude": 0.15,
+  "lower_description": "deep cold icy blue water with small ripples",
+  "upper_description": "soft white packed snow with subtle blue shadows",
+  "seed": 5102
+ },
+ "tiles": [
+  {
+   "x": 0,
+   "y": 0,
+   "corners": {
+    "NW": "upper",
+    "NE": "upper",
+    "SW": "lower",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 32,
+   "y": 0,
+   "corners": {
+    "NW": "upper",
+    "NE": "lower",
+    "SW": "upper",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 64,
+   "y": 0,
+   "corners": {
+    "NW": "lower",
+    "NE": "upper",
+    "SW": "lower",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 96,
+   "y": 0,
+   "corners": {
+    "NW": "upper",
+    "NE": "upper",
+    "SW": "lower",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 0,
+   "y": 32,
+   "corners": {
+    "NW": "lower",
+    "NE": "upper",
+    "SW": "upper",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 32,
+   "y": 32,
+   "corners": {
+    "NW": "upper",
+    "NE": "lower",
+    "SW": "lower",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 64,
+   "y": 32,
+   "corners": {
+    "NW": "lower",
+    "NE": "lower",
+    "SW": "lower",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 96,
+   "y": 32,
+   "corners": {
+    "NW": "lower",
+    "NE": "lower",
+    "SW": "lower",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 0,
+   "y": 64,
+   "corners": {
+    "NW": "upper",
+    "NE": "lower",
+    "SW": "upper",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 32,
+   "y": 64,
+   "corners": {
+    "NW": "lower",
+    "NE": "lower",
+    "SW": "upper",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 64,
+   "y": 64,
+   "corners": {
+    "NW": "lower",
+    "NE": "lower",
+    "SW": "upper",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 96,
+   "y": 64,
+   "corners": {
+    "NW": "lower",
+    "NE": "upper",
+    "SW": "lower",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 0,
+   "y": 96,
+   "corners": {
+    "NW": "upper",
+    "NE": "upper",
+    "SW": "upper",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 32,
+   "y": 96,
+   "corners": {
+    "NW": "upper",
+    "NE": "upper",
+    "SW": "upper",
+    "SE": "lower"
+   }
+  },
+  {
+   "x": 64,
+   "y": 96,
+   "corners": {
+    "NW": "upper",
+    "NE": "lower",
+    "SW": "lower",
+    "SE": "upper"
+   }
+  },
+  {
+   "x": 96,
+   "y": 96,
+   "corners": {
+    "NW": "lower",
+    "NE": "upper",
+    "SW": "upper",
+    "SE": "upper"
+   }
+  }
+ ]
+}

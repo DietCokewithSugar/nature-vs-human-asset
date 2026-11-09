@@ -1,0 +1,22 @@
+# Wang (corner) tilesets for the lab map. Every set shares "upper" = snow, so
+# grass / water / mud patches can sit anywhere on a snow base.
+common:
+  mode: pro
+  tile_size: {width: 32, height: 32}
+  view: low top-down
+  transition_size: 0
+  raggedness: 0.35
+  boundary_amplitude: 0.15
+tilesets:
+  - id: ice_snow_tundra
+    lower_description: frozen tundra ground with tufts of dry yellow-green grass and small pebbles
+    upper_description: soft white packed snow with subtle blue shadows
+    seed: 5101
+  - id: ice_snow_water
+    lower_description: deep cold icy blue water with small ripples
+    upper_description: soft white packed snow with subtle blue shadows
+    seed: 5102
+  - id: ice_snow_mud
+    lower_description: trampled brown mud with footprints, human camp ground
+    upper_description: soft white packed snow with subtle blue shadows
+    seed: 5103

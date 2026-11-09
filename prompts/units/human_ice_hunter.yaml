@@ -1,5 +1,6 @@
 id: human_ice_hunter
 display_name: 原始人猎人
+english_name: Ice Age Hunter
 faction: human
 era: ice_age
 size_class: medium        # 32x32, 1 tile
@@ -16,3 +17,5 @@ animations:
   - name: attack
     action: thrusting the spear forward to stab, then pulling it back
     frames: 4
+demo: true             # trial unit, not in the species sheet
+habitat: land

@@ -1,0 +1,19 @@
+{
+  "name": "nature-vs-human-asset-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "data": "node scripts/build-data.mjs",
+    "dev": "npm run data && vite",
+    "build": "npm run data && tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "pixi.js": "8.3.4",
+    "yaml": "2.5.1"
+  },
+  "devDependencies": {
+    "typescript": "5.6.3",
+    "vite": "5.4.10"
+  }
+}
