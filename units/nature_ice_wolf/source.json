@@ -1,0 +1,23 @@
+{
+  "id": "nature_ice_wolf",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab ToS (commercial use per plan)",
+  "created": "2026-11-09",
+  "generations_spent": 0,
+  "animations": {},
+  "character_id": "b51b3968-df77-4be8-a9a4-10c6c3c4dda5",
+  "create_request": {
+    "description": "grey ice age dire wolf, thick grey and white fur, bushy tail, lean muscular body, alert ears",
+    "view": "low top-down",
+    "template_id": "dog",
+    "outline": "single color black outline",
+    "detail": "medium detail",
+    "no_background": true,
+    "seed": 3001,
+    "image_size": {
+      "width": 32,
+      "height": 32
+    },
+    "name": "nature_ice_wolf"
+  }
+}

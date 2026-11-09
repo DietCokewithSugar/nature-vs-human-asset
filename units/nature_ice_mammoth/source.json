@@ -3,8 +3,19 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab ToS (commercial use per plan)",
   "created": "2026-11-09",
-  "generations_spent": 0,
-  "animations": {},
+  "generations_spent": 7.0,
+  "animations": {
+    "walk": {
+      "directions": {
+        "south": "done",
+        "south-east": "done",
+        "east": "done",
+        "north-east": "done",
+        "north": "done"
+      },
+      "animation_group_id": "aeefd425-10d3-4ee2-b265-186d09f036fd"
+    }
+  },
   "character_id": "cf9d4ebe-179a-44c2-af17-e5ead08b1bf4",
   "create_request": {
     "description": "woolly mammoth, shaggy reddish-brown long fur, long curved ivory tusks, small ears, trunk hanging down, huge heavy body, thick column legs",
