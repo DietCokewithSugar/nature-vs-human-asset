@@ -1,0 +1,33 @@
+{
+ "species": "巴利阿里山羊 - Balearic Island Cave Goat",
+ "wiki": "https://en.wikipedia.org/wiki/Myotragus",
+ "description_zh": "演化出低代谢与双眼面朝前方的特化岛屿偶蹄动物，耐旱且行动敏捷。",
+ "images": [
+  {
+   "file": "00_H_hlenziege_Museum_Manacor_12_jpg.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:H%C3%B6hlenziege_Museum_Manacor_12.jpg",
+   "license": "CC BY 3.0",
+   "author": "Olaf Tausch",
+   "size": [
+    3878,
+    2907
+   ]
+  },
+  {
+   "file": "01_Myotragus_balearicus_JPG.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Myotragus_balearicus.JPG",
+   "license": "Public domain",
+   "author": "Xavier Vázquez",
+   "size": [
+    992,
+    744
+   ]
+  },
+  {
+   "file": null,
+   "title": "File:Sóller. Museu Balear de Ciències Naturals. Myotragus balearicus (cropped).jpg",
+   "license": "CC BY-SA 4.0",
+   "skipped": "share-alike / unclear licence"
+  }
+ ]
+}
