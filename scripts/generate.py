@@ -45,6 +45,17 @@ def load_unit(path):
     return u
 
 
+def fetch_image(url, tries=5):
+    """Rotation PNGs are sometimes not ready the moment a job completes: retry."""
+    for i in range(tries):
+        try:
+            return Image.open(io.BytesIO(requests.get(url, timeout=60).content)).convert("RGBA")
+        except Exception:
+            if i == tries - 1:
+                raise
+            time.sleep(5 * (i + 1))
+
+
 class Unit:
     def __init__(self, path):
         self.cfg = load_unit(path)
@@ -173,7 +184,7 @@ class Unit:
                     url = url.get("url")
                 if not url:
                     continue
-                ims.append(Image.open(io.BytesIO(requests.get(url, timeout=60).content)).convert("RGBA"))
+                ims.append(fetch_image(url))
             rows.append((c, ims))
         if not rows or not rows[0][1]:
             print("no rotation urls found; keys:", list(info))

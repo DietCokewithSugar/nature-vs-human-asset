@@ -26,15 +26,27 @@ SKIP = re.compile(r"skelet|skull|bone|tooth|teeth|dentition|jaw|cranium|vertebra
 PREFER = re.compile(r"restor|reconstruct|life|antón|anton|knight|painting|art|chauvet|lascaux|illustr|model|sculpt", re.I)
 
 
+PACE = 45   # seconds between Wikimedia requests (the shared egress IP is easily rate limited)
+_last = [0.0]
+
+
 def get(url, **kw):
-    for i in range(8):
+    for i in range(10):
+        wait = PACE - (time.time() - _last[0])
+        if wait > 0:
+            time.sleep(wait)
+        _last[0] = time.time()
         r = requests.get(url, headers=UA, timeout=60, **kw)
         if r.status_code == 429 or r.content[:40].startswith(b"You are making too many"):
-            time.sleep(15 * (i + 1))   # Wikimedia rate limits: back off hard
+            print("  429, backing off", flush=True)
+            time.sleep(60 * (i + 1))   # Wikimedia rate limits: back off hard
             continue
         r.raise_for_status()
         return r
     raise RuntimeError(f"rate limited: {url}")
+
+
+OPEN = re.compile(r"^(public domain|pd|cc0|cc by \d|cc by$|cc-by-\d|cc by \d\.\d)", re.I)
 
 
 def sheet_row(cfg):
@@ -64,17 +76,24 @@ def main():
         files.sort(key=lambda f: 0 if PREFER.search(f) else 1)
         out = ROOT / "refs" / uid
         out.mkdir(parents=True, exist_ok=True)
-        recs = []
-        for i, f in enumerate(files[:cap]):
-            info = get("https://commons.wikimedia.org/w/api.php", params={
-                "action": "query", "format": "json", "titles": f, "prop": "imageinfo",
-                "iiprop": "url|extmetadata|size", "iiurlwidth": 1024}).json()
-            page = list(info["query"]["pages"].values())[0]
+        info = get("https://commons.wikimedia.org/w/api.php", params={
+            "action": "query", "format": "json", "titles": "|".join(files[:20]), "prop": "imageinfo",
+            "iiprop": "url|extmetadata|size", "iiurlwidth": 1024}).json()
+        strip = lambda s: re.sub(r"<[^>]+>", "", s or "").strip()
+        metas = []
+        for page in info.get("query", {}).get("pages", {}).values():
             if "imageinfo" not in page:
                 continue
             ii = page["imageinfo"][0]
             md = ii.get("extmetadata", {})
-            strip = lambda s: re.sub(r"<[^>]+>", "", s or "").strip()
+            lic = strip(md.get("LicenseShortName", {}).get("value"))
+            metas.append((files.index(page["title"]) if page["title"] in files else 99, page["title"], ii, md, lic))
+        metas.sort(key=lambda m: m[0])
+        # concept images must be redistributable without share-alike: PD / CC0 / CC BY only
+        usable = [m for m in metas if OPEN.match(m[4]) and "SA" not in m[4].upper()]
+        recs = [{"file": None, "title": m[1], "license": m[4], "skipped": "share-alike / unclear licence"}
+                for m in metas if m not in usable]
+        for i, (_, f, ii, md, lic) in enumerate(usable[:cap]):
             src = ii.get("thumburl") or ii["url"]
             ext = src.split("?", 1)[0].rsplit(".", 1)[-1].lower()[:4]
             name = f"{i:02d}_{re.sub(r'[^A-Za-z0-9]+', '_', f[5:])[:50]}.{ext}"
@@ -83,13 +102,11 @@ def main():
             except Exception as e:
                 print("  skip", f, e)
                 continue
-            recs.append({"file": name, "commons": ii.get("descriptionurl"), "license": strip(md.get("LicenseShortName", {}).get("value")),
-                         "author": strip(md.get("Artist", {}).get("value"))[:200], "size": [ii.get("width"), ii.get("height")]})
-            time.sleep(4)
+            recs.insert(i, {"file": name, "commons": ii.get("descriptionurl"), "license": lic,
+                            "author": strip(md.get("Artist", {}).get("value"))[:200], "size": [ii.get("width"), ii.get("height")]})
         (out / "refs.json").write_text(json.dumps({"species": row.get("物种名称"), "wiki": url, "description_zh": row.get("物种描述", ""),
                                                    "images": recs}, indent=1, ensure_ascii=False) + "\n")
-        print(uid, len(recs), "images:", [(r["file"], r["license"]) for r in recs])
-        time.sleep(2)
+        print(uid, "downloaded:", [(r["file"], r["license"]) for r in recs if r.get("file")], flush=True)
 
 
 if __name__ == "__main__":
