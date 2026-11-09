@@ -1,0 +1,39 @@
+{
+  "id": "nature_ice_leafcutter_bee",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 20.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 4101,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "5679a46f-0862-4e3c-86d9-c4836a7377a1",
+      "picked": false
+    },
+    {
+      "seed": 4102,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "4b2219d5-8c09-4dda-ab4f-bc738f28db69",
+      "picked": true
+    }
+  ],
+  "create_request": {
+    "description": "a small swarm of three Ice Age leafcutter bees flying close together, solitary bees with strong cutting mandibles, fuzzy black bodies with amber pollen hair under the belly, translucent wings, each bee carrying a tiny cut green leaf disc",
+    "view": "low top-down",
+    "template_id": "custom",
+    "no_background": true,
+    "seed": 4101,
+    "image_size": {
+      "width": 64,
+      "height": 64
+    },
+    "method": "create_with_style",
+    "style_character_id": "bd11b67a-1165-495e-96cf-b40403d116cb"
+  },
+  "updated": "2026-11-09",
+  "character_id": "4b2219d5-8c09-4dda-ab4f-bc738f28db69"
+}
