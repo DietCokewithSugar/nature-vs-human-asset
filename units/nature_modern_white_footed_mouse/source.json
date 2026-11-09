@@ -1,0 +1,30 @@
+{
+  "id": "nature_modern_white_footed_mouse",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 10.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 9081,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "7254d992-4ea3-48d6-bba4-586f97adf19b"
+    }
+  ],
+  "create_request": {
+    "description": "white-footed mouse Peromyscus leucopus, small agile mouse with reddish-brown back, bright white belly and white feet, big round ears, big black eyes, long tail",
+    "view": "low top-down",
+    "template_id": "cat",
+    "no_background": true,
+    "seed": 9081,
+    "image_size": {
+      "width": 64,
+      "height": 64
+    },
+    "method": "create_with_style",
+    "style_character_id": "bd11b67a-1165-495e-96cf-b40403d116cb"
+  },
+  "updated": "2026-11-09"
+}
