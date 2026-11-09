@@ -1,30 +1,26 @@
 id: nature_ice_sardinian_pika
 display_name: 撒丁岛巨兔
-sheet: {tab: 生物, row: 6, name: 撒丁岛巨兔 - Sardinian pika}
+sheet: {tab: 生物, name: 撒丁岛巨兔 - Sardinian pika}
 faction: nature
 era: ice_age
 size_class: small
-canvas: 32
+canvas: 64
 template_id: cat
+habitat: land
 seed: 4201
 description: >-
-  Sardinian giant pika (Prolagus sardus), plump round rabbit-like rodent, short
-  rounded ears, no visible tail, dense brown-grey fur with a lighter belly,
-  small black eyes, short legs
+  Sardinian pika Prolagus sardus, plump round rabbit-like burrowing lagomorph, short rounded ears, no visible tail, dense brown-grey fur with a lighter belly, small black eyes, short legs
 animations:
   - name: walk
     action: hopping forward, the whole body clearly lifts off the ground and lands again, hind legs push off, ears bounce, seamless loop
     frames: 6
-  - name: attack
-    action: rears back, then lunges forward with mouth wide open showing front teeth to bite, then returns to the starting pose
-    action_by_dir:
-      north: >-
-        seen from behind, facing away from the viewer: the body rears back, then
-        lunges forward away from the viewer with the head dipping down out of
-        sight, then returns; only the back, ears and fur are visible, no face or mouth
-    frames: 6
-attack_keys:
-  anticipation: crouching low and leaning back, ears flattened, body squashed and coiled, about to pounce, facing {facing}
-  strike: lunging forward {facing}, its round plump body leaning far forward and slightly stretched, mouth open biting with its front teeth; it has no tail and keeps its round pika shape and short ears
-  motion: quick pounce and bite
 handedit: {kind: lunge, heavy: false}
+# High-detail standard (2026-11): Pro character mode at 64px, styled after the approved
+# HD cave hyena, design seeded by an open-licence image from the species' Wikipedia page.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: crouching low and bunched up with ears flattened back, facing {facing}
+  strike: leaping forward {facing} with front paws outstretched, mouth open biting with its front teeth; it has no tail and keeps its round pika shape and short ears

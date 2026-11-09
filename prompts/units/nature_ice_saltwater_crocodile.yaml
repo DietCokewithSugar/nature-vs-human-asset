@@ -15,3 +15,12 @@ animations:
     action: low crawling walk, legs sprawling, tail swaying side to side, seamless loop
     frames: 6
 handedit: {kind: lunge, heavy: true}
+# High-detail standard (2026-11): Pro character mode at 64px, styled after the approved
+# HD cave hyena, design seeded by an open-licence image from the species' Wikipedia page.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: lying low with its head drawn back and long jaws slightly open, facing {facing}
+  strike: lunging forward {facing} with its long jaws snapping wide open, body twisting

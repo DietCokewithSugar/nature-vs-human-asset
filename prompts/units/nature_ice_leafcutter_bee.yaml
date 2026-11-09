@@ -1,16 +1,15 @@
 id: nature_ice_leafcutter_bee
 display_name: 古代切叶蜂
-sheet: {tab: 生物, row: 2, name: 古代切叶蜂 - Leafcutter Bees}
+sheet: {tab: 生物, name: 古代切叶蜂 - Leafcutter Bees}
 faction: nature
 era: ice_age
-size_class: micro         # swarm of 3 drawn as one unit on a 32px canvas (PixelLab minimum)
-canvas: 32
-template_id: custom       # not a biped/quadruped: no skeleton
+size_class: micro
+canvas: 64
+template_id: custom
+habitat: air
 seed: 4101
 description: >-
-  a small swarm of three ancient leafcutter bees flying close together, fuzzy
-  black and amber striped bodies, translucent wings, each bee carrying a tiny
-  cut green leaf piece
+  a small swarm of three Ice Age leafcutter bees flying close together, solitary bees with strong cutting mandibles, fuzzy black bodies with amber pollen hair under the belly, translucent wings, each bee carrying a tiny cut green leaf disc
 animations:
   - name: idle
     action: hovering in place, wings buzzing rapidly, bees bobbing slightly
@@ -18,12 +17,10 @@ animations:
   - name: walk
     action: flying forward together, wings buzzing rapidly
     frames: 4
-  - name: attack
-    action: the bees dart forward to sting, then pull back
-    frames: 4
-habitat: air            # flies over water
-attack_keys:
-  anticipation: the three small separate bees pull back and bunch together tightly, abdomens curled forward with stingers ready, facing {facing}
-  strike: the three small separate bees dart forward {facing} in a tight line, stingers extended, wings blurred; they stay three small bees and never merge into one big bee
-  motion: fast darting sting
 handedit: {kind: swarm, heavy: false}
+# High-detail standard (2026-11): Pro character mode at 64px, styled after the approved
+# HD cave hyena, design seeded by an open-licence image from the species' Wikipedia page.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null   # a single-bee photo would pull the swarm design toward one bee
+reference_license: null

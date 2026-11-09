@@ -4,14 +4,23 @@ sheet: {tab: 生物, name: 巨河狸 - Giant Beaver}
 faction: nature
 era: ice_age
 size_class: small
-canvas: 32
+canvas: 64
 template_id: bear
 habitat: land
 seed: 6501
 description: >-
-  giant beaver Castoroides, large rounded rodent with dense dark brown fur, big orange front teeth, small ears, long narrow scaly tail
+  giant beaver Castoroides, bear-sized semi-aquatic rodent with dense dark brown fur, huge curved orange front incisors, small round ears, rounded heavy body, long narrow tail
 animations:
   - name: walk
     action: waddling forward on short legs, tail dragging, seamless loop
     frames: 6
 handedit: {kind: lunge, heavy: false}
+# High-detail standard (2026-11): Pro character mode at 64px, styled after the approved
+# HD cave hyena, design seeded by an open-licence image from the species' Wikipedia page.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: rearing back with its head raised and mouth open showing the big orange front teeth, facing {facing}
+  strike: lunging forward {facing} and biting down hard with its huge orange front teeth, neck stretched out

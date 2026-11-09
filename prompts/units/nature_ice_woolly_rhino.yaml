@@ -9,9 +9,18 @@ template_id: horse
 habitat: land
 seed: 6811
 description: >-
-  woolly rhinoceros completely covered in long shaggy woolly reddish-brown fur hanging down over its legs like a mammoth's coat, big shoulder hump, two horns with a very long flattened front horn sweeping forward, small eyes, short thick legs
+  woolly rhinoceros completely covered in long shaggy woolly reddish-brown fur hanging down over its legs, big shoulder hump, two horns with a very long flattened front horn sweeping forward, small eyes, short thick legs
 animations:
   - name: walk
     action: heavy plodding walk, head low, seamless loop
     frames: 6
 handedit: {kind: lunge, heavy: true}
+# High-detail standard (2026-11): Pro character mode at 64px, styled after the approved
+# HD cave hyena, design seeded by an open-licence image from the species' Wikipedia page.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: lowering its head with the long front horn aimed forward, front feet braced, facing {facing}
+  strike: charging forward {facing} and tossing its head upward, goring with the long flat front horn

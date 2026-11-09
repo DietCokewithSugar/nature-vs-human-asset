@@ -19,6 +19,8 @@ Writes units/<id>/variants/attackcombo/<dir>/ (frames + sequence.json) and keeps
 the raw AI keys as key_anticipation.png / key_strike.png for review.
 """
 import argparse
+import shutil
+import subprocess
 import json
 import pathlib
 import sys
@@ -177,15 +179,47 @@ def run_dir(api, uid, cfg, d, out, rebuild=False, reseed=0, key_source="pixen"):
     return spent
 
 
+def north_fallback(uid):
+    """Back view: copy the hand warp attack (AI key poses come out sideways)."""
+    u = ROOT / "units" / uid
+    src_dir, dst = u / "variants" / "attackhand" / "north", u / "variants" / "attackcombo" / "north"
+    if not src_dir.exists():
+        print(uid, "north: no hand attack to copy (run handedit.py build first)")
+        return
+    shutil.rmtree(dst, ignore_errors=True)
+    shutil.copytree(src_dir, dst)
+    seq = dst / "sequence.json"
+    meta = json.loads(seq.read_text()) if seq.exists() else {}
+    meta["method"] = "hand warp attack (fallback: AI key poses turn the back view sideways)"
+    seq.write_text(json.dumps(meta, indent=1) + "\n")
+    srcp = u / "source.json"
+    s = json.loads(srcp.read_text())
+    v = s.setdefault("variants", {}).setdefault("attackcombo", {"generations": 0, "directions": []})
+    v["directions"] = sorted(set(v.get("directions", [])) | {"north"})
+    v["key_sources"] = {"south": "pixen", "east": "pixen", "south-east": "v3", "north-east": "v3",
+                        "north": "hand warp (fallback)", **{k: x for k, x in (v.get("key_sources") or {}).items() if k != "north"}}
+    srcp.write_text(json.dumps(s, indent=2, ensure_ascii=False) + "\n")
+    print(uid, "north: hand warp fallback")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("unit")
-    ap.add_argument("--dirs", default="south,south-east,east,north-east,north")
+    ap.add_argument("--dirs", default="auto",
+                    help="auto (batch default): south,east from Pixen keys; south-east,north-east from v3 keys; "
+                         "north copied from the hand warp attack (both AI key sources turn the back view sideways)")
     ap.add_argument("--rebuild", action="store_true", help="reuse saved AI key poses; redo only the hand steps")
     ap.add_argument("--reseed", type=int, default=0, help="new take of the AI key poses")
     ap.add_argument("--keys", default="pixen", choices=["pixen", "v3"],
                     help="pixen: image edit (best for side/front views); v3: pick keys from a v3 animation (keeps diagonal/back angles)")
     a = ap.parse_args()
+    if a.dirs == "auto":
+        plan = {"pixen": ["south", "east"], "v3": ["south-east", "north-east"]}
+        for keys, dirs in plan.items():
+            sub = [x for x in sys.argv[1:] if not x.startswith("--dirs") and not x.startswith("--keys")]
+            subprocess.run([sys.executable, __file__, *sub, "--dirs", ",".join(dirs), "--keys", keys], check=True)
+        north_fallback(a.unit)
+        return
     style = yaml.safe_load((ROOT / "prompts/style.yaml").read_text())
     cfg = {**style, **yaml.safe_load((ROOT / "prompts/units" / f"{a.unit}.yaml").read_text())}
     api = PixelLab()

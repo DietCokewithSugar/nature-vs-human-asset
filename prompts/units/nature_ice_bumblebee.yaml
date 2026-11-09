@@ -4,14 +4,20 @@ sheet: {tab: 生物, name: 原生熊峰 - Bumblebees}
 faction: nature
 era: ice_age
 size_class: micro
-canvas: 32
+canvas: 64
 template_id: custom
 habitat: air
 seed: 6101
 description: >-
-  two large fuzzy ice age bumblebees flying side by side, very round fluffy black and golden-yellow bodies with a white tail tip, short translucent wings
+  two large fuzzy cold-hardy Ice Age bumblebees flying side by side, very round fluffy black and golden-yellow banded bodies with a white tail tip, short translucent wings
 animations:
   - name: walk
     action: flying forward together, wings buzzing rapidly, bobbing slightly
     frames: 6
 handedit: {kind: swarm, heavy: false}
+# High-detail standard (2026-11): Pro character mode at 64px, styled after the approved
+# HD cave hyena, design seeded by an open-licence image from the species' Wikipedia page.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null   # a single-bee photo would pull the swarm design toward one bee
+reference_license: null

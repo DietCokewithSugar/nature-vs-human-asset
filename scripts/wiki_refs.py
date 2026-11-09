@@ -1,7 +1,7 @@
 """Fetch reference images for a species from its Wikipedia page (sheet column
 "wiki参考"), with license + author, for use as PixelLab concept images.
 
-  python scripts/wiki_refs.py <unit_id> [...]
+  python scripts/wiki_refs.py [--max=N] <unit_id> [...]   (skips units that already have refs.json)
 
 Writes refs/<unit_id>/NN_<name>.<ext> (1024px thumbnails) and refs.json with
 source URL, license, author, and the description from the sheet. Picks images
@@ -46,7 +46,11 @@ def sheet_row(cfg):
 
 
 def main():
-    for uid in sys.argv[1:]:
+    args = [a for a in sys.argv[1:] if not a.startswith("--max=")]
+    cap = int(next((a.split("=")[1] for a in sys.argv[1:] if a.startswith("--max=")), 8))
+    for uid in args:
+        if (ROOT / "refs" / uid / "refs.json").exists():
+            print(uid, "already fetched"); continue
         cfg = yaml.safe_load((ROOT / "prompts/units" / f"{uid}.yaml").read_text())
         row = sheet_row(cfg)
         url = row.get("wiki参考", "")
@@ -61,7 +65,7 @@ def main():
         out = ROOT / "refs" / uid
         out.mkdir(parents=True, exist_ok=True)
         recs = []
-        for i, f in enumerate(files[:8]):
+        for i, f in enumerate(files[:cap]):
             info = get("https://commons.wikimedia.org/w/api.php", params={
                 "action": "query", "format": "json", "titles": f, "prop": "imageinfo",
                 "iiprop": "url|extmetadata|size", "iiurlwidth": 1024}).json()

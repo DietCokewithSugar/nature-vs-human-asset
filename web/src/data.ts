@@ -109,15 +109,15 @@ export const ATTACK_LABEL: Record<AttackVersion, string> = {
 export const ATTACK_NOTE: Record<AttackVersion, string> = {
   attack: "PixelLab v3 按文字一次生成，匀速播放",
   attackkf: "先用 Pixen 编辑出「蓄力」和「出击」两个关键姿势，再由 v3 补中间帧，按蓄力-出击-停顿-收招重排节奏",
-  attackhand: "在 PixelLab 原图上逐像素改出关键姿势（aseprite-ai-artist 的文本网格方法 + 攻击规则），5 个方向，不消耗生成次数（当前默认）",
-  attackcombo: "AI 画蓄力和出击两个关键姿势，AI 手改负责统一配色、对齐、残影、过渡和节奏（试点：冰河斑鬣狗）",
+  attackhand: "在 PixelLab 原图上逐像素改出关键姿势（aseprite-ai-artist 的文本网格方法 + 攻击规则），5 个方向，不消耗生成次数",
+  attackcombo: "AI 画蓄力和出击两个关键姿势，AI 手改负责统一配色、对齐、残影、过渡和节奏；背面沿用手改（当前默认，没有结合版的单位自动用 AI 手改）",
 };
 
 export interface Resolved { key: string; frames: string[]; fallback: boolean }
 export function resolve(atlas: Atlas, anim: AnimName, dir: Dir, attack: AttackVersion = "attack"): Resolved {
   const order: string[] = anim === "rest" ? ["idle", "rotation"]
     : anim === "death" ? ["death", "rotation"]
-    : anim === "attack" ? [attack, "attackhand", "attackcombo", "attackkf", "attack", "idle", "rotation"] : [anim, "idle", "rotation"];
+    : anim === "attack" ? [attack, "attackcombo", "attackhand", "attackkf", "attack", "idle", "rotation"] : [anim, "idle", "rotation"];
   for (const a of order) {
     const f = atlas.animations[`${a}_${dir}`];
     if (f?.length) return { key: a, frames: f, fallback: a !== order[0] };
@@ -163,16 +163,16 @@ export function frameAt(durs: number[], t: number, loop = true): number {
 
 /** Viewer preferences shared by the gallery, unit page and lab. */
 export const prefs = (() => {
-  const def = { attack: "attackhand" as AttackVersion, feel: true, labMap: "ice_age" as "ice_age" | "hd" | "demo" };
+  const def = { attack: "attackcombo" as AttackVersion, feel: true, labMap: "ice_age" as "ice_age" | "hd" | "demo" };
   try {
     // key bumped: the default attack version changed to the hand-edited one
-    return { ...def, ...JSON.parse(localStorage.getItem("nvh-prefs-v2") || "{}") } as typeof def;
+    return { ...def, ...JSON.parse(localStorage.getItem("nvh-prefs-v3") || "{}") } as typeof def;
   } catch {
     return def;
   }
 })();
 export function savePrefs() {
-  try { localStorage.setItem("nvh-prefs-v2", JSON.stringify(prefs)); } catch { /* private mode */ }
+  try { localStorage.setItem("nvh-prefs-v3", JSON.stringify(prefs)); } catch { /* private mode */ }
 }
 
 export function fpsFor(u: Unit, anim: AnimName): number {

@@ -4,14 +4,23 @@ sheet: {tab: 生物, name: 萨丁岛豺 - Sardinian dhole}
 faction: nature
 era: ice_age
 size_class: medium
-canvas: 32
+canvas: 64
 template_id: dog
 habitat: land
 seed: 7001
 description: >-
-  Sardinian dhole Cynotherium, small slender wild dog with a reddish-brown coat, paler throat, large rounded ears, bushy dark-tipped tail
+  Sardinian dhole Cynotherium sardous, small compact island wild dog with short sturdy legs, reddish-brown coat, paler throat, large rounded ears, bushy dark-tipped tail
 animations:
   - name: walk
     action: trotting forward, tail level, seamless loop
     frames: 6
 handedit: {kind: lunge, heavy: false}
+# High-detail standard (2026-11): Pro character mode at 64px, styled after the approved
+# HD cave hyena, design seeded by an open-licence image from the species' Wikipedia page.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: crouching low with the head lowered and lips curled back, weight on the hind legs, facing {facing}
+  strike: lunging forward {facing} with the neck stretched out, front legs off the ground, jaws wide open biting

@@ -4,14 +4,23 @@ sheet: {tab: 生物, name: 穴居古狐 - Protocyon}
 faction: nature
 era: ice_age
 size_class: medium
-canvas: 32
+canvas: 64
 template_id: dog
 habitat: land
 seed: 7101
 description: >-
-  Protocyon, large fox-like wild canid with a grey-brown coat, long legs, long pointed muzzle, large pointed ears, bushy tail
+  Protocyon, large long-legged fox-like South American wild canid with a grey-brown coat, long pointed muzzle, large pointed ears, bushy tail
 animations:
   - name: walk
     action: trotting forward, tail level, seamless loop
     frames: 6
 handedit: {kind: lunge, heavy: false}
+# High-detail standard (2026-11): Pro character mode at 64px, styled after the approved
+# HD cave hyena, design seeded by an open-licence image from the species' Wikipedia page.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: crouching low with the head lowered and ears pinned back, weight on the hind legs, facing {facing}
+  strike: lunging forward {facing} with the neck stretched out, front legs reaching off the ground, jaws wide open biting

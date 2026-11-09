@@ -4,14 +4,23 @@ sheet: {tab: 生物, name: 北美巨豪猪 - Pleistocene North American Porcupin
 faction: nature
 era: ice_age
 size_class: small
-canvas: 32
+canvas: 64
 template_id: dog
 habitat: land
 seed: 6601
 description: >-
-  large North American porcupine, round body covered in long pale-tipped dark quills, small dark face with a blunt nose, short legs
+  large Ice Age porcupine, round body covered in long sharp pale-tipped dark quills, small dark face with a blunt nose, short legs
 animations:
   - name: walk
     action: waddling forward, quills swaying, seamless loop
     frames: 6
 handedit: {kind: lunge, heavy: false}
+# High-detail standard (2026-11): Pro character mode at 64px, styled after the approved
+# HD cave hyena, design seeded by an open-licence image from the species' Wikipedia page.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: hunching up with all its quills raised and fanned out, head low, facing {facing}
+  strike: lunging forward {facing} with its quills fully bristled and spiky, ramming and biting

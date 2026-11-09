@@ -9,9 +9,18 @@ template_id: horse
 habitat: land
 seed: 6721
 description: >-
-  ancient elephant with a long low barrel body, a flat low head with no dome, short dark chestnut-brown hair, two long straight ivory tusks pointing forward, thick pillar legs, long trunk; it looks like a hairy African elephant, not a woolly beast
+  ancient woodland elephant with a long low barrel body, a flat low head with no dome, short dark chestnut-brown hair, two long gently curved ivory tusks pointing forward, thick pillar legs, long trunk; it looks like a hairy African elephant, not a woolly beast
 animations:
   - name: walk
     action: slow heavy walk, trunk swaying
     frames: 6
 handedit: {kind: lunge, heavy: true}
+# High-detail standard (2026-11): Pro character mode at 64px, styled after the approved
+# HD cave hyena, design seeded by an open-licence image from the species' Wikipedia page.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: raising its head with the trunk curled up and tusks lifted, weight shifted back, facing {facing}
+  strike: thrusting its long tusks forward and down {facing} with the head lowered, charging

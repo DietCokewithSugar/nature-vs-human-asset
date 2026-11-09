@@ -4,14 +4,23 @@ sheet: {tab: 生物, name: 大鲵 - Andrias}
 faction: nature
 era: ice_age
 size_class: medium
-canvas: 32
+canvas: 64
 template_id: custom
 habitat: land
 seed: 7601
 description: >-
-  giant salamander Andrias, flat broad head with tiny eyes, wrinkly mottled brown-grey skin, short stubby legs, long flat paddle tail
+  giant salamander Andrias, large flat broad-headed amphibian with tiny eyes, wrinkly slimy mottled brown-grey skin with folds along its sides, short stubby legs, long flat paddle tail
 animations:
   - name: walk
     action: slow crawling walk, body and tail undulating, seamless loop
     frames: 6
 handedit: {kind: lunge, heavy: false}
+# High-detail standard (2026-11): Pro character mode at 64px, styled after the approved
+# HD cave hyena, design seeded by an open-licence image from the species' Wikipedia page.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: pulling its flat head back with the body tensed, wide mouth closed, facing {facing}
+  strike: lunging forward {facing} with its wide flat mouth gaping open, snapping

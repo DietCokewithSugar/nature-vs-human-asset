@@ -1,0 +1,47 @@
+{
+ "species": "古代切叶蜂 - Leafcutter Bees",
+ "wiki": "https://en.wikipedia.org/wiki/Megachile",
+ "description_zh": "独居性昆虫，具强壮上颚切割树叶筑巢，腹部密被集粉毛，是高效的传粉者与木构破坏者。",
+ "images": [
+  {
+   "file": "00_Megachile_lagopoda_1_jpg.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Megachile_lagopoda_1.jpg",
+   "license": "CC BY 3.0",
+   "author": "Gideon Pisanty (Gidip) גדעון פיזנטי",
+   "size": [
+    999,
+    1249
+   ]
+  },
+  {
+   "file": "01_Megachile_male_Keila_jpg.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Megachile_(male)_-_Keila.jpg",
+   "license": "CC BY-SA 4.0",
+   "author": "Ivar Leidus",
+   "size": [
+    4800,
+    3200
+   ]
+  },
+  {
+   "file": "02_Leafcutter_bee_by_Bernhard_plank_jpg.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Leafcutter_bee_by_Bernhard_plank.jpg",
+   "license": "CC BY-SA 3.0",
+   "author": "Bernhard Plank - SiLencer",
+   "size": [
+    1024,
+    683
+   ]
+  },
+  {
+   "file": "03_Megachile_pjt_jpg.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Megachile-pjt.jpg",
+   "license": "CC BY-SA 3.0",
+   "author": "pjt56 ---",
+   "size": [
+    2898,
+    2184
+   ]
+  }
+ ]
+}

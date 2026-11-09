@@ -9,9 +9,18 @@ template_id: bear
 habitat: land
 seed: 6201
 description: >-
-  giant ground sloth Megatherium, massive shaggy brown body, small head with a short snout, long curved claws on the front feet, thick heavy tail, walking on all fours on the sides of its feet
+  giant ground sloth Megatherium, enormous shaggy ochre-brown body with broad heavy hips, small head with a short snout, huge long curved claws on its front feet, thick muscular tail, walking on all fours on the sides of its feet
 animations:
   - name: walk
     action: slow heavy lumbering walk on all fours, claws curled, body swaying
     frames: 6
 handedit: {kind: lunge, heavy: true}
+# High-detail standard (2026-11): Pro character mode at 64px, styled after the approved
+# HD cave hyena, design seeded by an open-licence image from the species' Wikipedia page.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: rearing up on its hind legs with the thick tail braced and both clawed forelimbs raised high, facing {facing}
+  strike: slamming both huge curved claws down and forward {facing}, body leaning in, raking

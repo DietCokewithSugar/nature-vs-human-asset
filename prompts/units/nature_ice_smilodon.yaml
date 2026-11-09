@@ -1,17 +1,27 @@
 id: nature_ice_smilodon
 display_name: 剑齿虎
-sheet: {tab: 生物, row: 17, name: 剑齿虎 - Smilodon}
+sheet: {tab: 生物, name: 剑齿虎 - Smilodon}
 faction: nature
 era: ice_age
-size_class: medium_large   # 48px: bigger than the 32px carnivores, smaller than 64px megafauna
-canvas: 48
+size_class: medium_large
+canvas: 64
 template_id: cat
+habitat: land
 seed: 4331
 # Coat: fossils preserve no coat pattern and there is no record of stripes, so plain.
 description: >-
-  sabre-toothed cat with a completely plain uniform tawny coat, no mane, no stripes, no spots, short smooth fur, paler belly, very long curved white upper sabre fangs, heavy muscular bear-like build, short bobbed tail like a lynx
+  Smilodon sabre-toothed cat with a completely plain uniform tawny coat, no mane, no stripes, no spots, short smooth fur, paler belly, very long flattened dagger-like curved white upper sabre fangs, powerful thick forelimbs, heavy muscular bear-like build, short bobbed tail like a lynx
 animations:
   - name: walk
     action: prowling forward in a seamless looping walk cycle, shoulders rolling, legs alternating
     frames: 6
 handedit: {kind: lunge, heavy: false}
+# High-detail standard (2026-11): Pro character mode at 64px, styled after the approved
+# HD cave hyena, design seeded by an open-licence image from the species' Wikipedia page.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: rearing back with its jaws gaping extremely wide showing the long sabre fangs, forelimbs lifted, facing {facing}
+  strike: lunging forward {facing} and stabbing down with its long sabre fangs, thick forelimbs reaching out

@@ -4,14 +4,23 @@ sheet: {tab: 生物, name: 恐鸟 - Moa}
 faction: nature
 era: ice_age
 size_class: medium
-canvas: 32
+canvas: 64
 template_id: custom
 habitat: land
 seed: 6301
 description: >-
-  giant moa bird, very tall flightless bird with a long neck, small head with a short pointed beak, shaggy brown-grey hair-like feathers covering a round body, thick strong legs, no wings visible
+  giant moa Dinornis, very tall flightless bird with a long upright neck, small head with a short pointed beak, shaggy reddish-brown hair-like feathers covering a large round body, thick powerful legs with three-toed feet, no wings visible
 animations:
   - name: walk
     action: striding forward on its long legs, neck bobbing, seamless loop
     frames: 6
 handedit: {kind: lunge, heavy: false}
+# High-detail standard (2026-11): Pro character mode at 64px, styled after the approved
+# HD cave hyena, design seeded by an open-licence image from the species' Wikipedia page.
+pipeline: pro
+style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
+reference: null
+reference_license: null
+attack_keys:
+  anticipation: pulling its long neck back into an S-curve with the head raised high, facing {facing}
+  strike: jabbing its head and beak sharply forward {facing} with the neck fully extended, pecking hard
