@@ -3,8 +3,17 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab ToS (commercial use per plan)",
   "created": "2026-11-09",
-  "generations_spent": 0,
-  "animations": {},
+  "generations_spent": 5.0,
+  "animations": {
+    "walk": {
+      "directions": {
+        "south": "done",
+        "south-east": "done",
+        "east": "done"
+      },
+      "animation_group_id": "39f98c06-73cf-4978-9730-9f4ac303eb4b"
+    }
+  },
   "character_id": "b51b3968-df77-4be8-a9a4-10c6c3c4dda5",
   "create_request": {
     "description": "grey ice age dire wolf, thick grey and white fur, bushy tail, lean muscular body, alert ears",
