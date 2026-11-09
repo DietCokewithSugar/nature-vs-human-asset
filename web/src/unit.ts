@@ -156,6 +156,8 @@ export function renderUnit(root: HTMLElement, m: Manifest, id: string): () => vo
           ["模型", u.prompt.model], ["描述（提示词）", u.prompt.description], ["视角", u.prompt.view],
           ["描边", u.prompt.outline], ["细节", u.prompt.detail], ["骨骼模板", u.prompt.templateId],
           ["画布", `${u.canvas}×${u.canvas}px（动画帧 ${u.cell}×${u.cell}px）`], ["种子", u.prompt.seed],
+          ...(u.prompt.styleCharacterId ? [["风格参考", u.prompt.styleCharacterId === "bd11b67a-1165-495e-96cf-b40403d116cb" ? "冰河斑鬣狗（高清标准）" : String(u.prompt.styleCharacterId)] as [string, string]] : []),
+          ["概念图", u.prompt.reference ? `${String(u.prompt.reference).split("/").pop()}（${u.prompt.referenceLicense ?? ""}）` : "无（文字 + 风格参考）"],
         ]),
         el("h3", {}, "动作提示词"),
         el("table", { class: "grid-table" },

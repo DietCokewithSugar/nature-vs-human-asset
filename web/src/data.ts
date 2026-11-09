@@ -33,7 +33,7 @@ export interface Unit {
   fps: Record<string, number>;
   generatedAnimations: string[];
   sheet: { tab: string; row: number; name: string; data: Record<string, string> | null } | null;
-  prompt: Record<string, string | number>;
+  prompt: Record<string, string | number | null>;
   animations: { name: string; action: string; frames: number; generated: boolean }[];
   drawnDirections: string[];
   mirrored: Record<string, string>;

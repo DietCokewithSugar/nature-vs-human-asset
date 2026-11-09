@@ -85,7 +85,10 @@ for (const file of fs.readdirSync(path.join(ROOT, "prompts/units")).sort()) {
       view: cfg.view ?? style.view,
       outline: cfg.outline ?? style.outline,
       detail: cfg.detail ?? style.detail,
-      model: "PixelLab create-character-v3",
+      model: cfg.pipeline === "pro" ? "PixelLab create-character-pro" : "PixelLab create-character-v3",
+      reference: cfg.reference ?? null,
+      referenceLicense: cfg.reference_license ?? null,
+      styleCharacterId: cfg.style_character_id ?? null,
     },
     animations: animationsFor(cfg).map((a) => ({
       name: a.name,
