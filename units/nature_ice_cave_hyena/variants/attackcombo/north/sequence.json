@@ -38,5 +38,5 @@
   }
  ],
  "hit": 4,
- "method": "combo fallback: AI key poses failed for the back view (Pixen turned it sideways, v3 rotated it), so this direction uses the hand-edited warp attack"
+ "method": "hand warp attack (fallback: AI key poses turn the back view sideways)"
 }

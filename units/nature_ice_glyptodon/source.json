@@ -113,7 +113,7 @@
         "east": "pixen",
         "south-east": "v3",
         "north-east": "v3",
-        "north": "hand warp (fallback)"
+        "north": "hand warp (fallback: AI key poses turn the back view sideways)"
       }
     }
   }
