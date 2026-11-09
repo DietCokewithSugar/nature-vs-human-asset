@@ -10,13 +10,15 @@
       "seed": 7201,
       "pipeline": "pro",
       "reference": null,
-      "character_id": "083771b9-4a1a-47eb-a9f8-38dde55ee8d3"
+      "character_id": "083771b9-4a1a-47eb-a9f8-38dde55ee8d3",
+      "picked": true
     },
     {
       "seed": 7202,
       "pipeline": "pro",
       "reference": null,
-      "character_id": "eedf11f4-d24c-462a-92cf-6aa60f165c38"
+      "character_id": "eedf11f4-d24c-462a-92cf-6aa60f165c38",
+      "picked": false
     }
   ],
   "create_request": {
@@ -32,5 +34,6 @@
     "method": "create_with_style",
     "style_character_id": "bd11b67a-1165-495e-96cf-b40403d116cb"
   },
-  "updated": "2026-11-09"
+  "updated": "2026-11-09",
+  "character_id": "083771b9-4a1a-47eb-a9f8-38dde55ee8d3"
 }
