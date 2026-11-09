@@ -732,7 +732,7 @@ export async function renderLab(root: HTMLElement, m: Manifest, classic = false)
     side.replaceChildren(
       el("div", { class: "panel" },
         el("h3", {}, "地图"),
-        seg([["ice_age", "冰河关卡 96×64"], ["hd", "高清试点 64px"], ["demo", "演示小图"]], level ? "ice_age" : hd ? "hd" : "demo", (v) => {
+        seg([["ice_age", "冰河关卡 96×64"], ["hd", "高清 64px"], ["demo", "演示小图"]], level ? "ice_age" : hd ? "hd" : "demo", (v) => {
           prefs.labMap = v as "ice_age" | "hd" | "demo"; savePrefs();
           window.dispatchEvent(new HashChangeEvent("hashchange"));
         }, "seg"),
@@ -740,7 +740,7 @@ export async function renderLab(root: HTMLElement, m: Manifest, classic = false)
           check("领地与区块（PRD 4.3）", territory.visible, (v) => (territory.visible = v)),
           el("p", { class: "muted small" }, "冰河时代固定地图：分层地块（dual grid）、火山、资源点、森林边缘的树。橙框是人类开局建筑的占地（还没有美术）。区块边框：橙=人类，绿=自然，白=争夺中。"),
         ] : []),
-        ...(hd ? [el("p", { class: "muted small" }, "高清标准试点：64px 地块、64px/128px 单位（冰河斑鬣狗、猛犸象已升级，其余仍是旧 32px，会显得偏小）、营地道具。")] : []),
+        ...(hd ? [el("p", { class: "muted small" }, "高清标准：64px 地块，全部生物 64px（猛犸象 128px）、营地道具。注：统一 64px 画布后，小型物种和大型物种在地图上体型接近。")] : []),
       ),
       el("div", { class: "panel" },
         el("h3", {}, "全体状态"),

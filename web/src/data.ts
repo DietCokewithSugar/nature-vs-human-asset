@@ -163,7 +163,7 @@ export function frameAt(durs: number[], t: number, loop = true): number {
 
 /** Viewer preferences shared by the gallery, unit page and lab. */
 export const prefs = (() => {
-  const def = { attack: "attackcombo" as AttackVersion, feel: true, labMap: "ice_age" as "ice_age" | "hd" | "demo" };
+  const def = { attack: "attackcombo" as AttackVersion, feel: true, labMap: "hd" as "ice_age" | "hd" | "demo" };
   try {
     // key bumped: the default attack version changed to the hand-edited one
     return { ...def, ...JSON.parse(localStorage.getItem("nvh-prefs-v3") || "{}") } as typeof def;
