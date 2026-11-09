@@ -75,6 +75,7 @@ def main():
     ap.add_argument("--image")
     ap.add_argument("--rig-type", default="quadruped")
     ap.add_argument("--animations", default="preset:quadruped:walk")
+    ap.add_argument("--rig-model", default="v2.5-20260210")   # the v2 endpoint rejects v3.0
     a = ap.parse_args()
     d = ROOT / "units" / a.unit / "tripo"
     d.mkdir(parents=True, exist_ok=True)
@@ -108,8 +109,9 @@ def main():
                        "texture": True, "pbr": True, "face_limit": 20000}, out_file="model.glb")
     chk = step("rigcheck", {"type": "animate_prerigcheck", "original_model_task_id": m["task_id"]})
     print("rig check:", chk.get("output"))
+    # without rig_type Tripo defaults to a biped skeleton, and quadruped presets then fail (code 1004)
     r = step("rig", {"type": "animate_rig", "original_model_task_id": m["task_id"], "out_format": "glb",
-                     "rig_type": a.rig_type, "spec": "tripo"}, out_file="rigged.glb")
+                     "rig_type": a.rig_type, "spec": "tripo", "model_version": a.rig_model}, out_file="rigged.glb")
     step("walk", {"type": "animate_retarget", "original_model_task_id": r["task_id"], "out_format": "glb",
                   "animation": a.animations, "bake_animation": True, "animate_in_place": True}, out_file="walk.glb")
     print("done; credits left:", balance())
