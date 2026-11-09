@@ -1,0 +1,31 @@
+{
+  "id": "human_ice_hunter",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab ToS (commercial use per plan)",
+  "created": "2026-11-09",
+  "generations_spent": 4.0,
+  "animations": {
+    "walk": {
+      "directions": {
+        "south": "done",
+        "south-east": "done"
+      },
+      "animation_group_id": "16b09928-aa2f-4f2f-b7bd-43c7c7ed362a"
+    }
+  },
+  "character_id": "be25476a-68c5-4081-800e-ff564d6e8cd8",
+  "create_request": {
+    "description": "ice age caveman hunter holding a stone-tipped wooden spear, wearing brown fur pelt clothing, messy dark hair, bare feet, stocky build",
+    "view": "low top-down",
+    "template_id": "mannequin",
+    "outline": "single color black outline",
+    "detail": "medium detail",
+    "no_background": true,
+    "seed": 1001,
+    "image_size": {
+      "width": 32,
+      "height": 32
+    },
+    "name": "human_ice_hunter"
+  }
+}

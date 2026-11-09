@@ -1,0 +1,18 @@
+id: human_ice_hunter
+display_name: 原始人猎人
+faction: human
+era: ice_age
+size_class: medium        # 32x32, 1 tile
+canvas: 32
+template_id: mannequin
+seed: 1001
+description: >-
+  ice age caveman hunter holding a stone-tipped wooden spear, wearing brown
+  fur pelt clothing, messy dark hair, bare feet, stocky build
+animations:
+  - name: walk
+    action: walking forward, steady pace, spear held upright
+    frames: 6
+  - name: attack
+    action: thrusting the spear forward to stab, then pulling it back
+    frames: 4

@@ -1,0 +1,15 @@
+# Shared style settings. Every unit inherits these unless it overrides them.
+# Mirrors the art-direction doc: pixel art, 3/4 top-down ("low top-down" in
+# PixelLab), 1px dark outline, light from the top-left.
+view: low top-down
+outline: single color black outline
+detail: medium detail
+no_background: true
+# Directions we actually generate animations for. The other three
+# (south-west, west, north-west) are produced by horizontal mirroring.
+drawn_directions: [south, south-east, east, north-east, north]
+mirror_map:
+  south-west: south-east
+  west: east
+  north-west: north-east
+palette: palettes/endesga-32.hex

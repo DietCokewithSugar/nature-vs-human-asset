@@ -1,0 +1,15 @@
+id: nature_ice_mammoth
+display_name: 猛犸象
+faction: nature
+era: ice_age
+size_class: large         # 64x64, 2x2 tiles
+canvas: 64
+template_id: horse
+seed: 2001
+description: >-
+  woolly mammoth, shaggy reddish-brown long fur, long curved ivory tusks, small
+  ears, trunk hanging down, huge heavy body, thick column legs
+animations:
+  - name: walk
+    action: slow heavy walk, trunk swaying
+    frames: 6

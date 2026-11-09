@@ -1,0 +1,15 @@
+id: nature_ice_wolf
+display_name: 狼
+faction: nature
+era: ice_age
+size_class: medium        # 32x32, 1 tile
+canvas: 32
+template_id: dog
+seed: 3001
+description: >-
+  grey ice age dire wolf, thick grey and white fur, bushy tail, lean muscular
+  body, alert ears
+animations:
+  - name: walk
+    action: trotting forward, tail level
+    frames: 6
