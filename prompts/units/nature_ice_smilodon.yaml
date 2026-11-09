@@ -5,11 +5,11 @@ faction: nature
 era: ice_age
 size_class: medium_large   # 48px: bigger than the 32px carnivores, smaller than 64px megafauna
 canvas: 48
-template_id: lion
-seed: 4321
+template_id: cat
+seed: 4331
 # Coat: fossils preserve no coat pattern and there is no record of stripes, so plain.
 description: >-
-  Smilodon sabre-toothed cat with a completely plain uniform tawny coat like a lion, absolutely no stripes and no spots anywhere, paler belly, very long curved white upper sabre fangs, heavy muscular bear-like build, short bobbed tail like a lynx
+  sabre-toothed cat with a completely plain uniform tawny coat, no mane, no stripes, no spots, short smooth fur, paler belly, very long curved white upper sabre fangs, heavy muscular bear-like build, short bobbed tail like a lynx
 animations:
   - name: walk
     action: prowling forward in a seamless looping walk cycle, shoulders rolling, legs alternating

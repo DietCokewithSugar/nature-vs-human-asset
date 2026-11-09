@@ -3,16 +3,16 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 6.0,
+  "generations_spent": 12.0,
   "animations": {},
   "create_request": {
-    "description": "American mastodon, long low heavy body with shorter shaggy reddish-brown hair, flat low head without a dome, long nearly straight forward-pointing ivory tusks, thick legs, trunk hanging down",
+    "description": "American mastodon, an elephant-like animal that is clearly NOT a mammoth: long low barrel-shaped body, flat sloping forehead with no dome and no shoulder hump, short dark chestnut-brown hair, two long nearly straight ivory tusks pointing forward and slightly upward, thick pillar legs, long trunk",
     "view": "low top-down",
     "template_id": "horse",
     "outline": "single color black outline",
     "detail": "medium detail",
     "no_background": true,
-    "seed": 6701,
+    "seed": 6711,
     "name": "nature_ice_mastodon",
     "image_size": {
       "width": 64,
@@ -32,6 +32,18 @@
     {
       "seed": 6701,
       "character_id": "b9886b01-b170-42b0-9520-a65e97d0e96b"
+    },
+    {
+      "seed": 6712,
+      "character_id": "24059cc4-1d2c-4217-8c52-1c66d7e8741a"
+    },
+    {
+      "seed": 6711,
+      "character_id": "9765bfaf-372f-49ce-a686-76b6f6efd2cb"
+    },
+    {
+      "seed": 6713,
+      "character_id": "eac64079-a849-4c97-a776-77159bcb6f6e"
     }
   ]
 }

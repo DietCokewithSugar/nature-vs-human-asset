@@ -7,12 +7,9 @@ size_class: large
 canvas: 64
 template_id: horse
 habitat: land
-seed: 6711
+seed: 6721
 description: >-
-  American mastodon, an elephant-like animal that is clearly NOT a mammoth: long
-  low barrel-shaped body, flat sloping forehead with no dome and no shoulder
-  hump, short dark chestnut-brown hair, two long nearly straight ivory tusks
-  pointing forward and slightly upward, thick pillar legs, long trunk
+  ancient elephant with a long low barrel body, a flat low head with no dome, short dark chestnut-brown hair, two long straight ivory tusks pointing forward, thick pillar legs, long trunk; it looks like a hairy African elephant, not a woolly beast
 animations:
   - name: walk
     action: slow heavy walk, trunk swaying

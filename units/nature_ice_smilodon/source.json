@@ -3,16 +3,16 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 6.0,
+  "generations_spent": 12.0,
   "animations": {},
   "create_request": {
-    "description": "Smilodon sabre-toothed cat, plain tawny coat without stripes or spots, paler belly, very long curved white upper sabre fangs, heavy muscular shoulders and forelimbs, short bobbed tail",
+    "description": "Smilodon sabre-toothed cat with a completely plain uniform tawny coat like a lion, absolutely no stripes and no spots anywhere, paler belly, very long curved white upper sabre fangs, heavy muscular bear-like build, short bobbed tail like a lynx",
     "view": "low top-down",
     "template_id": "lion",
     "outline": "single color black outline",
     "detail": "medium detail",
     "no_background": true,
-    "seed": 4311,
+    "seed": 4321,
     "name": "nature_ice_smilodon",
     "image_size": {
       "width": 48,
@@ -32,6 +32,18 @@
     {
       "seed": 4313,
       "character_id": "6d6858fd-9899-46d4-965a-c49ccc3e8c06"
+    },
+    {
+      "seed": 4323,
+      "character_id": "c6a0acda-26de-47cc-9a0a-754f38d8bb42"
+    },
+    {
+      "seed": 4322,
+      "character_id": "97fc6db0-76ab-4cf8-9e6e-2d57ae09bd19"
+    },
+    {
+      "seed": 4321,
+      "character_id": "4cf0c543-d259-4037-b865-d03956ef7eb4"
     }
   ]
 }

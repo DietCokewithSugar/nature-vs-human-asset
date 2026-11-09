@@ -3,16 +3,16 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 6.0,
+  "generations_spent": 12.0,
   "animations": {},
   "create_request": {
-    "description": "woolly rhinoceros, stocky heavy body with a shoulder hump and thick shaggy reddish-brown fur, two horns on the snout with a very long flattened front horn, small eyes, short thick legs",
+    "description": "woolly rhinoceros completely covered in long shaggy woolly reddish-brown fur hanging down over its legs like a mammoth's coat, big shoulder hump, two horns with a very long flattened front horn sweeping forward, small eyes, short thick legs",
     "view": "low top-down",
     "template_id": "horse",
     "outline": "single color black outline",
     "detail": "medium detail",
     "no_background": true,
-    "seed": 6801,
+    "seed": 6812,
     "name": "nature_ice_woolly_rhino",
     "image_size": {
       "width": 64,
@@ -33,5 +33,23 @@
       "seed": 6802,
       "character_id": "c86f1b07-c9a5-47fe-9670-598cf7adff9e"
     }
-  ]
+  ],
+  "candidates": [
+    {
+      "seed": 6812,
+      "character_id": "b3f4a6a4-72d0-4b1c-8ab3-04fabb35fb82",
+      "picked": true
+    },
+    {
+      "seed": 6813,
+      "character_id": "640c130c-61a9-4cd6-b058-5a935a427ea6",
+      "picked": false
+    },
+    {
+      "seed": 6811,
+      "character_id": "67a69111-8c6d-41cb-82af-7016bce6291f",
+      "picked": false
+    }
+  ],
+  "character_id": "b3f4a6a4-72d0-4b1c-8ab3-04fabb35fb82"
 }
