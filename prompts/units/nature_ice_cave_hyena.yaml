@@ -23,3 +23,6 @@ pipeline: pro
 reference: refs/nature_ice_cave_hyena/05_Stamps_of_Moldova_2016_Crocuta_crocuta_spelaea_mod.jpg
 reference_license: Public domain (Post of Moldova, 2016) - https://commons.wikimedia.org/wiki/File:Stamps_of_Moldova_2016_Crocuta_crocuta_spelaea_(mod).jpg
 
+attack_keys:
+  anticipation: crouching low with the head lowered and shoulders hunched, weight shifted back onto the hind legs, jaws slightly open, facing {facing}
+  strike: lunging forward {facing} with the neck stretched out, front legs reaching forward off the ground, massive jaws wide open biting

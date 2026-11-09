@@ -3,7 +3,7 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 40.0,
+  "generations_spent": 59.0,
   "animations": {
     "idle": {
       "directions": {
@@ -99,6 +99,28 @@
         "north"
       ],
       "generations": 0
+    },
+    "attackcombo": {
+      "method": "AI key poses (Pixen edit) + AI hand-edit cleanup/tweens/timing",
+      "directions": [
+        "east",
+        "north",
+        "north-east",
+        "south",
+        "south-east"
+      ],
+      "keys": {
+        "anticipation": "crouching low with the head lowered and shoulders hunched, weight shifted back onto the hind legs, jaws slightly open, facing {facing}",
+        "strike": "lunging forward {facing} with the neck stretched out, front legs reaching forward off the ground, massive jaws wide open biting"
+      },
+      "generations": 19,
+      "key_sources": {
+        "south": "pixen",
+        "east": "pixen",
+        "south-east": "v3",
+        "north-east": "v3",
+        "north": "hand warp (fallback)"
+      }
     }
   }
 }

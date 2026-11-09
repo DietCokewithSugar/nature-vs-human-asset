@@ -102,21 +102,22 @@ export function framesFor(atlas: Atlas, anim: AnimName, dir: Dir, attack: Attack
   return resolve(atlas, anim, dir, attack).frames;
 }
 
-export type AttackVersion = "attack" | "attackkf" | "attackhand";
+export type AttackVersion = "attack" | "attackkf" | "attackhand" | "attackcombo";
 export const ATTACK_LABEL: Record<AttackVersion, string> = {
-  attack: "PixelLab 原版", attackkf: "PixelLab 关键帧", attackhand: "AI 手改",
+  attack: "PixelLab 原版", attackkf: "PixelLab 关键帧", attackhand: "AI 手改", attackcombo: "结合版",
 };
 export const ATTACK_NOTE: Record<AttackVersion, string> = {
   attack: "PixelLab v3 按文字一次生成，匀速播放",
   attackkf: "先用 Pixen 编辑出「蓄力」和「出击」两个关键姿势，再由 v3 补中间帧，按蓄力-出击-停顿-收招重排节奏",
   attackhand: "在 PixelLab 原图上逐像素改出关键姿势（aseprite-ai-artist 的文本网格方法 + 攻击规则），5 个方向，不消耗生成次数（当前默认）",
+  attackcombo: "AI 画蓄力和出击两个关键姿势，AI 手改负责统一配色、对齐、残影、过渡和节奏（试点：冰河斑鬣狗）",
 };
 
 export interface Resolved { key: string; frames: string[]; fallback: boolean }
 export function resolve(atlas: Atlas, anim: AnimName, dir: Dir, attack: AttackVersion = "attack"): Resolved {
   const order: string[] = anim === "rest" ? ["idle", "rotation"]
     : anim === "death" ? ["death", "rotation"]
-    : anim === "attack" ? [attack, "attackhand", "attackkf", "attack", "idle", "rotation"] : [anim, "idle", "rotation"];
+    : anim === "attack" ? [attack, "attackhand", "attackcombo", "attackkf", "attack", "idle", "rotation"] : [anim, "idle", "rotation"];
   for (const a of order) {
     const f = atlas.animations[`${a}_${dir}`];
     if (f?.length) return { key: a, frames: f, fallback: a !== order[0] };
@@ -131,7 +132,7 @@ export function durations(atlas: Atlas, key: string, dir: Dir, frames: string[],
   return timed(atlas, key, dir, frames, fps, feel);
 }
 
-const AUTHORED = new Set(["attackkf", "attackhand", "death"]);
+const AUTHORED = new Set(["attackkf", "attackhand", "attackcombo", "death"]);
 function timed(atlas: Atlas, key: string, dir: Dir, frames: string[], fps: number, feel: boolean): number[] {
   const even = frames.map(() => 1000 / fps);
   if (key === "death") return frames.map((f) => atlas.frames[f]?.duration ?? 1000 / fps);   // always authored
@@ -182,7 +183,7 @@ export function fpsFor(u: Unit, anim: AnimName): number {
 /** "已生成" means a real animation exists, not only the fallback. */
 export function hasAnim(u: Unit, anim: AnimName): boolean {
   if (anim === "rest") return u.generatedAnimations.includes("idle");
-  if (anim === "attack") return ["attack", "attackhand", "attackkf"].some((a) => u.generatedAnimations.includes(a));
+  if (anim === "attack") return ["attack", "attackhand", "attackkf", "attackcombo"].some((a) => u.generatedAnimations.includes(a));
   return u.generatedAnimations.includes(anim);
 }
 
