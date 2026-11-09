@@ -1,0 +1,101 @@
+[
+ {
+  "tag": "pixen_sheet",
+  "endpoint": "/create-image-pixen",
+  "n": 1,
+  "usage": {
+   "type": "generations",
+   "generations": 1.0
+  }
+ },
+ {
+  "tag": "pro_hide_tent",
+  "endpoint": "/generate-image-v2",
+  "n": 4,
+  "usage": {
+   "type": "generations",
+   "generations": 10.0
+  }
+ },
+ {
+  "tag": "pro_campfire",
+  "endpoint": "/generate-image-v2",
+  "n": 4,
+  "usage": {
+   "type": "generations",
+   "generations": 10.0
+  }
+ },
+ {
+  "tag": "pro_drying_rack",
+  "endpoint": "/generate-image-v2",
+  "n": 4,
+  "usage": {
+   "type": "generations",
+   "generations": 10.0
+  }
+ },
+ {
+  "tag": "pro_mammoth_bone_hut",
+  "endpoint": "/generate-image-v2",
+  "n": 4,
+  "usage": {
+   "type": "generations",
+   "generations": 10.0
+  }
+ },
+ {
+  "tag": "flash_hide_tent",
+  "endpoint": "/create-image-pro-flash",
+  "n": 1,
+  "usage": {
+   "type": "generations",
+   "generations": 5.0
+  }
+ },
+ {
+  "tag": "flash_campfire",
+  "endpoint": "/create-image-pro-flash",
+  "n": 1,
+  "usage": {
+   "type": "generations",
+   "generations": 5.0
+  }
+ },
+ {
+  "tag": "pixen_hide_tent",
+  "endpoint": "/create-image-pixen",
+  "n": 1,
+  "usage": {
+   "type": "generations",
+   "generations": 1.0
+  }
+ },
+ {
+  "tag": "pixen_campfire",
+  "endpoint": "/create-image-pixen",
+  "n": 1,
+  "usage": {
+   "type": "generations",
+   "generations": 1.0
+  }
+ },
+ {
+  "tag": "pixen_drying_rack",
+  "endpoint": "/create-image-pixen",
+  "n": 1,
+  "usage": {
+   "type": "generations",
+   "generations": 1.0
+  }
+ },
+ {
+  "tag": "pixen_mammoth_bone_hut",
+  "endpoint": "/create-image-pixen",
+  "n": 1,
+  "usage": {
+   "type": "generations",
+   "generations": 1.0
+  }
+ }
+]
