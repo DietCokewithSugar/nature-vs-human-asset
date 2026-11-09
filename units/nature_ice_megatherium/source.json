@@ -1,0 +1,30 @@
+{
+  "id": "nature_ice_megatherium",
+  "tool": "PixelLab API v2",
+  "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
+  "created": "2026-11-09",
+  "generations_spent": 10.0,
+  "animations": {},
+  "candidates": [
+    {
+      "seed": 6201,
+      "pipeline": "pro",
+      "reference": null,
+      "character_id": "2563b291-44aa-4dc1-a503-de2ade40ad0f"
+    }
+  ],
+  "create_request": {
+    "description": "giant ground sloth Megatherium, enormous shaggy ochre-brown body with broad heavy hips, small head with a short snout, huge long curved claws on its front feet, thick muscular tail, walking on all fours on the sides of its feet",
+    "view": "low top-down",
+    "template_id": "bear",
+    "no_background": true,
+    "seed": 6201,
+    "image_size": {
+      "width": 64,
+      "height": 64
+    },
+    "method": "create_with_style",
+    "style_character_id": "bd11b67a-1165-495e-96cf-b40403d116cb"
+  },
+  "updated": "2026-11-09"
+}

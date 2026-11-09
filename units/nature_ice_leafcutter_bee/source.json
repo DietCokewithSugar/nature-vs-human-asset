@@ -3,7 +3,7 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 30.0,
+  "generations_spent": 31.0,
   "animations": {
     "idle": {
       "directions": {
@@ -25,7 +25,8 @@
         "south-east": "done",
         "north-east": "done",
         "east": "done",
-        "north": "done"
+        "north": "done",
+        "south": "done"
       },
       "request": {
         "action": "flying forward together, wings buzzing rapidly",
