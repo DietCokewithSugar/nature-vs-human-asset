@@ -3,13 +3,15 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab ToS (commercial use per plan)",
   "created": "2026-11-09",
-  "generations_spent": 5.0,
+  "generations_spent": 7.0,
   "animations": {
     "walk": {
       "directions": {
         "south": "done",
         "south-east": "done",
-        "east": "done"
+        "east": "done",
+        "north-east": "done",
+        "north": "done"
       },
       "animation_group_id": "39f98c06-73cf-4978-9730-9f4ac303eb4b"
     }

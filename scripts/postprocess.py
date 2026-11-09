@@ -6,7 +6,7 @@ Usage:
 For each unit it:
   * puts every frame into one shared cell (frames are centred, so the pivot stays put)
   * builds the 8 directions from the 5 drawn ones (west side = mirrored east side)
-  * hardens alpha and snaps every colour to the master palette (palettes/*.hex)
+  * hardens alpha and, if style.yaml sets `palette`, snaps every colour to it
   * writes units/<id>/<id>.png  - spritesheet (one row per animation+direction)
            units/<id>/<id>.json - atlas in TexturePacker "JSON Hash" format, which
                                   Phaser 3 (load.atlas) and PixiJS (Spritesheet) read
@@ -42,7 +42,12 @@ def srgb_to_lab(rgb):
 
 
 class Palette:
+    """Snap colours to a palette. With path=None it only hardens alpha."""
+
     def __init__(self, path):
+        self.off = path is None
+        if self.off:
+            return
         self.rgb = load_palette(path)
         self.lab = srgb_to_lab(self.rgb)
         self.cache = {}
@@ -50,6 +55,10 @@ class Palette:
     def apply(self, im):
         a = np.array(im.convert("RGBA"))
         alpha = a[..., 3] >= 128
+        if self.off:
+            a[..., 3] = np.where(alpha, 255, 0)
+            a[~alpha] = 0
+            return Image.fromarray(a, "RGBA")
         px = a[..., :3][alpha]
         uniq, inv = np.unique(px, axis=0, return_inverse=True)
         d = ((srgb_to_lab(uniq.astype(np.float64))[:, None, :] - self.lab[None]) ** 2).sum(-1)
@@ -165,7 +174,7 @@ def write_previews(uid, frames, cell, fps, scale=4):
 
 def main():
     style = yaml.safe_load((ROOT / "prompts/style.yaml").read_text())
-    pal = Palette(style["palette"])
+    pal = Palette(style.get("palette"))
     ids = sys.argv[1:] or sorted(p.name for p in (ROOT / "units").iterdir() if (p / "raw/metadata.json").exists())
     for uid in ids:
         process(uid, style, pal)

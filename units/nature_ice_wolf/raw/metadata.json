@@ -1,0 +1,79 @@
+{
+  "group_id": "c9c8112b-cf24-487a-8443-58943077690e",
+  "states": [
+    {
+      "character": {
+        "id": "b51b3968-df77-4be8-a9a4-10c6c3c4dda5",
+        "name": "Idle",
+        "prompt": "grey ice age dire wolf, thick grey and white fur, bushy tail, lean muscular body, alert ears",
+        "size": {
+          "width": 32,
+          "height": 32
+        },
+        "template_id": "dog",
+        "directions": 8,
+        "view": "low top-down",
+        "created_at": "2026-11-09T04:25:26.898414+00:00"
+      },
+      "folder": "Idle",
+      "frames": {
+        "rotations": {
+          "south": "Idle/rotations/south.png",
+          "south-east": "Idle/rotations/south-east.png",
+          "east": "Idle/rotations/east.png",
+          "north-east": "Idle/rotations/north-east.png",
+          "north": "Idle/rotations/north.png",
+          "north-west": "Idle/rotations/north-west.png",
+          "west": "Idle/rotations/west.png",
+          "south-west": "Idle/rotations/south-west.png"
+        },
+        "animations": {
+          "walk": {
+            "north-east": [
+              "Idle/animations/walk/north-east/frame_000.png",
+              "Idle/animations/walk/north-east/frame_001.png",
+              "Idle/animations/walk/north-east/frame_002.png",
+              "Idle/animations/walk/north-east/frame_003.png",
+              "Idle/animations/walk/north-east/frame_004.png",
+              "Idle/animations/walk/north-east/frame_005.png"
+            ],
+            "east": [
+              "Idle/animations/walk/east/frame_000.png",
+              "Idle/animations/walk/east/frame_001.png",
+              "Idle/animations/walk/east/frame_002.png",
+              "Idle/animations/walk/east/frame_003.png",
+              "Idle/animations/walk/east/frame_004.png",
+              "Idle/animations/walk/east/frame_005.png"
+            ],
+            "south": [
+              "Idle/animations/walk/south/frame_000.png",
+              "Idle/animations/walk/south/frame_001.png",
+              "Idle/animations/walk/south/frame_002.png",
+              "Idle/animations/walk/south/frame_003.png",
+              "Idle/animations/walk/south/frame_004.png",
+              "Idle/animations/walk/south/frame_005.png"
+            ],
+            "south-east": [
+              "Idle/animations/walk/south-east/frame_000.png",
+              "Idle/animations/walk/south-east/frame_001.png",
+              "Idle/animations/walk/south-east/frame_002.png",
+              "Idle/animations/walk/south-east/frame_003.png",
+              "Idle/animations/walk/south-east/frame_004.png",
+              "Idle/animations/walk/south-east/frame_005.png"
+            ],
+            "north": [
+              "Idle/animations/walk/north/frame_000.png",
+              "Idle/animations/walk/north/frame_001.png",
+              "Idle/animations/walk/north/frame_002.png",
+              "Idle/animations/walk/north/frame_003.png",
+              "Idle/animations/walk/north/frame_004.png",
+              "Idle/animations/walk/north/frame_005.png"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "export_version": "3.1",
+  "export_date": "2026-11-09T04:37:02.851417"
+}

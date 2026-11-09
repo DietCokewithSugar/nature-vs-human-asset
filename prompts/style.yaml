@@ -12,4 +12,8 @@ mirror_map:
   south-west: south-east
   west: east
   north-west: north-east
-palette: palettes/endesga-32.hex
+# Master palette lock. Off (null) during the trial: Endesga 32 is only a
+# placeholder and visibly shifts greys to blue and skin to pink (see
+# preview/palette_compare.png). Pick the real palette in the tone-image phase,
+# then set e.g. `palette: palettes/endesga-32.hex` and re-run postprocess.py.
+palette: null
