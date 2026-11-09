@@ -1,0 +1,65 @@
+{
+  "unit": "nature_ice_smilodon",
+  "image_token": "(tripo-cli upload of concept.png)",
+  "concept": "concept.png: Tripo image-to-image restyle of input.png",
+  "model": {
+    "task_id": "7cd57590-89a0-4cc6-ba0e-7a52a3522883",
+    "request": {
+      "model": "P2-20260801",
+      "via": "tripo-cli"
+    },
+    "status": "success",
+    "output": {
+      "model": "https://tripo-data.rg1.data.tripo3d.com/tcli_244d132c8e7c4fbba482cca84a28742c/20261109/7cd57590-89a0-4cc6-ba0e-7a52a3522883/tripo_model_7cd57590-89a0-4cc6-ba0e-7a52a3522883.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMjQ0ZDEzMmM4ZTdjNGZiYmE0ODJjY2E4NGEyODc0MmMvMjAyNjExMDkvN2NkNTc1OTAtODlhMC00Y2M2LWJhMGUtN2E1MmEzNTIyODgzL3RyaXBvX21vZGVsXzdjZDU3NTkwLTg5YTAtNGNjNi1iYTBlLTdhNTJhMzUyMjg4My5nbGIiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTQyNjg4MDB9fX1dfQ__&Signature=EuGJHpvR49gFJ5~9EhAj368UdqwnAdAmUGkd1aiEKeZGdOKUfnOEncu-v5iQfLToX1xwjAXBlaD5jjKcL-2nS3IqohPbvIgtlukv6c7tJ32Cq0KhJOeGAkTuiLNS7szraE8PYlIUsiBiXbVOff6wE6TGdKkz2djFZciCMg6PzR8tPTze4kv-QjAOtY4OnvF-6Lkq9SqNlTFa1F6AY7On3fZaos2GBXa~T3EC1z3I8AZNUuWER0CdrpAztOmIVt4vezJWhKhbR0LNYuui1MBGJ~SM20XdqRad6hKIo9kCLTpP0eG1x~plEoEagHUHR9tIn4mLMmow~iVrVIKVTDBWVA__",
+      "rendered_image": "https://tripo-data.rg1.data.tripo3d.com/tcli_244d132c8e7c4fbba482cca84a28742c/20261109/7cd57590-89a0-4cc6-ba0e-7a52a3522883/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMjQ0ZDEzMmM4ZTdjNGZiYmE0ODJjY2E4NGEyODc0MmMvMjAyNjExMDkvN2NkNTc1OTAtODlhMC00Y2M2LWJhMGUtN2E1MmEzNTIyODgzL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTQyNjg4MDB9fX1dfQ__&Signature=SU-cRMkS3Z10FBZcA6f9nLKLs5GrVLLF8dmgAKnM3XaiKQwAOh-4IONhZMrccGvJx9YdqgM7ZslTJe810zva68AJ3PS3lppEmXXOWU3GjUCjTYS~C4~TdDvh8wftIJfCEWKMepAFkg0BSdPjauXVdn66HVcrO11IqQhnHEkyGK4cpTSUUPF-77gn7y7Vryen6Jmh7~DccDdE1b~dUOeANOfa2nu~yDl1FtHhnHNxxE8BARy26N5CFpV-BQH1LSalvoeYpOig6dcTfojz-S~Q2MzOK5PPktMMkY7GjUF09GBW~gL50DftbQiHDXG1AT7uBOQquZtGpE0YrcSsO7zEWg__"
+    },
+    "consumed": 110
+  },
+  "rigcheck": {
+    "task_id": "56c6fd24-5671-4365-8d61-4417e05eaf4a",
+    "request": {
+      "type": "animate_prerigcheck",
+      "original_model_task_id": "7cd57590-89a0-4cc6-ba0e-7a52a3522883"
+    },
+    "status": "success",
+    "output": {
+      "riggable": true,
+      "rig_type": "quadruped",
+      "topology": "quadruped"
+    },
+    "consumed": 0
+  },
+  "rig": {
+    "task_id": "338bfcd5-d89c-4ebd-aa50-c640ac4563e3",
+    "request": {
+      "type": "animate_rig",
+      "original_model_task_id": "7cd57590-89a0-4cc6-ba0e-7a52a3522883",
+      "out_format": "glb",
+      "rig_type": "quadruped",
+      "spec": "tripo",
+      "model_version": "v2.5-20260210"
+    },
+    "status": "success",
+    "output": {
+      "model": "https://tripo-data.rg1.data.tripo3d.com/tcli_244d132c8e7c4fbba482cca84a28742c/20261109/338bfcd5-d89c-4ebd-aa50-c640ac4563e3/tripo_rigging_338bfcd5-d89c-4ebd-aa50-c640ac4563e3.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMjQ0ZDEzMmM4ZTdjNGZiYmE0ODJjY2E4NGEyODc0MmMvMjAyNjExMDkvMzM4YmZjZDUtZDg5Yy00ZWJkLWFhNTAtYzY0MGFjNDU2M2UzL3RyaXBvX3JpZ2dpbmdfMzM4YmZjZDUtZDg5Yy00ZWJkLWFhNTAtYzY0MGFjNDU2M2UzLmdsYiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5NDI2ODgwMH19fV19&Signature=WsmuK6KmQeqO90G~Hc4m-ce~rhJ9yfPjcePEQbqhfCG4PQhoZMHJXNXNGMfYFSy4RtYPJkADBuet0qnEOkomD6vtxmA2z0c9I0bc2OzJ~P2fTP3qiG~U0KAnvSBm1KBJ~M4SgL4N3hAbZIlL-DVlrGfCAXceY31lYqc0Tdv--iHWc47uR6ESz4Q1HYlzHMXRS1TficfC6FLJzAQmOC-FTjw~m0-8vEDhav4yPNeSQZIcSIMJsLixLga7ynIStBgdVV7WyHnMlWfVlJPNsc2tV0eDxb3xsMPfvleibWmGceiDOZPkRdyJzz1fRi0vsq8YmwVMI4PQZDFwFFSR5HzOpQ__",
+      "rendered_image": "https://tripo-data.rg1.data.tripo3d.com/tcli_244d132c8e7c4fbba482cca84a28742c/20261109/338bfcd5-d89c-4ebd-aa50-c640ac4563e3/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMjQ0ZDEzMmM4ZTdjNGZiYmE0ODJjY2E4NGEyODc0MmMvMjAyNjExMDkvMzM4YmZjZDUtZDg5Yy00ZWJkLWFhNTAtYzY0MGFjNDU2M2UzL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTQyNjg4MDB9fX1dfQ__&Signature=snDoGcIIZB0KAwu9zFhFWAl~6i61bhLn6c71wblkA1h63bSIpNkWkDDuozbOMEVs-qckhWQeu3asdqnMv3M3581ByGy~KvXexbX~kdWYa9AUUboqJ-bPVmtCeOihE2m8k7CLcksbEsghxw8kO9U-TGv1tBLow~K~CY0RcmGFCQ6o-GYlDZiYu5X68QQosKXsSaETjIBB8rtkl~QXkOVsvfnFrNEZW5JWVVd9Nd5bI8SahLy521Y6yJ9~WRTGhTWih00cnOKbF6nkQMNyeRggRh1huZxgsVNEEsoB0UukRP~tZsOLdbBuieFeSmZJTAfMrzGqq2wNEjZmYQ01UjoDKw__"
+    },
+    "consumed": 25
+  },
+  "walk": {
+    "task_id": "36af5735-60fa-4e1a-98a9-385b9b64b272",
+    "request": {
+      "type": "animate_retarget",
+      "original_model_task_id": "338bfcd5-d89c-4ebd-aa50-c640ac4563e3",
+      "out_format": "glb",
+      "animation": "preset:quadruped:walk",
+      "bake_animation": true,
+      "animate_in_place": true
+    },
+    "status": "success",
+    "output": {
+      "model": "https://tripo-data.rg1.data.tripo3d.com/tcli_244d132c8e7c4fbba482cca84a28742c/20261109/36af5735-60fa-4e1a-98a9-385b9b64b272/tripo_retarget_36af5735-60fa-4e1a-98a9-385b9b64b272.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMjQ0ZDEzMmM4ZTdjNGZiYmE0ODJjY2E4NGEyODc0MmMvMjAyNjExMDkvMzZhZjU3MzUtNjBmYS00ZTFhLTk4YTktMzg1YjliNjRiMjcyL3RyaXBvX3JldGFyZ2V0XzM2YWY1NzM1LTYwZmEtNGUxYS05OGE5LTM4NWI5YjY0YjI3Mi5nbGIiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTQyNjg4MDB9fX1dfQ__&Signature=ukdpsuGtlrVZVx4gAinMEDrTMK0yDquP4IXTDlind3Wh6Praq6dYZ~wUS90vI3~qeZmMsY7ToeVzNzb885-3qowSe-cQ2YoQVeiNaM58F~AqYhVPr6vxGqKx6F-5T0HZaVkkdAxFxLyi0VCIOi-lBkKpDlfvEpssyMh70CMfytN2BJBhi-ybcyHQ0glBEN5m4OOTi7MkJqB~~8LDBurwaHtECV6ICSKK4bWGL5GpLMvjTJ2mBZd4VVJN82s9K97FMW~SA-EerIXroG~Bw3d6KirEq9uUHyglIr6xroJwqWYgebyRQVWyk2G0~eBmPU3W4zKJPNI5edqj-bbr0vI5hA__"
+    },
+    "consumed": 10
+  }
+}
