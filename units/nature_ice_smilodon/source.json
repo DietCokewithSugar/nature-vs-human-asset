@@ -3,7 +3,7 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 17.0,
+  "generations_spent": 21.0,
   "animations": {
     "idle": {
       "directions": {
@@ -35,7 +35,11 @@
     },
     "attack": {
       "directions": {
-        "south": "done"
+        "south": "done",
+        "north-east": "done",
+        "south-east": "done",
+        "east": "done",
+        "north": "done"
       },
       "request": {
         "action": "pouncing forward and biting down with its long sabre fangs, then recovering",

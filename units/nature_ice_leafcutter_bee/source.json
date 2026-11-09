@@ -3,7 +3,7 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 15.0,
+  "generations_spent": 22.0,
   "animations": {
     "idle": {
       "directions": {
@@ -23,7 +23,9 @@
       "directions": {
         "south": "done",
         "south-east": "done",
-        "east": "done"
+        "east": "done",
+        "north-east": "done",
+        "north": "done"
       },
       "request": {
         "action": "flying forward together, wings buzzing rapidly",
@@ -33,7 +35,11 @@
     },
     "attack": {
       "directions": {
-        "south": "done"
+        "south": "done",
+        "south-east": "done",
+        "east": "done",
+        "north-east": "done",
+        "north": "done"
       },
       "request": {
         "action": "the bees dart forward to sting, then pull back",

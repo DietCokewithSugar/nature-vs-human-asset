@@ -13,8 +13,8 @@ description: >-
   small black eyes, short legs
 animations:
   - name: walk
-    action: hopping forward in short bouncy hops, seamless loop
+    action: hopping forward, the whole body clearly lifts off the ground and lands again, hind legs push off, ears bounce, seamless loop
     frames: 6
   - name: attack
-    action: lunging forward to bite, then hopping back
+    action: rears back, then lunges forward with mouth wide open showing front teeth to bite, then returns to the starting pose
     frames: 6

@@ -21,3 +21,4 @@ animations:
   - name: attack
     action: the bees dart forward to sting, then pull back
     frames: 4
+habitat: air            # flies over water

@@ -15,5 +15,5 @@ animations:
     action: slow heavy walk, trunk swaying
     frames: 6
   - name: attack
-    action: swinging its head and long tusks sideways to strike, then returning
+    action: steps forward and thrusts its head down and forward to gore with its tusks, then lifts its head back up; the tusks keep exactly the same curved shape and size in every frame
     frames: 6

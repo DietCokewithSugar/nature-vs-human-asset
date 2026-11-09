@@ -197,7 +197,8 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
     const st = SIZE_STATS[u.sizeClass] ?? SIZE_STATS.medium;
     const rootC = new Container();
     const rx = Math.max(5, ut.bodyW * 0.42), ry = Math.max(2, ut.bodyW * 0.16);
-    const shadow = new Graphics().ellipse(0, 0, rx, ry).fill({ color: 0x19192d, alpha: 0.32 });
+    const air = u.habitat === "air";
+    const shadow = new Graphics().ellipse(0, 0, air ? rx * 0.7 : rx, air ? ry * 0.7 : ry).fill({ color: 0x19192d, alpha: air ? 0.2 : 0.32 });
     const ring = new Graphics().ellipse(0, 0, rx + 1, ry + 0.6).stroke({ color: u.faction === "nature" ? 0x63c74d : 0xf77622, width: 1 });
     const sprite = new Sprite();
     sprite.anchor.set(u.anchor.x, u.anchor.y);
@@ -359,6 +360,8 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
     e.root.position.set(Math.round(e.x + shake), Math.round(e.y));
     e.root.zIndex = e.y;
     e.sprite.tint = e.flash > 0 ? 0xff9a9a : 0xffffff;
+    // flying units hover above their shadow
+    if (u.habitat === "air") e.sprite.y = -7 + Math.round(Math.sin(e.animT * 3) * 1.5);
     e.ring.visible = ui.rings;
     const top = -u.anchor.y * u.cell + (u.cell - u.canvas) / 2 + 2;
     e.zzz.visible = e.state === "rest";
@@ -513,7 +516,7 @@ export async function renderLab(root: HTMLElement, m: Manifest): Promise<() => v
   renderSide();
   renderClock();
   battle(60);
-  ui.zoom = 2;
+  ui.zoom = app.screen.width < 700 ? 1 : 2;
   centerOn(MAP_W * TILE / 2, MAP_H * TILE / 2);
 
   let fpsAvg = 60, hudT = 0;

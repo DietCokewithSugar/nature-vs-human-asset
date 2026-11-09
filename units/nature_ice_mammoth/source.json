@@ -30,18 +30,11 @@
       "animation_group_id": "b99ef587-bc2f-4b34-a15f-d806e89392f6"
     },
     "attack": {
-      "directions": {
-        "south": "done",
-        "north": "done",
-        "south-east": "done",
-        "north-east": "done",
-        "east": "done"
-      },
+      "directions": {},
       "request": {
         "action": "swinging its head and long tusks sideways to strike, then returning",
         "frames": 6
-      },
-      "animation_group_id": "644102c0-f88c-4ed8-9ddb-507e3d92fa3c"
+      }
     }
   },
   "character_id": "cf9d4ebe-179a-44c2-af17-e5ead08b1bf4",

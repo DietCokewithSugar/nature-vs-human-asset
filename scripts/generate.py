@@ -216,6 +216,9 @@ class Unit:
             rec = self.src["animations"][name]
             self.api._req("DELETE", f"/characters/{cid}/animations/{rec['animation_group_id']}/directions/{d}")
             rec["directions"].pop(d, None)
+            if not rec["directions"]:
+                # PixelLab drops a group once its last direction is deleted
+                rec.pop("animation_group_id", None)
             by_anim.setdefault(name, []).append(d)
         self.save()
         for name, ds in by_anim.items():

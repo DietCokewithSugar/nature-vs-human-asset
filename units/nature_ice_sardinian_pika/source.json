@@ -3,7 +3,7 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 16.0,
+  "generations_spent": 21.0,
   "animations": {
     "idle": {
       "directions": {
@@ -20,27 +20,18 @@
       "animation_group_id": "a0be6b6a-a550-4e99-89d3-0b549a8cd01e"
     },
     "walk": {
-      "directions": {
-        "south": "done",
-        "east": "done",
-        "south-east": "done",
-        "north-east": "done"
-      },
+      "directions": {},
       "request": {
         "action": "hopping forward in short bouncy hops, seamless loop",
         "frames": 6
-      },
-      "animation_group_id": "580e2020-c265-4bac-9787-0be42b691768"
+      }
     },
     "attack": {
-      "directions": {
-        "south": "done"
-      },
+      "directions": {},
       "request": {
         "action": "lunging forward to bite, then hopping back",
         "frames": 6
-      },
-      "animation_group_id": "f42d3336-dfa4-4bb5-95ee-af4689e1ae6a"
+      }
     }
   },
   "candidates": [
