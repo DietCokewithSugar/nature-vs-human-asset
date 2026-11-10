@@ -112,6 +112,24 @@ class Frame:
         px = self.im.load()
         w, h = self.im.size
         lum = lambda c: 0.3 * c[0] + 0.59 * c[1] + 0.11 * c[2]
+
+        def dark_run(x0, y0, cap=6):
+            """Size (capped) of the 8-connected dark patch at x0,y0. Buried outline
+            is a long line; a 1-4px spot (cheetah, hyena, leopard) is a coat
+            marking, not outline, and must survive the cleanup."""
+            seen, stack = {(x0, y0)}, [(x0, y0)]
+            while stack and len(seen) < cap:
+                x, y = stack.pop()
+                for i in (-1, 0, 1):
+                    for j in (-1, 0, 1):
+                        q = (x + i, y + j)
+                        if q not in seen and 0 <= q[0] < w and 0 <= q[1] < h:
+                            c2 = px[q]
+                            if c2[3] and lum(c2) < 45:
+                                seen.add(q)
+                                stack.append(q)
+            return len(seen)
+
         for _ in range(2):
             drop, recolor = [], []
             for y in range(1, h - 1):
@@ -126,7 +144,7 @@ class Frame:
                     elif lum(c) < 45 and len(op) == 4:
                         light = [n for n in n4 if lum(n) >= 45]
                         n8 = [px[x + i, y + j] for i in (-1, 0, 1) for j in (-1, 0, 1) if (i or j)]
-                        if len(light) >= 3 and all(n[3] for n in n8):
+                        if len(light) >= 3 and all(n[3] for n in n8) and dark_run(x, y) >= 6:
                             recolor.append((x, y, max(set(light), key=light.count)))
             for x, y in drop:
                 px[x, y] = (0, 0, 0, 0)
