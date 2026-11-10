@@ -21,6 +21,8 @@ pipeline: pro
 style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
 reference: null
 reference_license: null
+attack_hand_dirs: [south-east]
+attack_hand_why: the AI strike key stretched the body into a thin shape with a sting-like tail
 attack_keys:
   anticipation: rearing up on its hind legs with the spiny legs raised, facing {facing}
   strike: lunging forward {facing} and striking with its thick spiny legs, body stretched

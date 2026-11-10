@@ -21,6 +21,8 @@ pipeline: pro
 style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
 reference: null
 reference_license: null
+attack_hand_dirs: [north-east]
+attack_hand_why: the AI strike key drew a human-like leap with loose fragments on the ground
 attack_keys:
   anticipation: raising its flat head with the huge front teeth bared, facing {facing}
   strike: lunging forward {facing} and biting with its huge orange front teeth
