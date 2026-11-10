@@ -3421,7 +3421,7 @@
     "w": 128,
     "h": 128
    },
-   "duration": 220
+   "duration": 200
   },
   "attackcombo_south_3": {
    "frame": {
@@ -3463,7 +3463,7 @@
     "w": 128,
     "h": 128
    },
-   "duration": 150
+   "duration": 140
   },
   "attackcombo_south_5": {
    "frame": {
@@ -3505,7 +3505,7 @@
     "w": 128,
     "h": 128
    },
-   "duration": 100
+   "duration": 90
   },
   "attackcombo_south_7": {
    "frame": {

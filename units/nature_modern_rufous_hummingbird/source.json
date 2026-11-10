@@ -3,7 +3,7 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 36.0,
+  "generations_spent": 38.0,
   "animations": {
     "idle": {
       "directions": {
@@ -24,7 +24,9 @@
       "directions": {
         "south-east": "done",
         "north": "done",
-        "north-east": "done"
+        "north-east": "done",
+        "east": "done",
+        "south": "done"
       },
       "request": {
         "action": "darting forward while hovering, wings a rapid blur, seamless loop",
@@ -107,7 +109,7 @@
         "strike": "darting forward {facing} and stabbing with its long thin beak, body stretched, wings back"
       },
       "key_sources": {
-        "south": "pixen",
+        "south": "hand warp (fallback: the AI strike key flipped the bird over to show its back)",
         "east": "pixen",
         "south-east": "v3",
         "north-east": "v3",

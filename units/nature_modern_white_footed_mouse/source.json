@@ -3,8 +3,39 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 20.0,
-  "animations": {},
+  "generations_spent": 34.0,
+  "animations": {
+    "idle": {
+      "directions": {
+        "south": "done",
+        "south-east": "done",
+        "north-east": "done",
+        "east": "done",
+        "north": "done"
+      },
+      "request": {
+        "action": "standing in place, gentle breathing, slight body bob, seamless loop",
+        "action_by_dir": null,
+        "frames": 4
+      },
+      "animation_group_id": "c24230fe-a0f2-4235-bf99-3bb03e0a613a"
+    },
+    "walk": {
+      "directions": {
+        "south": "done",
+        "south-east": "done",
+        "north-east": "done",
+        "north": "done",
+        "east": "done"
+      },
+      "request": {
+        "action": "scampering forward quickly, tail trailing, seamless loop",
+        "action_by_dir": null,
+        "frames": 6
+      },
+      "animation_group_id": "c738b2be-d4b4-4271-a7eb-dc60a6ca4b3d"
+    }
+  },
   "candidates": [
     {
       "seed": 9081,
@@ -34,6 +65,46 @@
     "method": "create_with_style",
     "style_character_id": "bd11b67a-1165-495e-96cf-b40403d116cb"
   },
-  "updated": "2026-11-09",
-  "character_id": "7254d992-4ea3-48d6-bba4-586f97adf19b"
+  "updated": "2026-11-10",
+  "character_id": "7254d992-4ea3-48d6-bba4-586f97adf19b",
+  "variants": {
+    "attackhand": {
+      "method": "AI hand-edited: select-and-move / squash-stretch / smear edits on the PixelLab base pose, text-grid method from aseprite-ai-artist (MIT), timing from its rules/44",
+      "kind": "lunge",
+      "heavy": false,
+      "mag": 1.92,
+      "directions": [
+        "south",
+        "south-east",
+        "east",
+        "north-east",
+        "north"
+      ],
+      "hand_tuned": [],
+      "generations": 0
+    },
+    "death": {
+      "method": "AI hand-edited collapse (squash + RotSprite-style tilt)",
+      "directions": [
+        "south",
+        "south-east",
+        "east",
+        "north-east",
+        "north"
+      ],
+      "generations": 0
+    },
+    "attackcombo": {
+      "generations": 4,
+      "directions": [
+        "east",
+        "south"
+      ],
+      "method": "AI key poses (Pixen edit) + AI hand-edit cleanup/tweens/timing",
+      "keys": {
+        "anticipation": "crouching low and bunched up ready to leap, facing {facing}",
+        "strike": "leaping forward {facing} with front paws out, mouth open biting"
+      }
+    }
+  }
 }
