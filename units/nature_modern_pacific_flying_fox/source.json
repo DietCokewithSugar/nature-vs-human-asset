@@ -3,7 +3,7 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 29.0,
+  "generations_spent": 35.0,
   "animations": {
     "idle": {
       "directions": {
@@ -93,6 +93,28 @@
         "north"
       ],
       "generations": 0
+    },
+    "attackcombo": {
+      "generations": 6,
+      "directions": [
+        "east",
+        "north",
+        "north-east",
+        "south",
+        "south-east"
+      ],
+      "method": "AI key poses (Pixen edit) + AI hand-edit cleanup/tweens/timing",
+      "keys": {
+        "anticipation": "pulling back in the air with wings raised high and mouth open, facing {facing}",
+        "strike": "swooping forward {facing} with wings swept back, mouth open biting with small sharp teeth"
+      },
+      "key_sources": {
+        "south": "pixen",
+        "east": "pixen",
+        "south-east": "hand warp (fallback: the AI strike key folded the wings and sat the bat on the ground)",
+        "north-east": "v3",
+        "north": "hand warp (fallback: AI key poses turn the back view sideways)"
+      }
     }
   }
 }
