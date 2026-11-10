@@ -3,7 +3,7 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 30.0,
+  "generations_spent": 36.0,
   "animations": {
     "idle": {
       "directions": {
@@ -93,6 +93,28 @@
         "north"
       ],
       "generations": 0
+    },
+    "attackcombo": {
+      "generations": 6,
+      "directions": [
+        "east",
+        "north",
+        "north-east",
+        "south",
+        "south-east"
+      ],
+      "method": "AI key poses (Pixen edit) + AI hand-edit cleanup/tweens/timing",
+      "keys": {
+        "anticipation": "lowering its head with the tusks aimed forward, back legs bunched, facing {facing}",
+        "strike": "charging forward {facing} and slashing upward with its curved tusks"
+      },
+      "key_sources": {
+        "south": "hand warp (fallback: the AI strike keys turned the tusks into big ram-like curled horns)",
+        "east": "hand warp (fallback: the AI strike keys turned the tusks into big ram-like curled horns)",
+        "south-east": "v3",
+        "north-east": "v3",
+        "north": "hand warp (fallback: AI key poses turn the back view sideways)"
+      }
     }
   }
 }
