@@ -3,11 +3,12 @@
   "tool": "PixelLab API v2",
   "license": "PixelLab Terms of Service - commercial use allowed on paid plans",
   "created": "2026-11-09",
-  "generations_spent": 21.0,
+  "generations_spent": 23.0,
   "animations": {
     "idle": {
       "directions": {
-        "south": "done"
+        "south": "done",
+        "south-east": "done"
       },
       "request": {
         "action": "hovering in place, wings beating rapidly, tail flicking",
@@ -17,12 +18,15 @@
       "animation_group_id": "c9246ef1-8e9a-41c5-8b9e-f8d172ee0d98"
     },
     "walk": {
-      "directions": {},
+      "directions": {
+        "south": "done"
+      },
       "request": {
         "action": "darting forward while hovering, wings a rapid blur, seamless loop",
         "action_by_dir": null,
         "frames": 6
-      }
+      },
+      "animation_group_id": "1192d17b-53da-4171-bc1c-f929d541cb88"
     }
   },
   "candidates": [
@@ -54,6 +58,6 @@
     "method": "create_with_style",
     "style_character_id": "bd11b67a-1165-495e-96cf-b40403d116cb"
   },
-  "updated": "2026-11-09",
+  "updated": "2026-11-10",
   "character_id": "d38fb966-1604-4909-9cfa-aceae5d79a3d"
 }
