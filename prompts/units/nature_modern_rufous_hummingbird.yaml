@@ -24,6 +24,8 @@ pipeline: pro
 style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
 reference: null
 reference_license: null
+attack_hand_dirs: [south]
+attack_hand_why: the AI strike key flipped the bird over to show its back
 attack_keys:
   anticipation: pulling its head back with the long beak raised and wings spread, facing {facing}
   strike: darting forward {facing} and stabbing with its long thin beak, body stretched, wings back
