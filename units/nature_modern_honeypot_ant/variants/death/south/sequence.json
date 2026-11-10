@@ -1,0 +1,30 @@
+{
+ "frames": [
+  {
+   "file": "frame_00.png",
+   "ms": 90
+  },
+  {
+   "file": "frame_01.png",
+   "ms": 100
+  },
+  {
+   "file": "frame_02.png",
+   "ms": 90
+  },
+  {
+   "file": "frame_03.png",
+   "ms": 80
+  },
+  {
+   "file": "frame_04.png",
+   "ms": 70
+  },
+  {
+   "file": "frame_05.png",
+   "ms": 500
+  }
+ ],
+ "hit": 0,
+ "method": "AI hand-edited death"
+}

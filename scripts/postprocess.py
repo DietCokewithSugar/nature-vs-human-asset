@@ -46,11 +46,11 @@ def srgb_to_lab(rgb):
 class Palette:
     """Snap colours to a palette. With path=None it only hardens alpha."""
 
-    def __init__(self, path):
-        self.off = path is None
+    def __init__(self, path, rgb=None):
+        self.off = path is None and rgb is None
         if self.off:
             return
-        self.rgb = load_palette(path)
+        self.rgb = load_palette(path) if rgb is None else rgb
         self.lab = srgb_to_lab(self.rgb)
         self.cache = {}
 
@@ -183,6 +183,12 @@ def process(uid, style, pal):
     frames, ms, hits, cells, cell = load_unit_frames(uid, style)
     fps = {"rotation": 1, "idle": 6, "walk": 10, "attack": 10, "attackkf": 10, "attackhand": 10, "attackcombo": 10, "death": 10}
 
+    # lock_palette: PixelLab v3 sometimes drifts colours between frames (the honeypot ant's
+    # honey flickers pale/orange); snap idle/walk to the colours of the approved rotations
+    unit_pal = None
+    if unit_cfg.get("lock_palette") and "rotation" in frames:
+        cols = np.concatenate([np.array(im.convert("RGBA")).reshape(-1, 4) for d in frames["rotation"] for im in frames["rotation"][d]])
+        unit_pal = Palette(None, np.unique(cols[cols[:, 3] >= 128][:, :3], axis=0).astype(np.float64))
     rows = [(n, d) for n in frames for d in DIRS if d in frames[n]]
     strips = [((n, d), len(frames[n][d]) * cells[n], cells[n]) for n, d in rows]
     pos, size = pack(strips)
@@ -193,7 +199,7 @@ def process(uid, style, pal):
         x0, y0 = pos[(n, d)]
         names = []
         for i, im in enumerate(frames[n][d]):
-            im = pal.apply(im)
+            im = (unit_pal if unit_pal is not None and n in ("idle", "walk") else pal).apply(im)
             frames[n][d][i] = im
             sheet.paste(im, (x0 + i * c, y0))
             key = f"{n}_{d}_{i}"

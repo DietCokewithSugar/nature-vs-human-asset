@@ -17,6 +17,7 @@ animations:
   - name: walk
     action: scurrying forward together, legs moving quickly, seamless loop
     frames: 6
+lock_palette: true   # v3 idle/walk drifted the honey colour between frames
 handedit: {kind: swarm, heavy: false}
 # HD standard: Pro character mode at 64px, styled after the approved HD cave hyena.
 # Text only: Wikimedia rate-limits this build container; these are well-documented living species.
