@@ -8,7 +8,8 @@
     "idle": {
       "directions": {
         "south": "done",
-        "south-east": "done"
+        "south-east": "done",
+        "east": "done"
       },
       "request": {
         "action": "standing in place, gentle breathing, slight body bob, seamless loop",
@@ -58,6 +59,6 @@
     "method": "create_with_style",
     "style_character_id": "bd11b67a-1165-495e-96cf-b40403d116cb"
   },
-  "updated": "2026-11-09",
+  "updated": "2026-11-10",
   "character_id": "d4d9aeb1-9dfc-45e1-a949-d9ec219285be"
 }

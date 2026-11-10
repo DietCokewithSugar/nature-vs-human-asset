@@ -21,6 +21,8 @@ pipeline: pro
 style_character_id: bd11b67a-1165-495e-96cf-b40403d116cb
 reference: null
 reference_license: null
+attack_hand_dirs: [north-east]
+attack_hand_why: the AI strike key turned the shell into a hook and the body into a dinosaur
 attack_keys:
   anticipation: pulling its big head back into the shell with jaws open, facing {facing}
   strike: snapping its head far forward {facing} with the hooked beak wide open
